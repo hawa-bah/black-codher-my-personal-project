@@ -1,15 +1,20 @@
 # Black Codher Personal Project
 
-Here's a boilerplate with for you Personal Project.
+Here's a boilerplate project directory with the initial components for your Personal Project.
 
 The expectation with this project is that you're able to fork the project, and get started.
 
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-  - [Fork Project](#fork-project)
-  - [Pull Repo](#pull-repo)
-  - [Start The Development Server](#start-the-development-server)
-  - [Example Application](#example-application)
+- [Black Codher Personal Project](#black-codher-personal-project)
+  - [Project Structure](#project-structure)
+    - [client](#client)
+    - [server](#server)
+  - [Getting Started](#getting-started)
+    - [Fork Project](#fork-project)
+    - [Pull Repo](#pull-repo)
+    - [Populate The Database](#populate-the-database)
+    - [Start The Development Server](#start-the-development-server)
+    - [Example Application](#example-application)
+  - [What's Next?!](#whats-next)
 
 ## Project Structure
 
@@ -21,15 +26,15 @@ This is the structure of the project
 
 ### client
 
-The client folder is where you will store your front end code. Currently this contains a new project created with create-react-app.
+The client folder is where you will store your front-end code. Currently this contains a new project created with create-react-app.
 
-Put your react code here
+Put your React code here
 
 ### server
 
-The server folder is where you will store your back end code. This currently contains a json file with some fake data, and it is where you'll add your node.js code.
+The server folder is where you will store your back-end code. This currently contains a JSON file with some fake data, and it is where you'll add your Node.js code.
 
-Put your node code here
+Put your Node code here
 
 ## Getting Started
 
@@ -50,14 +55,24 @@ This will add the black-codher-personal-project to your GitHub account.
 4. Copy the text starting with `https://github.com/<your-repo-name>/black-codher-personal-project` (replace <your-repo-name> with the name of your GitHub username)
 5. On your command line / terminal type `git clone https://github.com/<your-repo-name>/black-codher-personal-project` (replace <your-repo-name> with the name of your GitHub username)
 
+### Populate The Database
+
+You need to create and populate an initial collection in your local MongoDB server:
+
+1. Open a `mongo` shell and run `db use black-codher-personal-project`. Close the shell or open a second terminal.
+2. Type `mongoimport -h 127.0.0.1:27017 -d black-codher-personal-project -c users --file ./server/models/data.json --jsonArray`
+
 ### Start The Development Server
 
-You can start the client side code (front end), server side (back end) and database separately using the commands in their represpective folders. If you prefer to start all three together (this is the most convienient way) you can do so with the following commands:
+You can start the client side code (front-end), server side (back-end) and database separately using the commands in their respective folders. If you prefer to start all three together (this is the most convienient way), you can do so with the following commands:
 
 1. `npm install && npm install --prefix client`
 2. `npm run develop`
 
 ### Example Application
+
+If all's well, you should see a list of names. If your browser shows a "No users found" message, re-check all the steps to ensure your database is populated and connected properly.
+
 ## What's Next?!
 
 Now it's time to start building your project.
