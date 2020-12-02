@@ -1,3 +1,22 @@
+# Black Codher Personal Personal Project - Client side (frontend)
+
+All of your front end code should be in this folder.
+
+Once you have your development environment up and running you'll be able to see the app running here:
+
+```
+http://localhost:3000
+```
+
+## Example App
+
+In the example we have provided you can see:
+
+1. How to display a list of users
+2. How to connect to your API
+3. What to display if your request to the API doesn't return any users
+
+---
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
