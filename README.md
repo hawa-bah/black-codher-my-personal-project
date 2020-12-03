@@ -95,10 +95,10 @@ You need to create and populate an initial collection in your local MongoDB serv
 
 You can start the client side code (front-end), server side (back-end) and database separately using the commands in their respective folders. If you prefer to start all three together (this is the most convienient way), you can do so with the following commands:
 
-1. `npm install && cd client && npm install cd ..`
+1. `npm install && cd client && npm install && cd ..`
 2. `npm run develop`
 
-Please note that you run `npm install && cd client && npm install cd ..` during your first installation, subsequently you will only need to run `npm run develop` to get your development environment up and running
+Please note that you run `npm install && cd client && npm install && cd ..` during your first installation, subsequently you will only need to run `npm run develop` to get your development environment up and running
 ### Example Application
 
 We have created an example application that will display a list of users that are stored in your local database.
