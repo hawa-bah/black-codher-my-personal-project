@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
+import AccomodationTab from "./components/expense_tab/accomodation";
 
 // SERVICES
 import { getAll, deleteOne } from "./services/userService";
 
 function App() {
+  const [budget, setbudget] = useState(0);
+  const [transaction, setTransactions] = useState(0);
+  const [description, setDesc] = useState("");
+
   const [users, setusers] = useState(null);
 
   useEffect(() => {
@@ -43,6 +48,16 @@ function App() {
 
   return (
     <div>
+      <div>
+        <AccomodationTab
+          budget={budget}
+          setbudget={setbudget}
+          transaction={transaction}
+          setTransactions={setTransactions}
+          description={description}
+          setDesc={setDesc}
+        />
+      </div>
       <ul>
         {users && users.length > 0 ? (
           users.map((user) => renderUser(user))
