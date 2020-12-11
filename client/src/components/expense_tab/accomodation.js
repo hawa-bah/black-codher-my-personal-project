@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import AccomodationTransactions from "../transaction_list/accomodation_transactions";
 
 const AccomodationTab = (props) => {
   // const [budget, setbudget] = useState(0);
@@ -69,7 +70,12 @@ const AccomodationTab = (props) => {
           </Button>
         </div>
         <div className="transaction List">
-          {vewTransactions ? <p>tansactionList</p> : Null}
+          {viewTransactions ? (
+            <div>
+              <p>tansactionList</p>
+              <AccomodationTransactions />
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

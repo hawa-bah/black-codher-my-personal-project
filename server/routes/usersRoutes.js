@@ -38,5 +38,5 @@ module.exports = (app) => {
     });
   });
 
-  app.post(`/api/expense/accomodation`, async (req, res) => {});
+  // app.post(`/api/expense/accomodation`, async (req, res) => {});
 };
