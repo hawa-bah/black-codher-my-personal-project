@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AccomodationTab from "./components/expense_tab/accomodation";
+import FoodTab from "./components/expense_tab/Food_tab";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // SERVICES
 import { getAll, deleteOne } from "./services/userService";
@@ -8,6 +10,10 @@ function App() {
   const [budget, setbudget] = useState(0);
   const [transaction, setTransactions] = useState(0);
   const [description, setDesc] = useState("");
+
+  const [budgetFood, setbudgetFood] = useState(0);
+  const [transactionFood, setTransactionsFood] = useState(0);
+  const [descriptionFood, setDescFood] = useState("");
 
   const [users, setusers] = useState(null);
 
@@ -48,8 +54,54 @@ function App() {
 
   return (
     <div>
-      <div>
-        <AccomodationTab
+      <Router>
+        <Route
+          exact
+          path="/expenseTracker"
+          render={() => (
+            <React.Fragment>
+              <AccomodationTab
+                budget={budget}
+                setbudget={setbudget}
+                transaction={transaction}
+                setTransactions={setTransactions}
+                description={description}
+                setDesc={setDesc}
+              />
+              <FoodTab
+                budget={budgetFood}
+                setbudget={setbudgetFood}
+                transaction={transactionFood}
+                setTransactions={setTransactionsFood}
+                description={descriptionFood}
+                setDesc={setDescFood}
+              />
+            </React.Fragment>
+          )}
+        />
+        <Route
+          exact
+          path="/"
+          render={() => {
+            <React.Fragment>
+              <ul>
+                {users && users.length > 0 ? (
+                  users.map((user) => renderUser(user))
+                ) : (
+                  <p>No users found</p>
+                )}
+              </ul>
+
+              <div>
+                <button>Add</button>
+              </div>
+            </React.Fragment>;
+          }}
+        />
+      </Router>
+    </div>
+    //  <div>
+    /* <AccomodationTab
           budget={budget}
           setbudget={setbudget}
           transaction={transaction}
@@ -57,7 +109,15 @@ function App() {
           description={description}
           setDesc={setDesc}
         />
-      </div>
+        <FoodTab
+          budget={budgetFood}
+          setbudget={setbudgetFood}
+          transaction={transactionFood}
+          setTransactions={setTransactionsFood}
+          description={descriptionFood}
+          setDesc={setDescFood}
+        /> */
+    /* </div>
       <ul>
         {users && users.length > 0 ? (
           users.map((user) => renderUser(user))
@@ -68,8 +128,8 @@ function App() {
 
       <div>
         <button>Add</button>
-      </div>
-    </div>
+      </div> */
+    /* </div> */
   );
 }
 

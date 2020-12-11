@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 // IMPORT YOUR MODELS
 require("./models/Users");
 require("./models/expense_models/Accomodation");
+require("./models/expense_models/Food");
 
 const app = express();
 

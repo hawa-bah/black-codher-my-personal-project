@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 
-const AccomodationTab = (props) => {
+const FoodTab = (props) => {
   // const [budget, setbudget] = useState(0);
   // const [transaction, setTransactions] = useState(0);
-  const [viewTransactions, setViewTransactions] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
     console.log(props.budget, props.transaction);
     // users can post a transaction to the accomodation
-    axios.post(`/api/expense`, {
-      transaction_value: props.transaction,
+    axios.post(`/api/expense/food`, {
+      transaction_value: props.budget,
       description: props.description,
     });
   }
@@ -22,7 +21,7 @@ const AccomodationTab = (props) => {
     <div>
       <div className="AccomodationDiv tab">
         {/* maybe use props so that i can reuse commponents in name of the category */}
-        <h3>Accomodation:</h3>
+        <h3>Food:</h3>
         <Form onSubmit={(event) => handleSubmit(event)}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Budget</Form.Label>
@@ -60,20 +59,8 @@ const AccomodationTab = (props) => {
           </Button>
         </Form>
       </div>
-      <div className="Accomodation transaction List">
-        <div className="button transaction">
-          <Button onClick={() => setViewTransactions(!viewTransactions)}>
-            <p>
-              {viewTransactions ? "Hide transactions" : "View Transactions"}
-            </p>
-          </Button>
-        </div>
-        <div className="transaction List">
-          {vewTransactions ? <p>tansactionList</p> : Null}
-        </div>
-      </div>
     </div>
   );
 };
 
-export default AccomodationTab;
+export default FoodTab;
