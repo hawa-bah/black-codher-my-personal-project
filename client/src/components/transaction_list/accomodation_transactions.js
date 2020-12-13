@@ -4,6 +4,7 @@ import { getAll } from "../../services/transactionService";
 import { deleteOne } from "../../services/transactionService";
 
 const AccomodationTransactions = (props) => {
+  // >>> we are passing as props renderBalance() and others but only using the first
   const [transactions, setTransactions] = useState(null);
 
   useEffect(() => {
@@ -29,7 +30,14 @@ const AccomodationTransactions = (props) => {
           {`${transaction.transaction_value} 
           ${transaction.description}`}
           {/* the button can be transformed to an icon later */}
-          <button onClick={() => deleteTransaction(transaction)}>Delete</button>
+          <button
+            onClick={() => {
+              deleteTransaction(transaction);
+              props.renderBalance();
+            }}
+          >
+            Delete
+          </button>
         </h3>
       </li>
     );
