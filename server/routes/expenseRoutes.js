@@ -21,4 +21,18 @@ module.exports = (app) => {
   app.post(`api/expense/food`, async (req, res) => {
     await Exp_Food.create(req.body);
   });
+
+  app.delete(`/api/expenses/transactions/:id`, async (req, res) => {
+    // const transactions = await Exp_Accomodation.findByIdAndDelete(
+    //   req.params.id
+    // );
+    const { id } = req.params;
+
+    const transactions = await Exp_Accomodation.findByIdAndDelete(id);
+
+    return res.status(202).send({
+      error: false,
+      transactions,
+    });
+  });
 };

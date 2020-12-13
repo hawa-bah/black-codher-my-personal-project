@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { getAll } from "../../services/transactionService";
+// import { deleteOne } from "../../services/userService";
+import { deleteOne } from "../../services/transactionService";
 
-const AccomodationTransactions = () => {
+const AccomodationTransactions = (props) => {
   const [transactions, setTransactions] = useState(null);
+
   useEffect(() => {
     if (!transactions) {
       getTransactionsList();
@@ -13,6 +16,11 @@ const AccomodationTransactions = () => {
     let res = await getAll();
     setTransactions(res);
   };
+  // transaction is deleted from the database AND in the front end
+  const deleteTransaction = async (transaction) => {
+    let res = await deleteOne(transaction);
+    setTransactions(res);
+  };
 
   const renderTransaction = (transaction) => {
     return (
@@ -20,6 +28,8 @@ const AccomodationTransactions = () => {
         <h3>
           {`${transaction.transaction_value} 
           ${transaction.description}`}
+          {/* the button can be transformed to an icon later */}
+          <button onClick={() => deleteTransaction(transaction)}>Delete</button>
         </h3>
       </li>
     );

@@ -76,6 +76,19 @@ function App() {
                 description={descriptionFood}
                 setDesc={setDescFood}
               />
+              <div>
+                <ul>
+                  {users && users.length > 0 ? (
+                    users.map((user) => renderUser(user))
+                  ) : (
+                    <p>No users found</p>
+                  )}
+                </ul>
+
+                <div>
+                  <button>Add</button>
+                </div>
+              </div>
             </React.Fragment>
           )}
         />
@@ -84,16 +97,18 @@ function App() {
           path="/"
           render={() => {
             <React.Fragment>
-              <ul>
-                {users && users.length > 0 ? (
-                  users.map((user) => renderUser(user))
-                ) : (
-                  <p>No users found</p>
-                )}
-              </ul>
-
               <div>
-                <button>Add</button>
+                <ul>
+                  {users && users.length > 0 ? (
+                    users.map((user) => renderUser(user))
+                  ) : (
+                    <p>No users found</p>
+                  )}
+                </ul>
+
+                <div>
+                  <button>Add</button>
+                </div>
               </div>
             </React.Fragment>;
           }}

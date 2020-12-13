@@ -17,6 +17,9 @@ const AccomodationTab = (props) => {
       transaction_value: props.transaction,
       description: props.description,
     });
+    // this is to clear the input fields once clicked submit. The values will still be saved in the mongo database
+    props.setDesc("");
+    props.setTransactions(0);
   }
 
   return (
@@ -73,7 +76,10 @@ const AccomodationTab = (props) => {
           {viewTransactions ? (
             <div>
               <p>tansactionList</p>
-              <AccomodationTransactions />
+              <AccomodationTransactions
+                viewTransactions={viewTransactions}
+                setViewTransactions={setViewTransactions}
+              />
             </div>
           ) : null}
         </div>

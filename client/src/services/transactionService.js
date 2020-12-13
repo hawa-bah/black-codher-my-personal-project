@@ -5,8 +5,8 @@ async function getAll() {
   return res.data || [];
 }
 
-// async function deleteOne(user) {
-//   await axios.delete(`/api/user/${user._id}`);
-// }
+async function deleteOne(transaction) {
+  await axios.delete(`/api/expenses/transactions/${transaction._id}`);
+}
 
-export { getAll };
+export { getAll, deleteOne };
