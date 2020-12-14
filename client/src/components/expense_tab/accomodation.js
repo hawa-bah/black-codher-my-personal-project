@@ -1,10 +1,14 @@
+import DateFnsUtils from "@date-io/date-fns";
 import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import AccomodationTransactions from "../transaction_list/accomodation_transactions";
 import { getBalance } from "../../services/transactionService";
-import { KeyboardDatePicker } from "@material-ui/pickers";
+import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider,
+} from "@material-ui/pickers";
 
 const AccomodationTab = (props) => {
   // >>>> I'm passing transactions state (the value of a transaction) as a props
@@ -13,6 +17,7 @@ const AccomodationTab = (props) => {
   const [viewTransactions, setViewTransactions] = useState(false);
   //>>>> The balance is the sum of those values with test for now
   const [balance, setBalance] = useState(null);
+  //
   const [selectedDate, handleDateChange] = useState(new Date());
 
   useEffect(() => {
@@ -90,6 +95,11 @@ const AccomodationTab = (props) => {
             </Form.Text>
           </Form.Group>
 
+          <Button variant="primary" type="submit">
+            Submit Transaction
+          </Button>
+        </Form>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
             clearable
             value={selectedDate}
@@ -98,11 +108,7 @@ const AccomodationTab = (props) => {
             minDate={new Date()}
             format="MM/dd/yyyy"
           />
-
-          <Button variant="primary" type="submit">
-            Submit Transaction
-          </Button>
-        </Form>
+        </MuiPickersUtilsProvider>
       </div>
       <div className="Accomodation transaction List">
         <div className="button transaction">

@@ -14,7 +14,7 @@ function App() {
   const [transaction, setTransactions] = useState(0);
   const [description, setDesc] = useState("");
   const [transactionCategory, setTransactionCategory] = useState("");
-  const [date];
+  // const [date];
 
   //--------------- this can probably be deleted later
   // const [budgetFood, setbudgetFood] = useState(0);
