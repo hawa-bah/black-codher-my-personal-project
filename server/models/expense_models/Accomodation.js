@@ -6,6 +6,12 @@ const AccomodationSchema = Schema({
   description: String,
   transaction_date: {
     type: Date,
+    default: new Date(),
+    required: true,
+  },
+  budget_category: {
+    type: String,
+    required: true,
   },
 });
 

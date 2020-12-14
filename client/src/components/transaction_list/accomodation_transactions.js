@@ -29,7 +29,8 @@ const AccomodationTransactions = (props) => {
         <h3>
           {`${transaction.transaction_value} 
           ${transaction.description}
-          ${transaction.transaction_date}`}
+          ${transaction.transaction_date}
+          ${transaction.budget_category}`}
           {/* the button can be transformed to an icon later */}
           <button
             onClick={() => {

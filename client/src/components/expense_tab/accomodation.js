@@ -9,6 +9,7 @@ import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
+import budgetCategoriesArry from "../../budgetCategoriesArray";
 
 const AccomodationTab = (props) => {
   // >>>> I'm passing transactions state (the value of a transaction) as a props
@@ -19,6 +20,7 @@ const AccomodationTab = (props) => {
   const [balance, setBalance] = useState(null);
   //
   const [selectedDate, handleDateChange] = useState(new Date());
+  const [transactionCategory, setTransactionCategory] = useState("");
 
   useEffect(() => {
     if (!balance) {
@@ -39,6 +41,7 @@ const AccomodationTab = (props) => {
       transaction_value: props.transaction,
       description: props.description,
       transaction_date: selectedDate,
+      budget_category: transactionCategory,
     });
     //>>>> this is to clear the input fields once clicked submit. The values will still be saved in the mongo database
     props.setDesc("");
@@ -51,11 +54,12 @@ const AccomodationTab = (props) => {
 
   return (
     <div>
+      <div className="budget categories card"></div>
       <div className="AccomodationDiv tab">
         {/* maybe use props so that i can reuse commponents in name of the category */}
         <h3>Accomodation:</h3>
-
-        <h2>Amount left: {balance}</h2>
+        {/*  Amount spent in {test description} the router needs to be changed!  */}
+        <h2>Amount spent: {balance}</h2>
         {console.log(balance)}
         <Form
           onSubmit={(event) => {
@@ -95,18 +99,32 @@ const AccomodationTab = (props) => {
               Enter negative numbers if it is an expense.
             </Form.Text>
           </Form.Group>
-          {/* to input the date of the transaction we are using material-ui */}
 
+          {/* to input the date of the transaction we are using material-ui */}
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
               clearable
               value={selectedDate}
               placeholder="10/10/2018"
               onChange={(date) => handleDateChange(date)}
-              minDate={new Date()}
+              // minDate={new Date()}
               format="MM/dd/yyyy"
             />
           </MuiPickersUtilsProvider>
+          <Form.Group>
+            <Form.Label>
+              Select a category to classify the transaction{" "}
+            </Form.Label>
+            <Form.Control
+              as="select"
+              placeholder="e.g Transport"
+              onChange={(event) => setTransactionCategory(event.target.value)}
+            >
+              {budgetCategoriesArry.map((category) => (
+                <option value={category}>{category}</option>
+              ))}
+            </Form.Control>
+          </Form.Group>
           <Button variant="primary" type="submit">
             Submit Transaction
           </Button>
