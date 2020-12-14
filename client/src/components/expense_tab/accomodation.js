@@ -85,6 +85,7 @@ const AccomodationTab = (props) => {
               Enter negative numbers if it is an expense.
             </Form.Text>
           </Form.Group>
+
           <Button variant="primary" type="submit">
             Submit Transaction
           </Button>

@@ -8,12 +8,18 @@ import { getAll, deleteOne } from "./services/userService";
 
 function App() {
   const [budget, setbudget] = useState(0);
+  const [budgetFood, setbudgetFood] = useState(0);
+
+  //>>>> this will be used for inputing the expenses/transactions and viewing the transactions:
   const [transaction, setTransactions] = useState(0);
   const [description, setDesc] = useState("");
+  const [transactionCategory, setTransactionCategory] = useState("");
+  const [date];
 
-  const [budgetFood, setbudgetFood] = useState(0);
-  const [transactionFood, setTransactionsFood] = useState(0);
-  const [descriptionFood, setDescFood] = useState("");
+  //--------------- this can probably be deleted later
+  // const [budgetFood, setbudgetFood] = useState(0);
+  // const [transactionFood, setTransactionsFood] = useState(0);
+  // const [descriptionFood, setDescFood] = useState("");
 
   const [users, setusers] = useState(null);
 
@@ -63,19 +69,21 @@ function App() {
               <AccomodationTab
                 budget={budget}
                 setbudget={setbudget}
+                //
                 transaction={transaction}
                 setTransactions={setTransactions}
                 description={description}
                 setDesc={setDesc}
               />
-              <FoodTab
+              {/* ------------------ this can be deleted later
+                <FoodTab
                 budget={budgetFood}
                 setbudget={setbudgetFood}
                 transaction={transactionFood}
                 setTransactions={setTransactionsFood}
                 description={descriptionFood}
                 setDesc={setDescFood}
-              />
+              /> */}
               <div>
                 <ul>
                   {users && users.length > 0 ? (
