@@ -4,6 +4,8 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import AccomodationTransactions from "../transaction_list/accomodation_transactions";
 import { getBalance } from "../../services/transactionService";
+import { KeyboardDatePicker } from "@material-ui/pickers";
+
 const AccomodationTab = (props) => {
   // >>>> I'm passing transactions state (the value of a transaction) as a props
   // const [budget, setbudget] = useState(0);
@@ -11,6 +13,7 @@ const AccomodationTab = (props) => {
   const [viewTransactions, setViewTransactions] = useState(false);
   //>>>> The balance is the sum of those values with test for now
   const [balance, setBalance] = useState(null);
+  const [selectedDate, handleDateChange] = useState(new Date());
 
   useEffect(() => {
     if (!balance) {
@@ -52,6 +55,7 @@ const AccomodationTab = (props) => {
           onSubmit={(event) => {
             handleSubmit(event);
             renderBalance();
+            console.log(selectedDate);
           }}
         >
           <Form.Group controlId="formBasicEmail">
@@ -85,6 +89,15 @@ const AccomodationTab = (props) => {
               Enter negative numbers if it is an expense.
             </Form.Text>
           </Form.Group>
+
+          <KeyboardDatePicker
+            clearable
+            value={selectedDate}
+            placeholder="10/10/2018"
+            onChange={(date) => handleDateChange(date)}
+            minDate={new Date()}
+            format="MM/dd/yyyy"
+          />
 
           <Button variant="primary" type="submit">
             Submit Transaction
