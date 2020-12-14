@@ -38,6 +38,7 @@ const AccomodationTab = (props) => {
     axios.post(`/api/expense`, {
       transaction_value: props.transaction,
       description: props.description,
+      transaction_date: selectedDate,
     });
     //>>>> this is to clear the input fields once clicked submit. The values will still be saved in the mongo database
     props.setDesc("");
@@ -94,22 +95,24 @@ const AccomodationTab = (props) => {
               Enter negative numbers if it is an expense.
             </Form.Text>
           </Form.Group>
+          {/* to input the date of the transaction we are using material-ui */}
 
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              clearable
+              value={selectedDate}
+              placeholder="10/10/2018"
+              onChange={(date) => handleDateChange(date)}
+              minDate={new Date()}
+              format="MM/dd/yyyy"
+            />
+          </MuiPickersUtilsProvider>
           <Button variant="primary" type="submit">
             Submit Transaction
           </Button>
         </Form>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <KeyboardDatePicker
-            clearable
-            value={selectedDate}
-            placeholder="10/10/2018"
-            onChange={(date) => handleDateChange(date)}
-            minDate={new Date()}
-            format="MM/dd/yyyy"
-          />
-        </MuiPickersUtilsProvider>
       </div>
+
       <div className="Accomodation transaction List">
         <div className="button transaction">
           <Button onClick={() => setViewTransactions(!viewTransactions)}>

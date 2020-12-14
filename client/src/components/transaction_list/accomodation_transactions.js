@@ -28,7 +28,8 @@ const AccomodationTransactions = (props) => {
       <li key={transaction._id}>
         <h3>
           {`${transaction.transaction_value} 
-          ${transaction.description}`}
+          ${transaction.description}
+          ${transaction.transaction_date}`}
           {/* the button can be transformed to an icon later */}
           <button
             onClick={() => {
