@@ -49,6 +49,11 @@ module.exports = (app) => {
   });
 
   //>>>>>>>>>>>>>>>>> for budgeting
+  app.get(`/api/budget`, async (req, res) => {
+    const budgets = await Budget.find();
+    return res.status(200).send(budgets);
+  });
+
   app.post(`/api/budget`, async (req, res) => {
     await Budget.create(req.body);
   });
