@@ -10,6 +10,7 @@ import {
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import budgetCategoriesArry from "../../budgetCategoriesArray";
+import BudgetCategories from "../../components/BudgetCatgories";
 
 const AccomodationTab = (props) => {
   // >>>> I'm passing transactions state (the value of a transaction) as a props
@@ -54,13 +55,35 @@ const AccomodationTab = (props) => {
 
   return (
     <div>
-      <div className="budget categories card"></div>
-      <div className="AccomodationDiv tab">
+      <div className="budget categories card">
+        <BudgetCategories budgetCategoriesArry={budgetCategoriesArry} />
+        {/* {budgetCategoriesArry.map((category) => {
+          return (
+            <div className={"card" + category}>
+              <h2>{category}</h2>
+              <p>Current budget {balance}</p>
+              <Form>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Budget</Form.Label>
+                  <Form.Control
+                    type="expense"
+                    placeholder="input value"
+                    value={props.budget}
+                    onChange={(e) => props.setbudget(e.target.value)}
+                  />
+                </Form.Group>
+              </Form>
+            </div>
+          );
+        })} */}
+
         {/* maybe use props so that i can reuse commponents in name of the category */}
         <h3>Accomodation:</h3>
         {/*  Amount spent in {test description} the router needs to be changed!  */}
         <h2>Amount spent: {balance}</h2>
         {console.log(balance)}
+      </div>
+      <div className="AccomodationDiv tab">
         <Form
           onSubmit={(event) => {
             handleSubmit(event);
@@ -68,7 +91,7 @@ const AccomodationTab = (props) => {
             console.log(selectedDate);
           }}
         >
-          <Form.Group controlId="formBasicEmail">
+          {/* <Form.Group controlId="formBasicEmail">
             <Form.Label>Budget</Form.Label>
             <Form.Control
               type="expense"
@@ -76,7 +99,7 @@ const AccomodationTab = (props) => {
               value={props.budget}
               onChange={(e) => props.setbudget(e.target.value)}
             />
-          </Form.Group>
+          </Form.Group> */}
           <Form.Group controlId="description">
             <Form.Label>descip</Form.Label>
             <Form.Control

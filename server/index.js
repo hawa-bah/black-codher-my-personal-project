@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 require("./models/Users");
 require("./models/expense_models/Accomodation");
 require("./models/expense_models/Food");
+require("./models/Budget");
 
 const app = express();
 

@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const Exp_Accomodation = mongoose.model("accomodation");
 const Exp_Food = mongoose.model("food");
+const Budget = mongoose.model("budget");
 
 module.exports = (app) => {
   app.get(`/api/expense`, async (req, res) => {
@@ -45,5 +46,10 @@ module.exports = (app) => {
       error: false,
       transactions,
     });
+  });
+
+  //>>>>>>>>>>>>>>>>> for budgeting
+  app.post(`/api/budget`, async (req, res) => {
+    await Budget.create(req.body);
   });
 };
