@@ -15,7 +15,7 @@ const BudgetCategories = (props) => {
   });
 
   const getTripNameList = async () => {
-    // from budgetService
+    //>>>> I am getting the documents from the budget collection whith budgetService.js
     let res = await getAll();
     setTripNameList(res);
   };
