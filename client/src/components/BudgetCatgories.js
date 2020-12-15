@@ -42,7 +42,10 @@ const BudgetCategories = (props) => {
           <Form.Control
             as="select"
             placeholder="e.g Transport"
-            onChange={(event) => setTripName(event.target.value)}
+            onChange={(event) => {
+              setTripName(event.target.value);
+              console.log("You have selected " + event.target.value);
+            }}
           >
             {/* here i need to map the name of the trips inside the budget collection */}
             {tripNameList && tripNameList.length > 0 ? (
@@ -56,6 +59,11 @@ const BudgetCategories = (props) => {
           </Form.Control>
         </Form.Group>
       </Form>
+
+      <div className="Accomodation Tab" style={{ background: "yellow" }}>
+        <h1>Accomodation</h1>
+        <p>Your current budget for {tripName}</p>
+      </div>
 
       {props.budgetCategoriesArry.map((category) => {
         return (
