@@ -8,10 +8,6 @@ const BudgetCategories = (props) => {
   const [tripName, setTripName] = useState("");
   const [tripNameList, setTripNameList] = useState(null);
 
-  const renderTripNameList = (trip) => {
-    return <option key={trip.trip_name}>{trip.trip_name}</option>;
-  };
-
   useEffect(() => {
     if (!tripNameList) {
       getTripNameList();
@@ -24,6 +20,11 @@ const BudgetCategories = (props) => {
     setTripNameList(res);
   };
 
+  const renderTripNameList = (trip) => {
+    return <option key={trip.trip_name}>{trip.trip_name}</option>;
+  };
+
+  // -------------------------------------------------- this is used to submit budgets which might be deleted later
   const [budget, setbudget] = useState(null);
   function handleSubmit(category) {
     console.log("i've clicked budget" + category);
@@ -33,7 +34,7 @@ const BudgetCategories = (props) => {
       budget_amount: budget,
     });
   }
-
+  // -----------------------------------------------------------------------------------------------------------
   return (
     <div>
       <Form>
@@ -47,25 +48,24 @@ const BudgetCategories = (props) => {
               console.log("You have selected " + event.target.value);
             }}
           >
-            {/* here i need to map the name of the trips inside the budget collection */}
+            {/* here i am mapping the name of the trips inside the budget collection */}
             {tripNameList && tripNameList.length > 0 ? (
               tripNameList.map((trip) => renderTripNameList(trip))
             ) : (
               <option>No trips found</option>
             )}
-            {/* {budgetCategoriesArry.map((category) => (
-              <option value={category}>{category}</option>
-            ))} */}
           </Form.Control>
         </Form.Group>
       </Form>
 
       <div className="Accomodation Tab" style={{ background: "yellow" }}>
         <h1>Accomodation</h1>
-        <p>Your current budget for {tripName}</p>
+        <p>
+          Your current budget for {tripName} is {}
+        </p>
       </div>
-
-      {props.budgetCategoriesArry.map((category) => {
+      {/* -----------------------------------------------------this are to submit budget, might delete late */}
+      {/* {props.budgetCategoriesArry.map((category) => {
         return (
           <div className={"card" + category}>
             <h2>{category}</h2>
@@ -84,7 +84,8 @@ const BudgetCategories = (props) => {
             </Form>
           </div>
         );
-      })}
+      })} */}
+      {/* ---------------------------------------------------------------------------------------------- */}
     </div>
   );
 };
