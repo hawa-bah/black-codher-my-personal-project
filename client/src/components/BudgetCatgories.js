@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
@@ -7,6 +7,10 @@ import { getAll } from "../services/budgetService";
 const BudgetCategories = (props) => {
   const [tripName, setTripName] = useState("");
   const [tripNameList, setTripNameList] = useState(null);
+
+  const renderTripNameList = (trip) => {
+    return <option key={trip.trip_name}>{trip.trip_name}</option>;
+  };
 
   useEffect(() => {
     if (!tripNameList) {
@@ -29,10 +33,6 @@ const BudgetCategories = (props) => {
       budget_amount: budget,
     });
   }
-
-  const renderTripNameList = (trip) => {
-    return <option key={trip.trip_name}>{trip.trip_name}</option>;
-  };
 
   return (
     <div>
