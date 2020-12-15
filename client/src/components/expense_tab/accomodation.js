@@ -22,6 +22,7 @@ const AccomodationTab = (props) => {
   //
   const [selectedDate, handleDateChange] = useState(new Date());
   const [transactionCategory, setTransactionCategory] = useState("");
+  const [tripTransaction, setTripTransaction] = useState(null);
 
   useEffect(() => {
     if (!balance) {
@@ -43,6 +44,7 @@ const AccomodationTab = (props) => {
       description: props.description,
       transaction_date: selectedDate,
       budget_category: transactionCategory,
+      trip_name: tripTransaction,
     });
     //>>>> this is to clear the input fields once clicked submit. The values will still be saved in the mongo database
     props.setDesc("");
@@ -107,6 +109,16 @@ const AccomodationTab = (props) => {
               placeholder="input value"
               value={props.description}
               onChange={(e) => props.setDesc(e.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="trip_name">
+            <Form.Label>trip_name</Form.Label>
+            <Form.Control
+              type="trip_name"
+              placeholder="input value"
+              value={tripTransaction}
+              onChange={(e) => setTripTransaction(e.target.value)}
             />
           </Form.Group>
 

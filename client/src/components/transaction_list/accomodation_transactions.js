@@ -8,9 +8,7 @@ const AccomodationTransactions = (props) => {
   const [transactions, setTransactions] = useState(null);
 
   useEffect(() => {
-    if (!transactions) {
-      getTransactionsList();
-    }
+    getTransactionsList();
   });
 
   const getTransactionsList = async () => {
@@ -30,7 +28,8 @@ const AccomodationTransactions = (props) => {
           {`${transaction.transaction_value} 
           ${transaction.description}
           ${transaction.transaction_date}
-          ${transaction.budget_category}`}
+          ${transaction.budget_category}
+          ${transaction.trip_name}`}
           {/* the button can be transformed to an icon later */}
           <button
             onClick={() => {

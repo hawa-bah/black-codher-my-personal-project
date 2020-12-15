@@ -48,6 +48,18 @@ module.exports = (app) => {
     });
   });
 
+  app.get(`/api/expenses/accomodation/:tripName`, async (req, res) => {
+    const { tripName } = req.params;
+    const spent = await Exp_Accomodation.aggregate([
+      { $match: { budget_category: "Accomodation", trip_name: tripName } },
+      {
+        $group: { _id: "", transaction_value: { $sum: "$transaction_value" } },
+      },
+    ]);
+
+    return res.status(200).send(spent);
+  });
+
   //>>>>>>>>>>>>>>>>> for budgeting
   app.get(`/api/budget`, async (req, res) => {
     const budgets = await Budget.find();
@@ -56,5 +68,15 @@ module.exports = (app) => {
 
   app.post(`/api/budget`, async (req, res) => {
     await Budget.create(req.body);
+  });
+
+  app.get(`/api/budget/:tripName`, async (req, res) => {
+    const { tripName } = req.params;
+    const budget = await Budget.find({
+      budget_category: "Accomodation",
+      trip_name: tripName,
+    });
+    console.log(budget);
+    return res.status(200).send(budget);
   });
 };

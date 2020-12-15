@@ -13,5 +13,9 @@ async function getBalance() {
 async function deleteOne(transaction) {
   await axios.delete(`/api/expenses/transactions/${transaction._id}`);
 }
+async function getSpentAccomodation(tripName) {
+  const res = await axios.get(`/api/expenses/accomodation/${tripName}`);
+  return res.data || [];
+}
 
-export { getAll, getBalance, deleteOne };
+export { getAll, getBalance, deleteOne, getSpentAccomodation };

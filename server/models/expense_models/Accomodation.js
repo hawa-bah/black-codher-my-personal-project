@@ -13,6 +13,7 @@ const AccomodationSchema = Schema({
     type: String,
     required: true,
   },
+  trip_name: String,
 });
 
 mongoose.model("accomodation", AccomodationSchema, "accomodation");
