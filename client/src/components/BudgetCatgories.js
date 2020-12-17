@@ -23,9 +23,14 @@ const BudgetCategories = (props) => {
   const [budgetCategory, setBudgetCategory] = useState(null);
   const [budgetAmount, setBudgetAmount] = useState(null);
 
+  const [data, setData] = useState([]);
+
   useEffect(() => {
     if (!tripNameList) {
       getTripNameList();
+      // renderBudgetCategory();
+      // renderBudgetCategory(tripName, budgetCategory);
+      // renderBudgetCategory(tripName, category);
     }
     // if (tripName !== null && !budgetAccomodation && !budget) {
     //   // renderBudgetAccomodation(tripName);
@@ -41,7 +46,7 @@ const BudgetCategories = (props) => {
     //>>>> I am getting the documents from the budget collection whith budgetService.js
     let res = await getAll();
     setTripNameList(res);
-    console.log(res);
+    // console.log(res);
   };
   const renderTripNameList = (trip) => {
     return <option key={trip.trip_name}>{trip.trip_name}</option>;
@@ -59,15 +64,19 @@ const BudgetCategories = (props) => {
   // };
 
   // attempt rendering categories info using map
-  // const renderBudgetCategory = async (tripName, budgetCategory) => {
-  //   // let res = await getBudget(tripName);
-  //   // console.log(res);
-  //   console.log(budgetCategory);
-  //   // let selectedBudget = res[0].budgets.filter((object) => {
-  //   //   return object.budget_category === category;
-  //   // });
-  //   // setBudgetAmount(selectedBudget[0].budget_amount);
-  // };
+  const renderBudgetCategory = async (tripName) => {
+    let res = await getBudget(tripName);
+    console.log(res);
+    console.log("testing");
+    setData(res);
+
+    // make a map looping elemnts and render amount for the category
+    //   // console.log(budgetCategory);
+    //   // let selectedBudget = res[0].budgets.filter((object) => {
+    //   //   return object.budget_category === category;
+    //   // });
+    //   // setBudgetAmount(selectedBudget[0].budget_amount);
+  };
 
   // -------------------------------------------------- this is used to submit budgets which might be deleted later
   // const [budget, setbudget] = useState(null);
@@ -80,6 +89,7 @@ const BudgetCategories = (props) => {
   //   });
   // }
   // -----------------------------------------------------------------------------------------------------------
+  console.log(data);
   return (
     <div>
       <Form>
@@ -92,6 +102,7 @@ const BudgetCategories = (props) => {
               setTripName(event.target.value);
               // renderBudgetAccomodation(event.target.value);
               // renderSpentAccomodation(event.target.value);
+              renderBudgetCategory(event.target.value);
               console.log("You have selected " + event.target.value);
             }}
           >
@@ -118,13 +129,24 @@ const BudgetCategories = (props) => {
         <p>the difference is {difference}</p>
         <p></p>
       </div> */}
+      {/* each element is an object */}
+
+      {data &&
+        data[0].budgets.map((elements) => (
+          // <div>
+          <>
+            <div>
+              <h2>{elements.budget_category}</h2>
+              <h1>{elements.budget_amount}</h1>
+            </div>
+          </>
+        ))}
 
       {props.budgetCategoriesArry.map((category) => {
         // attempt using map
-        setBudgetCategory(category);
-
-        // renderBudgetCategory(tripName, budgetCategory);
-
+        // ================================================>>>>>>>> this state is causing an
+        // setBudgetCategory(category);
+        // renderBudgetCategory(tripName, category);
         return (
           <div className={category + "Tab"} style={{ background: "yellow" }}>
             <h1>{category}</h1>

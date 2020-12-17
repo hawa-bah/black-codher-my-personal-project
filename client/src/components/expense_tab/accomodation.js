@@ -28,7 +28,7 @@ const AccomodationTab = (props) => {
     if (!balance) {
       renderBalance();
     }
-  }, []);
+  });
 
   const renderBalance = async () => {
     let res = await getBalance();
