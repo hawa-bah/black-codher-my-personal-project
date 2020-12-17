@@ -28,7 +28,7 @@ const AccomodationTab = (props) => {
     if (!balance) {
       renderBalance();
     }
-  });
+  }, []);
 
   const renderBalance = async () => {
     let res = await getBalance();
@@ -80,10 +80,10 @@ const AccomodationTab = (props) => {
         })} */}
 
         {/* maybe use props so that i can reuse commponents in name of the category */}
-        <h3>Accomodation:</h3>
+        {/* <h3>Accomodation:</h3> */}
         {/*  Amount spent in {test description} the router needs to be changed!  */}
-        <h2>Amount spent: {balance}</h2>
-        {console.log(balance)}
+        {/* <h2>Amount spent: {balance}</h2>
+        {console.log(balance)} */}
       </div>
       <div className="AccomodationDiv tab">
         <Form

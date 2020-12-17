@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import {
   getAll,
-  getBudgetAccomodation,
+  // getBudgetAccomodation,
   getBudget,
 } from "../services/budgetService";
 import { getSpentAccomodation } from "../services/transactionService";
@@ -21,16 +21,17 @@ const BudgetCategories = (props) => {
 
   // attempt with map
   const [budgetCategory, setBudgetCategory] = useState(null);
+  const [budgetAmount, setBudgetAmount] = useState(null);
 
   useEffect(() => {
     if (!tripNameList) {
       getTripNameList();
     }
-    if (tripName !== null && !budgetAccomodation && !budget) {
-      renderBudgetAccomodation(tripName);
-      renderSpentAccomodation(tripName);
-      // renderBudgetCategory(tripName, category);
-    }
+    // if (tripName !== null && !budgetAccomodation && !budget) {
+    //   // renderBudgetAccomodation(tripName);
+    //   // renderSpentAccomodation(tripName);
+    //   // renderBudgetCategory(tripName, category);
+    // }
     // if (budgetAccomodation) {
     //   document.getElementsByClassName();
     // }
@@ -40,41 +41,44 @@ const BudgetCategories = (props) => {
     //>>>> I am getting the documents from the budget collection whith budgetService.js
     let res = await getAll();
     setTripNameList(res);
+    console.log(res);
   };
-
   const renderTripNameList = (trip) => {
     return <option key={trip.trip_name}>{trip.trip_name}</option>;
   };
+
   // budget collection
-  const renderBudgetAccomodation = async (tripName) => {
-    let res = await getBudgetAccomodation(tripName);
-    setBudgetAccomodation(res[0].budget_amount);
-  };
+  // const renderBudgetAccomodation = async (tripName) => {
+  //   let res = await getBudgetAccomodation(tripName);
+  //   setBudgetAccomodation(res[0].budget_amount);
+  // };
   // accomodation collection
-  const renderSpentAccomodation = async (tripName) => {
-    let res = await getSpentAccomodation(tripName);
-    setSpentAccomodation(res[0].transaction_value);
-  };
+  // const renderSpentAccomodation = async (tripName) => {
+  //   let res = await getSpentAccomodation(tripName);
+  //   setSpentAccomodation(res[0].transaction_value);
+  // };
 
   // attempt rendering categories info using map
-  const renderBudgetCategory = async (tripName, category) => {
-    let res = await getBudget(tripName);
-    let selectedBudget = res[0].budgets.filter((object) => {
-      return object.budget_category === category;
-    });
-    setBudgetCategory(selectedBudget[0].budget_amount);
-  };
+  // const renderBudgetCategory = async (tripName, budgetCategory) => {
+  //   // let res = await getBudget(tripName);
+  //   // console.log(res);
+  //   console.log(budgetCategory);
+  //   // let selectedBudget = res[0].budgets.filter((object) => {
+  //   //   return object.budget_category === category;
+  //   // });
+  //   // setBudgetAmount(selectedBudget[0].budget_amount);
+  // };
 
   // -------------------------------------------------- this is used to submit budgets which might be deleted later
-  const [budget, setbudget] = useState(null);
-  function handleSubmit(category) {
-    console.log("i've clicked budget" + category);
+  // const [budget, setbudget] = useState(null);
+  // function handleSubmit(category) {
+  //   console.log("i've clicked budget" + category);
 
-    axios.post(`/api/budget`, {
-      budget_category: category,
-      budget_amount: budget,
-    });
-  }
+  //   axios.post(`/api/budget`, {
+  //     budget_category: category,
+  //     budget_amount: budget,
+  //   });
+  // }
   // -----------------------------------------------------------------------------------------------------------
   return (
     <div>
@@ -86,8 +90,8 @@ const BudgetCategories = (props) => {
             placeholder="e.g Transport"
             onChange={(event) => {
               setTripName(event.target.value);
-              renderBudgetAccomodation(event.target.value);
-              renderSpentAccomodation(event.target.value);
+              // renderBudgetAccomodation(event.target.value);
+              // renderSpentAccomodation(event.target.value);
               console.log("You have selected " + event.target.value);
             }}
           >
@@ -102,7 +106,7 @@ const BudgetCategories = (props) => {
         </Form.Group>
       </Form>
 
-      <div className="Accomodation Tab" style={{ background: "yellow" }}>
+      {/* <div className="Accomodation Tab" style={{ background: "yellow" }}>
         <h1>Accomodation</h1>
         <p>
           Your current budget for {tripName} is {budgetAccomodation}
@@ -113,16 +117,20 @@ const BudgetCategories = (props) => {
         </p>
         <p>the difference is {difference}</p>
         <p></p>
-      </div>
+      </div> */}
 
       {props.budgetCategoriesArry.map((category) => {
         // attempt using map
-        renderBudgetCategory(tripName, category);
+        setBudgetCategory(category);
+
+        // renderBudgetCategory(tripName, budgetCategory);
+
         return (
           <div className={category + "Tab"} style={{ background: "yellow" }}>
             <h1>{category}</h1>
             <p>
-              Your current budget for {tripName} is {budget}
+              Your current budget for {tripName} is
+              {/* {budgetAmount} */}
             </p>
           </div>
         );

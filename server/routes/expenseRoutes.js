@@ -62,7 +62,7 @@ module.exports = (app) => {
 
   //>>>>>>>>>>>>>>>>> for budgeting
   app.get(`/api/budget`, async (req, res) => {
-    const budgets = await Budget.find();
+    const budgets = await Budget.find({});
     return res.status(200).send(budgets);
   });
 
@@ -70,18 +70,18 @@ module.exports = (app) => {
     await Budget.create(req.body);
   });
 
-  app.get(`/api/budget/:tripName`, async (req, res) => {
-    const { tripName } = req.params;
-    const budget = await Budget.find({
-      budget_category: "Accomodation",
-      trip_name: tripName,
-    });
-    console.log(budget);
-    return res.status(200).send(budget);
-  });
+  // app.get(`/api/budget/:tripName`, async (req, res) => {
+  //   const { tripName } = req.params;
+  //   const budget = await Budget.find({
+  //     budget_category: "Accomodation",
+  //     trip_name: tripName,
+  //   });
+  //   console.log(budget);
+  //   return res.status(200).send(budget);
+  // });
 
-  app.get(`/api/budget/:tripName/:category`, async (req, res) => {
-    const { tripName } = req.params.tripName;
+  app.get(`/api/budget/category/:tripName`, async (req, res) => {
+    const { tripName } = req.params;
     // const { category } = req.params.category;
     const budget = await Budget.find({
       // budget_category: "Accomodation",
