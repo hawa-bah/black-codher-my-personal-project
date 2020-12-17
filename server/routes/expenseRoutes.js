@@ -79,4 +79,15 @@ module.exports = (app) => {
     console.log(budget);
     return res.status(200).send(budget);
   });
+
+  app.get(`/api/budget/:tripName/:category`, async (req, res) => {
+    const { tripName } = req.params.tripName;
+    // const { category } = req.params.category;
+    const budget = await Budget.find({
+      // budget_category: "Accomodation",
+      trip_name: tripName,
+    });
+    console.log(budget);
+    return res.status(200).send(budget);
+  });
 };

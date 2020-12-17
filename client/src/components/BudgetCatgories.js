@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import { getAll, getBudgetAccomodation } from "../services/budgetService";
+import {
+  getAll,
+  getBudgetAccomodation,
+  getBudget,
+} from "../services/budgetService";
 import { getSpentAccomodation } from "../services/transactionService";
 import budgetCategoriesArray from "../budgetCategoriesArray";
 
@@ -15,13 +19,17 @@ const BudgetCategories = (props) => {
   const difference = budgetAccomodation - spentAccomodation;
   const percentage = (spentAccomodation / budgetAccomodation) * 100;
 
+  // attempt with map
+  const [budgetCategory, setBudgetCategory] = useState(null);
+
   useEffect(() => {
     if (!tripNameList) {
       getTripNameList();
     }
-    if (tripName !== null && !budgetAccomodation) {
+    if (tripName !== null && !budgetAccomodation && !budget) {
       renderBudgetAccomodation(tripName);
       renderSpentAccomodation(tripName);
+      // renderBudgetCategory(tripName, category);
     }
     // if (budgetAccomodation) {
     //   document.getElementsByClassName();
@@ -37,16 +45,26 @@ const BudgetCategories = (props) => {
   const renderTripNameList = (trip) => {
     return <option key={trip.trip_name}>{trip.trip_name}</option>;
   };
-
+  // budget collection
   const renderBudgetAccomodation = async (tripName) => {
     let res = await getBudgetAccomodation(tripName);
     setBudgetAccomodation(res[0].budget_amount);
   };
-
+  // accomodation collection
   const renderSpentAccomodation = async (tripName) => {
     let res = await getSpentAccomodation(tripName);
     setSpentAccomodation(res[0].transaction_value);
   };
+
+  // attempt rendering categories info using map
+  const renderBudgetCategory = async (tripName, category) => {
+    let res = await getBudget(tripName);
+    let selectedBudget = res[0].budgets.filter((object) => {
+      return object.budget_category === category;
+    });
+    setBudgetCategory(selectedBudget[0].budget_amount);
+  };
+
   // -------------------------------------------------- this is used to submit budgets which might be deleted later
   const [budget, setbudget] = useState(null);
   function handleSubmit(category) {
@@ -96,6 +114,19 @@ const BudgetCategories = (props) => {
         <p>the difference is {difference}</p>
         <p></p>
       </div>
+
+      {props.budgetCategoriesArry.map((category) => {
+        // attempt using map
+        renderBudgetCategory(tripName, category);
+        return (
+          <div className={category + "Tab"} style={{ background: "yellow" }}>
+            <h1>{category}</h1>
+            <p>
+              Your current budget for {tripName} is {budget}
+            </p>
+          </div>
+        );
+      })}
 
       {/* -----------------------------------------------------this are to submit budget, might delete late */}
       {/* {props.budgetCategoriesArry.map((category) => {

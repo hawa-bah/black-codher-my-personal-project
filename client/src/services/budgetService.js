@@ -10,4 +10,9 @@ async function getBudgetAccomodation(tripName) {
   return res.data || [];
 }
 
-export { getAll, getBudgetAccomodation };
+async function getBudget(tripName, category) {
+  const res = await axios.get(`/api/budget/${tripName}/${category}`);
+  return res.data || [];
+}
+
+export { getAll, getBudgetAccomodation, getBudget };
