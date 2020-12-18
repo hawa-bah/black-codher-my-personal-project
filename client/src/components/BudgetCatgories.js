@@ -73,12 +73,20 @@ const BudgetCategories = (props) => {
     setData(res);
   };
 
-  const renderSpent = async (elements, tripName) => {
-    let res = await getSpent(elements.budget_category, tripName);
-    console.log(elements.budget_category);
+  // attempt 1
+  // const renderSpent = async (elements, tripName) => {
+  //   let res = await getSpent(elements.budget_category, tripName);
+  //   console.log(elements.budget_category);
+  //   console.log(res);
+  //   setSpent(res);
+  //   return 1;
+  // };
+
+  // attempt 2
+  const renderSpent = async (tripName) => {
+    let res = await getSpent(tripName);
     console.log(res);
-    setSpent(res);
-    return 1;
+    setSpent(res); //this returns the transactions of a specific trip
   };
 
   // -------------------------------------------------- this is used to submit budgets which might be deleted later
@@ -103,6 +111,7 @@ const BudgetCategories = (props) => {
             placeholder="e.g Transport"
             onChange={(event) => {
               setTripName(event.target.value);
+              renderSpent(event.target.value); // this are transactions corresponding to one trip
               // renderBudgetAccomodation(event.target.value);
               // renderSpentAccomodation(event.target.value);
               renderBudgetCategory(event.target.value);
@@ -146,7 +155,7 @@ const BudgetCategories = (props) => {
         ))} */}
       {data && data.length > 0
         ? data[0].budgets.map((elements) => {
-            renderSpent(elements, tripName);
+            // renderSpent(elements, tripName);
             return (
               // <div>
 
@@ -163,8 +172,10 @@ const BudgetCategories = (props) => {
           })
         : null}
       {spent && spent.length > 0 ? (
-        <h2>Spent: {spent.transaction_value}</h2>
-      ) : null}
+        <h2>Spent: </h2>
+      ) : (
+        <h1>Amount spent isn't working</h1>
+      )}
 
       {props.budgetCategoriesArry.map((category) => {
         // attempt using map

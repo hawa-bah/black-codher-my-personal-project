@@ -10,8 +10,15 @@ async function getAll() {
 //   return res.data || [];
 // }
 
-async function getSpent(category, tripName) {
-  const res = await axios.get(`/api/expenses/${category}/${tripName}`);
+// attempt  1
+// async function getSpent(category, tripName) {
+//   const res = await axios.get(`/api/expenses/${category}/${tripName}`);
+//   return res.data || [];
+// }
+
+// attempt 2
+async function getSpent(tripName) {
+  const res = await axios.get(`/api/expenses/${tripName}`);
   return res.data || [];
 }
 
