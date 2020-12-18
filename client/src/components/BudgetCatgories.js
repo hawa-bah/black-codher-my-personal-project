@@ -6,6 +6,7 @@ import {
   getAll,
   // getBudgetAccomodation,
   getBudget,
+  getSpent,
 } from "../services/budgetService";
 // import { getSpentAccomodation } from "../services/transactionService";
 // import budgetCategoriesArray from "../budgetCategoriesArray";
@@ -13,6 +14,7 @@ import {
 const BudgetCategories = (props) => {
   const [tripName, setTripName] = useState("");
   const [tripNameList, setTripNameList] = useState(null);
+  const [spent, setSpent] = useState(null);
 
   // const [budgetAccomodation, setBudgetAccomodation] = useState(null);
   // const [spentAccomodation, setSpentAccomodation] = useState(null);
@@ -69,13 +71,14 @@ const BudgetCategories = (props) => {
     console.log(res);
     console.log("testing");
     setData(res);
+  };
 
-    // make a map looping elemnts and render amount for the category
-    //   // console.log(budgetCategory);
-    //   // let selectedBudget = res[0].budgets.filter((object) => {
-    //   //   return object.budget_category === category;
-    //   // });
-    //   // setBudgetAmount(selectedBudget[0].budget_amount);
+  const renderSpent = async (elements, tripName) => {
+    let res = await getSpent(elements.budget_category, tripName);
+    console.log(elements.budget_category);
+    console.log(res);
+    setSpent(res);
+    return 1;
   };
 
   // -------------------------------------------------- this is used to submit budgets which might be deleted later
@@ -142,16 +145,26 @@ const BudgetCategories = (props) => {
           </>
         ))} */}
       {data && data.length > 0
-        ? data[0].budgets.map((elements) => (
-            // <div>
-            <>
-              <div>
-                <h2>{elements.budget_category}</h2>
-                <h1>{elements.budget_amount}</h1>
-              </div>
-            </>
-          ))
+        ? data[0].budgets.map((elements) => {
+            renderSpent(elements, tripName);
+            return (
+              // <div>
+
+              <>
+                <div>
+                  <h2>
+                    {elements.budget_category} budget for {tripName}
+                  </h2>
+                  <h1>budget amount:{elements.budget_amount}</h1>
+                  {/* <h2>amount spent: {spent}</h2> */}
+                </div>
+              </>
+            );
+          })
         : null}
+      {spent && spent.length > 0 ? (
+        <h2>Spent: {spent.transaction_value}</h2>
+      ) : null}
 
       {props.budgetCategoriesArry.map((category) => {
         // attempt using map

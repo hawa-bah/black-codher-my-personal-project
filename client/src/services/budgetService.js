@@ -10,9 +10,14 @@ async function getAll() {
 //   return res.data || [];
 // }
 
+async function getSpent(category, tripName) {
+  const res = await axios.get(`/api/expenses/${category}/${tripName}`);
+  return res.data || [];
+}
+
 async function getBudget(tripName) {
   const res = await axios.get(`/api/budget/category/${tripName}`);
   return res.data || [];
 }
 
-export { getAll, getBudget };
+export { getAll, getSpent, getBudget };

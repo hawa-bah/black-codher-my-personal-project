@@ -60,6 +60,20 @@ module.exports = (app) => {
     return res.status(200).send(spent);
   });
 
+  // >>>>>>>>>>>>>>>> amount spent in each category
+  app.get(`/api/expenses/:category/:tripName`, async (req, res) => {
+    const { tripName } = req.params.tripName;
+    const { category } = req.params.category;
+    const spent = await Exp_Accomodation.aggregate([
+      { $match: { budget_category: category, trip_name: tripName } },
+      {
+        $group: { _id: "", transaction_value: { $sum: "$transaction_value" } },
+      },
+    ]);
+
+    return res.status(200).send(spent);
+  });
+
   //>>>>>>>>>>>>>>>>> for budgeting
   app.get(`/api/budget`, async (req, res) => {
     const budgets = await Budget.find({});
