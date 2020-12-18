@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import axios from "axios";
+// import Button from "react-bootstrap/Button";
+// import axios from "axios";
 import {
   getAll,
   // getBudgetAccomodation,
   getBudget,
 } from "../services/budgetService";
-import { getSpentAccomodation } from "../services/transactionService";
-import budgetCategoriesArray from "../budgetCategoriesArray";
+// import { getSpentAccomodation } from "../services/transactionService";
+// import budgetCategoriesArray from "../budgetCategoriesArray";
 
 const BudgetCategories = (props) => {
   const [tripName, setTripName] = useState("");
   const [tripNameList, setTripNameList] = useState(null);
 
-  const [budgetAccomodation, setBudgetAccomodation] = useState(null);
-  const [spentAccomodation, setSpentAccomodation] = useState(null);
-  const difference = budgetAccomodation - spentAccomodation;
-  const percentage = (spentAccomodation / budgetAccomodation) * 100;
+  // const [budgetAccomodation, setBudgetAccomodation] = useState(null);
+  // const [spentAccomodation, setSpentAccomodation] = useState(null);
+  // const difference = budgetAccomodation - spentAccomodation;
+  // const percentage = (spentAccomodation / budgetAccomodation) * 100;
 
   // attempt with map
-  const [budgetCategory, setBudgetCategory] = useState(null);
-  const [budgetAmount, setBudgetAmount] = useState(null);
+  // const [budgetCategory, setBudgetCategory] = useState(null);
+  // const [budgetAmount, setBudgetAmount] = useState(null);
 
   const [data, setData] = useState([]);
 
@@ -131,7 +131,7 @@ const BudgetCategories = (props) => {
       </div> */}
       {/* each element is an object */}
 
-      {data &&
+      {/* {data &&
         data[0].budgets.map((elements) => (
           // <div>
           <>
@@ -140,7 +140,18 @@ const BudgetCategories = (props) => {
               <h1>{elements.budget_amount}</h1>
             </div>
           </>
-        ))}
+        ))} */}
+      {data && data.length > 0
+        ? data[0].budgets.map((elements) => (
+            // <div>
+            <>
+              <div>
+                <h2>{elements.budget_category}</h2>
+                <h1>{elements.budget_amount}</h1>
+              </div>
+            </>
+          ))
+        : null}
 
       {props.budgetCategoriesArry.map((category) => {
         // attempt using map

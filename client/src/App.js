@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AccomodationTab from "./components/expense_tab/accomodation";
-import FoodTab from "./components/expense_tab/Food_tab";
+// import FoodTab from "./components/expense_tab/Food_tab";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // SERVICES
@@ -8,12 +8,12 @@ import { getAll, deleteOne } from "./services/userService";
 
 function App() {
   const [budget, setbudget] = useState(0);
-  const [budgetFood, setbudgetFood] = useState(0);
+  // const [budgetFood, setbudgetFood] = useState(0);
 
   //>>>> this will be used for inputing the expenses/transactions and viewing the transactions:
   const [transaction, setTransactions] = useState(0);
   const [description, setDesc] = useState("");
-  const [transactionCategory, setTransactionCategory] = useState("");
+  // const [transactionCategory, setTransactionCategory] = useState("");
   // const [date];
 
   //--------------- this can probably be deleted later
