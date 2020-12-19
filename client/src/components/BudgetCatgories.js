@@ -86,7 +86,7 @@ const BudgetCategories = (props) => {
   const renderSpent = async (tripName) => {
     let res = await getSpent(tripName);
     console.log(res);
-    setSpent(res); //this returns the transactions of a specific trip
+    setSpent(res); //this returns the transactions of a specific trip. Spent is an array of objects(transactions)
   };
 
   // -------------------------------------------------- this is used to submit budgets which might be deleted later
@@ -156,6 +156,13 @@ const BudgetCategories = (props) => {
       {data && data.length > 0
         ? data[0].budgets.map((elements) => {
             // renderSpent(elements, tripName);
+            let filterSpent = spent.filter((object) => {
+              return object.budget_category === elements.budget_category;
+            }); // filterSpent is an array of objects(transactions in the same category hopefully?)
+            let spentValue = filterSpent.reduce(function (prev, cur) {
+              return prev + cur.transaction_value;
+            }, 0);
+            console.log(elements.budget_category + filterSpent.length);
             return (
               // <div>
 
@@ -165,7 +172,8 @@ const BudgetCategories = (props) => {
                     {elements.budget_category} budget for {tripName}
                   </h2>
                   <h1>budget amount:{elements.budget_amount}</h1>
-                  {/* <h2>amount spent: {spent}</h2> */}
+                  <h2>times spent: {filterSpent.length}</h2>
+                  <h3>amount spent: {spentValue}</h3>
                 </div>
               </>
             );
