@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import AccomodationTab from "./components/expense_tab/accomodation";
-// import FoodTab from "./components/expense_tab/Food_tab";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // SERVICES
@@ -75,15 +74,7 @@ function App() {
                 description={description}
                 setDesc={setDesc}
               />
-              {/* ------------------ this can be deleted later
-                <FoodTab
-                budget={budgetFood}
-                setbudget={setbudgetFood}
-                transaction={transactionFood}
-                setTransactions={setTransactionsFood}
-                description={descriptionFood}
-                setDesc={setDescFood}
-              /> */}
+              
               <div>
                 <ul>
                   {users && users.length > 0 ? (
@@ -123,36 +114,7 @@ function App() {
         />
       </Router>
     </div>
-    //  <div>
-    /* <AccomodationTab
-          budget={budget}
-          setbudget={setbudget}
-          transaction={transaction}
-          setTransactions={setTransactions}
-          description={description}
-          setDesc={setDesc}
-        />
-        <FoodTab
-          budget={budgetFood}
-          setbudget={setbudgetFood}
-          transaction={transactionFood}
-          setTransactions={setTransactionsFood}
-          description={descriptionFood}
-          setDesc={setDescFood}
-        /> */
-    /* </div>
-      <ul>
-        {users && users.length > 0 ? (
-          users.map((user) => renderUser(user))
-        ) : (
-          <p>No users found</p>
-        )}
-      </ul>
-
-      <div>
-        <button>Add</button>
-      </div> */
-    /* </div> */
+    
   );
 }
 
