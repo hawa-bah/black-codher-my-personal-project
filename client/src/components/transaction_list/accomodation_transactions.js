@@ -3,7 +3,7 @@ import { getAll } from "../../services/transactionService";
 // import { deleteOne } from "../../services/userService";
 import { deleteOne } from "../../services/transactionService";
 
-const AccomodationTransactions = (props) => {
+const TransactionsList = (props) => {
   // >>> we are passing as props renderBalance() and others but only using the first
   const [transactions, setTransactions] = useState(null);
 
@@ -57,4 +57,4 @@ const AccomodationTransactions = (props) => {
   );
 };
 
-export default AccomodationTransactions;
+export default TransactionsList;

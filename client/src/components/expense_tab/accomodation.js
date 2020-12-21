@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import AccomodationTransactions from "../transaction_list/accomodation_transactions";
+import TransactionsList from "../transaction_list/TransactionsList";
 import { getBalance } from "../../services/transactionService";
 import {
   KeyboardDatePicker,
@@ -160,7 +160,7 @@ const AccomodationTab = (props) => {
           {viewTransactions ? (
             <div>
               <p>tansactionList</p>
-              <AccomodationTransactions
+              <TransactionsList
                 viewTransactions={viewTransactions}
                 setViewTransactions={setViewTransactions}
                 // renderBalance={renderBalance}
