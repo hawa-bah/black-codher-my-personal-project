@@ -25,15 +25,15 @@ const AccomodationTab = (props) => {
   const [tripTransaction, setTripTransaction] = useState(null);
 
   useEffect(() => {
-    if (!balance) {
-      renderBalance();
-    }
+    // if (!balance) {
+    //   renderBalance();
+    // }
   });
 
-  const renderBalance = async () => {
-    let res = await getBalance();
-    setBalance(res[0].transaction_value);
-  };
+  // const renderBalance = async () => {
+  //   let res = await getBalance();
+  //   setBalance(res[0].transaction_value);
+  // };
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -89,7 +89,7 @@ const AccomodationTab = (props) => {
         <Form
           onSubmit={(event) => {
             handleSubmit(event);
-            renderBalance();
+            // renderBalance();
             console.log(selectedDate);
           }}
         >
@@ -181,7 +181,7 @@ const AccomodationTab = (props) => {
               <AccomodationTransactions
                 viewTransactions={viewTransactions}
                 setViewTransactions={setViewTransactions}
-                renderBalance={renderBalance}
+                // renderBalance={renderBalance}
               />
             </div>
           ) : null}

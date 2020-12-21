@@ -4,8 +4,9 @@ const bodyParser = require("body-parser");
 
 // IMPORT YOUR MODELS
 require("./models/Users");
-require("./models/expense_models/Accomodation");
-require("./models/expense_models/Food");
+require("./models/expense_models/Transaction");
+// ---- delete below
+// require("./models/expense_models/Food");
 require("./models/Budget");
 
 const app = express();

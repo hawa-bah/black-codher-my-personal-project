@@ -34,7 +34,7 @@ const AccomodationTransactions = (props) => {
           <button
             onClick={() => {
               deleteTransaction(transaction);
-              props.renderBalance();
+              // props.renderBalance();
             }}
           >
             Delete
