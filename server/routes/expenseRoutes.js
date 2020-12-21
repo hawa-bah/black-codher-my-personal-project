@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const Exp_Transaction = mongoose.model("transaction");
-const Exp_Food = mongoose.model("food");
 const Budget = mongoose.model("budget");
 
 module.exports = (app) => {
@@ -35,9 +34,7 @@ module.exports = (app) => {
   });
 
   app.delete(`/api/expenses/transactions/:id`, async (req, res) => {
-    // const transactions = await Exp_Transaction.findByIdAndDelete(
-    //   req.params.id
-    // );
+    
     const { id } = req.params;
 
     const transactions = await Exp_Transaction.findByIdAndDelete(id);
