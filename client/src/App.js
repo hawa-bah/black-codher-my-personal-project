@@ -7,18 +7,10 @@ import { getAll, deleteOne } from "./services/userService";
 
 function App() {
   const [budget, setbudget] = useState(0);
-  // const [budgetFood, setbudgetFood] = useState(0);
 
   //>>>> this will be used for inputing the expenses/transactions and viewing the transactions:
   const [transaction, setTransactions] = useState(0);
   const [description, setDesc] = useState("");
-  // const [transactionCategory, setTransactionCategory] = useState("");
-  // const [date];
-
-  //--------------- this can probably be deleted later
-  // const [budgetFood, setbudgetFood] = useState(0);
-  // const [transactionFood, setTransactionsFood] = useState(0);
-  // const [descriptionFood, setDescFood] = useState("");
 
   const [users, setusers] = useState(null);
 

@@ -18,7 +18,7 @@ const AccomodationTab = (props) => {
   // const [transaction, setTransactions] = useState(0);
   const [viewTransactions, setViewTransactions] = useState(false);
   //>>>> The balance is the sum of those values with test for now
-  const [balance, setBalance] = useState(null);
+  // const [balance, setBalance] = useState(null);
   //
   const [selectedDate, handleDateChange] = useState(new Date());
   const [transactionCategory, setTransactionCategory] = useState("");

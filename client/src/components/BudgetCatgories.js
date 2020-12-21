@@ -73,14 +73,7 @@ const BudgetCategories = (props) => {
     setData(res);
   };
 
-  // attempt 1
-  // const renderSpent = async (elements, tripName) => {
-  //   let res = await getSpent(elements.budget_category, tripName);
-  //   console.log(elements.budget_category);
-  //   console.log(res);
-  //   setSpent(res);
-  //   return 1;
-  // };
+
 
   // attempt 2
   const renderSpent = async (tripName) => {
@@ -129,19 +122,7 @@ const BudgetCategories = (props) => {
         </Form.Group>
       </Form>
 
-      {/* <div className="Accomodation Tab" style={{ background: "yellow" }}>
-        <h1>Accomodation</h1>
-        <p>
-          Your current budget for {tripName} is {budgetAccomodation}
-        </p>
-        <p>
-          The amount you have spent so far is {spentAccomodation} ({percentage}
-          %)
-        </p>
-        <p>the difference is {difference}</p>
-        <p></p>
-      </div> */}
-      {/* each element is an object */}
+    
 
       {/* {data &&
         data[0].budgets.map((elements) => (
@@ -164,16 +145,15 @@ const BudgetCategories = (props) => {
             }, 0);
             console.log(elements.budget_category + filterSpent.length);
             return (
-              // <div>
 
               <>
                 <div>
                   <h2>
                     {elements.budget_category} budget for {tripName}
                   </h2>
-                  <h1>budget amount:{elements.budget_amount}</h1>
+                  <h2>budget amount:{elements.budget_amount}</h2>
                   <h2>times spent: {filterSpent.length}</h2>
-                  <h3>amount spent: {spentValue}</h3>
+                  <h2>amount spent: {spentValue}</h2>
                 </div>
               </>
             );
@@ -182,7 +162,7 @@ const BudgetCategories = (props) => {
       {spent && spent.length > 0 ? (
         <h2>Spent: </h2>
       ) : (
-        <h1>Amount spent isn't working</h1>
+        <h1>select a Trip</h1>
       )}
 
       {props.budgetCategoriesArry.map((category) => {
