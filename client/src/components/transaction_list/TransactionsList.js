@@ -52,8 +52,10 @@ const TransactionsList = (props) => {
       </li>
     );
   };
-
+  // label is state, also the things that will be filtered
   const filterMethod = (label, value) => {
+    console.log("label:" + label);
+
     setIsFiltered(true);
     setFilterLabel(label);
     setFilterValue(value);
@@ -61,11 +63,21 @@ const TransactionsList = (props) => {
   };
 
   const filterTransactions = (filterLabel, filterValue) => {
-    const filteredTransactions = [...transactions].filter((transaction) => {
-      return transaction[filterLabel] === filterValue;
+    const filteredTransactions = transactions.filter(function (item) {
+      for (var key in filterLabel) {
+        console.log(key, filterLabel, item);
+        if (
+          item.budget_category === undefined ||
+          item.budget_category != filterLabel[key]
+        )
+          return false;
+      }
+      return true;
     });
+
     setFilteredTransactions(filteredTransactions);
     console.log("filter transactions function clicked");
+    console.log(filteredTransactions);
   };
 
   const clearFilters = () => {
