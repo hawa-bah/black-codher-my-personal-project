@@ -30,14 +30,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Sort = (props) => {
+const Filter = (props) => {
   const classes = useStyles();
 
   const [displayMenuItems, setDisplayMenuItems] = useState(null);
 
   //   functions:
-  const handleSortClick = (event) => {
+  const handleFilterClick = (event) => {
     setDisplayMenuItems(event.target);
+  };
+  const handleMenuClose = () => {
+    setDisplayMenuItems(null);
   };
 
   return (
@@ -47,16 +50,25 @@ const Sort = (props) => {
         color="primary"
         className={classes.margin}
         startIcon={<SortIcon />}
-        onClick={handleSortClick}
+        onClick={handleFilterClick}
       >
-        Sort
+        Filter
       </ColorButton>
 
-      <Menu>
-        <MenuItem>Transaction Date</MenuItem>
+      <Menu
+        open={Boolean(displayMenuItems)}
+        onClose={handleMenuClose}
+        elevation={1}
+        anchorEl={displayMenuItems}
+      >
+        <MenuItem disabled={true}>Category</MenuItem>
+        <MenuItem>Accomodation</MenuItem>
+        <MenuItem>Transport</MenuItem>
+        <MenuItem disabled={true}>Transaction Date</MenuItem>
+        <MenuItem disabled={true}>Trip Name</MenuItem>
       </Menu>
     </div>
   );
 };
 
-export default Sort;
+export default Filter;

@@ -12,8 +12,8 @@ import {
 // import budgetCategoriesArray from "../budgetCategoriesArray";
 
 const BudgetCategories = (props) => {
-  const [tripName, setTripName] = useState("");
-  const [tripNameList, setTripNameList] = useState(null);
+  const [tripName, setTripName] = useState(""); // tripName is used to select the trip at thhe top of the page
+  const [tripNameList, setTripNameList] = useState(null); //documents from the budget collection
   const [spent, setSpent] = useState(null);
 
   // const [budgetAccomodation, setBudgetAccomodation] = useState(null);
@@ -25,7 +25,7 @@ const BudgetCategories = (props) => {
   // const [budgetCategory, setBudgetCategory] = useState(null);
   // const [budgetAmount, setBudgetAmount] = useState(null);
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([]); //document from the budget collection from a specific Trip
 
   useEffect(() => {
     if (!tripNameList) {
@@ -72,8 +72,6 @@ const BudgetCategories = (props) => {
     console.log("testing");
     setData(res);
   };
-
-
 
   // attempt 2
   const renderSpent = async (tripName) => {
@@ -122,8 +120,6 @@ const BudgetCategories = (props) => {
         </Form.Group>
       </Form>
 
-    
-
       {/* {data &&
         data[0].budgets.map((elements) => (
           // <div>
@@ -136,11 +132,10 @@ const BudgetCategories = (props) => {
           </>
         ))} */}
 
-{spent && spent.length > 0 ? (
+      {spent && spent.length > 0 ? (
         <h1>BUDGET CATEGORIES </h1>
       ) : (
         <h1>select a Trip</h1>
-        
       )}
       {data && data.length > 0
         ? data[0].budgets.map((elements) => {
@@ -160,7 +155,10 @@ const BudgetCategories = (props) => {
                   </h2>
                   <p>budget amount:{elements.budget_amount}</p>
                   <p>Number of transactions: {filterSpent.length}</p>
-                  <p>amount spent: {spentValue} ({Math.round((spentValue / elements.budget_amount) * 100)}%)</p>
+                  <p>
+                    amount spent: {spentValue} (
+                    {Math.round((spentValue / elements.budget_amount) * 100)}%)
+                  </p>
                   <p>Amount left: {elements.budget_amount - spentValue}</p>
                 </div>
               </>
