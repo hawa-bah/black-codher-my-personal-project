@@ -53,30 +53,34 @@ const TransactionsList = (props) => {
     );
   };
   // label is state, also the things that will be filtered
-  const filterMethod = (label) => {
+  const filterMethod = (categorySelected, tripSelected) => {
     console.log("label:" + label);
 
     setIsFiltered(true);
-    setFilterLabel(label);
+
+    // setFilterLabel(label);
     // setFilterValue(value);
-    filterTransactions(label);
+    filterTransactions(categorySelected, tripSelected);
   };
 
-  const filterTransactions = (filterLabel) => {
-    // const filteredTransactions = transactions.filter((item) => {
-    //   item.includes(filterLabel);
-    //   return filterLabel.includes(item.budget_category);
-    //   // return item.budget_category === filterLabel[0];
-    // });
-
-    const filteredTransactions = (arr1, arr2) => {
-      const filtered = arr1.filter((el) => {
-        console.log(arr2, el);
-        return arr2.indexOf(el.budget_category) >= 0;
+  const filterTransactions = (categorySelected, tripSelected) => {
+    const filteredTransactions = (
+      transactionsArray,
+      categoriesSelectedArray,
+      tripsSelectedArray
+    ) => {
+      const filtered = transactionsArray.filter((el) => {
+        console.log(categoriesSelectedArray, tripsSelectedArray, el);
+        return categoriesSelectedArray.indexOf(el.budget_category) >= 0;
       });
       return filtered;
     };
-    const test = filteredTransactions(transactions, filterLabel);
+    const test = filteredTransactions(
+      transactions,
+      categorySelected,
+      tripSelected
+    );
+
     console.log(test);
 
     setFilteredTransactions(filteredTransactions);
