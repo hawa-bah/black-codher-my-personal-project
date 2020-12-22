@@ -53,27 +53,31 @@ const TransactionsList = (props) => {
     );
   };
   // label is state, also the things that will be filtered
-  const filterMethod = (label, value) => {
+  const filterMethod = (label) => {
     console.log("label:" + label);
 
     setIsFiltered(true);
     setFilterLabel(label);
-    setFilterValue(value);
-    filterTransactions(label, value);
+    // setFilterValue(value);
+    filterTransactions(label);
   };
 
-  const filterTransactions = (filterLabel, filterValue) => {
-    const filteredTransactions = transactions.filter(function (item) {
-      for (var key in filterLabel) {
-        console.log(key, filterLabel, item);
-        if (
-          item.budget_category === undefined ||
-          item.budget_category != filterLabel[key]
-        )
-          return false;
-      }
-      return true;
-    });
+  const filterTransactions = (filterLabel) => {
+    // const filteredTransactions = transactions.filter((item) => {
+    //   item.includes(filterLabel);
+    //   return filterLabel.includes(item.budget_category);
+    //   // return item.budget_category === filterLabel[0];
+    // });
+
+    const filteredTransactions = (arr1, arr2) => {
+      const filtered = arr1.filter((el) => {
+        console.log(arr2, el);
+        return arr2.indexOf(el.budget_category) >= 0;
+      });
+      return filtered;
+    };
+    const test = filteredTransactions(transactions, filterLabel);
+    console.log(test);
 
     setFilteredTransactions(filteredTransactions);
     console.log("filter transactions function clicked");

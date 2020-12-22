@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // Material-ui
 import Button from "@material-ui/core/Button";
 import {
@@ -19,6 +19,8 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 
 import Checkbox from "@material-ui/core/Checkbox";
+
+import { getAll } from "../../services/budgetService";
 
 // styling material-ui
 const ColorButton = withStyles((theme) => ({
@@ -42,6 +44,27 @@ const Filter = (props) => {
 
   const [displayMenuItems, setDisplayMenuItems] = useState(null);
 
+  const [tripNames, setTripNames] = useState(null);
+  const [tripList, setTripList] = useState(null); //documents from the budget collection
+
+  useEffect(() => {
+    if (!tripList) {
+      getTripList();
+      console.log("heeeey");
+    }
+  });
+
+  const getTripList = async () => {
+    //>>>> I am getting the documents from the budget collection whith budgetService.js
+    let res = await getAll();
+    console.log(res.map((item) => item.trip_name));
+    let data = res.map((item) => item.trip_name); //array of trip names
+    setTripNames(data);
+    const stateTrip = data.reduce((a, b) => ((a[b] = false), a), {}); // we obtain an object
+    console.log(stateTrip);
+    setTripList(stateTrip);
+  };
+
   //   functions:
   const handleFilterClick = (event) => {
     setDisplayMenuItems(event.target);
@@ -55,18 +78,28 @@ const Filter = (props) => {
     Accomodation: true,
     Transport: false,
     Others: false,
-    Paris: false,
-    Italy: false,
   });
-  const { Accomodation, Transport, Others, Paris, Italy } = state;
-  const handleChange = (event) => {
+
+  // change it and make it seperately
+
+  const { Accomodation, Transport, Others } = state;
+
+  const handleChangeCategory = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
-  const handleSubmitFilter = () => {
-    props.filterMethod(Object.keys(state).filter((item) => item === item.true));
+  const handleChangeTrip = (event) => {
+    setTripList({ ...tripList, [event.target.name]: event.target.checked });
   };
 
+  const handleSubmitFilter = () => {
+    const categorySelected = Object.keys(state).filter((item) => state[item]);
+    const tripSelected = Object.keys(tripList).filter((item) => state[item]);
+
+    console.log(result.filter((item) => state[item])); //returns the array of the ones that are true
+    props.filterMethod(categorySelected, tripSelected);
+  };
+  console.log(tripNames);
   return (
     <div>
       <div className={classes.root}>
@@ -77,7 +110,7 @@ const Filter = (props) => {
               control={
                 <Checkbox
                   checked={Accomodation}
-                  onChange={handleChange}
+                  onChange={handleChangeCategory}
                   name="Accomodation"
                 />
               }
@@ -87,7 +120,7 @@ const Filter = (props) => {
               control={
                 <Checkbox
                   checked={Transport}
-                  onChange={handleChange}
+                  onChange={handleChangeCategory}
                   name="Transport"
                 />
               }
@@ -97,7 +130,7 @@ const Filter = (props) => {
               control={
                 <Checkbox
                   checked={Others}
-                  onChange={handleChange}
+                  onChange={handleChangeCategory}
                   name="Others"
                 />
               }
@@ -113,26 +146,14 @@ const Filter = (props) => {
         >
           <FormLabel component="legend">Choose the trip</FormLabel>
           <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={Paris}
-                  onChange={handleChange}
-                  name="Paris"
+            {console.log(tripList)}
+            {tripNames &&
+              tripNames.map((trip) => (
+                <FormControlLabel
+                  control={<Checkbox onChange={handleChangeTrip} name={trip} />}
+                  label={trip}
                 />
-              }
-              label="Paris"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={Italy}
-                  onChange={handleChange}
-                  name="Italy"
-                />
-              }
-              label="Italy"
-            />
+              ))}
           </FormGroup>
         </FormControl>
         <ColorButton onClick={() => handleSubmitFilter()}>
