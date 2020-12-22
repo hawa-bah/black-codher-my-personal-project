@@ -62,10 +62,19 @@ const Filter = (props) => {
         anchorEl={displayMenuItems}
       >
         <MenuItem disabled={true}>Category</MenuItem>
-        <MenuItem>Accomodation</MenuItem>
-        <MenuItem>Transport</MenuItem>
+        <MenuItem
+          onClick={() => props.filterMethod("budget_category", "Accomodation")}
+        >
+          Accomodation
+        </MenuItem>
+        <MenuItem
+          onClick={() => props.filterMethod("budget_category", "Transport")}
+        >
+          Transport
+        </MenuItem>
         <MenuItem disabled={true}>Transaction Date</MenuItem>
         <MenuItem disabled={true}>Trip Name</MenuItem>
+        <MenuItem onClick={() => props.clearFilters()}>Transport</MenuItem>
       </Menu>
     </div>
   );

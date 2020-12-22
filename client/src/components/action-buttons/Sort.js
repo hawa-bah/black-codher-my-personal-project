@@ -34,10 +34,31 @@ const Sort = (props) => {
   const classes = useStyles();
 
   const [displayMenuItems, setDisplayMenuItems] = useState(null);
+  const [sortType, setSortType] = useState();
 
   //   functions:
   const handleSortClick = (event) => {
     setDisplayMenuItems(event.target);
+  };
+
+  const handleMenuClose = () => {
+    setDisplayMenuItems(null);
+  };
+
+  const sortTransactions = (type) => {
+    const sortedTransactions = [...props.transactions].sort(function (a, b) {
+      return type === "transaction_date"
+        ? new Date(b[type]).getTime() - new Date(a[type]).getTime()
+        : b[type] - a[type];
+    });
+    props.setTransactions(sortedTransactions);
+  };
+
+  const handleMenuItemclick = (sortType) => {
+    handleMenuClose();
+    sortTransactions(sortType);
+    setSortType(sortType);
+    props.clearFilters();
   };
 
   return (
@@ -52,8 +73,43 @@ const Sort = (props) => {
         Sort
       </ColorButton>
 
-      <Menu>
-        <MenuItem>Transaction Date</MenuItem>
+      <Menu
+        anchorEl={displayMenuItems}
+        open={Boolean(displayMenuItems)}
+        onClose={handleMenuClose}
+        elevation={1}
+      >
+        <MenuItem
+          onClick={() => {
+            handleMenuItemclick("transaction_value");
+          }}
+        >
+          Transaction value
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleMenuItemclick("transaction_date");
+          }}
+        >
+          {" "}
+          Transaction date{" "}
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleMenuItemclick("trip_name");
+          }}
+        >
+          {" "}
+          Trip Name{" "}
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleMenuItemclick("budget_category");
+          }}
+        >
+          {" "}
+          Budget Category{" "}
+        </MenuItem>
       </Menu>
     </div>
   );

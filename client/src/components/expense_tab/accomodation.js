@@ -59,7 +59,6 @@ const AccomodationTab = (props) => {
     <div>
       <div className="budget categories card">
         <BudgetCategories budgetCategoriesArry={budgetCategoriesArry} />
-      
 
         {/* maybe use props so that i can reuse commponents in name of the category */}
         {/* <h3>Accomodation:</h3> */}
@@ -75,7 +74,6 @@ const AccomodationTab = (props) => {
             console.log(selectedDate);
           }}
         >
-          
           <Form.Group controlId="description">
             <Form.Label>descip</Form.Label>
             <Form.Control
@@ -151,7 +149,7 @@ const AccomodationTab = (props) => {
         <div className="transaction List">
           {viewTransactions ? (
             <div>
-              <p>tansactionList</p>
+              <h2>Transaction list component</h2>
               <TransactionsList
                 viewTransactions={viewTransactions}
                 setViewTransactions={setViewTransactions}
