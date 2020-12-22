@@ -132,8 +132,16 @@ const BudgetCategories = (props) => {
               <h2>{elements.budget_category}</h2>
               <h1>{elements.budget_amount}</h1>
             </div>
+
           </>
         ))} */}
+
+{spent && spent.length > 0 ? (
+        <h1>BUDGET CATEGORIES </h1>
+      ) : (
+        <h1>select a Trip</h1>
+        
+      )}
       {data && data.length > 0
         ? data[0].budgets.map((elements) => {
             // renderSpent(elements, tripName);
@@ -145,41 +153,20 @@ const BudgetCategories = (props) => {
             }, 0);
             console.log(elements.budget_category + filterSpent.length);
             return (
-
               <>
                 <div>
                   <h2>
                     {elements.budget_category} budget for {tripName}
                   </h2>
-                  <h2>budget amount:{elements.budget_amount}</h2>
-                  <h2>times spent: {filterSpent.length}</h2>
-                  <h2>amount spent: {spentValue}</h2>
+                  <p>budget amount:{elements.budget_amount}</p>
+                  <p>Number of transactions: {filterSpent.length}</p>
+                  <p>amount spent: {spentValue} ({Math.round((spentValue / elements.budget_amount) * 100)}%)</p>
+                  <p>Amount left: {elements.budget_amount - spentValue}</p>
                 </div>
               </>
             );
           })
         : null}
-      {spent && spent.length > 0 ? (
-        <h2>Spent: </h2>
-      ) : (
-        <h1>select a Trip</h1>
-      )}
-
-      {props.budgetCategoriesArry.map((category) => {
-        // attempt using map
-        // ================================================>>>>>>>> this state is causing an
-        // setBudgetCategory(category);
-        // renderBudgetCategory(tripName, category);
-        return (
-          <div className={category + "Tab"} style={{ background: "yellow" }}>
-            <h1>{category}</h1>
-            <p>
-              Your current budget for {tripName} is
-              {/* {budgetAmount} */}
-            </p>
-          </div>
-        );
-      })}
 
       {/* -----------------------------------------------------this are to submit budget, might delete late */}
       {/* {props.budgetCategoriesArry.map((category) => {

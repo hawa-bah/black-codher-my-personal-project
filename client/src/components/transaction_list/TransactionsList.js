@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+// components
+import Sort from "../action-buttons/Sort"
+// services
 import { getAll } from "../../services/transactionService";
 // import { deleteOne } from "../../services/userService";
 import { deleteOne } from "../../services/transactionService";
@@ -46,13 +49,20 @@ const TransactionsList = (props) => {
 
   return (
     <div>
-      <ul>
-        {transactions && transactions.length > 0 ? (
-          transactions.map((transaction) => renderTransaction(transaction))
-        ) : (
-          <p>No transactions made</p>
-        )}
-      </ul>
+      <div className="filter-sort-actions-div">
+        <Sort transactions={transactions} setTransactions={setTransactions}></Sort>
+
+
+      </div>
+      <div>
+        <ul>
+          {transactions && transactions.length > 0 ? (
+            transactions.map((transaction) => renderTransaction(transaction))
+          ) : (
+            <p>No transactions made</p>
+          )}
+        </ul>
+      </div>
     </div>
   );
 };

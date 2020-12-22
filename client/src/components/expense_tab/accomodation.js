@@ -67,7 +67,7 @@ const AccomodationTab = (props) => {
         {/* <h2>Amount spent: {balance}</h2>
         {console.log(balance)} */}
       </div>
-      <div className="AccomodationDiv tab">
+      <div className="SubmitTransaction Form div">
         <Form
           onSubmit={(event) => {
             handleSubmit(event);
@@ -75,15 +75,7 @@ const AccomodationTab = (props) => {
             console.log(selectedDate);
           }}
         >
-          {/* <Form.Group controlId="formBasicEmail">
-            <Form.Label>Budget</Form.Label>
-            <Form.Control
-              type="expense"
-              placeholder="input value"
-              value={props.budget}
-              onChange={(e) => props.setbudget(e.target.value)}
-            />
-          </Form.Group> */}
+          
           <Form.Group controlId="description">
             <Form.Label>descip</Form.Label>
             <Form.Control
@@ -95,7 +87,7 @@ const AccomodationTab = (props) => {
           </Form.Group>
 
           <Form.Group controlId="trip_name">
-            <Form.Label>trip_name</Form.Label>
+            <Form.Label>trip name</Form.Label>
             <Form.Control
               type="trip_name"
               placeholder="input value"
@@ -148,7 +140,7 @@ const AccomodationTab = (props) => {
         </Form>
       </div>
 
-      <div className="Accomodation transaction List">
+      <div className="Transactions div">
         <div className="button transaction">
           <Button onClick={() => setViewTransactions(!viewTransactions)}>
             <p>
