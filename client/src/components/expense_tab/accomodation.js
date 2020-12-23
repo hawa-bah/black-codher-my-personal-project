@@ -18,6 +18,7 @@ const AccomodationTab = (props) => {
   // const [transaction, setTransactions] = useState(0);
   const [viewTransactions, setViewTransactions] = useState(false);
   //>>>> The balance is the sum of those values with test for now
+  const [hasSubmitedTransaction, setHasSubmitedTransaction] = useState(false);
   // const [balance, setBalance] = useState(null);
   //
   const [selectedDate, handleDateChange] = useState(new Date());
@@ -49,6 +50,8 @@ const AccomodationTab = (props) => {
     //>>>> this is to clear the input fields once clicked submit. The values will still be saved in the mongo database
     props.setDesc("");
     props.setTransactions(0);
+
+    setHasSubmitedTransaction(true);
 
     //>>>> atempt to update the inputed transaction in the front end
     // const res = axios.get(`/api/expense`);
@@ -153,6 +156,9 @@ const AccomodationTab = (props) => {
               <TransactionsList
                 viewTransactions={viewTransactions}
                 setViewTransactions={setViewTransactions}
+                hasSubmitedTransaction={hasSubmitedTransaction}
+                setHasSubmitedTransaction={setHasSubmitedTransaction}
+
                 // renderBalance={renderBalance}
               />
             </div>

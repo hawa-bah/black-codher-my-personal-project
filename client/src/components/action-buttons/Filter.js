@@ -52,7 +52,7 @@ const Filter = (props) => {
       getTripList();
       console.log("heeeey");
     }
-  });
+  }, [tripList]);
 
   const getTripList = async () => {
     //>>>> I am getting the documents from the budget collection whith budgetService.js
@@ -95,8 +95,7 @@ const Filter = (props) => {
   const handleSubmitFilter = () => {
     const categorySelected = Object.keys(state).filter((item) => state[item]);
     const tripSelected = Object.keys(tripList).filter((item) => state[item]);
-
-    console.log(result.filter((item) => state[item])); //returns the array of the ones that are true
+    //returns the array of the ones that are true
     props.filterMethod(categorySelected, tripSelected);
   };
   console.log(tripNames);

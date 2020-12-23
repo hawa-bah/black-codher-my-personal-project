@@ -34,11 +34,10 @@ module.exports = (app) => {
   });
 
   app.delete(`/api/expenses/transactions/:id`, async (req, res) => {
-    
     const { id } = req.params;
 
     const transactions = await Exp_Transaction.findByIdAndDelete(id);
-
+    console.log(transactions);
     return res.status(202).send({
       error: false,
       transactions,

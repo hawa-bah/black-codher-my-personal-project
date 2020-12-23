@@ -17,8 +17,17 @@ const TransactionsList = (props) => {
   const [filterValue, setFilterValue] = useState([]);
 
   useEffect(() => {
-    getTransactionsList();
-  });
+    if (!transactions) {
+      getTransactionsList();
+
+      console.log("heeeey transactions");
+    }
+    if (props.hasSubmitedTransaction) {
+      getTransactionsList();
+      console.log("heeeey has submited");
+      props.setHasSubmitedTransaction(false);
+    }
+  }, [props.hasSubmitedTransaction]);
 
   const getTransactionsList = async () => {
     let res = await getAll();
@@ -27,7 +36,9 @@ const TransactionsList = (props) => {
   // transaction is deleted from the database AND in the front end
   const deleteTransaction = async (transaction) => {
     let res = await deleteOne(transaction);
-    setTransactions(res);
+    getTransactionsList(); //ask Tanya why we shouldn't make so may requests to the back-end
+    // setTransactions(res);
+    console.log(res);
   };
 
   const renderTransaction = (transaction) => {
@@ -54,8 +65,6 @@ const TransactionsList = (props) => {
   };
   // label is state, also the things that will be filtered
   const filterMethod = (categorySelected, tripSelected) => {
-    console.log("label:" + label);
-
     setIsFiltered(true);
 
     // setFilterLabel(label);

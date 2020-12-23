@@ -16,32 +16,12 @@ const BudgetCategories = (props) => {
   const [tripNameList, setTripNameList] = useState(null); //documents from the budget collection
   const [spent, setSpent] = useState(null);
 
-  // const [budgetAccomodation, setBudgetAccomodation] = useState(null);
-  // const [spentAccomodation, setSpentAccomodation] = useState(null);
-  // const difference = budgetAccomodation - spentAccomodation;
-  // const percentage = (spentAccomodation / budgetAccomodation) * 100;
-
-  // attempt with map
-  // const [budgetCategory, setBudgetCategory] = useState(null);
-  // const [budgetAmount, setBudgetAmount] = useState(null);
-
   const [data, setData] = useState([]); //document from the budget collection from a specific Trip
 
   useEffect(() => {
     if (!tripNameList) {
       getTripNameList();
-      // renderBudgetCategory();
-      // renderBudgetCategory(tripName, budgetCategory);
-      // renderBudgetCategory(tripName, category);
     }
-    // if (tripName !== null && !budgetAccomodation && !budget) {
-    //   // renderBudgetAccomodation(tripName);
-    //   // renderSpentAccomodation(tripName);
-    //   // renderBudgetCategory(tripName, category);
-    // }
-    // if (budgetAccomodation) {
-    //   document.getElementsByClassName();
-    // }
   });
 
   const getTripNameList = async () => {
