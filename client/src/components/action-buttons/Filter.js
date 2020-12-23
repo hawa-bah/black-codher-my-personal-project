@@ -93,9 +93,12 @@ const Filter = (props) => {
   };
 
   const handleSubmitFilter = () => {
+    console.log(tripList);
     const categorySelected = Object.keys(state).filter((item) => state[item]);
-    const tripSelected = Object.keys(tripList).filter((item) => state[item]);
+    const tripSelected = Object.keys(tripList).filter((item) => tripList[item]);
     //returns the array of the ones that are true
+    console.log(tripSelected);
+
     props.filterMethod(categorySelected, tripSelected);
   };
   console.log(tripNames);
