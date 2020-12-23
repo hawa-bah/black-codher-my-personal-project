@@ -35,10 +35,9 @@ const TransactionsList = (props) => {
   };
   // transaction is deleted from the database AND in the front end
   const deleteTransaction = async (transaction) => {
-    let res = await deleteOne(transaction);
-    getTransactionsList(); //ask Tanya why we shouldn't make so may requests to the back-end
+    await deleteOne(transaction);
+    getTransactionsList(); //>>>>>>>>>>>>>>>>>>>>>> !!!! ask Tanya why we shouldn't make so may requests to the back-end
     // setTransactions(res);
-    console.log(res);
   };
 
   const renderTransaction = (transaction) => {
