@@ -61,7 +61,11 @@ const AccomodationTab = (props) => {
   return (
     <div>
       <div className="budget categories card">
-        <BudgetCategories budgetCategoriesArry={budgetCategoriesArry} />
+        <BudgetCategories
+          budgetCategoriesArry={budgetCategoriesArry}
+          hasSubmitedTransaction={hasSubmitedTransaction}
+          setHasSubmitedTransaction={setHasSubmitedTransaction}
+        />
 
         {/* maybe use props so that i can reuse commponents in name of the category */}
         {/* <h3>Accomodation:</h3> */}

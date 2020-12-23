@@ -22,7 +22,12 @@ const BudgetCategories = (props) => {
     if (!tripNameList) {
       getTripNameList();
     }
-  });
+    if (props.hasSubmitedTransaction) {
+      renderSpent(tripName);
+      console.log("heeeey has submited");
+      props.setHasSubmitedTransaction(false);
+    }
+  }, [props.hasSubmitedTransaction]);
 
   const getTripNameList = async () => {
     //>>>> I am getting the documents from the budget collection whith budgetService.js
@@ -33,17 +38,6 @@ const BudgetCategories = (props) => {
   const renderTripNameList = (trip) => {
     return <option key={trip.trip_name}>{trip.trip_name}</option>;
   };
-
-  // budget collection
-  // const renderBudgetAccomodation = async (tripName) => {
-  //   let res = await getBudgetAccomodation(tripName);
-  //   setBudgetAccomodation(res[0].budget_amount);
-  // };
-  // accomodation collection
-  // const renderSpentAccomodation = async (tripName) => {
-  //   let res = await getSpentAccomodation(tripName);
-  //   setSpentAccomodation(res[0].transaction_value);
-  // };
 
   // attempt rendering categories info using map
   const renderBudgetCategory = async (tripName) => {
