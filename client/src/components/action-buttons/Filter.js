@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 const Filter = (props) => {
   const classes = useStyles();
 
-  const [displayMenuItems, setDisplayMenuItems] = useState(null);
+  // TO DELETE: const [displayMenuItems, setDisplayMenuItems] = useState(null);
 
   const [tripNames, setTripNames] = useState(null);
   const [tripList, setTripList] = useState(null); //documents from the budget collection
@@ -65,13 +65,13 @@ const Filter = (props) => {
     setTripList(stateTrip);
   };
 
-  //   functions:
-  const handleFilterClick = (event) => {
-    setDisplayMenuItems(event.target);
-  };
-  const handleMenuClose = () => {
-    setDisplayMenuItems(null);
-  };
+  //  // TO DELETE:  functions:
+  // const handleFilterClick = (event) => {
+  //   setDisplayMenuItems(event.target);
+  // };
+  // const handleMenuClose = () => {
+  //   setDisplayMenuItems(null);
+  // };
 
   // with checkbox
   const [state, setState] = React.useState({
@@ -169,7 +169,7 @@ const Filter = (props) => {
         </ColorButton>
       </div>
 
-      <ColorButton
+      {/*  // TO DELETE: <ColorButton
         variant="contained"
         color="primary"
         className={classes.margin}
@@ -177,9 +177,9 @@ const Filter = (props) => {
         onClick={handleFilterClick}
       >
         Filter
-      </ColorButton>
+      </ColorButton> */}
 
-      <Menu
+      {/* <Menu
         open={Boolean(displayMenuItems)}
         onClose={handleMenuClose}
         elevation={1}
@@ -206,11 +206,11 @@ const Filter = (props) => {
         <MenuItem onClick={() => props.filterMethod("trip_name", "Italy")}>
           Italy
         </MenuItem>
-        {/* put a third paramenter for the trip name, put null  */}
+        // put a third paramenter for the trip name, put null 
         <MenuItem onClick={() => props.clearFilters()}>
           Clear all filters
         </MenuItem>
-      </Menu>
+      </Menu> */}
     </div>
   );
 };
