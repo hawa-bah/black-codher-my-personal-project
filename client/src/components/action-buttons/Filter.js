@@ -67,12 +67,22 @@ const Filter = (props) => {
   const [state, setState] = React.useState({
     Accomodation: true,
     Transport: false,
+    Food: false,
+    Shopping: false,
+    Entertainment: false,
     Others: false,
   });
 
   // change it and make it seperately
 
-  const { Accomodation, Transport, Others } = state;
+  const {
+    Accomodation,
+    Transport,
+    Food,
+    Shopping,
+    Entertainment,
+    Others,
+  } = state;
 
   const handleChangeCategory = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
@@ -117,6 +127,36 @@ const Filter = (props) => {
                 />
               }
               label="Transport"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={Food}
+                  onChange={handleChangeCategory}
+                  name="Food"
+                />
+              }
+              label="Food"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={Shopping}
+                  onChange={handleChangeCategory}
+                  name="Shopping"
+                />
+              }
+              label="Shopping"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={Entertainment}
+                  onChange={handleChangeCategory}
+                  name="Entertainment"
+                />
+              }
+              label="Entertainment"
             />
             <FormControlLabel
               control={
