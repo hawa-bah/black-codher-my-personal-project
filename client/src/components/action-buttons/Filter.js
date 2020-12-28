@@ -17,6 +17,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+import FormatHelperText from "@material-ui/core/FormHelperText";
 
 import Checkbox from "@material-ui/core/Checkbox";
 
@@ -56,7 +57,7 @@ const Filter = (props) => {
     //>>>> I am getting the documents from the budget collection whith budgetService.js
     let res = await getAll();
     console.log(res.map((item) => item.trip_name));
-    let data = res.map((item) => item.trip_name); //array of trip names
+    let data = res.map((item) => item.trip_name); // array of trip names
     setTripNames(data);
     const stateTrip = data.reduce((a, b) => ((a[b] = false), a), {}); // we obtain an object
     console.log(stateTrip);
@@ -83,6 +84,10 @@ const Filter = (props) => {
     Entertainment,
     Others,
   } = state;
+  const error =
+    [Accomodation, Transport, Food, Shopping, Entertainment, Others].filter(
+      (v) => v
+    ).length < 1;
 
   const handleChangeCategory = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
@@ -105,8 +110,13 @@ const Filter = (props) => {
   return (
     <div>
       <div className={classes.root}>
-        <FormControl component="fieldset" className={classes.formControl}>
-          <FormLabel component="legend">choose category</FormLabel>
+        <FormControl
+          required
+          error={error}
+          component="fieldset"
+          className={classes.formControl}
+        >
+          <FormLabel component="legend">Choose a category</FormLabel>
           <FormGroup>
             <FormControlLabel
               control={
@@ -169,6 +179,9 @@ const Filter = (props) => {
               label="Others"
             />
           </FormGroup>
+          <FormatHelperText>
+            Select at least one category to use the filter
+          </FormatHelperText>
         </FormControl>
         <FormControl
           required
