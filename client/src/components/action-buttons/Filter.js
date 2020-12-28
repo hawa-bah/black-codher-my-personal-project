@@ -46,10 +46,15 @@ const Filter = (props) => {
   const [tripNames, setTripNames] = useState(null);
   const [tripList, setTripList] = useState(null); //documents from the budget collection
 
+  const [errorTrip, setErrorTrip] = useState(null);
+
   useEffect(() => {
     if (!tripList) {
       getTripList();
       console.log("heeeey");
+    }
+    if (tripNames) {
+      setErrorTrip(tripNames.filter((v) => v).length < 1);
     }
   }, [tripList]);
 
@@ -88,6 +93,10 @@ const Filter = (props) => {
     [Accomodation, Transport, Food, Shopping, Entertainment, Others].filter(
       (v) => v
     ).length < 1;
+  // let errorTrips;
+  // if (tripNames) {
+  //   const errorTrips = tripNames.filter((v) => v).length < 1;
+  // }
 
   const handleChangeCategory = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
@@ -185,7 +194,7 @@ const Filter = (props) => {
         </FormControl>
         <FormControl
           required
-          //   error={error} // this will be used if we want a maximum of checkbox selected
+          error={errorTrip} // this will be used if we want a maximum of checkbox selected
           component="fieldset"
           className={classes.formControl}
         >
@@ -200,6 +209,9 @@ const Filter = (props) => {
                 />
               ))}
           </FormGroup>
+          <FormatHelperText>
+            Select at least one trip to use the filter
+          </FormatHelperText>
         </FormControl>
         <ColorButton
           variant="contained"
