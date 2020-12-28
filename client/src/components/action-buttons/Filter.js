@@ -42,8 +42,6 @@ const useStyles = makeStyles((theme) => ({
 const Filter = (props) => {
   const classes = useStyles();
 
-  // TO DELETE: const [displayMenuItems, setDisplayMenuItems] = useState(null);
-
   const [tripNames, setTripNames] = useState(null);
   const [tripList, setTripList] = useState(null); //documents from the budget collection
 
@@ -64,14 +62,6 @@ const Filter = (props) => {
     console.log(stateTrip);
     setTripList(stateTrip);
   };
-
-  //  // TO DELETE:  functions:
-  // const handleFilterClick = (event) => {
-  //   setDisplayMenuItems(event.target);
-  // };
-  // const handleMenuClose = () => {
-  //   setDisplayMenuItems(null);
-  // };
 
   // with checkbox
   const [state, setState] = React.useState({
@@ -168,49 +158,6 @@ const Filter = (props) => {
           Submit Filters
         </ColorButton>
       </div>
-
-      {/*  // TO DELETE: <ColorButton
-        variant="contained"
-        color="primary"
-        className={classes.margin}
-        startIcon={<SortIcon />}
-        onClick={handleFilterClick}
-      >
-        Filter
-      </ColorButton> */}
-
-      {/* <Menu
-        open={Boolean(displayMenuItems)}
-        onClose={handleMenuClose}
-        elevation={1}
-        anchorEl={displayMenuItems}
-      >
-        <MenuItem disabled={true}>Category</MenuItem>
-        <MenuItem
-          onClick={() => props.filterMethod("budget_category", "Accomodation")}
-        >
-          {"  "}
-          Accomodation
-          {"  "}
-        </MenuItem>
-        <MenuItem
-          onClick={() => props.filterMethod("budget_category", "Transport")}
-        >
-          Transport
-        </MenuItem>
-        <MenuItem disabled={true}>Transaction Date</MenuItem>
-        <MenuItem disabled={true}>Trip Name</MenuItem>
-        <MenuItem onClick={() => props.filterMethod("trip_name", "Paris")}>
-          Paris
-        </MenuItem>
-        <MenuItem onClick={() => props.filterMethod("trip_name", "Italy")}>
-          Italy
-        </MenuItem>
-        // put a third paramenter for the trip name, put null 
-        <MenuItem onClick={() => props.clearFilters()}>
-          Clear all filters
-        </MenuItem>
-      </Menu> */}
     </div>
   );
 };
