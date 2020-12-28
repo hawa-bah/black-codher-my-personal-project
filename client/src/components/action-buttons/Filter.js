@@ -158,7 +158,13 @@ const Filter = (props) => {
               ))}
           </FormGroup>
         </FormControl>
-        <ColorButton onClick={() => handleSubmitFilter()}>
+        <ColorButton
+          variant="contained"
+          color="primary"
+          className={classes.margin}
+          startIcon={<SortIcon />}
+          onClick={() => handleSubmitFilter()}
+        >
           Submit Filters
         </ColorButton>
       </div>
