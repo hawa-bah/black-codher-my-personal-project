@@ -46,15 +46,12 @@ const Filter = (props) => {
   const [tripNames, setTripNames] = useState(null);
   const [tripList, setTripList] = useState(null); //documents from the budget collection
 
-  const [errorTrip, setErrorTrip] = useState(null);
+  const [errorTrip, setErrorTrip] = useState(true);
 
   useEffect(() => {
     if (!tripList) {
       getTripList();
       console.log("heeeey");
-    }
-    if (tripNames) {
-      setErrorTrip(tripNames.filter((v) => v).length < 1);
     }
   }, [tripList]);
 
@@ -66,10 +63,16 @@ const Filter = (props) => {
     setTripNames(data);
     const stateTrip = data.reduce((a, b) => ((a[b] = false), a), {}); // we obtain an object
     console.log(stateTrip);
-    setTripList(stateTrip);
+    setTripList(stateTrip); // TripList is now the state of the trips
+
+    // new:
+    // const errorTrips = tripNames.filter((v) => v).length < 1;
+    // (below) object destructuring of trips
+    // const {tripNames}
   };
 
   // with checkbox
+  // >>> defining the state of categories
   const [state, setState] = React.useState({
     Accomodation: true,
     Transport: false,
@@ -81,6 +84,7 @@ const Filter = (props) => {
 
   // change it and make it seperately
 
+  // (below) object destructuring of categories
   const {
     Accomodation,
     Transport,
@@ -93,10 +97,16 @@ const Filter = (props) => {
     [Accomodation, Transport, Food, Shopping, Entertainment, Others].filter(
       (v) => v
     ).length < 1;
+
   // let errorTrips;
   // if (tripNames) {
   //   const errorTrips = tripNames.filter((v) => v).length < 1;
+  // } else {
+  //   getTripList();
   // }
+
+  // const errorTrips = tripNames.filter((v) => v).length < 1;
+  // setErrorTrip(tripNames.filter((v) => v).length < 1);
 
   const handleChangeCategory = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
