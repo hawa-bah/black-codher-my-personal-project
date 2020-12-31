@@ -19,7 +19,6 @@ const TransactionsList = (props) => {
   useEffect(() => {
     if (!transactions) {
       getTransactionsList();
-
       console.log("heeeey transactions");
     }
     if (props.hasSubmitedTransaction) {
@@ -38,7 +37,6 @@ const TransactionsList = (props) => {
   const deleteTransaction = async (transaction) => {
     await deleteOne(transaction);
     getTransactionsList(); //>>>>>>>>>>>>>>>>>>>>>> !!!! ask Tanya why we shouldn't make so may requests to the back-end
-    // setTransactions(res);
     props.setHasSubmitedTransaction(!props.hasSubmitedTransaction);
     props.setHasSubmitedTransaction(!props.hasSubmitedTransaction);
   };
@@ -151,8 +149,8 @@ const TransactionsList = (props) => {
               {isFiltered &&
               filteredTransactions &&
               filteredTransactions.length > 0
-                ? filteredTransactions.map((transaction) =>
-                    renderTransaction(transaction)
+                ? filteredTransactions.map(
+                    (transaction) => renderTransaction(transaction) // this creates <li>
                   )
                 : transactions.map((transaction) =>
                     renderTransaction(transaction)
