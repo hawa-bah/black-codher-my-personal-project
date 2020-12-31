@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 // components
 import Sort from "../action-buttons/Sort";
 import Filter from "../action-buttons/Filter";
+import TransactionsTable from "./TransactionsTable";
 // services
 import { getAll } from "../../services/transactionService";
 // import { deleteOne } from "../../services/userService";
@@ -123,25 +124,9 @@ const TransactionsList = (props) => {
           clearFilters={clearFilters}
         ></Filter>
       </div>
-      {/* <div>
-        <ul>
-          {transactions && transactions.length > 0 ? (
-            transactions.map((transaction) => renderTransaction(transaction))
-          ) : (
-            <p>No transactions made</p>
-          )}
-        </ul>
-      </div> */}
+
       <div className="new transaction list">
-        {/* {isFiltered &&
-        filteredTransactions &&
-        filteredTransactions.length > 0 ? (
-          filteredTransactions.map((transaction) =>
-            renderTransaction(transaction)
-          )
-        ) : (
-          <p>No transactions made</p>
-        )} */}
+        <TransactionsTable></TransactionsTable>
         <p>Transactions:</p>
         {transactions && transactions.length > 0 ? (
           <div>
