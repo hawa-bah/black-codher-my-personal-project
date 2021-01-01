@@ -2,7 +2,7 @@ import React from "react";
 
 const TransactionsTable = () => {
   return (
-    <div>
+    <div className="transactionsTableDiv">
       <div></div>
     </div>
   );
