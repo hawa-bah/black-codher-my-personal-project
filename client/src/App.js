@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import AccomodationTab from "./components/expense_tab/accomodation";
+import BudgetPage from "./components/expense_tab/BudgetPage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // SERVICES
@@ -57,7 +57,7 @@ function App() {
           path="/expenseTracker"
           render={() => (
             <React.Fragment>
-              <AccomodationTab
+              <BudgetPage
                 budget={budget}
                 setbudget={setbudget}
                 //
@@ -66,7 +66,7 @@ function App() {
                 description={description}
                 setDesc={setDesc}
               />
-              
+
               <div>
                 <ul>
                   {users && users.length > 0 ? (
@@ -106,7 +106,6 @@ function App() {
         />
       </Router>
     </div>
-    
   );
 }
 

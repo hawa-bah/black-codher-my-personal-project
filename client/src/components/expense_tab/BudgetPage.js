@@ -10,9 +10,9 @@ import {
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import budgetCategoriesArry from "../../budgetCategoriesArray";
-import BudgetCategories from "../../components/BudgetCatgories";
+import BudgetCategories from "../BudgetCatgories";
 
-const AccomodationTab = (props) => {
+const BudgetPage = (props) => {
   // >>>> I'm passing transactions state (the value of a transaction) as a props
   // const [budget, setbudget] = useState(0);
   // const [transaction, setTransactions] = useState(0);
@@ -173,4 +173,4 @@ const AccomodationTab = (props) => {
   );
 };
 
-export default AccomodationTab;
+export default BudgetPage;
