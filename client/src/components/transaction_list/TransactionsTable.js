@@ -2,17 +2,18 @@ import * as React from "react";
 import { DataGrid } from "@material-ui/data-grid";
 
 const columns = [
-  { field: "transaction value", headerName: "ID", width: 70 },
+  { field: "_id", hide: true },
+  { field: "transaction_value", headerName: "ID", width: 70 },
   { field: "description", headerName: "First name", width: 130 },
-  { field: "date", headerName: "Last name", width: 130 },
+  { field: "transaction_date", headerName: "Last name", width: 130 },
   {
-    field: "category",
+    field: "budget_category",
     headerName: "Age",
-    type: "number",
+    // type: "number",
     width: 90,
   },
   {
-    field: "tripName",
+    field: "trip_name",
     headerName: "trip Name",
     description: "This column has a value getter and is not sortable.",
     // sortable: false,
@@ -36,9 +37,22 @@ const columns = [
 //   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 // ];
 const TransactionsTable = (props) => {
+  console.log(props.transactions);
+  const rows = props.transactions;
+  rows.map((row) => {
+    row.id = row._id;
+  });
+  console.log(rows);
   return (
     <div style={{ height: 400, width: "100%" }}>
-      <DataGrid rows={props.transactions} columns={columns} pageSize={5} />
+      {props.transactions && (
+        <DataGrid
+          // id={Math.random()}
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+        />
+      )}{" "}
     </div>
   );
 };

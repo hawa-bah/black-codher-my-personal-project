@@ -126,11 +126,13 @@ const TransactionsList = (props) => {
       </div>
 
       <div className="new transaction list">
-        <TransactionsTable
-          transactions={transactions}
-          isFiltered={isFiltered}
-          filteredTransactions={filteredTransactions}
-        ></TransactionsTable>
+        {transactions && (
+          <TransactionsTable
+            transactions={transactions}
+            isFiltered={isFiltered}
+            filteredTransactions={filteredTransactions}
+          ></TransactionsTable>
+        )}
         <p>Transactions:</p>
         {transactions && transactions.length > 0 ? (
           <div>
