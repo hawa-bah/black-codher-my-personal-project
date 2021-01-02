@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import { Col, Row } from "react-bootstrap";
 import axios from "axios";
 import TransactionsList from "../transaction_list/TransactionsList";
@@ -17,7 +17,7 @@ import {
 import NumberFormat from "react-number-format";
 // import { Form, Field } from "react-final-form";
 
-import { Grid, MenuItem, TextField } from "@material-ui/core";
+import { Grid, MenuItem, TextField, Button } from "@material-ui/core";
 // Material-ui
 import {
   createMuiTheme,
@@ -112,8 +112,12 @@ const BudgetPage = (props) => {
       trip_name: tripTransaction,
     });
     //>>>> this is to clear the input fields once clicked submit. The values will still be saved in the mongo database
-    props.setDesc("");
+
     props.setTransactions(0);
+    props.setDesc("");
+    handleDateChange(new Date());
+    setTransactionCategory("");
+    setTripTransaction("");
 
     setHasSubmitedTransaction(true);
 
@@ -149,29 +153,27 @@ const BudgetPage = (props) => {
           }}
         >
           <Grid container alignItems="flex-start" spacing={2}>
-            <Grid item xs={4}>
+            <Grid item xs="auto" sm={4} className="my-1">
               <TextField
                 id="Description"
                 color="secondary"
                 label="Description"
                 value={props.description}
                 onChange={(e) => props.setDesc(e.target.value)}
-                fullWidth
                 required
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs="auto" sm={4} className="my-1">
               <TextField
                 id="TripName"
                 color="secondary"
                 label="Trip Name"
                 value={tripTransaction}
                 onChange={(e) => setTripTransaction(e.target.value)}
-                fullWidth
                 required
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs="auto" sm={4} className="my-1">
               <TextField
                 label="Transaction value"
                 value={props.transaction}
@@ -181,13 +183,17 @@ const BudgetPage = (props) => {
                 InputProps={{
                   inputComponent: NumberFormatCustom,
                 }}
-                fullwidth
                 required
               />
             </Grid>
           </Grid>
-          <Grid container alignItems="flex-start" spacing={2}>
-            <Grid item xs={6}>
+          <Grid
+            container
+            alignItems="flex-start"
+            justifyContent="space-around"
+            spacing={2}
+          >
+            <Grid item xs="auto" sm={6} className="my-2">
               {/* to input the date of the transaction we are using material-ui */}
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
@@ -198,10 +204,11 @@ const BudgetPage = (props) => {
                   onChange={(date) => handleDateChange(date)}
                   // minDate={new Date()}
                   format="MM/dd/yyyy"
+                  required
                 />
               </MuiPickersUtilsProvider>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs="auto" sm={6} className="my-2">
               <TextField
                 id="category-input-form"
                 label="Select a category"
@@ -209,6 +216,7 @@ const BudgetPage = (props) => {
                 select
                 onChange={(event) => setTransactionCategory(event.target.value)}
                 style={{ width: "25ch" }}
+                required
               >
                 {budgetCategoriesArry.map((category) => (
                   <MenuItem key={category} value={category}>
