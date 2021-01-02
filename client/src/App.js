@@ -66,43 +66,8 @@ function App() {
                 description={description}
                 setDesc={setDesc}
               />
-
-              <div>
-                <ul>
-                  {users && users.length > 0 ? (
-                    users.map((user) => renderUser(user))
-                  ) : (
-                    <p>No users found</p>
-                  )}
-                </ul>
-
-                <div>
-                  <button>Add</button>
-                </div>
-              </div>
             </React.Fragment>
           )}
-        />
-        <Route
-          exact
-          path="/"
-          render={() => {
-            <React.Fragment>
-              <div>
-                <ul>
-                  {users && users.length > 0 ? (
-                    users.map((user) => renderUser(user))
-                  ) : (
-                    <p>No users found</p>
-                  )}
-                </ul>
-
-                <div>
-                  <button>Add</button>
-                </div>
-              </div>
-            </React.Fragment>;
-          }}
         />
       </Router>
     </div>

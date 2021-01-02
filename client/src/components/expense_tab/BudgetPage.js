@@ -2,9 +2,6 @@ import DateFnsUtils from "@date-io/date-fns";
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import Form from "react-bootstrap/Form";
-// import Button from "react-bootstrap/Button";
-import { Col, Row } from "react-bootstrap";
 import axios from "axios";
 import TransactionsList from "../transaction_list/TransactionsList";
 import TransactionForm from "../expense_tab/TransactionForm";
@@ -31,6 +28,7 @@ import BudgetCategories from "../BudgetCatgories";
 import "./BudgetPage.css";
 import "../../App.css";
 
+// >> for the transaction form, numeric input
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
 
@@ -52,7 +50,6 @@ function NumberFormatCustom(props) {
     />
   );
 }
-
 NumberFormatCustom.propTypes = {
   inputRef: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
@@ -83,7 +80,6 @@ const BudgetPage = (props) => {
   const [viewTransactions, setViewTransactions] = useState(false);
   //>>>> The balance is the sum of those values with test for now
   const [hasSubmitedTransaction, setHasSubmitedTransaction] = useState(false);
-  // const [balance, setBalance] = useState(null);
   //
   const [selectedDate, handleDateChange] = useState(new Date());
   const [transactionCategory, setTransactionCategory] = useState("");
@@ -95,14 +91,10 @@ const BudgetPage = (props) => {
     // }
   });
 
-  // const renderBalance = async () => {
-  //   let res = await getBalance();
-  //   setBalance(res[0].transaction_value);
-  // };
-
   function handleSubmit(event) {
     event.preventDefault();
     console.log(props.budget, props.transaction);
+
     //>>>> users can post a transaction to the accomodation sect.
     axios.post(`/api/expense`, {
       transaction_value: props.transaction,
@@ -111,8 +103,8 @@ const BudgetPage = (props) => {
       budget_category: transactionCategory, //
       trip_name: tripTransaction,
     });
-    //>>>> this is to clear the input fields once clicked submit. The values will still be saved in the mongo database
 
+    //>>>> this is to clear the input fields once clicked submit. The values will still be saved in the mongo database
     props.setTransactions(0);
     props.setDesc("");
     handleDateChange(new Date());
@@ -120,10 +112,6 @@ const BudgetPage = (props) => {
     setTripTransaction("");
 
     setHasSubmitedTransaction(true);
-
-    //>>>> atempt to update the inputed transaction in the front end
-    // const res = axios.get(`/api/expense`);
-    // props.setTransactions(res);
   }
 
   return (
@@ -134,16 +122,10 @@ const BudgetPage = (props) => {
           hasSubmitedTransaction={hasSubmitedTransaction}
           setHasSubmitedTransaction={setHasSubmitedTransaction}
         />
-
-        {/* maybe use props so that i can reuse commponents in name of the category */}
-        {/* <h3>Accomodation:</h3> */}
-        {/*  Amount spent in {test description} the router needs to be changed!  */}
-        {/* <h2>Amount spent: {balance}</h2>
-        {console.log(balance)} */}
       </div>
       <div
         className="transactions-form-ui-div"
-        style={{ padding: 16, margin: "auto", maxWidth: 600 }}
+        style={{ padding: 20, margin: "auto", maxWidth: 600 }}
       >
         <h2>Submit a transaction</h2>
         <form
@@ -232,6 +214,7 @@ const BudgetPage = (props) => {
             color="primary"
             className={classes.margin}
             type="submit"
+            styles={{ padding: "16px" }}
           >
             Submit Form
           </ColorButton>
