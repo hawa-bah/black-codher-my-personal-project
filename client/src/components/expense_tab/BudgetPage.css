@@ -1,12 +1,11 @@
-/* Budget PAGE .budgetPage-Div {
+/* Budget PAGE  */
+.budgetPage-Div {
   background-color: aliceblue;
-  background-image: url("/logo192.png");
-
-  Full height
-  height: 100%;
-
-  Center and scale the image nicely
+  background: url("../../micheile-henderson-SoT4-mZhyhE-unsplash.jpg");
+  height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-} */
+  background-attachment: fixed;
+  padding: 100px;
+}

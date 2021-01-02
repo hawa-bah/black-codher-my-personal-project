@@ -3,21 +3,6 @@ html {
   height: 100%;
   margin: 0;
 }
-.budgetPage-Div {
-  background-color: aliceblue;
-  background: url("./micheile-henderson-SoT4-mZhyhE-unsplash.jpg");
-
-  /* Full height */
-
-  /* min-height: 100%;
-  height: auto !important; */
-  height: 100vh;
-  /* height: 100%; */
-  /* Center and scale the image nicely */
-  /* background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover; */
-}
 
 /* .App {
   text-align: center;
