@@ -9,3 +9,8 @@
   background-attachment: fixed;
   padding: 100px;
 }
+
+.SubmitTransaction-Form-div {
+  background-color: aliceblue;
+  padding: 20px;
+}

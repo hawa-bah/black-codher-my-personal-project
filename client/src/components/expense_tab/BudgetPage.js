@@ -2,8 +2,10 @@ import DateFnsUtils from "@date-io/date-fns";
 import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { Col, Row } from "react-bootstrap";
 import axios from "axios";
 import TransactionsList from "../transaction_list/TransactionsList";
+// import TransactionForm from "../expense_tab/TransactionForm";
 import { getBalance } from "../../services/transactionService";
 import {
   KeyboardDatePicker,
@@ -75,7 +77,9 @@ const BudgetPage = (props) => {
         {/* <h2>Amount spent: {balance}</h2>
         {console.log(balance)} */}
       </div>
-      <div className="SubmitTransaction Form div">
+      <div className="SubmitTransaction-Form-div">
+        {/* <TransactionForm></TransactionForm> */}
+        <h2>Submit a transaction</h2>
         <Form
           onSubmit={(event) => {
             handleSubmit(event);
@@ -83,38 +87,40 @@ const BudgetPage = (props) => {
             console.log(selectedDate);
           }}
         >
-          <Form.Group controlId="description">
-            <Form.Label>descip</Form.Label>
-            <Form.Control
-              type="descipr"
-              placeholder="input value"
-              value={props.description}
-              onChange={(e) => props.setDesc(e.target.value)}
-            />
-          </Form.Group>
+          <Form.Row>
+            <Form.Group as={Col} controlId="description">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                type="descipr"
+                placeholder="input value"
+                value={props.description}
+                onChange={(e) => props.setDesc(e.target.value)}
+              />
+            </Form.Group>
 
-          <Form.Group controlId="trip_name">
-            <Form.Label>trip name</Form.Label>
-            <Form.Control
-              type="trip_name"
-              placeholder="input value"
-              value={tripTransaction}
-              onChange={(e) => setTripTransaction(e.target.value)}
-            />
-          </Form.Group>
+            <Form.Group as={Col} controlId="trip_name">
+              <Form.Label>trip name</Form.Label>
+              <Form.Control
+                type="trip_name"
+                placeholder="input value"
+                value={tripTransaction}
+                onChange={(e) => setTripTransaction(e.target.value)}
+              />
+            </Form.Group>
 
-          <Form.Group controlId="Expense">
-            <Form.Label>Enter a transaction</Form.Label>
-            <Form.Control
-              type="expense"
-              placeholder="e.g. 80.00"
-              value={props.transaction}
-              onChange={(e) => props.setTransactions(e.target.value)}
-            />
-            <Form.Text className="text-muted">
-              Enter negative numbers if it is an expense.
-            </Form.Text>
-          </Form.Group>
+            <Form.Group as={Col} controlId="Expense">
+              <Form.Label>Enter a transaction</Form.Label>
+              <Form.Control
+                type="expense"
+                placeholder="e.g. 80.00"
+                value={props.transaction}
+                onChange={(e) => props.setTransactions(e.target.value)}
+              />
+              <Form.Text className="text-muted">
+                Enter negative numbers if it is an expense.
+              </Form.Text>
+            </Form.Group>
+          </Form.Row>
 
           {/* to input the date of the transaction we are using material-ui */}
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
