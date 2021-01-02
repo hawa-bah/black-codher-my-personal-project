@@ -126,7 +126,7 @@ const BudgetPage = (props) => {
           maxWidth: 600,
         }}
       >
-        <h2 className="budgetPage-subtitle">Input an expense</h2>
+        <h2 className="budgetPage-subtitle">INPUT AN EXPENSE</h2>
         <form
           onSubmit={(event) => {
             handleSubmit(event);

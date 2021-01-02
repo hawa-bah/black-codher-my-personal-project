@@ -58,10 +58,11 @@ const BudgetCategories = (props) => {
   // -----------------------------------------------------------------------------------------------------------
   console.log(data);
   return (
-    <div>
+    <div className="budgetCategories-div" style={{ padding: "20px" }}>
       <Form>
         <Form.Group>
-          <Form.Label>Select a trip</Form.Label>
+          <h2 className="budgetPage-substitle">VIEW YOUR BUDGETS</h2>
+          <Form.Label>Choose the name of the Trip:</Form.Label>
           <Form.Control
             as="select"
             placeholder="e.g Transport"
