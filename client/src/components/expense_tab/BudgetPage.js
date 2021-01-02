@@ -116,16 +116,15 @@ const BudgetPage = (props) => {
 
   return (
     <div className="budgetPage-Div">
-      <div className="budget categories card">
-        <BudgetCategories
-          budgetCategoriesArry={budgetCategoriesArry}
-          hasSubmitedTransaction={hasSubmitedTransaction}
-          setHasSubmitedTransaction={setHasSubmitedTransaction}
-        />
-      </div>
+      <h1>Budget Planner</h1>
       <div
         className="transactions-form-ui-div"
-        style={{ padding: 20, margin: "auto", maxWidth: 600 }}
+        style={{
+          padding: 20,
+          margin: "auto",
+          marginBottom: "20px",
+          maxWidth: 600,
+        }}
       >
         <h2 className="budgetPage-subtitle">Input an expense</h2>
         <form
@@ -241,6 +240,14 @@ const BudgetPage = (props) => {
           hasSubmitedTransaction={hasSubmitedTransaction}
           setHasSubmitedTransaction={setHasSubmitedTransaction}
         ></TransactionForm> */}
+      </div>
+
+      <div className="budget categories card">
+        <BudgetCategories
+          budgetCategoriesArry={budgetCategoriesArry}
+          hasSubmitedTransaction={hasSubmitedTransaction}
+          setHasSubmitedTransaction={setHasSubmitedTransaction}
+        />
       </div>
 
       <div className="Transactions div">

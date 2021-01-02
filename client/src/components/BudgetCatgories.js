@@ -1,15 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
-// import Button from "react-bootstrap/Button";
-// import axios from "axios";
-import {
-  getAll,
-  // getBudgetAccomodation,
-  getBudget,
-  getSpent,
-} from "../services/budgetService";
-// import { getSpentAccomodation } from "../services/transactionService";
-// import budgetCategoriesArray from "../budgetCategoriesArray";
+import { getAll, getBudget, getSpent } from "../services/budgetService";
 
 const BudgetCategories = (props) => {
   const [tripName, setTripName] = useState(""); // tripName is used to select the trip at thhe top of the page
@@ -77,34 +68,17 @@ const BudgetCategories = (props) => {
             onChange={(event) => {
               setTripName(event.target.value);
               renderSpent(event.target.value); // this are transactions corresponding to one trip
-              // renderBudgetAccomodation(event.target.value);
-              // renderSpentAccomodation(event.target.value);
               renderBudgetCategory(event.target.value);
               console.log("You have selected " + event.target.value);
             }}
           >
             {/* here i am mapping the name of the trips inside the budget collection */}
-            {
-              tripNameList && tripNameList.length > 0
-                ? tripNameList.map((trip) => renderTripNameList(trip))
-                : null
-              // <option>No trips found</option>
-            }
+            {tripNameList && tripNameList.length > 0
+              ? tripNameList.map((trip) => renderTripNameList(trip))
+              : null}
           </Form.Control>
         </Form.Group>
       </Form>
-
-      {/* {data &&
-        data[0].budgets.map((elements) => (
-          // <div>
-          <>
-            <div>
-              <h2>{elements.budget_category}</h2>
-              <h1>{elements.budget_amount}</h1>
-            </div>
-
-          </>
-        ))} */}
 
       {spent && spent.length > 0 ? (
         <h1>BUDGET CATEGORIES </h1>
