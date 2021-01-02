@@ -11,6 +11,8 @@ import {
 } from "@material-ui/pickers";
 import budgetCategoriesArry from "../../budgetCategoriesArray";
 import BudgetCategories from "../BudgetCatgories";
+import "./BudgetPage.css";
+import "../../App.css";
 
 const BudgetPage = (props) => {
   // >>>> I'm passing transactions state (the value of a transaction) as a props
@@ -59,7 +61,7 @@ const BudgetPage = (props) => {
   }
 
   return (
-    <div>
+    <div className="budgetPage-Div">
       <div className="budget categories card">
         <BudgetCategories
           budgetCategoriesArry={budgetCategoriesArry}
