@@ -14,6 +14,8 @@ import BudgetCategories from "../BudgetCatgories";
 import "./BudgetPage.css";
 import "../../App.css";
 
+var bg = require("../../../src/micheile-henderson-SoT4-mZhyhE-unsplash.jpg");
+
 const BudgetPage = (props) => {
   // >>>> I'm passing transactions state (the value of a transaction) as a props
   // const [budget, setbudget] = useState(0);
@@ -61,7 +63,17 @@ const BudgetPage = (props) => {
   }
 
   return (
-    <div className="budgetPage-Div">
+    <div
+      className="budgetPage-Div"
+      style={{
+        backgroundImage: "url(" + bg + ")",
+        minHeight: "100%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "noRepeat",
+        padding: "100px",
+      }}
+    >
       <div className="budget categories card">
         <BudgetCategories
           budgetCategoriesArry={budgetCategoriesArry}

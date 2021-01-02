@@ -1,17 +1,25 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
 .budgetPage-Div {
   background-color: aliceblue;
-  background-image: url("/tim-trad--TcTakRTNfM-unsplash.jpg");
+  background: url("./micheile-henderson-SoT4-mZhyhE-unsplash.jpg");
 
   /* Full height */
-  height: 100%;
 
+  /* min-height: 100%;
+  height: auto !important; */
+  height: 100vh;
+  /* height: 100%; */
   /* Center and scale the image nicely */
-  background-position: center;
+  /* background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
 }
 
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -48,4 +56,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
