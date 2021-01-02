@@ -142,9 +142,10 @@ const BudgetPage = (props) => {
         {console.log(balance)} */}
       </div>
       <div
-        className="new-form-ui"
+        className="transactions-form-ui-div"
         style={{ padding: 16, margin: "auto", maxWidth: 600 }}
       >
+        <h2>Submit a transaction</h2>
         <form
           onSubmit={(event) => {
             handleSubmit(event);
@@ -251,78 +252,6 @@ const BudgetPage = (props) => {
           hasSubmitedTransaction={hasSubmitedTransaction}
           setHasSubmitedTransaction={setHasSubmitedTransaction}
         ></TransactionForm> */}
-        <h2>Submit a transaction</h2>
-        <Form
-          onSubmit={(event) => {
-            handleSubmit(event);
-            // renderBalance();
-            console.log(selectedDate);
-          }}
-        >
-          <Form.Row>
-            <Form.Group as={Col} controlId="description">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                type="descipr"
-                placeholder="input value"
-                value={props.description}
-                onChange={(e) => props.setDesc(e.target.value)}
-              />
-            </Form.Group>
-
-            <Form.Group as={Col} controlId="trip_name">
-              <Form.Label>trip name</Form.Label>
-              <Form.Control
-                type="trip_name"
-                placeholder="input value"
-                value={tripTransaction}
-                onChange={(e) => setTripTransaction(e.target.value)}
-              />
-            </Form.Group>
-
-            <Form.Group as={Col} controlId="Expense">
-              <Form.Label>Enter a transaction</Form.Label>
-              <Form.Control
-                type="expense"
-                placeholder="e.g. 80.00"
-                value={props.transaction}
-                onChange={(e) => props.setTransactions(e.target.value)}
-              />
-              <Form.Text className="text-muted">
-                Enter negative numbers if it is an expense.
-              </Form.Text>
-            </Form.Group>
-          </Form.Row>
-
-          {/* to input the date of the transaction we are using material-ui */}
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-              clearable
-              value={selectedDate}
-              placeholder="10/10/2018"
-              onChange={(date) => handleDateChange(date)}
-              // minDate={new Date()}
-              format="MM/dd/yyyy"
-            />
-          </MuiPickersUtilsProvider>
-          <Form.Group>
-            <Form.Label>
-              Select a category to classify the transaction{" "}
-            </Form.Label>
-            <Form.Control
-              as="select"
-              placeholder="e.g Transport"
-              onChange={(event) => setTransactionCategory(event.target.value)}
-            >
-              {budgetCategoriesArry.map((category) => (
-                <option value={category}>{category}</option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit Transaction
-          </Button>
-        </Form>
       </div>
 
       <div className="Transactions div">
