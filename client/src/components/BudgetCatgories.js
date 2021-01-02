@@ -72,6 +72,7 @@ const BudgetCategories = (props) => {
               console.log("You have selected " + event.target.value);
             }}
           >
+            <option>Select</option>
             {/* here i am mapping the name of the trips inside the budget collection */}
             {tripNameList && tripNameList.length > 0
               ? tripNameList.map((trip) => renderTripNameList(trip))
@@ -85,34 +86,37 @@ const BudgetCategories = (props) => {
       ) : (
         <h1>select a Trip</h1>
       )}
-      {data && data.length > 0
-        ? data[0].budgets.map((elements) => {
-            // renderSpent(elements, tripName);
-            let filterSpent = spent.filter((object) => {
-              return object.budget_category === elements.budget_category;
-            }); // filterSpent is an array of objects(transactions in the same category hopefully?)
-            let spentValue = filterSpent.reduce(function (prev, cur) {
-              return prev + cur.transaction_value;
-            }, 0);
-            console.log(elements.budget_category + filterSpent.length);
-            return (
-              <>
-                <div>
-                  <h2>
-                    {elements.budget_category} budget for {tripName}
-                  </h2>
-                  <p>budget amount:{elements.budget_amount}</p>
-                  <p>Number of transactions: {filterSpent.length}</p>
-                  <p>
-                    amount spent: {spentValue} (
-                    {Math.round((spentValue / elements.budget_amount) * 100)}%)
-                  </p>
-                  <p>Amount left: {elements.budget_amount - spentValue}</p>
-                </div>
-              </>
-            );
-          })
-        : null}
+      <div className="category-card-container">
+        {data && data.length > 0
+          ? data[0].budgets.map((elements) => {
+              // renderSpent(elements, tripName);
+              let filterSpent = spent.filter((object) => {
+                return object.budget_category === elements.budget_category;
+              }); // filterSpent is an array of objects(transactions in the same category hopefully?)
+              let spentValue = filterSpent.reduce(function (prev, cur) {
+                return prev + cur.transaction_value;
+              }, 0);
+              console.log(elements.budget_category + filterSpent.length);
+              return (
+                <>
+                  <div className="category-card-div">
+                    <h2 className="category-card-title">
+                      {elements.budget_category} budget for {tripName}
+                    </h2>
+                    <p>budget amount:{elements.budget_amount}</p>
+                    <p>Number of transactions: {filterSpent.length}</p>
+                    <p>
+                      amount spent: {spentValue} (
+                      {Math.round((spentValue / elements.budget_amount) * 100)}
+                      %)
+                    </p>
+                    <p>Amount left: {elements.budget_amount - spentValue}</p>
+                  </div>
+                </>
+              );
+            })
+          : null}
+      </div>
 
       {/* -----------------------------------------------------this are to submit budget, might delete late */}
       {/* {props.budgetCategoriesArry.map((category) => {
