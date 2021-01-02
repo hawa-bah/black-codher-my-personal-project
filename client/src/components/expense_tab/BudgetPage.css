@@ -1,4 +1,6 @@
 /* Budget PAGE  */
+@import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
+
 .budgetPage-Div {
   background-color: aliceblue;
   background: url("../../micheile-henderson-SoT4-mZhyhE-unsplash.jpg");
@@ -8,4 +10,15 @@
   background-size: cover;
   background-attachment: fixed;
   padding: 10px;
+}
+.transactions-form-ui-div {
+  backdrop-filter: blur(30px);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-blend-mode: screen;
+}
+.budgetPage-subtitle {
+  font-family: "Staatliches", cursive;
+  font-size: 25px;
+  padding-left: 10px;
 }

@@ -127,7 +127,7 @@ const BudgetPage = (props) => {
         className="transactions-form-ui-div"
         style={{ padding: 20, margin: "auto", maxWidth: 600 }}
       >
-        <h2>Submit a transaction</h2>
+        <h2 className="budgetPage-subtitle">Input an expense</h2>
         <form
           onSubmit={(event) => {
             handleSubmit(event);
@@ -135,7 +135,12 @@ const BudgetPage = (props) => {
             // renderBalance();
           }}
         >
-          <Grid container alignItems="flex-start" spacing={2}>
+          <Grid
+            container
+            alignItems="flex-start"
+            spacing={2}
+            style={{ padding: "10px" }}
+          >
             <Grid item xs="auto" sm={4} className="my-1">
               <TextField
                 id="Description"
@@ -175,6 +180,7 @@ const BudgetPage = (props) => {
             alignItems="flex-start"
             justifyContent="space-around"
             spacing={2}
+            style={{ padding: "10px" }}
           >
             <Grid item xs="auto" sm={6} className="my-2">
               {/* to input the date of the transaction we are using material-ui */}
@@ -214,9 +220,9 @@ const BudgetPage = (props) => {
             color="primary"
             className={classes.margin}
             type="submit"
-            styles={{ padding: "16px" }}
+            // styles={{ padding: "6px" }}
           >
-            Submit Form
+            Submit Transaction
           </ColorButton>
         </form>
       </div>
