@@ -107,7 +107,7 @@ const BudgetPage = (props) => {
     //>>>> this is to clear the input fields once clicked submit. The values will still be saved in the mongo database
     props.setTransactions(0);
     props.setDesc("");
-    handleDateChange(new Date());
+    // handleDateChange(new Date());
     setTransactionCategory("");
     setTripTransaction("");
 
@@ -181,18 +181,17 @@ const BudgetPage = (props) => {
             spacing={2}
             style={{ padding: "10px" }}
           >
-            <Grid item xs="auto" sm={6} className="my-2">
+            <Grid item xs="auto" sm={6}>
               {/* to input the date of the transaction we are using material-ui */}
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
                   label="Date of the transaction"
                   clearable
                   value={selectedDate}
-                  placeholder="10/10/2018"
                   onChange={(date) => handleDateChange(date)}
                   // minDate={new Date()}
                   format="MM/dd/yyyy"
-                  required
+                  style={{ width: "25ch" }}
                 />
               </MuiPickersUtilsProvider>
             </Grid>

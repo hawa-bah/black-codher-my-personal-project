@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
+import { Grid, MenuItem, TextField } from "@material-ui/core";
 import { getAll, getBudget, getSpent } from "../services/budgetService";
 
 const BudgetCategories = (props) => {
@@ -18,6 +19,10 @@ const BudgetCategories = (props) => {
       console.log("heeeey has submited");
       props.setHasSubmitedTransaction(false);
     }
+    // const categoryDiv = document.getElementsByClassName(
+    //   "category-card-container"
+    // );
+    // console.log(categoryDiv);
   }, [props.hasSubmitedTransaction]);
 
   const getTripNameList = async () => {
@@ -27,7 +32,11 @@ const BudgetCategories = (props) => {
     // console.log(res);
   };
   const renderTripNameList = (trip) => {
-    return <option key={trip.trip_name}>{trip.trip_name}</option>;
+    return (
+      <MenuItem key={trip.trip_name} value={trip.trip_name}>
+        {trip.trip_name}
+      </MenuItem>
+    );
   };
 
   // attempt rendering categories info using map
@@ -59,34 +68,40 @@ const BudgetCategories = (props) => {
   console.log(data);
   return (
     <div className="budgetCategories-div" style={{ padding: "20px" }}>
-      <Form>
-        <Form.Group>
-          <h2 className="budgetPage-substitle">VIEW YOUR BUDGETS</h2>
-          <Form.Label>Choose the name of the Trip:</Form.Label>
-          <Form.Control
-            as="select"
-            placeholder="e.g Transport"
-            onChange={(event) => {
-              setTripName(event.target.value);
-              renderSpent(event.target.value); // this are transactions corresponding to one trip
-              renderBudgetCategory(event.target.value);
-              console.log("You have selected " + event.target.value);
-            }}
-          >
-            <option>Select</option>
-            {/* here i am mapping the name of the trips inside the budget collection */}
-            {tripNameList && tripNameList.length > 0
-              ? tripNameList.map((trip) => renderTripNameList(trip))
-              : null}
-          </Form.Control>
-        </Form.Group>
-      </Form>
+      <h2 className="budgetPage-substitle">VIEW YOUR BUDGETS</h2>
 
-      {spent && spent.length > 0 ? (
-        <h1>BUDGET CATEGORIES </h1>
-      ) : (
-        <h1>select a Trip</h1>
-      )}
+      <form>
+        {/* <Form.Label>Choose the name of the Trip:</Form.Label> */}
+        <Grid container>
+          <Grid itemxs="auto">
+            <TextField
+              id="category-form-tripName"
+              label="Choose the name of the Trip:"
+              value={tripName || ""}
+              select
+              onChange={(event) => {
+                setTripName(event.target.value);
+                renderSpent(event.target.value); // this are transactions corresponding to one trip
+                renderBudgetCategory(event.target.value);
+                console.log("You have selected " + event.target.value);
+              }}
+              style={{ width: "250px" }}
+              required
+            >
+              <MenuItem key="hidde">Hidde</MenuItem>
+              {/* here i am mapping the name of the trips inside the budget collection */}
+              {tripNameList && tripNameList.length > 0
+                ? tripNameList.map((trip) => renderTripNameList(trip))
+                : null}
+            </TextField>
+          </Grid>
+        </Grid>
+      </form>
+
+      {
+        spent && spent.length > 0 ? <h1>BUDGET CATEGORIES </h1> : null
+        // <h1>select a Trip</h1>
+      }
       <div className="category-card-container">
         {data && data.length > 0
           ? data[0].budgets.map((elements) => {
@@ -98,16 +113,29 @@ const BudgetCategories = (props) => {
                 return prev + cur.transaction_value;
               }, 0);
               console.log(elements.budget_category + filterSpent.length);
+              // const categoryDiv = document.getElementById(
+              //   "category-card-div" + "" + elements.budget_category
+              // );
+              // console.log(categoryDiv);
+              // if (
+              //   Math.round((spentValue / elements.budget_amount) * 100) > 50
+              // ) {
+              //   categoryDiv.style.cssText = "backgroung-color: 'red'";
+              // }
+
               return (
                 <>
-                  <div className="category-card-div">
-                    <h2 className="category-card-title">
+                  <div
+                    className={"category-card-div"}
+                    id={"category-card-div" + "" + elements.budget_category}
+                  >
+                    <h2 className={"category-card-title"}>
                       {elements.budget_category} budget for {tripName}
                     </h2>
-                    <p>budget amount:{elements.budget_amount}</p>
+                    <p>Budget amount:{elements.budget_amount}</p>
                     <p>Number of transactions: {filterSpent.length}</p>
                     <p>
-                      amount spent: {spentValue} (
+                      Amount spent: {spentValue} (
                       {Math.round((spentValue / elements.budget_amount) * 100)}
                       %)
                     </p>

@@ -26,6 +26,9 @@
 }
 
 /* BUDGETCATEGORIES.js */
+.budgetCategories-div {
+  max-width: fit-content;
+}
 
 .category-card-container {
   display: flex;
