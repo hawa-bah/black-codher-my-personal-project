@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import { Grid, MenuItem, TextField } from "@material-ui/core";
+import ProgressBar from "react-bootstrap/ProgressBar";
 import { getAll, getBudget, getSpent } from "../services/budgetService";
 
 const BudgetCategories = (props) => {
@@ -150,6 +151,13 @@ const BudgetCategories = (props) => {
                       %)
                     </p>
                     <p>Amount left: {elements.budget_amount - spentValue}</p>
+                    <ProgressBar
+                      now={Math.round(
+                        (spentValue / elements.budget_amount) * 100
+                      )}
+                      label="label"
+                    />
+                    ;
                   </div>
                 </>
               );
