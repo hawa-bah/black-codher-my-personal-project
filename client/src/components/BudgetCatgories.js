@@ -15,16 +15,42 @@ const BudgetCategories = (props) => {
     if (!tripNameList) {
       getTripNameList();
     }
+
+    if (data.length !== 0) {
+      changeColorBudget(data);
+    } else {
+      console.log("not working");
+    }
+
     if (props.hasSubmitedTransaction) {
       renderSpent(tripName);
       console.log("heeeey has submited");
       props.setHasSubmitedTransaction(false);
     }
-    // const categoryDiv = document.getElementsByClassName(
-    //   "category-card-container"
-    // );
-    // console.log(categoryDiv);
-  }, [props.hasSubmitedTransaction]);
+  }, [props.hasSubmitedTransaction, data]);
+
+  // >>> TO SOLVE: function works but doesn't get updated at the right time
+  const changeColorBudget = (data) => {
+    data[0].budgets.map((elements) => {
+      const categoryDiv = document.getElementById(
+        "category-card-div" + "" + elements.budget_category
+      );
+
+      // repeated code
+      let filterSpent = spent.filter((object) => {
+        return object.budget_category === elements.budget_category;
+      }); // filterSpent is an array of objects(transactions in the same category hopefully?)
+      let spentValue = filterSpent.reduce(function (prev, cur) {
+        return prev + cur.transaction_value;
+      }, 0);
+      if (Math.round((spentValue / elements.budget_amount) * 100) > 50) {
+        categoryDiv.style.cssText = "background-color: red; color: white";
+      } else {
+        categoryDiv.style.cssText = "background-color: white; color: black";
+      }
+      console.log(categoryDiv);
+    });
+  };
 
   const getTripNameList = async () => {
     //>>>> I am getting the documents from the budget collection whith budgetService.js
@@ -115,30 +141,15 @@ const BudgetCategories = (props) => {
               }, 0);
               console.log(elements.budget_category + filterSpent.length);
 
-              // >>> NEW: changing style
-
-              // const categoryDiv = document.getElementById(
-              //   "category-card-div" + "" + elements.budget_category
-              // );
-              // console.log(categoryDiv);
-
-              // const styleClass = { "background-color": "red" };
-              // if (
-              //   Math.round((spentValue / elements.budget_amount) * 100) > 50
-              // ) {
-              //   const high = true;
-              //   console.log("high");
-              //   console.log(high);
-              // } else {
-              //   const styleClass = { "background-color": "green" };
-              // }
-
               return (
                 <>
                   <div
                     className={"category-card-div"}
                     id={"category-card-div" + "" + elements.budget_category}
-                    // style={high && { backgroundColor: "green" }}
+                    value={
+                      Math.round((spentValue / elements.budget_amount) * 100) >
+                      50
+                    }
                   >
                     <h2 className={"category-card-title"}>
                       {elements.budget_category} budget for {tripName}
@@ -150,14 +161,18 @@ const BudgetCategories = (props) => {
                       {Math.round((spentValue / elements.budget_amount) * 100)}
                       %)
                     </p>
-                    <p>Amount left: {elements.budget_amount - spentValue}</p>
                     <ProgressBar
                       now={Math.round(
                         (spentValue / elements.budget_amount) * 100
                       )}
-                      label="label"
+                      color="black"
+                      label={
+                        Math.round(
+                          (spentValue / elements.budget_amount) * 100
+                        ) + "%"
+                      }
                     />
-                    ;
+                    <p>Amount left: {elements.budget_amount - spentValue}</p>
                   </div>
                 </>
               );
