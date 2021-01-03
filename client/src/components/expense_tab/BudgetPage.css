@@ -30,7 +30,7 @@
 .budgetCategories-div,
 .Transactions-div {
   max-width: fit-content;
-  min-width: 300px;
+  min-width: 250px;
 }
 
 .category-card-container {

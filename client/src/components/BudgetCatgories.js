@@ -113,14 +113,23 @@ const BudgetCategories = (props) => {
                 return prev + cur.transaction_value;
               }, 0);
               console.log(elements.budget_category + filterSpent.length);
+
+              // >>> NEW: changing style
+
               // const categoryDiv = document.getElementById(
               //   "category-card-div" + "" + elements.budget_category
               // );
               // console.log(categoryDiv);
+
+              // const styleClass = { "background-color": "red" };
               // if (
               //   Math.round((spentValue / elements.budget_amount) * 100) > 50
               // ) {
-              //   categoryDiv.style.cssText = "backgroung-color: 'red'";
+              //   const high = true;
+              //   console.log("high");
+              //   console.log(high);
+              // } else {
+              //   const styleClass = { "background-color": "green" };
               // }
 
               return (
@@ -128,6 +137,7 @@ const BudgetCategories = (props) => {
                   <div
                     className={"category-card-div"}
                     id={"category-card-div" + "" + elements.budget_category}
+                    // style={high && { backgroundColor: "green" }}
                   >
                     <h2 className={"category-card-title"}>
                       {elements.budget_category} budget for {tripName}
