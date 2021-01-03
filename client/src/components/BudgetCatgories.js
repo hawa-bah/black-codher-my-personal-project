@@ -104,7 +104,6 @@ const BudgetCategories = (props) => {
             <TextField
               id="category-form-tripName"
               label="Choose the name of the Trip:"
-              value={tripName || ""}
               select
               onChange={(event) => {
                 setTripName(event.target.value);
