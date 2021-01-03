@@ -249,18 +249,19 @@ const BudgetPage = (props) => {
         />
       </div>
 
-      <div className="Transactions div">
+      <div
+        className="Transactions-div"
+        style={{ padding: "20px", marginTop: "10px" }}
+      >
+        <h2 className="budgetPage-subtitle">TRANSACTIONS LIST</h2>
         <div className="button transaction">
           <Button onClick={() => setViewTransactions(!viewTransactions)}>
-            <p>
-              {viewTransactions ? "Hide transactions" : "View Transactions"}
-            </p>
+            <p>{viewTransactions ? "Click to Hide" : "Click to view"}</p>
           </Button>
         </div>
         <div className="transaction List">
           {viewTransactions ? (
             <div>
-              <h2>Transaction list component</h2>
               <TransactionsList
                 viewTransactions={viewTransactions}
                 setViewTransactions={setViewTransactions}

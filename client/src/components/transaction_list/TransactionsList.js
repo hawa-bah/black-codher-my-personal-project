@@ -44,13 +44,13 @@ const TransactionsList = (props) => {
 
   const renderTransaction = (transaction) => {
     return (
-      <li key={transaction._id}>
-        <h3>
-          {`${transaction.transaction_value} 
-          ${transaction.description}
-          ${transaction.transaction_date}
-          ${transaction.budget_category}
-          ${transaction.trip_name}`}
+      <div key={transaction._id}>
+        <div className="transactions-list-element">
+          <div>{`${transaction.transaction_value}`}</div>
+          <div>{`${transaction.description}`}</div>
+          <div>{`${transaction.transaction_date}`}</div>
+          <div>{` ${transaction.budget_category}`}</div>
+          <div>{` ${transaction.trip_name}`}</div>
           {/* the button can be transformed to an icon later */}
           <button
             onClick={() => {
@@ -60,8 +60,8 @@ const TransactionsList = (props) => {
           >
             Delete
           </button>
-        </h3>
-      </li>
+        </div>
+      </div>
     );
   };
   // label is state, also the things that will be filtered
@@ -129,8 +129,8 @@ const TransactionsList = (props) => {
         <TransactionsTable></TransactionsTable>
         <p>Transactions:</p>
         {transactions && transactions.length > 0 ? (
-          <div>
-            <ul>
+          <div className="transactions-container">
+            <div>
               {isFiltered &&
               filteredTransactions &&
               filteredTransactions.length > 0
@@ -140,7 +140,7 @@ const TransactionsList = (props) => {
                 : transactions.map((transaction) =>
                     renderTransaction(transaction)
                   )}
-            </ul>
+            </div>
           </div>
         ) : (
           <p>No transactions made</p>

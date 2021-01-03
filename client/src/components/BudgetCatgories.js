@@ -68,7 +68,7 @@ const BudgetCategories = (props) => {
   console.log(data);
   return (
     <div className="budgetCategories-div" style={{ padding: "20px" }}>
-      <h2 className="budgetPage-substitle">VIEW YOUR BUDGETS</h2>
+      <h2 className="budgetPage-subtitle">VIEW YOUR BUDGETS</h2>
 
       <form>
         {/* <Form.Label>Choose the name of the Trip:</Form.Label> */}

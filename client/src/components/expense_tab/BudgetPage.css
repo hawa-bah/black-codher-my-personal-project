@@ -12,7 +12,8 @@
   padding-top: 70px;
 }
 .transactions-form-ui-div,
-.budgetCategories-div {
+.budgetCategories-div,
+.Transactions-div {
   backdrop-filter: blur(30px);
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.5);
@@ -26,8 +27,10 @@
 }
 
 /* BUDGETCATEGORIES.js */
-.budgetCategories-div {
+.budgetCategories-div,
+.Transactions-div {
   max-width: fit-content;
+  min-width: 300px;
 }
 
 .category-card-container {
@@ -51,4 +54,14 @@
   font-family: "Staatliches", cursive;
   font-size: 20px;
   color: purple;
+}
+
+/* TRANSACTIONlIST.JS */
+.transactions-list-element {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr;
+  margin: 5px;
+}
+.transactions-container {
+  margin: 20px;
 }
