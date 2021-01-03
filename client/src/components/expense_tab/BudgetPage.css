@@ -1,4 +1,5 @@
 /* Budget PAGE  */
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Staatliches&display=swap");
 .budgetPage-Div {
   background-color: aliceblue;
   background: url("../../micheile-henderson-SoT4-mZhyhE-unsplash.jpg");
@@ -7,10 +8,60 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  padding: 100px;
+  padding: 10px;
+  padding-top: 70px;
+}
+.transactions-form-ui-div,
+.budgetCategories-div,
+.Transactions-div {
+  backdrop-filter: blur(30px);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-blend-mode: screen;
+  /* padding-bottom: 100px; */
+}
+.budgetPage-subtitle {
+  font-family: "Archivo Black", sans-serif;
+  font-size: 25px;
+  padding-left: 10px;
 }
 
-.SubmitTransaction-Form-div {
-  background-color: aliceblue;
+/* BUDGETCATEGORIES.js */
+.budgetCategories-div,
+.Transactions-div {
+  max-width: fit-content;
+  min-width: 250px;
+}
+
+.category-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.category-card-div {
+  background-color: white;
+  min-width: 210px;
   padding: 20px;
+  margin: 10px;
+  border-radius: 40px;
+  max-width: fit-content;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+}
+.category-card-title {
+  font-family: "Staatliches", cursive;
+  font-size: 20px;
+  color: purple;
+}
+
+/* TRANSACTIONlIST.JS */
+.transactions-list-element {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr;
+  margin: 5px;
+}
+.transactions-container {
+  margin: 20px;
 }
