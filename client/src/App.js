@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import BudgetPage from "./components/expense_tab/BudgetPage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-
+// PAGES
+import BudgetPage from "./components/expense_tab/BudgetPage";
+import SubmitBudgetPage from "./pages/SubmitBudgets";
+import budgetCategoriesArry from "./budgetCategoriesArray";
 // SERVICES
 import { getAll, deleteOne } from "./services/userService";
 
@@ -66,6 +68,15 @@ function App() {
                 description={description}
                 setDesc={setDesc}
               />
+            </React.Fragment>
+          )}
+        />
+        <Route
+          exact
+          path="/budgetInfo"
+          render={() => (
+            <React.Fragment>
+              <SubmitBudgetPage budgetCategoriesArray={budgetCategoriesArry} />
             </React.Fragment>
           )}
         />
