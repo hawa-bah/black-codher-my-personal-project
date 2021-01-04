@@ -132,7 +132,7 @@ const SubmitBudgetPage = (props) => {
                 id="Trip Name"
                 color="secondary"
                 label={"Trip Name" + ":" + editCard.trip_name}
-                value={tripName}
+                value={editCard.trip_name}
                 onChange={(e) => setTripName(e.target.value)}
               />
             </Grid>

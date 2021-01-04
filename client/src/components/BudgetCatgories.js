@@ -6,8 +6,8 @@ import { getAll, getBudget, getSpent } from "../services/budgetService";
 
 const BudgetCategories = (props) => {
   const [tripName, setTripName] = useState(""); // tripName is used to select the trip at thhe top of the page
-  const [tripNameList, setTripNameList] = useState(null); //documents from the budget collection
-  const [spent, setSpent] = useState(null);
+  const [tripNameList, setTripNameList] = useState(null); // documents from the budget collection
+  const [spent, setSpent] = useState(null); //transactions of a specific trip. Spent is an array of objects(transactions)
 
   const [data, setData] = useState([]); //document from the budget collection from a specific Trip
 
@@ -16,6 +16,7 @@ const BudgetCategories = (props) => {
       getTripNameList();
     }
 
+    // >>> the color gets updated in the first time the page is loaded
     if (data.length !== 0) {
       changeColorBudget(data);
     } else {
@@ -25,23 +26,26 @@ const BudgetCategories = (props) => {
     if (props.hasSubmitedTransaction) {
       renderSpent(tripName);
       console.log("heeeey has submited");
-      if (data.length !== 0) {
+      // >>> the color gets updated when a transaction has been submited and SPENT has been set and rendered
+      if (data.length !== 0 && spent) {
+        renderBudgetCategory(tripName);
         changeColorBudget(data);
-      } else {
-        console.log("not working");
       }
       props.setHasSubmitedTransaction(false);
     }
   }, [props.hasSubmitedTransaction, data]);
 
-  // >>> TO SOLVE: function works but doesn't get updated at the right time
   const changeColorBudget = (data) => {
+    console.log("222*******");
     data[0].budgets.map((elements) => {
       const categoryDiv = document.getElementById(
         "category-card-div" + "" + elements.budget_category
       );
 
       // repeated code
+
+      console.log("SPENT:" + elements.budget_category);
+
       let filterSpent = spent.filter((object) => {
         return object.budget_category === elements.budget_category;
       }); // filterSpent is an array of objects(transactions in the same category hopefully?)
@@ -50,6 +54,7 @@ const BudgetCategories = (props) => {
       }, 0);
       if (Math.round((spentValue / elements.budget_amount) * 100) > 50) {
         categoryDiv.style.cssText = "background-color: red; color: white";
+        console.log("*******" + spentValue);
       } else {
         categoryDiv.style.cssText = "background-color: white; color: black";
       }
@@ -103,7 +108,6 @@ const BudgetCategories = (props) => {
       <h2 className="budgetPage-subtitle">VIEW YOUR BUDGETS</h2>
 
       <form>
-        {/* <Form.Label>Choose the name of the Trip:</Form.Label> */}
         <Grid container>
           <Grid itemxs="auto">
             <TextField
@@ -129,17 +133,14 @@ const BudgetCategories = (props) => {
         </Grid>
       </form>
 
-      {
-        spent && spent.length > 0 ? <h1>BUDGET CATEGORIES </h1> : null
-        // <h1>select a Trip</h1>
-      }
+      {spent && spent.length > 0 ? <h1>BUDGET CATEGORIES </h1> : null}
       <div className="category-card-container">
         {data && data.length > 0
           ? data[0].budgets.map((elements) => {
               // renderSpent(elements, tripName);
               let filterSpent = spent.filter((object) => {
                 return object.budget_category === elements.budget_category;
-              }); // filterSpent is an array of objects(transactions in the same category hopefully?)
+              }); //>>>> filterSpent is an array of objects(transactions in the same category hopefully?)
               let spentValue = filterSpent.reduce(function (prev, cur) {
                 return prev + cur.transaction_value;
               }, 0);
