@@ -89,12 +89,6 @@ const BudgetPage = (props) => {
   // NEW:
   const [budgetCategoriesArray, setBudgetCategoriesArray] = useState([]);
 
-  useEffect(() => {
-    if (tripTransaction) {
-      // handleBudgetCategoriesArray(tripTransaction);
-    }
-  });
-
   // NEW:
   const handleBudgetCategoriesArray = async (tripName) => {
     let res = await getBudget(tripName);
