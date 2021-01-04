@@ -1,6 +1,7 @@
 import react, { useEffect, useState } from "react";
 import { Grid, MenuItem, TextField, Button } from "@material-ui/core";
 import axios from "axios";
+import { getAll } from "../services/budgetService";
 
 const SubmitBudgetPage = (props) => {
   const [budget, setBudget] = useState(null);
@@ -10,22 +11,35 @@ const SubmitBudgetPage = (props) => {
   const [budgetArray, setBudgetArray] = useState([]);
   const [hasSubmited, setHasSubmited] = useState(false);
 
+  const [infoCards, setInfoCards] = useState(null);
+
   useEffect(() => {
-    console.log(budgetArray);
+    if (!infoCards) {
+      getInfoCards();
+    }
     if (hasSubmited) {
       setBudgetArray([]);
       setTripName("");
       setHasSubmited(false);
     }
-  });
+    if (budgetArray) {
+      handleSubmitBudget();
+    }
+  }, [hasSubmited, budgetArray, infoCards]);
 
   function handleSubmit(event) {
     event.preventDefault();
+    handleSubmitBudget();
+  }
+
+  function handleSubmitBudget() {
+    const array = [];
     const obj = {
       budget_category: budget,
       budget_amount: budgetAmount,
     };
     budgetArray.push(obj);
+    setBudgetArray(budgetArray);
     console.log(budgetArray);
   }
 
@@ -42,23 +56,14 @@ const SubmitBudgetPage = (props) => {
 
     setHasSubmited(true);
   }
+  const getInfoCards = async () => {
+    //repeated code >>>> I am getting the documents from the budget collection whith budgetService.js
+    let res = await getAll();
+    setInfoCards(res);
+    console.log("infoCardssss");
+    console.log(infoCards);
+  };
 
-  //   function handleSubmit(category) {
-  //     console.log("i've clicked budget" + category);
-  //     budgetArray.push(obj);
-  //     console.log(budgetArray);
-  //     axios.post(`/api/budget`, {
-  //       budgets: [
-  //         {
-  //           budget_category: budget,
-  //           budget_amount: budgetAmount,
-  //         },
-  //       ],
-  //       trip_name: tripName,
-  //     });
-  //   }
-
-  //   const obj = {};
   return (
     <div>
       <div>
@@ -82,37 +87,31 @@ const SubmitBudgetPage = (props) => {
               onChange={(e) => setBudget(e.target.value)}
             />
           </Grid>
-          <button type="submit">Submit</button>
+          {budgetArray.length > 0
+            ? budgetArray.map((budget) => {
+                return (
+                  <div>
+                    <p>
+                      {budget.budget_category} {budget.budget_amount}
+                    </p>
+                  </div>
+                );
+              })
+            : "hello"}
+          <button type="submit">Set a budget</button>
         </form>
         <button onClick={() => handlePostInfo()}>Post info</button>
-        {/* <form onSubmit={() => handleSubmit(obj)}>
-          {props.budgetCategoriesArray.map((category) => {
-            const obj = {
-              budget_category: budget,
-              budget_amount: budgetAmount,
-            };
-
-            return (
-              <div className={"card" + category}>
-                <h2>{category}</h2>
-
-                <Grid item xs="auto">
-                  <TextField
-                    label="Budget"
-                    value={budgetAmount}
-                    onChange={(e) => setBudgetAmount(e.target.value)}
-                  />
-                  <TextField
-                    label="Budget"
-                    value={budget}
-                    onChange={(e) => setBudget(e.target.value)}
-                  />
-                </Grid>
-              </div>
-            );
-          })}
-          <button type="submit">Submit</button>
-        </form> */}
+      </div>
+      <div className="budgets-info-cards-container">
+        {infoCards > 0
+          ? infoCards.map((infoCard) => {
+              return (
+                <div>
+                  <p>Trip Name: {infoCard.trip_name}</p>
+                </div>
+              );
+            })
+          : null}
       </div>
     </div>
   );
