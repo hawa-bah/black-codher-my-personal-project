@@ -170,9 +170,9 @@ const TransactionForm = (props) => {
               {budgetCategoriesArray &&
                 budgetCategoriesArray.map((category) => (
                   <div>
-                    <MenuItem key={category} value={category}>
+                    {/* <MenuItem key={category} value={category}>
                       {category}
-                    </MenuItem>
+                    </MenuItem> */}
                   </div>
                 ))}
             </TextField>

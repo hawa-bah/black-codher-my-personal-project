@@ -24,6 +24,8 @@ import {
 } from "@material-ui/core/styles";
 import { purple } from "@material-ui/core/colors";
 import budgetCategoriesArry from "../../budgetCategoriesArray";
+import { getBudget } from "../../services/budgetService";
+
 import BudgetCategories from "../BudgetCatgories";
 import "./BudgetPage.css";
 import "../../App.css";
@@ -84,12 +86,36 @@ const BudgetPage = (props) => {
   const [selectedDate, handleDateChange] = useState(new Date());
   const [transactionCategory, setTransactionCategory] = useState("");
   const [tripTransaction, setTripTransaction] = useState(null);
+  // NEW:
+  const [budgetCategoriesArray, setBudgetCategoriesArray] = useState([]);
 
   useEffect(() => {
-    // if (!balance) {
-    //   renderBalance();
-    // }
+    if (tripTransaction) {
+      // handleBudgetCategoriesArray(tripTransaction);
+    }
   });
+
+  // NEW:
+  const handleBudgetCategoriesArray = async (tripName) => {
+    let res = await getBudget(tripName);
+    if (res.length > 0) {
+      let preArray = [];
+      res[0].budgets.map((budget) => {
+        preArray.push(budget.budget_category);
+      });
+      setBudgetCategoriesArray(preArray);
+      console.log(budgetCategoriesArray);
+    } else {
+      setBudgetCategoriesArray([
+        "Accomodation",
+        "Transport",
+        "Food",
+        "Entretainment",
+        "Shopping",
+        "Others",
+      ]);
+    }
+  };
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -156,7 +182,10 @@ const BudgetPage = (props) => {
                 color="secondary"
                 label="Trip Name"
                 value={tripTransaction}
-                onChange={(e) => setTripTransaction(e.target.value)}
+                onChange={(e) => {
+                  setTripTransaction(e.target.value);
+                  handleBudgetCategoriesArray(e.target.value);
+                }}
                 required
               />
             </Grid>
@@ -205,11 +234,13 @@ const BudgetPage = (props) => {
                 style={{ width: "25ch" }}
                 required
               >
-                {budgetCategoriesArry.map((category) => (
-                  <MenuItem key={category} value={category}>
-                    {category}
-                  </MenuItem>
-                ))}
+                {/*  CHANGED: */}
+                {budgetCategoriesArray &&
+                  budgetCategoriesArray.map((category) => (
+                    <MenuItem key={category} value={category}>
+                      {category}
+                    </MenuItem>
+                  ))}
               </TextField>
             </Grid>
           </Grid>
