@@ -66,7 +66,7 @@ const BudgetCategories = (props) => {
     );
   };
 
-  // attempt rendering categories info using map
+  //  rendering categories info
   const renderBudgetCategory = async (tripName) => {
     let res = await getBudget(tripName);
     console.log(res);

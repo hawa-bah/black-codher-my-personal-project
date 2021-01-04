@@ -92,9 +92,8 @@ module.exports = (app) => {
 
   app.get(`/api/budget/category/:tripName`, async (req, res) => {
     const { tripName } = req.params;
-    // const { category } = req.params.category;
+
     const budget = await Budget.find({
-      // budget_category: "Accomodation",
       trip_name: tripName,
     });
     console.log(budget);

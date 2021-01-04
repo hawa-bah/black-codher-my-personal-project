@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import NumberFormat from "react-number-format";
 // import { Form, Field } from "react-final-form";
-
 import {
   Grid,
   Button,
@@ -23,6 +22,7 @@ import {
 import DateFnsUtils from "@date-io/date-fns";
 
 import budgetCategoriesArry from "../../budgetCategoriesArray";
+import { getBudget } from "../../services/budgetService";
 
 // Material-ui
 import {
@@ -79,6 +79,13 @@ const useStyles = makeStyles((theme) => ({
 
 const TransactionForm = (props) => {
   const classes = useStyles();
+  // NEW:
+  const [budgetCategoriesArray, setBudgetCategoriesArray] = useEffect([]);
+  const handleBudgetCategoriesArray = async (tripName) => {
+    let res = await getBudget(tripName);
+    setBudgetCategoriesArray(res[0].budgets);
+    console.log(budgetCategoriesArray);
+  };
 
   return (
     <div
@@ -109,7 +116,10 @@ const TransactionForm = (props) => {
               color="secondary"
               label="Trip Name"
               value={props.tripTransaction}
-              onChange={(e) => props.setTripTransaction(e.target.value)}
+              onChange={(e) => {
+                props.setTripTransaction(e.target.value);
+                handleBudgetCategoriesArray(e.target.value);
+              }}
               fullWidth
               required
             />
@@ -157,13 +167,14 @@ const TransactionForm = (props) => {
               }
               style={{ width: "25ch" }}
             >
-              {budgetCategoriesArry.map((category) => (
-                <div>
-                  <MenuItem key={category} value={category}>
-                    {category}
-                  </MenuItem>
-                </div>
-              ))}
+              {budgetCategoriesArray &&
+                budgetCategoriesArray.map((category) => (
+                  <div>
+                    <MenuItem key={category} value={category}>
+                      {category}
+                    </MenuItem>
+                  </div>
+                ))}
             </TextField>
           </Grid>
         </Grid>
