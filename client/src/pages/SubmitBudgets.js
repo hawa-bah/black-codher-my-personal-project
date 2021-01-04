@@ -11,12 +11,11 @@ const SubmitBudgetPage = (props) => {
   const [budgetArray, setBudgetArray] = useState([]);
   const [hasSubmited, setHasSubmited] = useState(false);
 
-  const [infoCards, setInfoCards] = useState(null);
+  const [infoCards, setInfoCards] = useState([]);
 
   useEffect(() => {
-    if (!infoCards) {
-      getInfoCards();
-    }
+    getInfoCards();
+
     if (hasSubmited) {
       setBudgetArray([]);
       setTripName("");
@@ -25,7 +24,7 @@ const SubmitBudgetPage = (props) => {
     if (budgetArray) {
       handleSubmitBudget();
     }
-  }, [hasSubmited, budgetArray, infoCards]);
+  }, [infoCards]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -59,8 +58,9 @@ const SubmitBudgetPage = (props) => {
   const getInfoCards = async () => {
     //repeated code >>>> I am getting the documents from the budget collection whith budgetService.js
     let res = await getAll();
-    setInfoCards(res);
+    setInfoCards(res); //this does not work
     console.log("infoCardssss");
+    console.log(res);
     console.log(infoCards);
   };
 
