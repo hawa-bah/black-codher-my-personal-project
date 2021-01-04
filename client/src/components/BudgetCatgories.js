@@ -25,6 +25,11 @@ const BudgetCategories = (props) => {
     if (props.hasSubmitedTransaction) {
       renderSpent(tripName);
       console.log("heeeey has submited");
+      if (data.length !== 0) {
+        changeColorBudget(data);
+      } else {
+        console.log("not working");
+      }
       props.setHasSubmitedTransaction(false);
     }
   }, [props.hasSubmitedTransaction, data]);
