@@ -42,8 +42,38 @@ const SubmitBudgetPage = (props) => {
   const [clickEdit, setClickEdit] = useState(false);
 
   const [editCard, setEditCard] = useState({});
-
   const [editTripName, setEditTripName] = useState("");
+  const [editBudgets, setEditBudgets] = useState({
+    budgets: [
+      {
+        budget_category: "Accomodation",
+        budget_amount: 0,
+      },
+      {
+        budget_category: "Transport",
+        budget_amount: 0,
+      },
+      {
+        budget_category: "Food",
+        budget_amount: 0,
+      },
+      {
+        budget_category: "Others",
+        budget_amount: 0,
+      },
+      {
+        budget_category: "Shopping",
+        budget_amount: 0,
+      },
+      {
+        budget_category: "Entertainment",
+        budget_amount: 0,
+      },
+    ],
+  });
+
+  const [hasFinishedEdit, setHasFinishedEdit] = useState(false);
+  const [valueVar, setValueVar] = useState(0);
 
   // State for the input
   const [task, setTask] = useState("");
@@ -52,6 +82,47 @@ const SubmitBudgetPage = (props) => {
     getInfoCards(); // this by itself causes an infinite loop but solve if useEffect is only called once
   }, [hasSubmitedInfo]);
 
+  const changeTripBudgetAmount = (newvalue, key) => {
+    // >>> NEW:
+    console.log(key, newvalue);
+    setEditCard((editCard) => ({
+      // console.log("PREV STATE" + editBudgets.budgets);
+      budgets: editCard.budgets.map((budget) =>
+        budget.key === key ? { ...budget, budget_amount: newvalue } : budget
+      ),
+    }));
+    console.log(editCard);
+    // >>> OLD:
+    // console.log(key, newvalue);
+    // setEditBudgets((editBudgets) => ({
+    //   // console.log("PREV STATE" + editBudgets.budgets);
+    //   budgets: editBudgets.budgets.map((budget) =>
+    //     budget.key === key ? { ...budget, budget_amount: newvalue } : budget
+    //   ),
+    // }));
+    // console.log(editBudgets);
+    // setValueVar(newvalue);
+
+    // TESTING:
+    if (editBudgets && editCard) {
+      editBudgets.budgets.map((element) => {
+        console.log("Hello 0");
+
+        editCard.budgets.map((budget) => {
+          if (element.budget_category === budget.budget_category) {
+            const valuebudgetEditable = element.budget_amount;
+            console.log("Hello");
+          } else {
+            const valuebudgetEditable = 0;
+            console.log("Hello 2");
+          }
+        });
+      });
+    }
+  };
+  const handleFinishEdit = (event) => {
+    event.preventDefault();
+  };
   const handlesubmitInfo = () => {
     setHasSubmitedInfo(!hasSubmitedInfo);
   };
@@ -61,22 +132,6 @@ const SubmitBudgetPage = (props) => {
     setClickEdit(true);
     setEditCard(infoCard);
     setEditTripName(infoCard.trip_name);
-    // BUG: this does not get displayed
-    // return (
-    //   <form
-    //     className="info-form-edit"
-    //     style={{ backgroungColor: "blue", position: "relative" }}
-    //   >
-    //     <Grid>
-    //       <TextField
-    //         id="Trip Name"
-    //         color="secondary"
-    //         label="Trip Name"
-    //         value={infoCard.trip_name}
-    //       />
-    //     </Grid>
-    //   </form>
-    // );
   };
 
   const getInfoCards = async () => {
@@ -100,6 +155,7 @@ const SubmitBudgetPage = (props) => {
           startIcon={<EditIcon />}
           onClick={() => handleClickEdit(infoCard)}
         ></EditButton>
+
         <h3>BUDGETS:</h3>
         {infoCard.budgets &&
           infoCard.budgets.map((item) => {
@@ -117,9 +173,9 @@ const SubmitBudgetPage = (props) => {
 
   return (
     <div>
-      {/* DELETE LATER */}
+      {/* DELETE DIV LATER */}
       <div className="editable-component">
-        <Editable text={task} placeholder="Write a task name" type="input">
+        {/* <Editable text={task} placeholder="Write a task name" type="input">
           <input
             type="text"
             name="task"
@@ -127,13 +183,15 @@ const SubmitBudgetPage = (props) => {
             value={task} //state
             onChange={(e) => setTask(e.target.value)}
           />
-        </Editable>
+        </Editable> */}
       </div>
+
       <div>
         {clickEdit && (
           <form
             className="info-form-edit"
             style={{ backgroundColor: "yellow" }}
+            onSubmit={(e) => handleFinishEdit(e)}
           >
             {/* <Grid>
               <TextField
@@ -157,6 +215,62 @@ const SubmitBudgetPage = (props) => {
                 onChange={(e) => setEditTripName(e.target.value)}
               />
             </Editable>
+
+            {editCard.budgets.map((budget) => {
+              //---BUG: valuebudgetEditable should be the value of budget_amount of the state editBudgets
+              const valuebudgetEditable = 0;
+              // if (editBudgets && editCard) {
+              //   editBudgets.budgets.map((element) => {
+              //     console.log("Hello 0");
+
+              //     if (element.budget_category === budget.budget_category) {
+              //       const valuebudgetEditable = element.budget_amount;
+              //       console.log("Hello");
+              //     } else {
+              //       const valuebudgetEditable = 0;
+              //       console.log("Hello 2");
+              //     }
+              //   });
+              // }
+              return (
+                <div>
+                  <Editable
+                    text={budget.budget_category}
+                    placeholder="Write a task name"
+                    type="input"
+                  >
+                    <input
+                      type="text"
+                      name="task"
+                      placeholder="Write a task name"
+                      value={budget.budget_category} //state
+                      // onChange={(e) => setEditTripName(e.target.value)}
+                    />
+                  </Editable>
+                  <Editable
+                    text={budget.budget_amount}
+                    // text={valueVar}
+                    placeholder={budget.budget_amount}
+                    type="input"
+                  >
+                    <input
+                      type="text"
+                      name="task"
+                      placeholder="Write a task name"
+                      defaultValue={budget.budget_amount} //--BUG: this should be comming from editBudgetstate
+                      // value={valuebudgetEditable}
+                      // onChange={(e) =>
+                      //   changeTripBudgetAmount(
+                      //     e.target.value,
+                      //     budget.budget_category
+                      //   )
+                      // }
+                    />
+                  </Editable>
+                </div>
+              );
+            })}
+            <button type="submit">Finish editing</button>
           </form>
         )}
       </div>
