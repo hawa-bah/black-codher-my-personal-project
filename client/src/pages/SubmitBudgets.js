@@ -13,6 +13,8 @@ import {
 import { purple } from "@material-ui/core/colors";
 import EditIcon from "@material-ui/icons/Edit";
 
+import Editable from "../components/budgetInfo/Editable";
+
 // MATERIAL-UI:
 const EditButton = withStyles((theme) => ({
   root: {
@@ -38,9 +40,13 @@ const SubmitBudgetPage = (props) => {
   const [infoCards, setInfoCards] = useState([]);
   const [hasSubmitedInfo, setHasSubmitedInfo] = useState(false);
   const [clickEdit, setClickEdit] = useState(false);
+
   const [editCard, setEditCard] = useState({});
 
-  const [tripName, setTripName] = useState("");
+  const [editTripName, setEditTripName] = useState("");
+
+  // State for the input
+  const [task, setTask] = useState("");
 
   useEffect(() => {
     getInfoCards(); // this by itself causes an infinite loop but solve if useEffect is only called once
@@ -54,8 +60,13 @@ const SubmitBudgetPage = (props) => {
     console.log(infoCard);
     setClickEdit(true);
     setEditCard(infoCard);
+    setEditTripName(infoCard.trip_name);
+    // BUG: this does not get displayed
     // return (
-    //   <form className="info-form-edit" style={{ position: "relative" }}>
+    //   <form
+    //     className="info-form-edit"
+    //     style={{ backgroungColor: "blue", position: "relative" }}
+    //   >
     //     <Grid>
     //       <TextField
     //         id="Trip Name"
@@ -67,21 +78,6 @@ const SubmitBudgetPage = (props) => {
     //   </form>
     // );
   };
-  // function handleSubmit(event) {
-  //   event.preventDefault();
-  //   handleSubmitBudget();
-  // }
-
-  // function handleSubmitBudget() {
-  //   const array = [];
-  //   const obj = {
-  //     budget_category: budget,
-  //     budget_amount: budgetAmount,
-  //   };
-  //   budgetArray.push(obj);
-  //   setBudgetArray(budgetArray);
-  //   console.log(budgetArray);
-  // }
 
   const getInfoCards = async () => {
     //repeated code >>>> I am getting the documents from the budget collection whith budgetService.js
@@ -121,13 +117,25 @@ const SubmitBudgetPage = (props) => {
 
   return (
     <div>
+      {/* DELETE LATER */}
+      <div className="editable-component">
+        <Editable text={task} placeholder="Write a task name" type="input">
+          <input
+            type="text"
+            name="task"
+            placeholder="Write a task name"
+            value={task} //state
+            onChange={(e) => setTask(e.target.value)}
+          />
+        </Editable>
+      </div>
       <div>
         {clickEdit && (
           <form
             className="info-form-edit"
             style={{ backgroundColor: "yellow" }}
           >
-            <Grid>
+            {/* <Grid>
               <TextField
                 id="Trip Name"
                 color="secondary"
@@ -135,12 +143,27 @@ const SubmitBudgetPage = (props) => {
                 value={editCard.trip_name}
                 onChange={(e) => setTripName(e.target.value)}
               />
-            </Grid>
+            </Grid> */}
+            <Editable
+              text={editTripName}
+              placeholder="Write a task name"
+              type="input"
+            >
+              <input
+                type="text"
+                name="task"
+                placeholder="Write a task name"
+                value={editTripName} //state
+                onChange={(e) => setEditTripName(e.target.value)}
+              />
+            </Editable>
           </form>
         )}
       </div>
       <div className="submit-Info-Form">
-        <button onClick={() => handlesubmitInfo()}>Submit Info</button>
+        <button onClick={() => handlesubmitInfo()}>
+          Submit New Info (not to edit)
+        </button>
       </div>
       <div className="info-cards-container">
         {infoCards && infoCards.map((infoCard) => renderInfoCard(infoCard))}
