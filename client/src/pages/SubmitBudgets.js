@@ -43,34 +43,32 @@ const SubmitBudgetPage = (props) => {
 
   const [editCard, setEditCard] = useState({});
   const [editTripName, setEditTripName] = useState("");
-  const [editBudgets, setEditBudgets] = useState({
-    budgets: [
-      {
-        budget_category: "Accomodation",
-        budget_amount: 0,
-      },
-      {
-        budget_category: "Transport",
-        budget_amount: 0,
-      },
-      {
-        budget_category: "Food",
-        budget_amount: 0,
-      },
-      {
-        budget_category: "Others",
-        budget_amount: 0,
-      },
-      {
-        budget_category: "Shopping",
-        budget_amount: 0,
-      },
-      {
-        budget_category: "Entertainment",
-        budget_amount: 0,
-      },
-    ],
-  });
+  const [editBudgets, setEditBudgets] = useState([
+    {
+      budget_category: "Accomodation",
+      budget_amount: 0,
+    },
+    {
+      budget_category: "Transport",
+      budget_amount: 0,
+    },
+    {
+      budget_category: "Food",
+      budget_amount: 0,
+    },
+    {
+      budget_category: "Others",
+      budget_amount: 0,
+    },
+    {
+      budget_category: "Shopping",
+      budget_amount: 0,
+    },
+    {
+      budget_category: "Entertainment",
+      budget_amount: 0,
+    },
+  ]);
 
   const [hasFinishedEdit, setHasFinishedEdit] = useState(false);
   const [valueVar, setValueVar] = useState(0);
@@ -82,26 +80,36 @@ const SubmitBudgetPage = (props) => {
     getInfoCards(); // this by itself causes an infinite loop but solve if useEffect is only called once
   }, [hasSubmitedInfo]);
 
+  const updateFieldChanged = (index, e) => {
+    console.log("index: " + index);
+    console.log("property name: " + e.target.name);
+    let newArr = [...editBudgets]; // copying the old datas array
+    newArr[index].budget_amount = e.target.value; // replace e.target.value with whatever you want to change it to
+
+    setEditBudgets(newArr); // ??
+    console.log(editBudgets);
+  };
+
   const changeTripBudgetAmount = (newvalue, key) => {
     // >>> NEW:
-    console.log(key, newvalue);
-    setEditCard((editCard) => ({
-      // console.log("PREV STATE" + editBudgets.budgets);
-      budgets: editCard.budgets.map((budget) =>
-        budget.key === key ? { ...budget, budget_amount: newvalue } : budget
-      ),
-    }));
-    console.log(editCard);
-    // >>> OLD:
     // console.log(key, newvalue);
-    // setEditBudgets((editBudgets) => ({
+    // setEditCard((editCard) => ({
     //   // console.log("PREV STATE" + editBudgets.budgets);
-    //   budgets: editBudgets.budgets.map((budget) =>
+    //   budgets: editCard.budgets.map((budget) =>
     //     budget.key === key ? { ...budget, budget_amount: newvalue } : budget
     //   ),
     // }));
-    // console.log(editBudgets);
-    // setValueVar(newvalue);
+    // console.log(editCard);
+    // >>> OLD:
+    console.log(key, newvalue);
+    setEditBudgets((editBudgets) => ({
+      // console.log("PREV STATE" + editBudgets.budgets);
+      budgets: editBudgets.budgets.map((budget) =>
+        budget.key === key ? { ...budget, budget_amount: newvalue } : budget
+      ),
+    }));
+    console.log(editBudgets);
+    setValueVar(newvalue);
 
     // TESTING:
     if (editBudgets && editCard) {
@@ -216,7 +224,7 @@ const SubmitBudgetPage = (props) => {
               />
             </Editable>
 
-            {editCard.budgets.map((budget) => {
+            {editCard.budgets.map((budget, index) => {
               //---BUG: valuebudgetEditable should be the value of budget_amount of the state editBudgets
               const valuebudgetEditable = 0;
               // if (editBudgets && editCard) {
@@ -248,23 +256,35 @@ const SubmitBudgetPage = (props) => {
                     />
                   </Editable>
                   <Editable
-                    text={budget.budget_amount}
+                    text={
+                      editBudgets[index].budget_amount || budget.budget_amount
+                    }
                     // text={valueVar}
-                    placeholder={budget.budget_amount}
+                    placeholder={
+                      editBudgets[index].budget_amount || budget.budget_amount
+                    }
                     type="input"
                   >
                     <input
                       type="text"
                       name="task"
                       placeholder="Write a task name"
-                      defaultValue={budget.budget_amount} //--BUG: this should be comming from editBudgetstate
+                      // defaultValue={budget.budget_amount} //--BUG: this should be comming from editBudgetstate
                       // value={valuebudgetEditable}
-                      // onChange={(e) =>
-                      //   changeTripBudgetAmount(
-                      //     e.target.value,
-                      //     budget.budget_category
-                      //   )
-                      // }
+                      value={
+                        editBudgets[index].budget_amount === 0
+                          ? budget.budget_amount
+                          : editBudgets[index].budget_amount
+                      }
+                      onChange={
+                        (e) => {
+                          updateFieldChanged(index, e);
+                        }
+                        // changeTripBudgetAmount(
+                        //   e.target.value,
+                        //   budget.budget_category
+                        // )
+                      }
                     />
                   </Editable>
                 </div>
