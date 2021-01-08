@@ -37,11 +37,11 @@ const useStyles = makeStyles((theme) => ({
 
 const SubmitBudgetPage = (props) => {
   const classes = useStyles;
-  const [infoCards, setInfoCards] = useState([]);
+  const [infoCards, setInfoCards] = useState([]); //>>>> the cards stored in the database will be saved here to display them later
   const [hasSubmitedInfo, setHasSubmitedInfo] = useState(false);
   const [clickEdit, setClickEdit] = useState(false);
 
-  const [editCard, setEditCard] = useState({});
+  const [editCard, setEditCard] = useState({}); //>>>> the card we clicked to edit
   const [editTripName, setEditTripName] = useState("");
   const [editBudgets, setEditBudgets] = useState([
     {
@@ -68,7 +68,7 @@ const SubmitBudgetPage = (props) => {
       budget_category: "Entertainment",
       budget_amount: 0,
     },
-  ]);
+  ]); //
 
   const [hasFinishedEdit, setHasFinishedEdit] = useState(false);
   const [valueVar, setValueVar] = useState(0);
@@ -84,50 +84,11 @@ const SubmitBudgetPage = (props) => {
     console.log("index: " + index);
     console.log("property name: " + e.target.name);
     let newArr = [...editBudgets]; // copying the old datas array
-    newArr[index].budget_amount = e.target.value; // replace e.target.value with whatever you want to change it to
+    newArr[index].budget_amount = e.target.value; // we are changing the values of the objects of editBudgets[] to the new values(e.target)
 
-    setEditBudgets(newArr); // ??
-    console.log(editBudgets);
-  };
+    setEditBudgets(newArr); //
+  }; //
 
-  const changeTripBudgetAmount = (newvalue, key) => {
-    // >>> NEW:
-    // console.log(key, newvalue);
-    // setEditCard((editCard) => ({
-    //   // console.log("PREV STATE" + editBudgets.budgets);
-    //   budgets: editCard.budgets.map((budget) =>
-    //     budget.key === key ? { ...budget, budget_amount: newvalue } : budget
-    //   ),
-    // }));
-    // console.log(editCard);
-    // >>> OLD:
-    console.log(key, newvalue);
-    setEditBudgets((editBudgets) => ({
-      // console.log("PREV STATE" + editBudgets.budgets);
-      budgets: editBudgets.budgets.map((budget) =>
-        budget.key === key ? { ...budget, budget_amount: newvalue } : budget
-      ),
-    }));
-    console.log(editBudgets);
-    setValueVar(newvalue);
-
-    // TESTING:
-    if (editBudgets && editCard) {
-      editBudgets.budgets.map((element) => {
-        console.log("Hello 0");
-
-        editCard.budgets.map((budget) => {
-          if (element.budget_category === budget.budget_category) {
-            const valuebudgetEditable = element.budget_amount;
-            console.log("Hello");
-          } else {
-            const valuebudgetEditable = 0;
-            console.log("Hello 2");
-          }
-        });
-      });
-    }
-  };
   const handleFinishEdit = (event) => {
     event.preventDefault();
   };
@@ -140,16 +101,16 @@ const SubmitBudgetPage = (props) => {
     setClickEdit(true);
     setEditCard(infoCard);
     setEditTripName(infoCard.trip_name);
-  };
+  }; //
 
   const getInfoCards = async () => {
     //repeated code >>>> I am getting the documents from the budget collection whith budgetService.js
     let res = await getAll();
-    setInfoCards(res); //this does not work
-    console.log("infoCardssss");
+    setInfoCards(res);
+    console.log("infoCardssss :");
     console.log(res);
     console.log(infoCards);
-  };
+  }; //
 
   const renderInfoCard = (infoCard) => {
     return (
@@ -181,19 +142,6 @@ const SubmitBudgetPage = (props) => {
 
   return (
     <div>
-      {/* DELETE DIV LATER */}
-      <div className="editable-component">
-        {/* <Editable text={task} placeholder="Write a task name" type="input">
-          <input
-            type="text"
-            name="task"
-            placeholder="Write a task name"
-            value={task} //state
-            onChange={(e) => setTask(e.target.value)}
-          />
-        </Editable> */}
-      </div>
-
       <div>
         {clickEdit && (
           <form
@@ -201,15 +149,6 @@ const SubmitBudgetPage = (props) => {
             style={{ backgroundColor: "yellow" }}
             onSubmit={(e) => handleFinishEdit(e)}
           >
-            {/* <Grid>
-              <TextField
-                id="Trip Name"
-                color="secondary"
-                label={"Trip Name" + ":" + editCard.trip_name}
-                value={editCard.trip_name}
-                onChange={(e) => setTripName(e.target.value)}
-              />
-            </Grid> */}
             <Editable
               text={editTripName}
               placeholder="Write a task name"
@@ -225,21 +164,6 @@ const SubmitBudgetPage = (props) => {
             </Editable>
 
             {editCard.budgets.map((budget, index) => {
-              //---BUG: valuebudgetEditable should be the value of budget_amount of the state editBudgets
-              const valuebudgetEditable = 0;
-              // if (editBudgets && editCard) {
-              //   editBudgets.budgets.map((element) => {
-              //     console.log("Hello 0");
-
-              //     if (element.budget_category === budget.budget_category) {
-              //       const valuebudgetEditable = element.budget_amount;
-              //       console.log("Hello");
-              //     } else {
-              //       const valuebudgetEditable = 0;
-              //       console.log("Hello 2");
-              //     }
-              //   });
-              // }
               return (
                 <div>
                   <Editable
@@ -251,15 +175,13 @@ const SubmitBudgetPage = (props) => {
                       type="text"
                       name="task"
                       placeholder="Write a task name"
-                      value={budget.budget_category} //state
-                      // onChange={(e) => setEditTripName(e.target.value)}
+                      value={budget.budget_category}
                     />
                   </Editable>
                   <Editable
                     text={
                       editBudgets[index].budget_amount || budget.budget_amount
                     }
-                    // text={valueVar}
                     placeholder={
                       editBudgets[index].budget_amount || budget.budget_amount
                     }
@@ -269,22 +191,14 @@ const SubmitBudgetPage = (props) => {
                       type="text"
                       name="task"
                       placeholder="Write a task name"
-                      // defaultValue={budget.budget_amount} //--BUG: this should be comming from editBudgetstate
-                      // value={valuebudgetEditable}
                       value={
                         editBudgets[index].budget_amount === 0
                           ? budget.budget_amount
                           : editBudgets[index].budget_amount
                       }
-                      onChange={
-                        (e) => {
-                          updateFieldChanged(index, e);
-                        }
-                        // changeTripBudgetAmount(
-                        //   e.target.value,
-                        //   budget.budget_category
-                        // )
-                      }
+                      onChange={(e) => {
+                        updateFieldChanged(index, e);
+                      }}
                     />
                   </Editable>
                 </div>
@@ -305,7 +219,5 @@ const SubmitBudgetPage = (props) => {
     </div>
   );
 };
-
-// Previous code
 
 export default SubmitBudgetPage;
