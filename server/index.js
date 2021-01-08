@@ -24,6 +24,7 @@ app.use(bodyParser.json());
 // IMPORT YOUR ROUTES
 require("./routes/usersRoutes")(app);
 require("./routes/expenseRoutes")(app);
+require("./routes/submitBudgetRoutes")(app);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

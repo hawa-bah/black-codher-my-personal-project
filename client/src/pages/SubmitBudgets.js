@@ -91,6 +91,10 @@ const SubmitBudgetPage = (props) => {
 
   const handleFinishEdit = (event) => {
     event.preventDefault();
+    axios.put(`/api/edit/card/${editCard._id}`, {
+      trip_name: editTripName,
+      budgets: editBudgets,
+    });
   };
   const handlesubmitInfo = () => {
     setHasSubmitedInfo(!hasSubmitedInfo);
