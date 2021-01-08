@@ -71,30 +71,38 @@ const SubmitBudgetPage = (props) => {
   ]); //
 
   const [hasFinishedEdit, setHasFinishedEdit] = useState(false);
-  const [valueVar, setValueVar] = useState(0);
-
-  // State for the input
-  const [task, setTask] = useState("");
 
   useEffect(() => {
     getInfoCards(); // this by itself causes an infinite loop but solve if useEffect is only called once
-  }, [hasSubmitedInfo]);
+  }, [hasSubmitedInfo, hasFinishedEdit]);
 
   const updateFieldChanged = (index, e) => {
     console.log("index: " + index);
     console.log("property name: " + e.target.name);
     let newArr = [...editBudgets]; // copying the old datas array
     newArr[index].budget_amount = e.target.value; // we are changing the values of the objects of editBudgets[] to the new values(e.target)
-
+    if (newArr[index].budget_amount === 0) {
+      newArr[index].budget_amount = editCard.budgets[index].budget_amount;
+    }
     setEditBudgets(newArr); //
   }; //
 
   const handleFinishEdit = (event) => {
     event.preventDefault();
+    const newArr = [...editBudgets];
+    let index = 0;
+    for (index = 0; index < editBudgets.length; index++) {
+      if (newArr[index].budget_amount === 0) {
+        newArr[index].budget_amount = editCard.budgets[index].budget_amount;
+      }
+    }
+    setEditBudgets(newArr);
+
     axios.put(`/api/edit/card/${editCard._id}`, {
       trip_name: editTripName,
       budgets: editBudgets,
     });
+    setHasFinishedEdit(!hasFinishedEdit);
   };
   const handlesubmitInfo = () => {
     setHasSubmitedInfo(!hasSubmitedInfo);
