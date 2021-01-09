@@ -102,7 +102,7 @@ const SubmitBudgetPage = (props) => {
       trip_name: editTripName,
       budgets: editBudgets,
     });
-    setHasFinishedEdit(!hasFinishedEdit);
+    setHasFinishedEdit(true);
   };
   const handlesubmitInfo = () => {
     setHasSubmitedInfo(!hasSubmitedInfo);
@@ -160,7 +160,7 @@ const SubmitBudgetPage = (props) => {
             <h2>
               {" "}
               The card has been succesfully updated! Do you want to continue
-              editing?
+              editing the card?
             </h2>
             <div className="finished-edit-buttons">
               <ButtonSubmitPage onClick={() => setHasFinishedEdit(false)}>
