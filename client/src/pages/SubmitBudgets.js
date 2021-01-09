@@ -12,8 +12,9 @@ import {
 } from "@material-ui/core/styles";
 import { purple } from "@material-ui/core/colors";
 import EditIcon from "@material-ui/icons/Edit";
-
+import AddIcon from "@material-ui/icons/Add";
 import Editable from "../components/budgetInfo/Editable";
+import SubmitInfoForm from "../components/budgetInfo/SubmitInfo";
 
 // MATERIAL-UI:
 const ButtonSubmitPage = withStyles((theme) => ({
@@ -71,6 +72,7 @@ const SubmitBudgetPage = (props) => {
   ]); //
 
   const [hasFinishedEdit, setHasFinishedEdit] = useState(false);
+  const [wantsToSubmitInfo, setWantsToSubmitInfo] = useState(false);
 
   useEffect(() => {
     getInfoCards(); // this by itself causes an infinite loop but solve if useEffect is only called once
@@ -241,11 +243,13 @@ const SubmitBudgetPage = (props) => {
             <button type="submit">Finish editing</button>
           </form>
         )}
+        {wantsToSubmitInfo && <SubmitInfoForm />}
       </div>
-      <div className="submit-Info-Form">
-        <button onClick={() => handlesubmitInfo()}>
-          Submit New Info (not to edit)
-        </button>
+      <div className="submit-Info-button">
+        <ButtonSubmitPage
+          onClick={() => setWantsToSubmitInfo(true)}
+          startIcon={<AddIcon />}
+        ></ButtonSubmitPage>
       </div>
       <div className="info-cards-container">
         {infoCards && infoCards.map((infoCard) => renderInfoCard(infoCard))}
