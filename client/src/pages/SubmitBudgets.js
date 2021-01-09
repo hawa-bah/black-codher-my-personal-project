@@ -16,7 +16,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import Editable from "../components/budgetInfo/Editable";
 
 // MATERIAL-UI:
-const EditButton = withStyles((theme) => ({
+const ButtonSubmitPage = withStyles((theme) => ({
   root: {
     color: theme.palette.getContrastText(purple[500]),
     backgroundColor: purple[500],
@@ -128,14 +128,14 @@ const SubmitBudgetPage = (props) => {
     return (
       <div className="info-card-item">
         <h2 style={{ position: "absolute" }}>{infoCard.trip_name}</h2>
-        <EditButton
+        <ButtonSubmitPage
           variant="contained"
           color="primary"
           label=""
           className={classes.margin}
           startIcon={<EditIcon />}
           onClick={() => handleClickEdit(infoCard)}
-        ></EditButton>
+        ></ButtonSubmitPage>
 
         <h3>BUDGETS:</h3>
         {infoCard.budgets &&
@@ -155,6 +155,28 @@ const SubmitBudgetPage = (props) => {
   return (
     <div>
       <div>
+        {hasFinishedEdit && (
+          <div className="finished-edit-div">
+            <h2>
+              {" "}
+              The card has been succesfully updated! Do you want to continue
+              editing?
+            </h2>
+            <div className="finished-edit-buttons">
+              <ButtonSubmitPage onClick={() => setHasFinishedEdit(false)}>
+                YES
+              </ButtonSubmitPage>
+              <ButtonSubmitPage
+                onClick={() => {
+                  setHasFinishedEdit(false);
+                  setClickEdit(false);
+                }}
+              >
+                NO
+              </ButtonSubmitPage>
+            </div>
+          </div>
+        )}
         {clickEdit && (
           <form
             className="info-form-edit"
