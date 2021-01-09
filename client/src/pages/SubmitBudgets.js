@@ -46,27 +46,27 @@ const SubmitBudgetPage = (props) => {
   const [editBudgets, setEditBudgets] = useState([
     {
       budget_category: "Accomodation",
-      budget_amount: 0,
+      budget_amount: null,
     },
     {
       budget_category: "Transport",
-      budget_amount: 0,
+      budget_amount: null,
     },
     {
       budget_category: "Food",
-      budget_amount: 0,
+      budget_amount: null,
     },
     {
       budget_category: "Others",
-      budget_amount: 0,
+      budget_amount: null,
     },
     {
       budget_category: "Shopping",
-      budget_amount: 0,
+      budget_amount: null,
     },
     {
       budget_category: "Entertainment",
-      budget_amount: 0,
+      budget_amount: null,
     },
   ]); //
 
@@ -81,7 +81,7 @@ const SubmitBudgetPage = (props) => {
     console.log("property name: " + e.target.name);
     let newArr = [...editBudgets]; // copying the old datas array
     newArr[index].budget_amount = e.target.value; // we are changing the values of the objects of editBudgets[] to the new values(e.target)
-    if (newArr[index].budget_amount === 0) {
+    if (!newArr[index].budget_amount) {
       newArr[index].budget_amount = editCard.budgets[index].budget_amount;
     }
     setEditBudgets(newArr); //
@@ -92,7 +92,7 @@ const SubmitBudgetPage = (props) => {
     const newArr = [...editBudgets];
     let index = 0;
     for (index = 0; index < editBudgets.length; index++) {
-      if (newArr[index].budget_amount === 0) {
+      if (!newArr[index].budget_amount) {
         newArr[index].budget_amount = editCard.budgets[index].budget_amount;
       }
     }
@@ -226,7 +226,7 @@ const SubmitBudgetPage = (props) => {
                       name="task"
                       placeholder="Write a task name"
                       value={
-                        editBudgets[index].budget_amount === 0
+                        !editBudgets[index].budget_amount
                           ? budget.budget_amount
                           : editBudgets[index].budget_amount
                       }
