@@ -106,7 +106,7 @@ const SubmitBudgetPage = (props) => {
     });
     setHasFinishedEdit(true);
   };
-  const handlesubmitInfo = () => {
+  const handleSubmitInfo = () => {
     setHasSubmitedInfo(!hasSubmitedInfo);
   };
 
@@ -243,7 +243,12 @@ const SubmitBudgetPage = (props) => {
             <button type="submit">Finish editing</button>
           </form>
         )}
-        {wantsToSubmitInfo && <SubmitInfoForm />}
+        {wantsToSubmitInfo && (
+          <SubmitInfoForm
+            hasSubmitedInfo={hasSubmitedInfo}
+            setHasSubmitedInfo={setHasSubmitedInfo}
+          />
+        )}
       </div>
       <div className="submit-Info-button">
         <ButtonSubmitPage
