@@ -247,6 +247,8 @@ const SubmitBudgetPage = (props) => {
           <SubmitInfoForm
             hasSubmitedInfo={hasSubmitedInfo}
             setHasSubmitedInfo={setHasSubmitedInfo}
+            wantsToSubmitInfo={wantsToSubmitInfo}
+            setWantsToSubmitInfo={setWantsToSubmitInfo}
           />
         )}
       </div>

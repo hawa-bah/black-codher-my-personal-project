@@ -76,10 +76,13 @@ const SubmitInfoForm = (props) => {
   const [foodAmount, setFoodAmount] = useState(null);
   const [othersAmount, setOthersAmount] = useState(null);
 
+  const [hasFinishedSubmitInfo, setHasFinishedSubmitInfo] = useState(false);
+
   useEffect(() => {});
 
   const handleSubmitInfo = (e) => {
     props.setHasSubmitedInfo(!props.hasSubmitedInfo);
+    setHasFinishedSubmitInfo(true);
     e.preventDefault();
     axios.post(`/api/submit/info/card`, {
       trip_name: tripNameSubmit,
@@ -95,6 +98,23 @@ const SubmitInfoForm = (props) => {
   };
   return (
     <div>
+      <div>
+        {hasFinishedSubmitInfo && (
+          <div className="finished-edit-div">
+            <h2> The card has been succesfully posted!</h2>
+            <div className="finished-edit-buttons">
+              <ColorButton
+                onClick={() => {
+                  setHasFinishedSubmitInfo(false);
+                  props.setWantsToSubmitInfo(false);
+                }}
+              >
+                OK
+              </ColorButton>
+            </div>
+          </div>
+        )}
+      </div>
       <div className="submit-Info-Form">
         <form onSubmit={(e) => handleSubmitInfo(e)}>
           <Grid container alignItems="flex-start" spacing={2}>
