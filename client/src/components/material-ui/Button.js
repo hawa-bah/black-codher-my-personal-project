@@ -26,3 +26,5 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
 }));
+
+export default ColorButton;

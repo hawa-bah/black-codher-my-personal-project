@@ -1,6 +1,6 @@
 import react, { useEffect, useState } from "react";
 import axios from "axios";
-import { getAll } from "../services/budgetService";
+import { deleteOne, getAll } from "../services/budgetService";
 
 // Material-ui
 import { Grid, MenuItem, TextField, Button } from "@material-ui/core";
@@ -12,9 +12,12 @@ import {
 } from "@material-ui/core/styles";
 import { purple } from "@material-ui/core/colors";
 import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
+
 import Editable from "../components/budgetInfo/Editable";
 import SubmitInfoForm from "../components/budgetInfo/SubmitInfo";
+// import DeleteInfoCard from "../components/budgetInfo/DeleteInfoCard";
 
 // MATERIAL-UI:
 const ButtonSubmitPage = withStyles((theme) => ({
@@ -40,7 +43,14 @@ const SubmitBudgetPage = (props) => {
   const classes = useStyles;
   const [infoCards, setInfoCards] = useState([]); //>>>> the cards stored in the database will be saved here to display them later
   const [hasSubmitedInfo, setHasSubmitedInfo] = useState(false);
+
   const [clickEdit, setClickEdit] = useState(false);
+  const [hasFinishedEdit, setHasFinishedEdit] = useState(false);
+  const [wantsToSubmitInfo, setWantsToSubmitInfo] = useState(false); //>>>>pop up message to confirm if the user wants to continue editing
+
+  const [clickDelete, setClickDelete] = useState(false);
+  const [cardToDelete, setCardToDelete] = useState({});
+  const [hasDeleted, setHasDeleted] = useState(false);
 
   const [editCard, setEditCard] = useState({}); //>>>> the card we clicked to edit
   const [editTripName, setEditTripName] = useState("");
@@ -71,12 +81,15 @@ const SubmitBudgetPage = (props) => {
     },
   ]); //
 
-  const [hasFinishedEdit, setHasFinishedEdit] = useState(false);
-  const [wantsToSubmitInfo, setWantsToSubmitInfo] = useState(false);
-
   useEffect(() => {
     getInfoCards(); // this by itself causes an infinite loop but solve if useEffect is only called once
-  }, [hasSubmitedInfo, hasFinishedEdit]);
+  }, [hasSubmitedInfo, hasFinishedEdit, hasDeleted]);
+
+  const handleDelete = async (cardToDelete) => {
+    setHasDeleted(!hasDeleted);
+    await deleteOne(cardToDelete._id);
+    console.log("transaction deleted ", cardToDelete.trip_name);
+  };
 
   const updateFieldChanged = (index, e) => {
     console.log("index: " + index);
@@ -106,12 +119,9 @@ const SubmitBudgetPage = (props) => {
     });
     setHasFinishedEdit(true);
   };
-  const handleSubmitInfo = () => {
-    setHasSubmitedInfo(!hasSubmitedInfo);
-  };
 
   const handleClickEdit = (infoCard) => {
-    console.log(infoCard);
+    console.log("CARD TO EDIT:" + infoCard);
     setClickEdit(true);
     setEditCard(infoCard);
     setEditTripName(infoCard.trip_name);
@@ -138,7 +148,14 @@ const SubmitBudgetPage = (props) => {
           startIcon={<EditIcon />}
           onClick={() => handleClickEdit(infoCard)}
         ></ButtonSubmitPage>
-
+        <ButtonSubmitPage
+          onClick={() => {
+            setClickDelete(true);
+            setCardToDelete(infoCard);
+          }}
+          style={{ background: "black" }}
+          startIcon={<DeleteIcon />}
+        />
         <h3>BUDGETS:</h3>
         {infoCard.budgets &&
           infoCard.budgets.map((item) => {
@@ -157,6 +174,33 @@ const SubmitBudgetPage = (props) => {
   return (
     <div>
       <div>
+        {clickDelete && (
+          <div>
+            <h2>
+              Are you sure you want to delete the card {cardToDelete.trip_name}?
+            </h2>
+            <ButtonSubmitPage onClick={() => setClickDelete(false)}>
+              Cancel
+            </ButtonSubmitPage>
+            <ButtonSubmitPage
+              style={{ background: "grey" }}
+              onClick={() => {
+                setClickDelete(false);
+                handleDelete(cardToDelete);
+              }}
+            >
+              Yes
+            </ButtonSubmitPage>
+          </div>
+        )}
+        {wantsToSubmitInfo && (
+          <SubmitInfoForm
+            hasSubmitedInfo={hasSubmitedInfo}
+            setHasSubmitedInfo={setHasSubmitedInfo}
+            wantsToSubmitInfo={wantsToSubmitInfo}
+            setWantsToSubmitInfo={setWantsToSubmitInfo}
+          />
+        )}
         {hasFinishedEdit && (
           <div className="finished-edit-div">
             <h2>
@@ -243,17 +287,9 @@ const SubmitBudgetPage = (props) => {
             <button type="submit">Finish editing</button>
           </form>
         )}
-        {wantsToSubmitInfo && (
-          <SubmitInfoForm
-            hasSubmitedInfo={hasSubmitedInfo}
-            setHasSubmitedInfo={setHasSubmitedInfo}
-            wantsToSubmitInfo={wantsToSubmitInfo}
-            setWantsToSubmitInfo={setWantsToSubmitInfo}
-          />
-        )}
       </div>
       <div className="submit-Info-button">
-        <ButtonSubmitPage
+        <ButtonSubmitPage // to submit NEW info (not edit)
           onClick={() => setWantsToSubmitInfo(true)}
           startIcon={<AddIcon />}
         ></ButtonSubmitPage>

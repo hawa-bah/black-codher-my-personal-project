@@ -22,4 +22,14 @@ module.exports = (app) => {
       res.status(500).send(error);
     }
   });
+
+  app.delete(`/api/delete/Info/card/:id`, async (req, res) => {
+    try {
+      const id = req.params.id;
+      await Budget.findByIdAndDelete(id);
+      res.status(200).send({ message: "card with id:" + id + " been deleted" });
+    } catch {
+      res.status(500).send(error);
+    }
+  });
 };

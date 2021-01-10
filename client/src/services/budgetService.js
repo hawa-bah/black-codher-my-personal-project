@@ -5,18 +5,6 @@ async function getAll() {
   return res.data || [];
 }
 
-// async function getBudgetAccomodation(tripName) {
-//   const res = await axios.get(`/api/budget/${tripName}`);
-//   return res.data || [];
-// }
-
-// attempt  1
-// async function getSpent(category, tripName) {
-//   const res = await axios.get(`/api/expenses/${category}/${tripName}`);
-//   return res.data || [];
-// }
-
-// attempt 2
 async function getSpent(tripName) {
   const res = await axios.get(`/api/expenses/${tripName}`);
   return res.data || [];
@@ -27,4 +15,9 @@ async function getBudget(tripName) {
   return res.data || [];
 }
 
-export { getAll, getSpent, getBudget };
+async function deleteOne(_id) {
+  const res = await axios.delete(`/api/delete/Info/card/${_id}`);
+  return res.data || [];
+}
+
+export { getAll, getSpent, getBudget, deleteOne };
