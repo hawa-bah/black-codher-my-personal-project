@@ -7,6 +7,4 @@ const userSchema = new Schema({
   location: String,
 });
 
-// LOOK AT EXAMPLE QUICK START: if I want to add a method with functionality add it in here before the model
 mongoose.model("users", userSchema);
-// "users name of the collections"

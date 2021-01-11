@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import BudgetPage from "./components/expense_tab/BudgetPage";
 import SubmitBudgetPage from "./pages/SubmitBudgets";
 import budgetCategoriesArry from "./budgetCategoriesArray";
+import Auth from "./pages/Auth";
 // SERVICES
 // import { getAll, deleteOne } from "./services/userService"; //--DD
 
@@ -81,6 +82,15 @@ function App() {
           render={() => (
             <React.Fragment>
               <SubmitBudgetPage budgetCategoriesArray={budgetCategoriesArry} />
+            </React.Fragment>
+          )}
+        />
+        <Route
+          exact
+          path="/login-register"
+          render={() => (
+            <React.Fragment>
+              <Auth />
             </React.Fragment>
           )}
         />
