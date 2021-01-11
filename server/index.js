@@ -10,15 +10,20 @@ require("./models/Budget");
 const app = express();
 
 mongoose.Promise = global.Promise;
-mongoose.connect(
-  process.env.MONGODB_URI ||
-    `mongodb://localhost:27017/black-codher-personal-project`,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose
+  .connect(
+    process.env.MONGODB_URI ||
+      `mongodb://localhost:27017/black-codher-personal-project`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
+  .then(() => console.log("MongoDB has been connected"))
+  .catch((err) => console.log(err));
 
+//middleware
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // IMPORT YOUR ROUTES
