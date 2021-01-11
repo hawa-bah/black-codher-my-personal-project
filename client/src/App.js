@@ -66,7 +66,7 @@ function App() {
               <BudgetPage
                 budget={budget}
                 setbudget={setbudget}
-                //
+                ///
                 transaction={transaction}
                 setTransactions={setTransactions}
                 description={description}
