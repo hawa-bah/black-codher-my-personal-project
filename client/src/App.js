@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 // Redux
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./Redux/store";
 // PAGES
 import BudgetPage from "./components/expense_tab/BudgetPage";
 import SubmitBudgetPage from "./pages/SubmitBudgets";
@@ -66,7 +66,7 @@ function App() {
             )}
           />
           <Route exact path="/login" render={() => <Login />} />
-          <Route exact path="/register" render={() => <Register />} />
+          <Route exact path="/register" component={Register} />
           <Route
             exact
             path="/about"

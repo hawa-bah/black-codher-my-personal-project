@@ -207,4 +207,10 @@ const Register = () => {
   );
 };
 
+// getting state from Redux
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
 export default Register;
+// export default connect(mapStateToProps, { registerUser })(withRouter(Register));
