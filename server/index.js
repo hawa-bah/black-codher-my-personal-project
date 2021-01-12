@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const passport = require("passport");
 
 // IMPORT YOUR MODELS
 require("./models/Users");
@@ -25,6 +26,9 @@ mongoose
 //middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(passport.initialize());
+
+require("./auth/config/passport")(passport);
 
 // IMPORT YOUR ROUTES
 require("./routes/usersRoutes")(app);

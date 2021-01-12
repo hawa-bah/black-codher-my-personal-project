@@ -1,20 +1,19 @@
 const mongoose = require("mongoose");
-const express = require("express");
-const router = express.Router();
+// const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 // importing input validation
-const validateRegistrationInput = require("../auth/validation/login");
-const validateLoginInput = require("../auth/validation/register");
+const validateRegistrationInput = require("../auth/validation/register");
+const validateLoginInput = require("../auth/validation/login");
 
 const User = mongoose.model("users");
 
 module.exports = (app) => {
   app.post(`/register`, (req, res) => {
     // destructuring the return of the imported function
-    const { errors, isValid } = validateRegisterInput(req.body);
+    const { errors, isValid } = validateRegistrationInput(req.body);
     // Check validation
     if (!isValid) {
       return res.status(400).json(errors);
@@ -42,6 +41,51 @@ module.exports = (app) => {
           });
         });
       }
+    });
+  });
+
+  app.post(`/login`, (req, res) => {
+    const { errors, isValid } = validateLoginInput(req.body);
+    // Check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+    const email = req.body.email;
+    const password = req.body.password;
+    // Find user by email
+    User.findOne({ email }).then((user) => {
+      // Check if user exists
+      if (!user) {
+        return res.status(404).json({ emailnotfound: "Email not found" });
+      }
+      // Check password
+      bcrypt.compare(password, user.password).then((isMatch) => {
+        if (isMatch) {
+          // Create JWT Payload
+          const payload = {
+            id: user.id,
+            name: user.name,
+          };
+          // Sign token
+          jwt.sign(
+            payload,
+            process.env.SECRET_KEY,
+            {
+              expiresIn: 31556926, // 1 year in seconds
+            },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: "Bearer " + token,
+              });
+            }
+          );
+        } else {
+          return res
+            .status(400)
+            .json({ passwordincorrect: "Password incorrect" });
+        }
+      });
     });
   });
 };
