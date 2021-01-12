@@ -4,9 +4,11 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import BudgetPage from "./components/expense_tab/BudgetPage";
 import SubmitBudgetPage from "./pages/SubmitBudgets";
 import budgetCategoriesArry from "./budgetCategoriesArray";
+import NavBar from "./components/Navbar";
+import About from "./pages/About";
 import Auth from "./pages/Auth";
-// SERVICES
-// import { getAll, deleteOne } from "./services/userService"; //--DD
+import Login from "./pages/Login/Login";
+import Register from "./pages/Login/Register";
 
 function App() {
   const [budget, setbudget] = useState(0);
@@ -14,47 +16,6 @@ function App() {
   //>>>> this will be used for inputing the expenses/transactions and viewing the transactions:
   const [transaction, setTransactions] = useState(0);
   const [description, setDesc] = useState("");
-
-  // //--DD: const [users, setusers] = useState(null);
-
-  // ---DD:
-  // useEffect(() => {
-  //   if (!users) {
-  //     getusers();
-  //   }
-  // });
-
-  // ---DD:
-  // const getusers = async () => {
-  //   let res = await getAll();
-  //   setusers(res);
-  // };
-
-  // --DD:
-  // const deleteuser = async (user) => {
-  //   let res = await deleteOne(user);
-  //   setusers(res);
-  // };
-
-  // --DD:
-  // const renderUser = (user) => {
-  //   return (
-  //     <li key={user._id}>
-  //       <button
-  //         onClick={() => {
-  //           deleteuser(user);
-  //         }}
-  //       >
-  //         Delete
-  //       </button>
-  //       <h3>
-  //         {`${user.first_name}
-  //         ${user.last_name}`}
-  //       </h3>
-  //       <p>{user.location}</p>
-  //     </li>
-  //   );
-  // };
 
   return (
     <div>
@@ -64,6 +25,8 @@ function App() {
           path="/expenseTracker"
           render={() => (
             <React.Fragment>
+              <NavBar />
+
               <BudgetPage
                 budget={budget}
                 setbudget={setbudget}
@@ -81,6 +44,7 @@ function App() {
           path="/budgetInfo"
           render={() => (
             <React.Fragment>
+              <NavBar />
               <SubmitBudgetPage budgetCategoriesArray={budgetCategoriesArry} />
             </React.Fragment>
           )}
@@ -90,7 +54,20 @@ function App() {
           path="/login-register"
           render={() => (
             <React.Fragment>
+              <NavBar />
               <Auth />
+            </React.Fragment>
+          )}
+        />
+        <Route exact path="/login" render={() => <Login />} />
+        <Route exact path="/register" render={() => <Register />} />
+        <Route
+          exact
+          path="/about"
+          render={() => (
+            <React.Fragment>
+              <NavBar />
+              <About />
             </React.Fragment>
           )}
         />

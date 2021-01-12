@@ -31,43 +31,40 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Register = () => {
-  const [signUpInfo, setSignUpInfo] = useState({
-    name: "",
+const Login = () => {
+  const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
-    passwordToConfirm: "",
     showPassword: false,
+    errors: {},
   });
-  const { errors } = signUpInfo; ////  WHAT IS THIS??? maybe destructuring,  oh it's the same as    const errors = this.state.errors;
-
+  //
+  const { errors } = loginInfo;
   // material-ui
   const classes = useStyles();
 
   const handleClickShowPassword = () => {
-    setSignUpInfo({ ...signUpInfo, showPassword: !signUpInfo.showPassword });
+    setLoginInfo({ ...loginInfo, showPassword: !loginInfo.showPassword });
   };
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
-  const handleRegister = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    console.log(signUpInfo);
-    const newUser = {
-      name: signUpInfo.name,
-      email: signUpInfo.email,
-      password: signUpInfo.password,
-      password2: signUpInfo.password2,
+    console.log(loginInfo);
+    const userInfo = {
+      email: loginInfo.email,
+      password: loginInfo.password,
     };
   };
 
-  const handleSignUpInfo = (event) => {
+  const handleloginInfo = (event) => {
     const { id, value } = event.target;
 
-    setSignUpInfo({ ...signUpInfo, [id]: [value] });
-    console.log(signUpInfo);
+    setLoginInfo({ ...loginInfo, [id]: [value] });
+    console.log(loginInfo);
   };
 
   return (
@@ -85,10 +82,10 @@ const Register = () => {
             </Link>
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
               <h4>
-                <b>Register</b> below
+                <b>Login</b> below
               </h4>
               <p className="grey-text text-darken-1">
-                Already have an account? <Link to="/login">Login</Link>
+                Don't have an account? <Link to="/register">Register</Link>
               </p>
             </div>
           </div>
@@ -106,7 +103,7 @@ const Register = () => {
         <form
           noValidate
           onSubmit={(event) => {
-            handleRegister(event);
+            handleLogin(event);
             console.log("clickSubmit");
           }}
         >
@@ -118,23 +115,12 @@ const Register = () => {
           >
             <Grid item xs="auto" sm={12} className="my-1">
               <TextField
-                id="name"
-                color="secondary"
-                label="Name"
-                value={signUpInfo.name}
-                error={errors.name}
-                onChange={handleSignUpInfo}
-                required
-              />
-            </Grid>
-            <Grid item xs="auto" sm={12} className="my-1">
-              <TextField
                 id="email"
                 color="secondary"
                 label="Email"
-                value={signUpInfo.email}
-                error={errors.email}
-                onChange={handleSignUpInfo}
+                value={loginInfo.email}
+                type="email"
+                onChange={handleloginInfo}
                 required
               />
             </Grid>
@@ -143,10 +129,9 @@ const Register = () => {
                 <InputLabel htmlFor="password">Password</InputLabel>
                 <Input
                   id="password"
-                  type={signUpInfo.showPassword ? "text" : "password"}
-                  value={signUpInfo.password}
-                  error={errors.password}
-                  onChange={handleSignUpInfo}
+                  type={loginInfo.showPassword ? "text" : "password"}
+                  value={loginInfo.password}
+                  onChange={handleloginInfo}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -154,34 +139,7 @@ const Register = () => {
                         onClick={handleClickShowPassword}
                         onMouseDown={handleMouseDownPassword}
                       >
-                        {signUpInfo.showPassword ? (
-                          <Visibility />
-                        ) : (
-                          <VisibilityOff />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
-            </Grid>
-            <Grid item sm={12}>
-              <FormControl className={clsx(classes.margin, classes.textField)}>
-                <InputLabel htmlFor="password">Confirm Password</InputLabel>
-                <Input
-                  id="passwordToConfirm"
-                  type={signUpInfo.showPassword ? "text" : "password"}
-                  value={signUpInfo.passwordToConfirm}
-                  error={errors.passwordToConfim}
-                  onChange={handleSignUpInfo}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                      >
-                        {signUpInfo.showPassword ? (
+                        {loginInfo.showPassword ? (
                           <Visibility />
                         ) : (
                           <VisibilityOff />
@@ -196,10 +154,10 @@ const Register = () => {
           <button
             variant="contained"
             color="primary"
-            className="btn  btn-large waves-effect waves-light hoverable orange accent-3 white-text"
             type="submit"
+            className="btn  btn-large waves-effect waves-light hoverable orange accent-3 white-text"
           >
-            Ready to Sign Up!
+            Login to your account
           </button>
         </form>
       </div>
@@ -207,4 +165,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
