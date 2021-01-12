@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+// Redux
+import { Provider } from "react-redux";
+import store from "./store";
 // PAGES
 import BudgetPage from "./components/expense_tab/BudgetPage";
 import SubmitBudgetPage from "./pages/SubmitBudgets";
@@ -19,59 +22,63 @@ function App() {
 
   return (
     <div>
-      <Router>
-        <Route
-          exact
-          path="/expenseTracker"
-          render={() => (
-            <React.Fragment>
-              <NavBar />
+      <Provider store={store}>
+        <Router>
+          <Route
+            exact
+            path="/expenseTracker"
+            render={() => (
+              <React.Fragment>
+                <NavBar />
 
-              <BudgetPage
-                budget={budget}
-                setbudget={setbudget}
-                ///
-                transaction={transaction}
-                setTransactions={setTransactions}
-                description={description}
-                setDesc={setDesc}
-              />
-            </React.Fragment>
-          )}
-        />
-        <Route
-          exact
-          path="/budgetInfo"
-          render={() => (
-            <React.Fragment>
-              <NavBar />
-              <SubmitBudgetPage budgetCategoriesArray={budgetCategoriesArry} />
-            </React.Fragment>
-          )}
-        />
-        <Route
-          exact
-          path="/login-register"
-          render={() => (
-            <React.Fragment>
-              <NavBar />
-              <Auth />
-            </React.Fragment>
-          )}
-        />
-        <Route exact path="/login" render={() => <Login />} />
-        <Route exact path="/register" render={() => <Register />} />
-        <Route
-          exact
-          path="/about"
-          render={() => (
-            <React.Fragment>
-              <NavBar />
-              <About />
-            </React.Fragment>
-          )}
-        />
-      </Router>
+                <BudgetPage
+                  budget={budget}
+                  setbudget={setbudget}
+                  ///
+                  transaction={transaction}
+                  setTransactions={setTransactions}
+                  description={description}
+                  setDesc={setDesc}
+                />
+              </React.Fragment>
+            )}
+          />
+          <Route
+            exact
+            path="/budgetInfo"
+            render={() => (
+              <React.Fragment>
+                <NavBar />
+                <SubmitBudgetPage
+                  budgetCategoriesArray={budgetCategoriesArry}
+                />
+              </React.Fragment>
+            )}
+          />
+          <Route
+            exact
+            path="/login-register"
+            render={() => (
+              <React.Fragment>
+                <NavBar />
+                <Auth />
+              </React.Fragment>
+            )}
+          />
+          <Route exact path="/login" render={() => <Login />} />
+          <Route exact path="/register" render={() => <Register />} />
+          <Route
+            exact
+            path="/about"
+            render={() => (
+              <React.Fragment>
+                <NavBar />
+                <About />
+              </React.Fragment>
+            )}
+          />
+        </Router>
+      </Provider>
     </div>
   );
 }
