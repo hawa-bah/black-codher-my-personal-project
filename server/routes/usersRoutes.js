@@ -11,7 +11,7 @@ const validateLoginInput = require("../auth/validation/login");
 const User = mongoose.model("users");
 
 module.exports = (app) => {
-  app.post(`/register`, (req, res) => {
+  app.post("http://localhost:5000/api/register", (req, res) => {
     // destructuring the return of the imported function
     const { errors, isValid } = validateRegistrationInput(req.body);
     // Check validation

@@ -1,5 +1,9 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
+import { Link, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import { connect } from "react-redux";
+import { registerUser } from "../../Redux/actions/authActions";
 
 // material-ui
 import { Grid, MenuItem, TextField, Button } from "@material-ui/core";
@@ -31,36 +35,56 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Register = () => {
+const Register = (props) => {
   const [signUpInfo, setSignUpInfo] = useState({
     name: "",
     email: "",
     password: "",
     passwordToConfirm: "",
     showPassword: false,
+    errors: {},
   });
-  const { errors } = signUpInfo; ////  WHAT IS THIS??? maybe destructuring,  oh it's the same as    const errors = this.state.errors;
+  // const { errors } = signUpInfo; ////  WHAT IS THIS??? maybe destructuring,  oh it's the same as    const errors = this.state.errors;
+  const errors = signUpInfo.errors;
+
+  // review:Equivalent Component has recieved props
+  // const isFirstRun = useRef(true);
+  useEffect(() => {
+    // if (isFirstRun) {
+    //   isFirstRun.current = false;
+    //   return;
+    // }
+    const errors = signUpInfo.errors;
+
+    if (props.errors) {
+      setSignUpInfo({ ...signUpInfo, [errors]: props.errors });
+      console.log("testing");
+    }
+    console.log(props.errors);
+    console.log(signUpInfo.errors);
+  }, [props, errors]);
 
   // material-ui
   const classes = useStyles();
-
   const handleClickShowPassword = () => {
     setSignUpInfo({ ...signUpInfo, showPassword: !signUpInfo.showPassword });
   };
-
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log(signUpInfo);
+    console.log("ERRORS", signUpInfo.errors);
+
     const newUser = {
       name: signUpInfo.name,
       email: signUpInfo.email,
       password: signUpInfo.password,
-      password2: signUpInfo.password2,
+      passwordToConfim: signUpInfo.passwordToConfim,
     };
+
+    props.registerUser(newUser, props.history);
   };
 
   const handleSignUpInfo = (event) => {
@@ -105,8 +129,8 @@ const Register = () => {
       >
         <form
           noValidate
-          onSubmit={(event) => {
-            handleRegister(event);
+          onSubmit={(e) => {
+            handleRegister(e);
             console.log("clickSubmit");
           }}
         >
@@ -124,8 +148,11 @@ const Register = () => {
                 value={signUpInfo.name}
                 error={errors.name}
                 onChange={handleSignUpInfo}
-                required
+                className={classnames("", {
+                  invalid: errors.name,
+                })}
               />
+              <span className="red-text">{errors.name}</span>
             </Grid>
             <Grid item xs="auto" sm={12} className="my-1">
               <TextField
@@ -135,8 +162,14 @@ const Register = () => {
                 value={signUpInfo.email}
                 error={errors.email}
                 onChange={handleSignUpInfo}
-                required
+                className={classnames("", {
+                  invalid: errors.email || errors.emailnotfound,
+                })}
               />
+              <span className="red-text">
+                {errors.email}
+                {errors.emailnotfound}
+              </span>
             </Grid>
             <Grid item sm={12}>
               <FormControl className={clsx(classes.margin, classes.textField)}>
@@ -147,6 +180,9 @@ const Register = () => {
                   value={signUpInfo.password}
                   error={errors.password}
                   onChange={handleSignUpInfo}
+                  className={classnames("", {
+                    invalid: errors.password || errors.passwordincorrect,
+                  })}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -163,6 +199,10 @@ const Register = () => {
                     </InputAdornment>
                   }
                 />
+                <span className="red-text">
+                  {errors.password}
+                  {errors.passwordincorrect}
+                </span>
               </FormControl>
             </Grid>
             <Grid item sm={12}>
@@ -174,6 +214,9 @@ const Register = () => {
                   value={signUpInfo.passwordToConfirm}
                   error={errors.passwordToConfim}
                   onChange={handleSignUpInfo}
+                  className={classnames("", {
+                    invalid: errors.passwordToConfim,
+                  })}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -190,6 +233,7 @@ const Register = () => {
                     </InputAdornment>
                   }
                 />
+                <span className="red-text">{errors.passwordToConfim}</span>
               </FormControl>
             </Grid>
           </Grid>
@@ -206,11 +250,15 @@ const Register = () => {
     </div>
   );
 };
-
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
 // getting state from Redux
 const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,
 });
-export default Register;
-// export default connect(mapStateToProps, { registerUser })(withRouter(Register));
+// export default Register;
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));

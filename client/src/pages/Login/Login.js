@@ -1,5 +1,9 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
+import { Link, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import { connect } from "react-redux";
+import { loginUser } from "../../Redux/actions/authActions";
 
 // material-ui
 import { Grid, MenuItem, TextField, Button } from "@material-ui/core";
@@ -31,13 +35,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+const Login = (props) => {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
     showPassword: false,
     errors: {},
   });
+
+  // review:Equivalent Component has recieved props
+  const isFirstRun = useRef(true);
+  useEffect(() => {
+    if (isFirstRun) {
+      isFirstRun.current = false;
+      return;
+    }
+    if (props.auth.isAuthenticated) {
+      props.history.push("/dashbord");
+    }
+    if (props.errors) {
+      setLoginInfo({ ...loginInfo, [errors]: props.errors });
+    }
+  }, [props]);
   //
   const { errors } = loginInfo;
   // material-ui
@@ -58,6 +77,8 @@ const Login = () => {
       email: loginInfo.email,
       password: loginInfo.password,
     };
+
+    props.loginUser(userInfo, props.history);
   };
 
   const handleloginInfo = (event) => {
@@ -121,8 +142,15 @@ const Login = () => {
                 value={loginInfo.email}
                 type="email"
                 onChange={handleloginInfo}
+                className={classnames("", {
+                  invalid: errors.email || errors.emailnotfound,
+                })}
                 required
               />
+              <span className="red-text">
+                {errors.email}
+                {errors.emailnotfound}
+              </span>
             </Grid>
             <Grid item sm={12}>
               <FormControl className={clsx(classes.margin, classes.textField)}>
@@ -132,6 +160,9 @@ const Login = () => {
                   type={loginInfo.showPassword ? "text" : "password"}
                   value={loginInfo.password}
                   onChange={handleloginInfo}
+                  className={classnames("", {
+                    invalid: errors.password || errors.passwordincorrect,
+                  })}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -148,6 +179,10 @@ const Login = () => {
                     </InputAdornment>
                   }
                 />
+                <span className="red-text">
+                  {errors.password}
+                  {errors.passwordincorrect}
+                </span>
               </FormControl>
             </Grid>
           </Grid>
@@ -164,5 +199,15 @@ const Login = () => {
     </div>
   );
 };
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+export default connect(mapStateToProps, { loginUser })(Login);
 
-export default Login;
+// export default Login;

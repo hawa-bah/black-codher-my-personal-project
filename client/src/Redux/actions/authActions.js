@@ -6,14 +6,15 @@ import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 // Register User
 export const registerUser = (userData, history) => (dispatch) => {
   axios
-    .post("/register", userData)
+    .post("http://localhost:5000/api/register", userData)
     .then((res) => history.push("/login")) //>>>>>>>> THIS NEEDS TO CHANGE AS WE HAVE DIFFERENT ROUTES re-direct to login on successful register
-    .catch((err) =>
+    .catch((err) => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data,
-      })
-    );
+      });
+      console.log.log(err);
+    });
 };
 
 // Login - get user token

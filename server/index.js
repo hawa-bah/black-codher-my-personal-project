@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const cors = require("cors");
 
 // IMPORT YOUR MODELS
 require("./models/Users");
@@ -9,6 +10,7 @@ require("./models/expense_models/Transaction");
 require("./models/Budget");
 
 const app = express();
+app.use(cors());
 
 mongoose.Promise = global.Promise;
 mongoose
@@ -34,6 +36,8 @@ require("./auth/config/passport")(passport);
 require("./routes/usersRoutes")(app);
 require("./routes/expenseRoutes")(app);
 require("./routes/submitBudgetRoutes")(app);
+
+// app.use("/api/users", users);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
