@@ -35,12 +35,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+const Login = (props) => {
   // redux
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const history = useSelector((state) => state.history);
   const errorsRedux = useSelector((state) => state.error);
+  console.log(props.history);
 
   const [loginInfo, setLoginInfo] = useState({
     email: "",
@@ -50,19 +50,19 @@ const Login = () => {
   });
 
   // review:Equivalent Component has recieved props
-  const isFirstRun = useRef(true);
+
   useEffect(() => {
-    if (isFirstRun) {
-      isFirstRun.current = false;
-      return;
-    }
+    console.log("use effect");
+    console.log(auth.isAuthenticated);
+
     if (auth.isAuthenticated) {
-      history.push("/dashbord");
+      console.log("using push");
+      props.history.push("/budgetInfo");
     }
     if (errorsRedux) {
       setLoginInfo({ ...loginInfo, [errors]: errorsRedux });
     }
-  });
+  }, [auth, errorsRedux]);
   //
   const { errors } = loginInfo;
   // material-ui
@@ -84,7 +84,8 @@ const Login = () => {
       password: loginInfo.password,
     };
 
-    dispatch(loginUser(userData, history));
+    dispatch(loginUser(userData));
+    console.log("AUTH", auth);
   };
 
   const handleloginInfo = (event) => {

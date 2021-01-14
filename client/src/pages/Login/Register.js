@@ -35,11 +35,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Register = () => {
+const Register = (props) => {
   // redux:
   const dispatch = useDispatch();
   const errorsRedux = useSelector((state) => state.errors);
-  const history = useSelector((state) => state.history);
+  console.log("history", props.history);
+
+  const [errorHolder, setErrorHolder] = useState({}); /// THIS STATE IS A BIT USELESS
 
   const [signUpInfo, setSignUpInfo] = useState({
     name: "",
@@ -49,25 +51,21 @@ const Register = () => {
     showPassword: false,
     errors: {},
   });
-  const { errors } = signUpInfo; ////  WHAT IS THIS??? maybe destructuring,  oh it's the same as    const errors = this.state.errors;
+  let { errors } = signUpInfo; ////  WHAT IS THIS??? maybe destructuring,  oh it's the same as    const errors = this.state.errors;
 
   // review:Equivalent Component has recieved props
   // const isFirstRun = useRef(true);
   useEffect(() => {
-    // if (isFirstRun) {
-    //   isFirstRun.current = false;
-    //   return;
-    // }
-    // const errors = signUpInfo.errors;
-
     if (errorsRedux) {
-      // setSignUpInfo({ ...signUpInfo, [errors]: errorsRedux });
-      console.log("testing");
+      setSignUpInfo({ ...signUpInfo, [errors]: errorsRedux });
+      console.log("FROM THE USE EFFECT");
+      console.log("ERROR REDUX:", errorsRedux);
+      console.log("ERROR STATE:", signUpInfo.errors);
     }
     console.log(errorsRedux);
     console.log(signUpInfo.errors);
     console.log(errors);
-  });
+  }, [errorsRedux]);
 
   // material-ui
   const classes = useStyles();
@@ -91,21 +89,26 @@ const Register = () => {
     console.log("REGISTER FUNC.", newUser);
 
     // redux
-    // dispatch(registerUser(newUser, history));
+    // registerUser(newUser, history);
 
-    // without redux
-    axios
-      //throw a post-request to the api
-      .post("http://localhost:5000/api/register", newUser)
-      //then respond with the data
-      .then((res) => console.log(res.data))
-      //For the errors, respond with the appropriate error
-      .catch((err) => {
-        console.log("ERR FROM AXIOS", err.response.data);
-        errors = err.response.data;
-        setSignUpInfo({ ...signUpInfo, [errors]: { hello: "hello" } });
-        console.log("ERRORS FROM AXIOS", signUpInfo.errors);
-      });
+    dispatch(registerUser(newUser, props.history));
+    console.log("ERROR REDUX:", errorsRedux);
+    setErrorHolder(errorsRedux);
+
+    // WITHOUT REDUX (IT WORKS USING A STATE TO HOLD THE ERROR)
+    // axios
+    //   //throw a post-request to the api
+    //   .post("http://localhost:5000/api/register", newUser)
+    //   //then respond with the data
+    //   .then((res) => console.log("REGISTER AXIOS WAS OK", res.data))
+    //   //For the errors, respond with the appropriate error
+    //   .catch((err) => {
+    //     console.log("ERR FROM AXIOS", err.response.data);
+    //     setErrorHolder(err.response.data);
+    //     setSignUpInfo({ ...signUpInfo, [errors]: err.response.data });
+    //     console.log("ERRORS FROM AXIOS", signUpInfo.errors);
+    //     console.log("ERRORS holder", errorHolder);
+    //   });
   };
 
   const handleSignUpInfo = (event) => {
@@ -167,13 +170,15 @@ const Register = () => {
                 color="secondary"
                 label="Name"
                 value={signUpInfo.name}
-                error={errors.name}
+                error={errorsRedux.name && errorsRedux.name}
                 onChange={handleSignUpInfo}
                 className={classnames("", {
-                  invalid: errors.name,
+                  invalid: errorsRedux.name,
                 })}
               />
-              <span className="red-text">{errors.name}</span>
+              <span className="red-text">
+                {errorsRedux.name && errorsRedux.name}
+              </span>
             </Grid>
             <Grid item xs="auto" sm={12} className="my-1">
               <TextField

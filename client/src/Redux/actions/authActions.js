@@ -9,12 +9,12 @@ export const registerUser = (userData, history) => (dispatch) => {
     .post("http://localhost:5000/api/register", userData)
     .then((res) => history.push("/login")) //>>>>>>>> THIS NEEDS TO CHANGE AS WE HAVE DIFFERENT ROUTES re-direct to login on successful register
     .catch((err) => {
-      if (err.status === 400) {
-        dispatch({
-          type: GET_ERRORS,
-          payload: err.response.data,
-        });
-      }
+      console.log("heeey axios ", err);
+
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
     });
 };
 
