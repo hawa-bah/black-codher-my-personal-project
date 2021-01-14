@@ -2,9 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../Redux/actions/authActions";
-
+import axios from "axios";
 // material-ui
 import { Grid, MenuItem, TextField, Button } from "@material-ui/core";
 import clsx from "clsx";
@@ -35,7 +35,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Register = (props) => {
+const Register = () => {
+  // redux:
+  const dispatch = useDispatch();
+  const errorsRedux = useSelector((state) => state.errors);
+  const history = useSelector((state) => state.history);
+
   const [signUpInfo, setSignUpInfo] = useState({
     name: "",
     email: "",
@@ -44,8 +49,7 @@ const Register = (props) => {
     showPassword: false,
     errors: {},
   });
-  // const { errors } = signUpInfo; ////  WHAT IS THIS??? maybe destructuring,  oh it's the same as    const errors = this.state.errors;
-  const errors = signUpInfo.errors;
+  const { errors } = signUpInfo; ////  WHAT IS THIS??? maybe destructuring,  oh it's the same as    const errors = this.state.errors;
 
   // review:Equivalent Component has recieved props
   // const isFirstRun = useRef(true);
@@ -54,15 +58,16 @@ const Register = (props) => {
     //   isFirstRun.current = false;
     //   return;
     // }
-    const errors = signUpInfo.errors;
+    // const errors = signUpInfo.errors;
 
-    if (props.errors) {
-      setSignUpInfo({ ...signUpInfo, [errors]: props.errors });
+    if (errorsRedux) {
+      // setSignUpInfo({ ...signUpInfo, [errors]: errorsRedux });
       console.log("testing");
     }
-    console.log(props.errors);
+    console.log(errorsRedux);
     console.log(signUpInfo.errors);
-  }, [props, errors]);
+    console.log(errors);
+  });
 
   // material-ui
   const classes = useStyles();
@@ -81,16 +86,32 @@ const Register = (props) => {
       name: signUpInfo.name,
       email: signUpInfo.email,
       password: signUpInfo.password,
-      passwordToConfim: signUpInfo.passwordToConfim,
+      passwordToConfirm: signUpInfo.passwordToConfirm,
     };
+    console.log("REGISTER FUNC.", newUser);
 
-    props.registerUser(newUser, props.history);
+    // redux
+    // dispatch(registerUser(newUser, history));
+
+    // without redux
+    axios
+      //throw a post-request to the api
+      .post("http://localhost:5000/api/register", newUser)
+      //then respond with the data
+      .then((res) => console.log(res.data))
+      //For the errors, respond with the appropriate error
+      .catch((err) => {
+        console.log("ERR FROM AXIOS", err.response.data);
+        errors = err.response.data;
+        setSignUpInfo({ ...signUpInfo, [errors]: { hello: "hello" } });
+        console.log("ERRORS FROM AXIOS", signUpInfo.errors);
+      });
   };
 
   const handleSignUpInfo = (event) => {
     const { id, value } = event.target;
 
-    setSignUpInfo({ ...signUpInfo, [id]: [value] });
+    setSignUpInfo({ ...signUpInfo, [id]: value });
     console.log(signUpInfo);
   };
 

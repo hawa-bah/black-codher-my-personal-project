@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../Redux/actions/authActions";
 
 // material-ui
@@ -35,7 +35,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = (props) => {
+const Login = () => {
+  // redux
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const history = useSelector((state) => state.history);
+  const errorsRedux = useSelector((state) => state.error);
+
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -50,13 +56,13 @@ const Login = (props) => {
       isFirstRun.current = false;
       return;
     }
-    if (props.auth.isAuthenticated) {
-      props.history.push("/dashbord");
+    if (auth.isAuthenticated) {
+      history.push("/dashbord");
     }
-    if (props.errors) {
-      setLoginInfo({ ...loginInfo, [errors]: props.errors });
+    if (errorsRedux) {
+      setLoginInfo({ ...loginInfo, [errors]: errorsRedux });
     }
-  }, [props]);
+  });
   //
   const { errors } = loginInfo;
   // material-ui
@@ -73,18 +79,18 @@ const Login = (props) => {
   const handleLogin = (e) => {
     e.preventDefault();
     console.log(loginInfo);
-    const userInfo = {
+    const userData = {
       email: loginInfo.email,
       password: loginInfo.password,
     };
 
-    props.loginUser(userInfo, props.history);
+    dispatch(loginUser(userData, history));
   };
 
   const handleloginInfo = (event) => {
     const { id, value } = event.target;
 
-    setLoginInfo({ ...loginInfo, [id]: [value] });
+    setLoginInfo({ ...loginInfo, [id]: value });
     console.log(loginInfo);
   };
 

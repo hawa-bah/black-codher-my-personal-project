@@ -9,10 +9,12 @@ export const registerUser = (userData, history) => (dispatch) => {
     .post("http://localhost:5000/api/register", userData)
     .then((res) => history.push("/login")) //>>>>>>>> THIS NEEDS TO CHANGE AS WE HAVE DIFFERENT ROUTES re-direct to login on successful register
     .catch((err) => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data,
-      });
+      if (err.status === 400) {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data,
+        });
+      }
     });
 };
 
@@ -32,12 +34,13 @@ export const loginUser = (userData) => (dispatch) => {
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
-    .catch((err) =>
+    .catch((err) => {
+      // console.log(err);
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data,
-      })
-    );
+        payload: err,
+      });
+    });
 };
 
 // Set logged in user
