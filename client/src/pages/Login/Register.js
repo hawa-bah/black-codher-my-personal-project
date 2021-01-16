@@ -41,8 +41,6 @@ const Register = (props) => {
   const errorsRedux = useSelector((state) => state.errors);
   console.log("history", props.history);
 
-  const [errorHolder, setErrorHolder] = useState({}); /// THIS STATE IS A BIT USELESS
-
   const [signUpInfo, setSignUpInfo] = useState({
     name: "",
     email: "",
@@ -51,20 +49,12 @@ const Register = (props) => {
     showPassword: false,
     errors: {},
   });
-  let { errors } = signUpInfo; ////  WHAT IS THIS??? maybe destructuring,  oh it's the same as    const errors = this.state.errors;
 
-  // review:Equivalent Component has recieved props
-  // const isFirstRun = useRef(true);
   useEffect(() => {
     if (errorsRedux) {
-      setSignUpInfo({ ...signUpInfo, [errors]: errorsRedux });
       console.log("FROM THE USE EFFECT");
       console.log("ERROR REDUX:", errorsRedux);
-      console.log("ERROR STATE:", signUpInfo.errors);
     }
-    console.log(errorsRedux);
-    console.log(signUpInfo.errors);
-    console.log(errors);
   }, [errorsRedux]);
 
   // material-ui
@@ -89,26 +79,8 @@ const Register = (props) => {
     console.log("REGISTER FUNC.", newUser);
 
     // redux
-    // registerUser(newUser, history);
-
     dispatch(registerUser(newUser, props.history));
     console.log("ERROR REDUX:", errorsRedux);
-    setErrorHolder(errorsRedux);
-
-    // WITHOUT REDUX (IT WORKS USING A STATE TO HOLD THE ERROR)
-    // axios
-    //   //throw a post-request to the api
-    //   .post("http://localhost:5000/api/register", newUser)
-    //   //then respond with the data
-    //   .then((res) => console.log("REGISTER AXIOS WAS OK", res.data))
-    //   //For the errors, respond with the appropriate error
-    //   .catch((err) => {
-    //     console.log("ERR FROM AXIOS", err.response.data);
-    //     setErrorHolder(err.response.data);
-    //     setSignUpInfo({ ...signUpInfo, [errors]: err.response.data });
-    //     console.log("ERRORS FROM AXIOS", signUpInfo.errors);
-    //     console.log("ERRORS holder", errorHolder);
-    //   });
   };
 
   const handleSignUpInfo = (event) => {
@@ -186,15 +158,15 @@ const Register = (props) => {
                 color="secondary"
                 label="Email"
                 value={signUpInfo.email}
-                error={errors.email}
+                error={errorsRedux.email}
                 onChange={handleSignUpInfo}
                 className={classnames("", {
-                  invalid: errors.email || errors.emailnotfound,
+                  invalid: errorsRedux.email || errorsRedux.emailnotfound,
                 })}
               />
               <span className="red-text">
-                {errors.email}
-                {errors.emailnotfound}
+                {errorsRedux.email}
+                {errorsRedux.emailnotfound}
               </span>
             </Grid>
             <Grid item sm={12}>
@@ -204,10 +176,11 @@ const Register = (props) => {
                   id="password"
                   type={signUpInfo.showPassword ? "text" : "password"}
                   value={signUpInfo.password}
-                  error={errors.password}
+                  error={errorsRedux.password}
                   onChange={handleSignUpInfo}
                   className={classnames("", {
-                    invalid: errors.password || errors.passwordincorrect,
+                    invalid:
+                      errorsRedux.password || errorsRedux.passwordincorrect,
                   })}
                   endAdornment={
                     <InputAdornment position="end">
@@ -226,8 +199,8 @@ const Register = (props) => {
                   }
                 />
                 <span className="red-text">
-                  {errors.password}
-                  {errors.passwordincorrect}
+                  {errorsRedux.password}
+                  {errorsRedux.passwordincorrect}
                 </span>
               </FormControl>
             </Grid>
@@ -238,10 +211,10 @@ const Register = (props) => {
                   id="passwordToConfirm"
                   type={signUpInfo.showPassword ? "text" : "password"}
                   value={signUpInfo.passwordToConfirm}
-                  error={errors.passwordToConfim}
+                  error={errorsRedux.passwordToConfim}
                   onChange={handleSignUpInfo}
                   className={classnames("", {
-                    invalid: errors.passwordToConfim,
+                    invalid: errorsRedux.passwordToConfim,
                   })}
                   endAdornment={
                     <InputAdornment position="end">
@@ -259,7 +232,9 @@ const Register = (props) => {
                     </InputAdornment>
                   }
                 />
-                <span className="red-text">{errors.passwordToConfim}</span>
+                <span className="red-text">
+                  {errorsRedux.passwordToConfirm}
+                </span>
               </FormControl>
             </Grid>
           </Grid>

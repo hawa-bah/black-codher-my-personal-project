@@ -39,17 +39,16 @@ const Login = (props) => {
   // redux
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const errorsRedux = useSelector((state) => state.error);
+  const errorsRedux = useSelector((state) => state.errors);
   console.log(props.history);
+  console.log(errorsRedux);
 
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
     showPassword: false,
-    errors: {},
+    errors: {}, // thisobject can be deleted
   });
-
-  // review:Equivalent Component has recieved props
 
   useEffect(() => {
     console.log("use effect");
@@ -60,11 +59,11 @@ const Login = (props) => {
       props.history.push("/budgetInfo");
     }
     if (errorsRedux) {
-      setLoginInfo({ ...loginInfo, [errors]: errorsRedux });
+      console.log(errorsRedux);
     }
   }, [auth, errorsRedux]);
   //
-  const { errors } = loginInfo;
+
   // material-ui
   const classes = useStyles();
 
@@ -90,7 +89,6 @@ const Login = (props) => {
 
   const handleloginInfo = (event) => {
     const { id, value } = event.target;
-
     setLoginInfo({ ...loginInfo, [id]: value });
     console.log(loginInfo);
   };
@@ -147,16 +145,15 @@ const Login = (props) => {
                 color="secondary"
                 label="Email"
                 value={loginInfo.email}
-                type="email"
+                error={errorsRedux.email}
                 onChange={handleloginInfo}
                 className={classnames("", {
-                  invalid: errors.email || errors.emailnotfound,
+                  invalid: errorsRedux.email || errorsRedux.emailnotfound,
                 })}
-                required
               />
               <span className="red-text">
-                {errors.email}
-                {errors.emailnotfound}
+                {errorsRedux.email}
+                {errorsRedux.emailnotfound}
               </span>
             </Grid>
             <Grid item sm={12}>
@@ -168,7 +165,8 @@ const Login = (props) => {
                   value={loginInfo.password}
                   onChange={handleloginInfo}
                   className={classnames("", {
-                    invalid: errors.password || errors.passwordincorrect,
+                    invalid:
+                      errorsRedux.password || errorsRedux.passwordincorrect,
                   })}
                   endAdornment={
                     <InputAdornment position="end">
@@ -187,8 +185,8 @@ const Login = (props) => {
                   }
                 />
                 <span className="red-text">
-                  {errors.password}
-                  {errors.passwordincorrect}
+                  {errorsRedux.password}
+                  {errorsRedux.passwordincorrect}
                 </span>
               </FormControl>
             </Grid>
@@ -216,5 +214,3 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 export default connect(mapStateToProps, { loginUser })(Login);
-
-// export default Login;
