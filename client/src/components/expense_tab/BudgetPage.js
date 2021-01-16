@@ -228,7 +228,6 @@ const BudgetPage = (props) => {
                 style={{ width: "25ch" }}
                 required
               >
-                {/*  CHANGED: */}
                 {budgetCategoriesArray &&
                   budgetCategoriesArray.map((category) => (
                     <MenuItem key={category} value={category}>
@@ -243,27 +242,10 @@ const BudgetPage = (props) => {
             color="primary"
             className={classes.margin}
             type="submit"
-            // styles={{ padding: "6px" }}
           >
             Submit Transaction
           </ColorButton>
         </form>
-      </div>
-      <div className="SubmitTransaction-Form-div">
-        {/* <TransactionForm
-          handleSubmit={handleSubmit}
-          description={props.description}
-          setDesc={props.setDesc}
-          tripTransaction={tripTransaction}
-          setTripTransaction={setTripTransaction}
-          transactionCategory={transactionCategory}
-          setTransactionCategory={setTransactionCategory}
-          selectedDate={selectedDate}
-          handleDateChange={handleDateChange}
-          //
-          hasSubmitedTransaction={hasSubmitedTransaction}
-          setHasSubmitedTransaction={setHasSubmitedTransaction}
-        ></TransactionForm> */}
       </div>
 
       <div className="budget categories card">

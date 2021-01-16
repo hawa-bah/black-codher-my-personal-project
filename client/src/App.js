@@ -59,13 +59,10 @@ function App() {
               <NavBar />
 
               <BudgetPage
-                budget={budget}
-                setbudget={setbudget}
-                ///
-                transaction={transaction}
-                setTransactions={setTransactions}
-                description={description}
-                setDesc={setDesc}
+                transaction={transaction} //> used
+                setTransactions={setTransactions} //> used
+                description={description} //> used
+                setDesc={setDesc} //> used
               />
             </React.Fragment>
           )}
