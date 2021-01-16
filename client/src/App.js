@@ -19,6 +19,7 @@ import Auth from "./pages/Auth";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Login/Register";
 import Landing from "./pages/Login/Landing";
+import PrivateRoute from "./PrivateRoute";
 
 // >>>> checking if a user is loged in
 if (localStorage.jwtToken) {
@@ -92,19 +93,7 @@ function App() {
         />
         <Route exact path="/login" component={Login} render={() => <Login />} />
         <Route exact path="/register" component={Register} />
-        <Route
-          exact
-          path="/Landing"
-          component={Landing}
-          render={() =>
-            auth.isAuthenticated === true ? (
-              <Landing />
-            ) : (
-              <Redirect to="/login" />
-            )
-          }
-        />
-
+        <PrivateRoute path="/landing" component={Landing} />
         <Route
           exact
           path="/about"
