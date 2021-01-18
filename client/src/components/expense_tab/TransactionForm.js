@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import NumberFormat from "react-number-format";
 // import { Form, Field } from "react-final-form";
@@ -32,6 +32,7 @@ import {
   ThemeProvider,
 } from "@material-ui/core/styles";
 import { purple } from "@material-ui/core/colors";
+import axios from "axios";
 
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
@@ -80,100 +81,158 @@ const useStyles = makeStyles((theme) => ({
 const TransactionForm = (props) => {
   const classes = useStyles();
   // NEW:
-  const [budgetCategoriesArray, setBudgetCategoriesArray] = useEffect([]);
+  //>>>> The balance is the sum of those values with test for now
+  const [hasSubmitedTransaction, setHasSubmitedTransaction] = useState(false);
+  //
+  const [description, setDescription] = useState("");
+  const [transactionValue, setTransactionValue] = useState(0);
+  const [selectedDate, handleDateChange] = useState(new Date());
+  const [transactionCategory, setTransactionCategory] = useState("");
+  const [tripTransaction, setTripTransaction] = useState(null);
+  //
+  const [budgetCategoriesArray, setBudgetCategoriesArray] = useState([]);
+
+  //>>>// this might need to change, for now depending on the trip selected (for the transaction or budgets to display) we will get its corresponded categories :
   const handleBudgetCategoriesArray = async (tripName) => {
     let res = await getBudget(tripName);
-    setBudgetCategoriesArray(res[0].budgets);
-    console.log(budgetCategoriesArray);
+    if (res.length > 0) {
+      let preArray = [];
+      res[0].budgets.map((budget) => {
+        preArray.push(budget.budget_category);
+      });
+      setBudgetCategoriesArray(preArray);
+      console.log(budgetCategoriesArray);
+    } else {
+      setBudgetCategoriesArray([
+        "Accomodation",
+        "Transport",
+        "Food",
+        "Entretainment",
+        "Shopping",
+        "Others",
+      ]);
+    }
   };
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    //>>>> users can post a transaction to the accomodation sect.
+    axios.post(`/api/expense`, {
+      transaction_value: transactionValue,
+      description: description,
+      transaction_date: selectedDate, //
+      budget_category: transactionCategory, //
+      trip_name: tripTransaction,
+    });
+
+    //>>>> this is to clear the input fields once clicked submit. The values will still be saved in the mongo database
+    setTransactionValue(0);
+    setDescription("");
+    // handleDateChange(new Date());
+    setTransactionCategory("");
+    setTripTransaction("");
+
+    setHasSubmitedTransaction(true);
+  }
 
   return (
     <div
-      className="new-form-ui"
-      style={{ padding: 16, margin: "auto", maxWidth: 600 }}
+      className="transactions-form-ui-div"
+      style={{
+        padding: 20,
+        margin: "auto",
+        marginBottom: "20px",
+        maxWidth: 600,
+      }}
     >
+      <h2 className="budgetPage-subtitle">INPUT AN EXPENSE</h2>
       <form
         onSubmit={(event) => {
-          props.handleSubmit(event);
+          handleSubmit(event);
+          console.log("clickSubmit");
           // renderBalance();
         }}
       >
-        <Grid container alignItems="flex-start" spacing={2}>
-          <Grid item xs={4}>
+        <Grid
+          container
+          alignItems="flex-start"
+          spacing={2}
+          style={{ padding: "10px" }}
+        >
+          <Grid item xs="auto" sm={4} className="my-1">
             <TextField
               id="Description"
               color="secondary"
               label="Description"
-              value={props.description}
-              onChange={(e) => props.setDesc(e.target.value)}
-              fullWidth
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
               required
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs="auto" sm={4} className="my-1">
             <TextField
               id="TripName"
               color="secondary"
               label="Trip Name"
-              value={props.tripTransaction}
+              value={tripTransaction}
               onChange={(e) => {
-                props.setTripTransaction(e.target.value);
+                setTripTransaction(e.target.value);
                 handleBudgetCategoriesArray(e.target.value);
               }}
-              fullWidth
               required
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs="auto" sm={4} className="my-1">
             <TextField
               label="Transaction value"
-              value={props.transactionCategory}
-              onChange={(event) =>
-                props.setTransactionCategory(event.target.value)
-              }
+              value={transactionValue}
+              onChange={(event) => setTransactionValue(event.target.value)}
               name="Transaction-value-input"
               id="Transaction-value-input"
               InputProps={{
                 inputComponent: NumberFormatCustom,
               }}
-              fullwidth
               required
             />
           </Grid>
         </Grid>
-        <Grid container alignItems="flex-start" spacing={2}>
-          <Grid item xs={6}>
+        <Grid
+          container
+          alignItems="flex-start"
+          justifyContent="space-around"
+          spacing={2}
+          style={{ padding: "10px" }}
+        >
+          <Grid item xs="auto" sm={6}>
             {/* to input the date of the transaction we are using material-ui */}
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
                 label="Date of the transaction"
                 clearable
-                value={props.selectedDate}
-                placeholder="10/10/2018"
-                onChange={(date) => props.handleDateChange(date)}
+                value={selectedDate}
+                onChange={(date) => handleDateChange(date)}
                 // minDate={new Date()}
                 format="MM/dd/yyyy"
+                style={{ width: "25ch" }}
               />
             </MuiPickersUtilsProvider>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs="auto" sm={6} className="my-2">
             <TextField
               id="category-input-form"
               label="Select a category"
-              value={props.transactionCategory}
+              value={transactionCategory}
               select
-              onChange={(event) =>
-                props.setTransactionCategory(event.target.value)
-              }
+              onChange={(event) => setTransactionCategory(event.target.value)}
               style={{ width: "25ch" }}
+              required
             >
               {budgetCategoriesArray &&
                 budgetCategoriesArray.map((category) => (
-                  <div>
-                    {/* <MenuItem key={category} value={category}>
-                      {category}
-                    </MenuItem> */}
-                  </div>
+                  <MenuItem key={category} value={category}>
+                    {category}
+                  </MenuItem>
                 ))}
             </TextField>
           </Grid>
@@ -184,7 +243,7 @@ const TransactionForm = (props) => {
           className={classes.margin}
           type="submit"
         >
-          Submit Filters
+          Submit Transaction
         </ColorButton>
       </form>
     </div>

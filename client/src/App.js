@@ -90,7 +90,7 @@ function App() {
         />
         <Route exact path="/login" component={Login} render={() => <Login />} />
         <Route exact path="/register" component={Register} />
-        {/* So that only one route is rendered */}
+        {/*>>>> So that only one route is rendered */}
         <Switch>
           <PrivateRoute exact path="/landing" component={Landing} />
         </Switch>

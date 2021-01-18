@@ -77,8 +77,7 @@ const useStyles = makeStyles((theme) => ({
 const BudgetPage = (props) => {
   const classes = useStyles();
   // >>>> I'm passing transactions state (the value of a transaction) as a props
-  // const [budget, setbudget] = useState(0);
-  // const [transaction, setTransactions] = useState(0);
+
   const [viewTransactions, setViewTransactions] = useState(false);
   //>>>> The balance is the sum of those values with test for now
   const [hasSubmitedTransaction, setHasSubmitedTransaction] = useState(false);
@@ -86,10 +85,10 @@ const BudgetPage = (props) => {
   const [selectedDate, handleDateChange] = useState(new Date());
   const [transactionCategory, setTransactionCategory] = useState("");
   const [tripTransaction, setTripTransaction] = useState(null);
-  // NEW:
+  //
   const [budgetCategoriesArray, setBudgetCategoriesArray] = useState([]);
 
-  // NEW:
+  //>>>// this might need to change, for now depending on the trip selected (for the transaction or budgets to display) we will get its corresponded categories :
   const handleBudgetCategoriesArray = async (tripName) => {
     let res = await getBudget(tripName);
     if (res.length > 0) {
@@ -136,6 +135,7 @@ const BudgetPage = (props) => {
 
   return (
     <div className="budgetPage-Div">
+      <TransactionForm />
       <h1>Budget Planner</h1>
       <div
         className="transactions-form-ui-div"
