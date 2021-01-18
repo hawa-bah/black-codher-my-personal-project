@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import PropTypes from "prop-types";
 import { connect, useSelector } from "react-redux";
@@ -90,7 +90,10 @@ function App() {
         />
         <Route exact path="/login" component={Login} render={() => <Login />} />
         <Route exact path="/register" component={Register} />
-        {/* <PrivateRoute path="/landing" component={Landing} /> */}
+        {/* So that only one route is rendered */}
+        <Switch>
+          <PrivateRoute exact path="/landing" component={Landing} />
+        </Switch>
         <Route
           exact
           path="/about"
