@@ -90,7 +90,7 @@ function App() {
         />
         <Route exact path="/login" component={Login} render={() => <Login />} />
         <Route exact path="/register" component={Register} />
-        <PrivateRoute path="/landing" component={Landing} />
+        {/* <PrivateRoute path="/landing" component={Landing} /> */}
         <Route
           exact
           path="/about"
