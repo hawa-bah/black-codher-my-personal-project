@@ -10,6 +10,8 @@ import { deleteOne } from "../../services/transactionService";
 
 const TransactionsList = (props) => {
   // >>> we are passing as props renderBalance() and others but only using the first
+  const { auth } = props;
+
   const [transactions, setTransactions] = useState(null);
 
   const [filteredTransactions, setFilteredTransactions] = useState([]);
@@ -30,7 +32,7 @@ const TransactionsList = (props) => {
   }, [props.hasSubmitedTransaction]);
 
   const getTransactionsList = async () => {
-    let res = await getAll();
+    let res = await getAll(auth.user.email);
     console.log(res);
     setTransactions(res);
   };
@@ -55,7 +57,6 @@ const TransactionsList = (props) => {
           <button
             onClick={() => {
               deleteTransaction(transaction);
-              // props.renderBalance();
             }}
           >
             Delete

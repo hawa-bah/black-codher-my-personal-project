@@ -5,13 +5,15 @@ async function getAll(user_ref_email) {
   return res.data || [];
 }
 
-async function getSpent(tripName) {
-  const res = await axios.get(`/api/expenses/${tripName}`);
+async function getSpent(tripName, user_ref_email) {
+  const res = await axios.get(`/api/expenses/${tripName}/${user_ref_email}`);
   return res.data || [];
 }
 
-async function getBudget(tripName) {
-  const res = await axios.get(`/api/budget/category/${tripName}`);
+async function getBudget(tripName, user_ref_email) {
+  const res = await axios.get(
+    `/api/budget/category/${tripName}/${user_ref_email}`
+  );
   return res.data || [];
 }
 

@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Grid, MenuItem, TextField } from "@material-ui/core";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { getAll, getBudget, getSpent } from "../services/budgetService";
+import { connect, useSelector } from "react-redux";
+import BudgetPage from "./expense_tab/BudgetPage";
 
 const BudgetCategories = (props) => {
+  const { auth } = props;
+
   const [tripName, setTripName] = useState(""); // tripName is used to select the trip at thhe top of the page
   const [tripNameList, setTripNameList] = useState(null); // documents from the budget collection
   const [spent, setSpent] = useState(null); //transactions of a specific trip. Spent is an array of objects(transactions)
@@ -35,7 +39,6 @@ const BudgetCategories = (props) => {
   }, [props.hasSubmitedTransaction, data]);
 
   const changeColorBudget = (data) => {
-    console.log("222*******");
     data[0].budgets.map((elements) => {
       const categoryDiv = document.getElementById(
         "category-card-div" + "" + elements.budget_category
@@ -51,8 +54,11 @@ const BudgetCategories = (props) => {
       let spentValue = filterSpent.reduce(function (prev, cur) {
         return prev + cur.transaction_value;
       }, 0);
-      if (Math.round((spentValue / elements.budget_amount) * 100) > 50) {
+      if (Math.round((spentValue / elements.budget_amount) * 100) > 75) {
         categoryDiv.style.cssText = "background-color: red; color: white";
+        console.log("*******" + spentValue);
+      } else if (Math.round((spentValue / elements.budget_amount) * 100) > 60) {
+        categoryDiv.style.cssText = "background-color: orange; color: black";
         console.log("*******" + spentValue);
       } else {
         categoryDiv.style.cssText = "background-color: white; color: black";
@@ -63,10 +69,10 @@ const BudgetCategories = (props) => {
 
   const getTripNameList = async () => {
     //>>>> I am getting the documents from the budget collection whith budgetService.js
-    let res = await getAll();
+    let res = await getAll(auth.user.email);
     setTripNameList(res);
-    // console.log(res);
   };
+
   const renderTripNameList = (trip) => {
     return (
       <MenuItem key={trip.trip_name} value={trip.trip_name}>
@@ -77,20 +83,15 @@ const BudgetCategories = (props) => {
 
   //  rendering categories info
   const renderBudgetCategory = async (tripName) => {
-    let res = await getBudget(tripName);
-    console.log(res);
-    console.log("testing");
+    let res = await getBudget(tripName, auth.user.email);
     setData(res);
   };
 
-  // attempt 2
   const renderSpent = async (tripName) => {
-    let res = await getSpent(tripName);
-    console.log(res);
+    let res = await getSpent(tripName, auth.user.email);
     setSpent(res); //this returns the transactions of a specific trip. Spent is an array of objects(transactions)
   };
 
-  console.log(data);
   return (
     <div className="budgetCategories-div" style={{ padding: "20px" }}>
       <h2 className="budgetPage-subtitle">VIEW YOUR BUDGETS</h2>
@@ -172,29 +173,6 @@ const BudgetCategories = (props) => {
             })
           : null}
       </div>
-
-      {/* -----------------------------------------------------this are to submit budget, might delete late */}
-      {/* {props.budgetCategoriesArry.map((category) => {
-        return (
-          <div className={"card" + category}>
-            <h2>{category}</h2>
-            <p>Current budget {}</p>
-            <Form onSubmit={() => handleSubmit(category)}>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Budget</Form.Label>
-                <Form.Control
-                  type="expense"
-                  placeholder="input value"
-                  value={budget}
-                  onChange={(e) => setbudget(e.target.value)}
-                />
-                <Button type="submit">Submit</Button>
-              </Form.Group>
-            </Form>
-          </div>
-        );
-      })} */}
-      {/* ---------------------------------------------------------------------------------------------- */}
     </div>
   );
 };

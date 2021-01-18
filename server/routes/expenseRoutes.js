@@ -4,8 +4,10 @@ const Exp_Transaction = mongoose.model("transaction");
 const Budget = mongoose.model("budget");
 
 module.exports = (app) => {
-  app.get(`/api/expense`, async (req, res) => {
-    const transactions = await Exp_Transaction.find();
+  // used
+  app.get(`/api/expense/:ref`, async (req, res) => {
+    const { ref } = req.params;
+    const transactions = await Exp_Transaction.find({ user_ref_email: ref });
     return res.status(200).send(transactions);
   });
 
@@ -20,6 +22,7 @@ module.exports = (app) => {
     return res.status(200).send(balance);
     // console.log(res);
   });
+
   app.post(`/api/expense`, async (req, res) => {
     const expense = await Exp_Transaction.create(req.body);
 
@@ -27,10 +30,6 @@ module.exports = (app) => {
       error: false,
       expense,
     });
-  });
-
-  app.post(`api/expense/food`, async (req, res) => {
-    await Exp_Food.create(req.body);
   });
 
   app.delete(`/api/expenses/transactions/:id`, async (req, res) => {
@@ -44,58 +43,38 @@ module.exports = (app) => {
     });
   });
 
-  app.get(`/api/expenses/accomodation/:tripName`, async (req, res) => {
-    const { tripName } = req.params;
-    const spent = await Exp_Transaction.aggregate([
-      { $match: { budget_category: "Accomodation", trip_name: tripName } },
-      {
-        $group: { _id: "", transaction_value: { $sum: "$transaction_value" } },
-      },
-    ]);
+  // /used
+  app.get(`/api/expenses/:tripName/:ref`, async (req, res) => {
+    const { tripName, ref } = req.params;
+
+    const spent = await Exp_Transaction.find({
+      trip_name: tripName,
+      user_ref_email: ref,
+    });
 
     return res.status(200).send(spent);
   });
 
-  // >>>>>>>>>>>>>>>> amount spent in each category
-
-  // attempt 1
-  // app.get(`/api/expenses/:category/:tripName`, async (req, res) => {
-  //   const { tripName } = req.params.tripName;
-  //   const { category } = req.params.category;
-  //   const spent = await Exp_Accomodation.aggregate([
-  //     { $match: { budget_category: category, trip_name: tripName } },
-  //     {
-  //       $group: { _id: "", transaction_value: { $sum: "$transaction_value" } },
-  //     },
-  //   ]);
-
-  //   return res.status(200).send(spent);
-  // });
-
-  // attempt 2
-  app.get(`/api/expenses/:tripName`, async (req, res) => {
-    const { tripName } = req.params;
-
-    const spent = await Exp_Transaction.find({ trip_name: tripName });
-
-    return res.status(200).send(spent);
-  });
   //>>>>>>>>>>>>>>>>> for budgeting
+  // /used
   app.get(`/api/budget/:ref`, async (req, res) => {
     const ref = req.params.ref;
     const budgets = await Budget.find({ user_ref_email: ref });
     return res.status(200).send(budgets);
   });
 
+  // /used
   app.post(`/api/budget`, async (req, res) => {
     await Budget.create(req.body);
   });
 
-  app.get(`/api/budget/category/:tripName`, async (req, res) => {
-    const { tripName } = req.params;
+  // /used
+  app.get(`/api/budget/category/:tripName/:ref`, async (req, res) => {
+    const { tripName, ref } = req.params;
 
     const budget = await Budget.find({
       trip_name: tripName,
+      user_ref_email: ref,
     });
     console.log(budget);
     return res.status(200).send(budget);

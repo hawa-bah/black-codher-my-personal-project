@@ -22,6 +22,7 @@ import FormatHelperText from "@material-ui/core/FormHelperText";
 import Checkbox from "@material-ui/core/Checkbox";
 
 import { getAll } from "../../services/budgetService";
+import { connect, useSelector } from "react-redux";
 
 // styling material-ui
 const ColorButton = withStyles((theme) => ({
@@ -43,6 +44,8 @@ const useStyles = makeStyles((theme) => ({
 const Filter = (props) => {
   const classes = useStyles();
 
+  const auth = useSelector((state) => state.auth);
+
   const [tripNames, setTripNames] = useState(null);
   const [tripList, setTripList] = useState(null); //documents from the budget collection
 
@@ -60,7 +63,7 @@ const Filter = (props) => {
 
   const getTripList = async () => {
     //>>>> I am getting the documents from the budget collection whith budgetService.js
-    let res = await getAll();
+    let res = await getAll(auth.user.email);
     console.log(res.map((item) => item.trip_name));
     let data = res.map((item) => item.trip_name); //line 62 // array of trip names
     setTripNames(data); //line 63
@@ -69,6 +72,7 @@ const Filter = (props) => {
     console.log(stateTrip);
     setTripList(stateTrip); // TripList is now the state of the trips
   };
+
   const getErrorMessage = () => {
     let errorNumber = Object.values(tripList).reduce((a, item) => a + item, 0); // >>> counting how many trips have been selected
     let errorTrip = errorNumber < 1;
@@ -86,8 +90,6 @@ const Filter = (props) => {
     Entertainment: false,
     Others: false,
   });
-
-  // change it and make it seperately
 
   // (below) object destructuring of categories
   const {
@@ -232,4 +234,7 @@ const Filter = (props) => {
   );
 };
 
-export default Filter;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps)(Filter);

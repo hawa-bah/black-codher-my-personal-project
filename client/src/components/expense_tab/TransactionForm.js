@@ -80,9 +80,9 @@ const useStyles = makeStyles((theme) => ({
 
 const TransactionForm = (props) => {
   const classes = useStyles();
+  const { auth } = props;
   // NEW:
   //>>>> The balance is the sum of those values with test for now
-  const [hasSubmitedTransaction, setHasSubmitedTransaction] = useState(false);
   //
   const [description, setDescription] = useState("");
   const [transactionValue, setTransactionValue] = useState(0);
@@ -124,6 +124,7 @@ const TransactionForm = (props) => {
       transaction_date: selectedDate, //
       budget_category: transactionCategory, //
       trip_name: tripTransaction,
+      user_ref_email: auth.user.email,
     });
 
     //>>>> this is to clear the input fields once clicked submit. The values will still be saved in the mongo database
@@ -133,7 +134,7 @@ const TransactionForm = (props) => {
     setTransactionCategory("");
     setTripTransaction("");
 
-    setHasSubmitedTransaction(true);
+    props.setHasSubmitedTransaction(true);
   }
 
   return (
@@ -151,7 +152,6 @@ const TransactionForm = (props) => {
         onSubmit={(event) => {
           handleSubmit(event);
           console.log("clickSubmit");
-          // renderBalance();
         }}
       >
         <Grid

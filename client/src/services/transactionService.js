@@ -1,7 +1,7 @@
 import axios from "axios";
 
-async function getAll() {
-  const res = await axios.get(`/api/expense`);
+async function getAll(user_ref_email) {
+  const res = await axios.get(`/api/expense/${user_ref_email}`);
   return res.data || [];
 }
 
@@ -13,9 +13,5 @@ async function getBalance() {
 async function deleteOne(transaction) {
   await axios.delete(`/api/expenses/transactions/${transaction._id}`);
 }
-async function getSpentAccomodation(tripName) {
-  const res = await axios.get(`/api/expenses/accomodation/${tripName}`);
-  return res.data || [];
-}
 
-export { getAll, getBalance, deleteOne, getSpentAccomodation };
+export { getAll, getBalance, deleteOne };
