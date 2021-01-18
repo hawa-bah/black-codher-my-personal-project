@@ -11,7 +11,7 @@ import store from "./Redux/store";
 
 // PAGES
 import BudgetPage from "./components/expense_tab/BudgetPage";
-import SubmitBudgetPage from "./pages/SubmitBudgets";
+import SubmitBudgetPage from "./pages/SubmitBudgetsPage";
 import budgetCategoriesArry from "./budgetCategoriesArray";
 import NavBar from "./components/Navbar";
 import About from "./pages/About";

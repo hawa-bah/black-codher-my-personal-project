@@ -61,10 +61,11 @@ module.exports = (app) => {
       // Check password
       bcrypt.compare(password, user.password).then((isMatch) => {
         if (isMatch) {
-          // Create JWT Payload
+          // Create JWT Payload (the playload is what will be included in the state saved )
           const payload = {
             id: user.id,
             name: user.name,
+            email: user.email,
           };
           // Sign token
           jwt.sign(

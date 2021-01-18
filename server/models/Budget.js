@@ -10,6 +10,8 @@ const Budget = Schema({
     },
   ],
   trip_name: String,
+  // user_id: { type: Schema.Types.ObjectId, ref: "users" },
+  user_ref_email: String,
   // submit id of the cureent user too
   //also display depending on the user (if it matches the current user) if statement
 });

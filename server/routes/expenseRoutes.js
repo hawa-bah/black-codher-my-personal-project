@@ -81,8 +81,9 @@ module.exports = (app) => {
     return res.status(200).send(spent);
   });
   //>>>>>>>>>>>>>>>>> for budgeting
-  app.get(`/api/budget`, async (req, res) => {
-    const budgets = await Budget.find({});
+  app.get(`/api/budget/:ref`, async (req, res) => {
+    const ref = req.params.ref;
+    const budgets = await Budget.find({ user_ref_email: ref });
     return res.status(200).send(budgets);
   });
 

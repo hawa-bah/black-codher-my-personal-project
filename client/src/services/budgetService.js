@@ -1,7 +1,7 @@
 import axios from "axios";
 
-async function getAll() {
-  const res = await axios.get(`/api/budget`);
+async function getAll(user_ref_email) {
+  const res = await axios.get(`/api/budget/${user_ref_email}`);
   return res.data || [];
 }
 

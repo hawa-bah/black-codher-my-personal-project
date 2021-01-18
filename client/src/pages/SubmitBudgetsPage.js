@@ -17,6 +17,7 @@ import AddIcon from "@material-ui/icons/Add";
 
 import Editable from "../components/budgetInfo/Editable";
 import SubmitInfoForm from "../components/budgetInfo/SubmitInfo";
+import { useSelector } from "react-redux";
 // import DeleteInfoCard from "../components/budgetInfo/DeleteInfoCard";
 
 // MATERIAL-UI:
@@ -40,6 +41,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SubmitBudgetPage = (props) => {
+  const auth = useSelector((state) => state.auth);
+
   const classes = useStyles;
   const [infoCards, setInfoCards] = useState([]); //>>>> the cards stored in the database will be saved here to display them later
   const [hasSubmitedInfo, setHasSubmitedInfo] = useState(false);
@@ -129,7 +132,12 @@ const SubmitBudgetPage = (props) => {
 
   const getInfoCards = async () => {
     //repeated code >>>> I am getting the documents from the budget collection whith budgetService.js
-    let res = await getAll();
+    let res;
+    if (auth.user.email) {
+      res = await getAll(auth.user.email);
+    } else {
+      res = await getAll();
+    }
     setInfoCards(res);
     console.log("infoCardssss :");
     console.log(res);

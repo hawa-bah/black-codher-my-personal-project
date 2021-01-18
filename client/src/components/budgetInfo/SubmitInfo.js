@@ -21,6 +21,7 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormatHelperText from "@material-ui/core/FormHelperText";
 import Axios from "axios";
+import { connect, useSelector } from "react-redux";
 
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
@@ -67,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SubmitInfoForm = (props) => {
-  //   const [hasSubmitedInfo, setHasSubmitedInfo] = useState(false);
+  const auth = useSelector((state) => state.auth);
   const [tripNameSubmit, setTripNamesSubmit] = useState("");
   const [accomodationAmount, setAccomodationAmount] = useState(null);
   const [transportAmount, setTransportAmount] = useState(null);
@@ -94,6 +95,7 @@ const SubmitInfoForm = (props) => {
         { budget_category: "Shopping", budget_amount: shoppingAmount },
         { budget_category: "Entrainment", budget_amount: entertainmentAmount },
       ],
+      user_ref_email: auth.user.email,
     });
   };
   return (
@@ -182,7 +184,7 @@ const SubmitInfoForm = (props) => {
               <TextField
                 id="others"
                 color="secondary"
-                label="others amount"
+                label="food amount"
                 value={foodAmount}
                 onChange={(e) => setFoodAmount(e.target.value)}
                 InputProps={{
@@ -212,4 +214,7 @@ const SubmitInfoForm = (props) => {
   );
 };
 
-export default SubmitInfoForm;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps)(SubmitInfoForm);

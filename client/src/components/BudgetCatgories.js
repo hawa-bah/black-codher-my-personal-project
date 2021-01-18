@@ -90,17 +90,6 @@ const BudgetCategories = (props) => {
     setSpent(res); //this returns the transactions of a specific trip. Spent is an array of objects(transactions)
   };
 
-  // -------------------------------------------------- this is used to submit budgets which might be deleted later
-  // const [budget, setbudget] = useState(null);
-  // function handleSubmit(category) {
-  //   console.log("i've clicked budget" + category);
-
-  //   axios.post(`/api/budget`, {
-  //     budget_category: category,
-  //     budget_amount: budget,
-  //   });
-  // }
-  // -----------------------------------------------------------------------------------------------------------
   console.log(data);
   return (
     <div className="budgetCategories-div" style={{ padding: "20px" }}>
