@@ -85,7 +85,6 @@ function App() {
           path="/login-register"
           render={() => (
             <React.Fragment>
-              <NavBar />
               <Auth />
             </React.Fragment>
           )}
