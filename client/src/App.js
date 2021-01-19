@@ -21,6 +21,8 @@ import Register from "./pages/Login/Register";
 import Landing from "./pages/Login/Landing";
 import PrivateRoute from "./PrivateRoute";
 
+import "./pages/Login/main.css";
+
 // >>>> checking if a user is loged in
 if (localStorage.jwtToken) {
   // Set auth token header auth

@@ -94,111 +94,110 @@ const Login = (props) => {
 
   return (
     <div className="Register-div">
-      <div className="container">
-        <div style={{ marginTop: "4rem" }} className="row">
-          <div className="col s8 offset-s2">
-            <Link
-              to="/"
-              className="btn-flat waves-effect"
-              style={{ backgroundColor: "black" }}
-            >
-              <i className="material-icons left">keyboard_backspace</i> Back to
-              home
-            </Link>
-            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-              <h4>
-                <b>Login</b> below
-              </h4>
-              <p className="grey-text text-darken-1">
-                Don't have an account? <Link to="/register">Register</Link>
-              </p>
+      <div>
+        <div className="container">
+          <div style={{ marginTop: "4rem" }} className="row">
+            <div className="col s8 ">
+              <Link to="/" className="btn-flat waves-effect black white-text">
+                <i className="material-icons left">keyboard_backspace</i> Back
+              </Link>
+              <div className="col s9">
+                <h4>
+                  <b>Login</b> below
+                </h4>
+                <p className="white-text text-darken-1">
+                  Don't have an account? <Link to="/register">Register</Link>
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div
-        className="register-form-div"
-        style={{
-          padding: 20,
-          margin: "auto",
-          marginBottom: "20px",
-          maxWidth: 600,
-        }}
-      >
-        <form
-          noValidate
-          onSubmit={(event) => {
-            handleLogin(event);
-            console.log("clickSubmit");
+        <div
+          className="register-form-div"
+          style={{
+            padding: 20,
+            margin: "auto",
+            marginBottom: "20px",
+            maxWidth: 600,
           }}
         >
-          <Grid
-            container
-            alignItems="flex-start"
-            spacing={2}
-            style={{ padding: "10px" }}
+          <form
+            noValidate
+            onSubmit={(event) => {
+              handleLogin(event);
+              console.log("clickSubmit");
+            }}
           >
-            <Grid item xs="auto" sm={12} className="my-1">
-              <TextField
-                id="email"
-                color="secondary"
-                label="Email"
-                value={loginInfo.email}
-                error={errorsRedux.email}
-                onChange={handleloginInfo}
-                className={classnames("", {
-                  invalid: errorsRedux.email || errorsRedux.emailnotfound,
-                })}
-              />
-              <span className="red-text">
-                {errorsRedux.email}
-                {errorsRedux.emailnotfound}
-              </span>
-            </Grid>
-            <Grid item sm={12}>
-              <FormControl className={clsx(classes.margin, classes.textField)}>
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <Input
-                  id="password"
-                  type={loginInfo.showPassword ? "text" : "password"}
-                  value={loginInfo.password}
+            <Grid
+              container
+              alignItems="flex-start"
+              spacing={2}
+              style={{ padding: "10px" }}
+            >
+              <Grid item xs="auto" sm={12} className="my-1">
+                <TextField
+                  id="email"
+                  color="secondary"
+                  label="Email"
+                  value={loginInfo.email}
+                  error={errorsRedux.email}
                   onChange={handleloginInfo}
                   className={classnames("", {
-                    invalid:
-                      errorsRedux.password || errorsRedux.passwordincorrect,
+                    invalid: errorsRedux.email || errorsRedux.emailnotfound,
                   })}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                      >
-                        {loginInfo.showPassword ? (
-                          <Visibility />
-                        ) : (
-                          <VisibilityOff />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  }
                 />
                 <span className="red-text">
-                  {errorsRedux.password}
-                  {errorsRedux.passwordincorrect}
+                  {errorsRedux.email}
+                  {errorsRedux.emailnotfound}
                 </span>
-              </FormControl>
+              </Grid>
+              <Grid item sm={12}>
+                <FormControl
+                  className={clsx(classes.margin, classes.textField)}
+                >
+                  <InputLabel htmlFor="password">Password</InputLabel>
+                  <Input
+                    id="password"
+                    type={loginInfo.showPassword ? "text" : "password"}
+                    value={loginInfo.password}
+                    onChange={handleloginInfo}
+                    className={classnames("", {
+                      invalid:
+                        errorsRedux.password || errorsRedux.passwordincorrect,
+                    })}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                        >
+                          {loginInfo.showPassword ? (
+                            <Visibility />
+                          ) : (
+                            <VisibilityOff />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                  <span className="red-text">
+                    {errorsRedux.password}
+                    {errorsRedux.passwordincorrect}
+                  </span>
+                </FormControl>
+              </Grid>
             </Grid>
-          </Grid>
-          <button
-            variant="contained"
-            color="primary"
-            type="submit"
-            className="btn  btn-large waves-effect waves-light hoverable orange accent-3 white-text"
-          >
-            Login to your account
-          </button>
-        </form>
+            <button
+              variant="contained"
+              color="primary"
+              type="submit"
+              className="btn  btn-large waves-effect waves-light hoverable orange accent-3 white-text"
+            >
+              Login to your account
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
