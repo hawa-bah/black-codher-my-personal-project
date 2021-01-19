@@ -4,23 +4,10 @@ import axios from "axios";
 // Material-ui
 import Button from "@material-ui/core/Button";
 import NumberFormat from "react-number-format";
-
-import {
-  createMuiTheme,
-  withStyles,
-  makeStyles,
-  ThemeProvider,
-} from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { purple } from "@material-ui/core/colors";
+import { Grid, TextField } from "@material-ui/core";
 
-import { Grid, FormControlLabel, TextField } from "@material-ui/core";
-
-import FormGroup from "@material-ui/core/FormGroup";
-// import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormatHelperText from "@material-ui/core/FormHelperText";
-import Axios from "axios";
 import { connect, useSelector } from "react-redux";
 
 function NumberFormatCustom(props) {

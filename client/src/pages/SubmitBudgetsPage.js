@@ -1,15 +1,10 @@
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { deleteOne, getAll } from "../services/budgetService";
 
 // Material-ui
-import { Grid, MenuItem, TextField, Button } from "@material-ui/core";
-import {
-  createMuiTheme,
-  withStyles,
-  makeStyles,
-  ThemeProvider,
-} from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { purple } from "@material-ui/core/colors";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";

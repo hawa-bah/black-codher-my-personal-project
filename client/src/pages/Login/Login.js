@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -6,14 +6,13 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../Redux/actions/authActions";
 
 // material-ui
-import { Grid, MenuItem, TextField, Button } from "@material-ui/core";
+import { Grid, TextField } from "@material-ui/core";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";

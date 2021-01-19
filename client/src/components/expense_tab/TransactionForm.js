@@ -1,36 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import NumberFormat from "react-number-format";
 // import { Form, Field } from "react-final-form";
-import {
-  Grid,
-  Button,
-  CssBaseline,
-  RadioGroup,
-  FormLabel,
-  MenuItem,
-  FormGroup,
-  FormControl,
-  FormControlLabel,
-  TextField,
-  TextHelper,
-} from "@material-ui/core";
+import { Grid, Button, MenuItem, TextField } from "@material-ui/core";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 
-import budgetCategoriesArry from "../../budgetCategoriesArray";
 import { getBudget } from "../../services/budgetService";
 
 // Material-ui
-import {
-  createMuiTheme,
-  withStyles,
-  makeStyles,
-  ThemeProvider,
-} from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { purple } from "@material-ui/core/colors";
 import axios from "axios";
 
