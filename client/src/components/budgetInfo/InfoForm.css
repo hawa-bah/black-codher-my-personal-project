@@ -1,0 +1,10 @@
+.submit-info-form-div {
+  z-index: 1;
+  position: "absolute";
+  background-color: "white";
+}
+.pop-up dialog {
+  z-index: 2;
+  position: "absolute";
+  background-color: "white";
+}

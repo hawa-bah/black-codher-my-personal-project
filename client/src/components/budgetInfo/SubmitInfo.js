@@ -9,6 +9,7 @@ import { purple } from "@material-ui/core/colors";
 import { Grid, TextField } from "@material-ui/core";
 
 import { connect, useSelector } from "react-redux";
+import "./InfoForm.css";
 
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
@@ -20,7 +21,7 @@ function NumberFormatCustom(props) {
       onValueChange={(values) => {
         onChange({
           target: {
-            name: props.name,
+            // name: props.name,
             value: values.value,
           },
         });
@@ -34,7 +35,7 @@ function NumberFormatCustom(props) {
 
 NumberFormatCustom.propTypes = {
   inputRef: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
+  // name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
@@ -66,8 +67,6 @@ const SubmitInfoForm = (props) => {
 
   const [hasFinishedSubmitInfo, setHasFinishedSubmitInfo] = useState(false);
 
-  useEffect(() => {});
-
   const handleSubmitInfo = (e) => {
     props.setHasSubmitedInfo(!props.hasSubmitedInfo);
     setHasFinishedSubmitInfo(true);
@@ -86,10 +85,20 @@ const SubmitInfoForm = (props) => {
     });
   };
   return (
-    <div>
+    <div
+      className="submit-info-form-div"
+      style={{ zIndex: 1, position: "absolute", backgroundColor: "white" }}
+    >
       <div>
         {hasFinishedSubmitInfo && (
-          <div className="finished-edit-div">
+          <div
+            className="finished-edit-div pop-up dialog"
+            style={{
+              zIndex: 1,
+              position: "absolute",
+              backgroundColor: "white",
+            }}
+          >
             <h2> The card has been succesfully posted!</h2>
             <div className="finished-edit-buttons">
               <ColorButton
@@ -107,7 +116,7 @@ const SubmitInfoForm = (props) => {
       <div className="submit-Info-Form">
         <form onSubmit={(e) => handleSubmitInfo(e)}>
           <Grid container alignItems="flex-start" spacing={2}>
-            <Grid item xs={4}>
+            <Grid item xs="auto" sm={4}>
               <TextField
                 id="Trip_Name"
                 color="secondary"
@@ -117,7 +126,11 @@ const SubmitInfoForm = (props) => {
                 fullWidth
                 required
               />
-
+            </Grid>
+          </Grid>
+          <h4>Budgets</h4>
+          <Grid container alignItems="flex-start" spacing={2}>
+            <Grid item xs="auto" sm={4}>
               <TextField
                 id=""
                 color="secondary"
@@ -128,10 +141,11 @@ const SubmitInfoForm = (props) => {
                   inputComponent: NumberFormatCustom,
                 }}
                 fullWidth
+                isNumericString
                 required
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs="auto" sm={4}>
               <TextField
                 id="Accomodation"
                 color="secondary"
@@ -142,8 +156,11 @@ const SubmitInfoForm = (props) => {
                   inputComponent: NumberFormatCustom,
                 }}
                 fullWidth
+                isNumericString
                 required
               />
+            </Grid>
+            <Grid item xs="auto" sm={4}>
               <TextField
                 id="entratainment"
                 color="secondary"
@@ -154,8 +171,11 @@ const SubmitInfoForm = (props) => {
                   inputComponent: NumberFormatCustom,
                 }}
                 fullWidth
+                isNumericString
                 required
               />
+            </Grid>
+            <Grid item xs="auto" sm={4}>
               <TextField
                 id="shopping"
                 color="secondary"
@@ -166,8 +186,11 @@ const SubmitInfoForm = (props) => {
                   inputComponent: NumberFormatCustom,
                 }}
                 fullWidth
+                isNumericString
                 required
               />
+            </Grid>
+            <Grid item xs="auto" sm={4}>
               <TextField
                 id="others"
                 color="secondary"
@@ -178,8 +201,11 @@ const SubmitInfoForm = (props) => {
                   inputComponent: NumberFormatCustom,
                 }}
                 fullWidth
+                isNumericString
                 required
               />
+            </Grid>
+            <Grid item xs="auto" sm={4}>
               <TextField
                 id="others"
                 color="secondary"
@@ -190,11 +216,19 @@ const SubmitInfoForm = (props) => {
                   inputComponent: NumberFormatCustom,
                 }}
                 fullWidth
+                isNumericString
                 required
               />
             </Grid>
           </Grid>
           <ColorButton type="submit">Submit new budget</ColorButton>
+          <ColorButton
+            style={{ backgroundColor: "grey" }}
+            type="cancel"
+            onClick={() => props.setWantsToSubmitInfo(false)}
+          >
+            Cancel
+          </ColorButton>
         </form>
       </div>
     </div>

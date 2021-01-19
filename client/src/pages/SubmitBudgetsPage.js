@@ -178,7 +178,14 @@ const SubmitBudgetPage = (props) => {
     <div>
       <div>
         {clickDelete && (
-          <div>
+          <div
+            className="pop-up dialog"
+            style={{
+              zIndex: 1,
+              position: "absolute",
+              backgroundColor: "white",
+            }}
+          >
             <h2>
               Are you sure you want to delete the card {cardToDelete.trip_name}?
             </h2>
@@ -205,7 +212,14 @@ const SubmitBudgetPage = (props) => {
           />
         )}
         {hasFinishedEdit && (
-          <div className="finished-edit-div">
+          <div
+            className="finished-edit-div pop-up dialog"
+            style={{
+              zIndex: 1,
+              position: "absolute",
+              backgroundColor: "white",
+            }}
+          >
             <h2>
               {" "}
               The card has been succesfully updated! Do you want to continue
@@ -226,6 +240,7 @@ const SubmitBudgetPage = (props) => {
             </div>
           </div>
         )}
+
         {clickEdit && (
           <form
             className="info-form-edit"
@@ -291,6 +306,10 @@ const SubmitBudgetPage = (props) => {
           </form>
         )}
       </div>
+
+      <div>
+        <h2>Your plans</h2>
+      </div>
       <div className="submit-Info-button">
         <ButtonSubmitPage // to submit NEW info (not edit)
           onClick={() => setWantsToSubmitInfo(true)}
@@ -298,6 +317,18 @@ const SubmitBudgetPage = (props) => {
         ></ButtonSubmitPage>
       </div>
       <div className="info-cards-container">
+        {infoCards.length === 0 ? (
+          <div>
+            <h4>
+              click the button
+              <ButtonSubmitPage // to submit NEW info (not edit)
+                onClick={() => setWantsToSubmitInfo(true)}
+                startIcon={<AddIcon />}
+              ></ButtonSubmitPage>{" "}
+              to create your first card
+            </h4>
+          </div>
+        ) : null}
         {infoCards && infoCards.map((infoCard) => renderInfoCard(infoCard))}
       </div>
     </div>
