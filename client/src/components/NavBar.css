@@ -9,6 +9,9 @@
   left: -100%;
   opacity: 1;
   transition: all 0.6s ease;
+  text-decoration: none;
+  padding-left: 0;
+  list-style-type: none;
 }
 
 .nav-menu.active {
@@ -21,9 +24,13 @@
 
 .nav-links {
   text-align: center;
-  padding: 2rem;
+  padding: 3rem;
   width: 100%;
-  /* display: table; */
+  transition: all 0.3s ease;
+  font-size: 2rem;
+  color: #fff;
+  display: block;
+  cursor: pointer;
 }
 
 .nav-links:hover {
