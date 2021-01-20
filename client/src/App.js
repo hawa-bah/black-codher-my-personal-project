@@ -52,6 +52,8 @@ function App() {
 
   return (
     <div>
+      {/* <div className="darken overlay-1"></div> */}
+
       <Router>
         <Route
           exact

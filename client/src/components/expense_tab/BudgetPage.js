@@ -83,7 +83,7 @@ const BudgetPage = (props) => {
 
   return (
     <div className="budgetPage-Div">
-      <h1>Budget Planner</h1>
+      <h1>Expense Tracker</h1>
 
       <TransactionForm
         hasSubmitedTransaction={hasSubmitedTransaction}

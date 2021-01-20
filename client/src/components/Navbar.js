@@ -11,7 +11,7 @@ const NavBar = () => {
 
   return (
     <React.Fragment>
-      <nav className="navBar-2 transparent">
+      <div className="navBar-2">
         <div>
           <div className="navBar-onView">
             <Link to="/home" className="navbar-logo" style={{ color: "black" }}>
@@ -73,7 +73,7 @@ const NavBar = () => {
             </li>
           </ul>
         </div>
-      </nav>
+      </div>
     </React.Fragment>
   );
 };

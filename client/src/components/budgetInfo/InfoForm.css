@@ -1,14 +1,66 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap");
 
-.submit-info-form-div {
-  z-index: 1;
-  position: "absolute";
-  background-color: "white";
-}
-.pop-up dialog {
+/* SUBMITINFOFORM */
+/* .darken.overlay-1 {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+} */
+.info-form-edit {
   z-index: 2;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.726);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.info-card-item.edit {
+  background-color: yellow;
+  position: absolute;
+  min-width: 400px;
+}
+.submit-info-form-div {
+  z-index: 2;
+  /* position: "absolute"; */
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.74);
+}
+.submit-info-form-div > div {
+  background-color: white;
+  max-height: fit-content;
+  max-width: 600px;
+  position: absolute;
+  z-index: 3;
+  /* /* opacity: 0;  */
+}
+.pop-up.dialog {
+  z-index: 4;
   position: "absolute";
   background-color: "white";
+  max-width: 700px;
+  padding: 20px;
+  left: auto;
+  right: auto;
+}
+.pop-up.dialog-parent {
+  z-index: 3;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.74);
 }
 
 /* INFO CARD CSS */

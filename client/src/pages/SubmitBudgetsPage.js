@@ -189,29 +189,32 @@ const SubmitBudgetPage = (props) => {
     <div>
       <div>
         {clickDelete && (
-          <div
-            className="pop-up dialog"
-            style={{
-              zIndex: 1,
-              position: "absolute",
-              backgroundColor: "white",
-            }}
-          >
-            <h2>
-              Are you sure you want to delete the card {cardToDelete.trip_name}?
-            </h2>
-            <ButtonSubmitPage onClick={() => setClickDelete(false)}>
-              Cancel
-            </ButtonSubmitPage>
-            <ButtonSubmitPage
-              style={{ background: "grey" }}
-              onClick={() => {
-                setClickDelete(false);
-                handleDelete(cardToDelete);
+          <div class="pop-up dialog-parent">
+            <div
+              className="pop-up dialog"
+              style={{
+                zIndex: 1,
+                position: "absolute",
+                backgroundColor: "white",
               }}
             >
-              Yes
-            </ButtonSubmitPage>
+              <h2>
+                Are you sure you want to delete the card{" "}
+                {cardToDelete.trip_name}?
+              </h2>
+              <ButtonSubmitPage onClick={() => setClickDelete(false)}>
+                Cancel
+              </ButtonSubmitPage>
+              <ButtonSubmitPage
+                style={{ background: "grey" }}
+                onClick={() => {
+                  setClickDelete(false);
+                  handleDelete(cardToDelete);
+                }}
+              >
+                Yes
+              </ButtonSubmitPage>
+            </div>
           </div>
         )}
         {wantsToSubmitInfo && (
@@ -222,104 +225,112 @@ const SubmitBudgetPage = (props) => {
             setWantsToSubmitInfo={setWantsToSubmitInfo}
           />
         )}
+
         {hasFinishedEdit && (
-          <div
-            className="finished-edit-div pop-up dialog"
-            style={{
-              zIndex: 1,
-              position: "absolute",
-              backgroundColor: "white",
-            }}
-          >
-            <h2>
-              {" "}
-              The card has been succesfully updated! Do you want to continue
-              editing the card?
-            </h2>
-            <div className="finished-edit-buttons">
-              <ButtonSubmitPage onClick={() => setHasFinishedEdit(false)}>
-                YES
-              </ButtonSubmitPage>
-              <ButtonSubmitPage
-                onClick={() => {
-                  setHasFinishedEdit(false);
-                  setClickEdit(false);
-                }}
-              >
-                NO
-              </ButtonSubmitPage>
+          <div class="pop-up dialog-parent">
+            <div
+              className="finished-edit-div pop-up dialog"
+              style={{
+                zIndex: 4,
+                position: "absolute",
+                backgroundColor: "white",
+              }}
+            >
+              <h2>
+                {" "}
+                The card has been succesfully updated! Do you want to continue
+                editing the card?
+              </h2>
+              <div className="finished-edit-buttons">
+                <ButtonSubmitPage onClick={() => setHasFinishedEdit(false)}>
+                  YES
+                </ButtonSubmitPage>
+                <ButtonSubmitPage
+                  onClick={() => {
+                    setHasFinishedEdit(false);
+                    setClickEdit(false);
+                  }}
+                >
+                  NO
+                </ButtonSubmitPage>
+              </div>
             </div>
           </div>
         )}
 
-        {clickEdit && (
-          <form
-            className="info-form-edit info-card-item"
-            style={{ backgroundColor: "yellow" }}
-            onSubmit={(e) => handleFinishEdit(e)}
-          >
-            <Editable
-              text={editTripName}
-              className="info-card-title"
-              // placeholder="Write a task name"
-              type="input"
+        <div>
+          {clickEdit && (
+            <form
+              className="info-form-edit"
+              onSubmit={(e) => handleFinishEdit(e)}
             >
-              <input
-                type="text"
-                name="task"
-                // placeholder="Write a task name"
-                value={editTripName} //state
-                onChange={(e) => setEditTripName(e.target.value)}
-              />
-            </Editable>
+              <div className="info-card-item edit">
+                <Editable
+                  text={editTripName}
+                  className="info-card-title"
+                  // placeholder="Write a task name"
+                  type="input"
+                >
+                  <input
+                    type="text"
+                    name="task"
+                    // placeholder="Write a task name"
+                    value={editTripName} //state
+                    onChange={(e) => setEditTripName(e.target.value)}
+                  />
+                </Editable>
 
-            <h5>BUDGETS:</h5>
-            <div className="info-card budget-list">
-              {editCard.budgets.map((budget, index) => {
-                return (
-                  <div>
-                    <Editable
-                      text={budget.budget_category}
-                      placeholder="Write a task name"
-                      type="input"
-                    >
-                      <input
-                        type="text"
-                        name="task"
-                        placeholder="Write a task name"
-                        value={budget.budget_category}
-                      />
-                    </Editable>
-                    <Editable
-                      text={
-                        editBudgets[index].budget_amount || budget.budget_amount
-                      }
-                      placeholder={
-                        editBudgets[index].budget_amount || budget.budget_amount
-                      }
-                      type="input"
-                    >
-                      <input
-                        type="text"
-                        name="task"
-                        placeholder="Write a task name"
-                        value={
-                          !editBudgets[index].budget_amount
-                            ? budget.budget_amount
-                            : editBudgets[index].budget_amount
-                        }
-                        onChange={(e) => {
-                          updateFieldChanged(index, e);
-                        }}
-                      />
-                    </Editable>
-                  </div>
-                );
-              })}
-            </div>
-            <button type="submit">Finish editing</button>
-          </form>
-        )}
+                <h5>BUDGETS:</h5>
+                <div className="info-card budget-list">
+                  {editCard.budgets.map((budget, index) => {
+                    return (
+                      <div>
+                        <Editable
+                          text={budget.budget_category}
+                          placeholder="Write a task name"
+                          type="input"
+                        >
+                          <input
+                            type="text"
+                            name="task"
+                            placeholder="Write a task name"
+                            value={budget.budget_category}
+                          />
+                        </Editable>
+                        <Editable
+                          text={
+                            editBudgets[index].budget_amount ||
+                            budget.budget_amount
+                          }
+                          placeholder={
+                            editBudgets[index].budget_amount ||
+                            budget.budget_amount
+                          }
+                          type="input"
+                        >
+                          <input
+                            type="text"
+                            name="task"
+                            placeholder="Write a task name"
+                            value={
+                              !editBudgets[index].budget_amount
+                                ? budget.budget_amount
+                                : editBudgets[index].budget_amount
+                            }
+                            onChange={(e) => {
+                              updateFieldChanged(index, e);
+                            }}
+                          />
+                        </Editable>
+                      </div>
+                    );
+                  })}
+                </div>
+                <button type="submit">Finish editing</button>
+              </div>
+            </form>
+          )}
+        </div>
       </div>
 
       <div>
