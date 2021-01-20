@@ -12,62 +12,67 @@ const NavBar = () => {
   return (
     <React.Fragment>
       <nav className="navBar-2 transparent">
-        <div className="navBar-onView">
-          <Link to="/home" className="navbar-logo" style={{ color: "black" }}>
-            HOME
-          </Link>
-          <div onClick={handleClick}>
-            <MenuIcon style={{ color: "black" }} />
-            <i className={click ? "fas fa-times" : "fas fa-bars"} />
+        <div>
+          <div className="navBar-onView">
+            <Link to="/home" className="navbar-logo" style={{ color: "black" }}>
+              HOME
+            </Link>
+            <div onClick={handleClick}>
+              <MenuIcon style={{ color: "black" }} />
+              <i className={click ? "fas fa-times" : "fas fa-bars"} />
+            </div>
           </div>
+
+          <ul
+            className={click ? "nav-menu active" : "nav-menu"}
+            style={{ zIndex: 5, textDecoration: "none" }}
+          >
+            <li className="nav-item">
+              <Link to="/home" className="nav-links" onClick={closeMenu}>
+                Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/about" className="nav-links" onClick={closeMenu}>
+                About
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                to="/landing"
+                className="nav-links categories"
+                onClick={closeMenu}
+              >
+                Dashbord
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                to="/expenseTracker"
+                className="nav-links"
+                onClick={closeMenu}
+              >
+                Expenses
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/budgetInfo" className="nav-links" onClick={closeMenu}>
+                View your plans
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to="/login" className="nav-links" onClick={closeMenu}>
+                Login
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/register" className="nav-links" onClick={closeMenu}>
+                Register
+              </Link>
+            </li>
+          </ul>
         </div>
-
-        <ul className={click ? "nav-menu active" : "nav-menu"}>
-          <li className="nav-item">
-            <Link to="/home" className="nav-links" onClick={closeMenu}>
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/about" className="nav-links" onClick={closeMenu}>
-              About
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              to="/landing"
-              className="nav-links categories"
-              onClick={closeMenu}
-            >
-              Dashbord
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              to="/expenseTracker"
-              className="nav-links"
-              onClick={closeMenu}
-            >
-              Expenses
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/budgetInfo" className="nav-links" onClick={closeMenu}>
-              View your plans
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to="/login" className="nav-links" onClick={closeMenu}>
-              Login
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/register" className="nav-links" onClick={closeMenu}>
-              Register
-            </Link>
-          </li>
-        </ul>
       </nav>
     </React.Fragment>
   );

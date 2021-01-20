@@ -23,14 +23,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
   },
-  margin: {
-    margin: theme.spacing(1),
-  },
   withoutLabel: {
     marginTop: theme.spacing(3),
-  },
-  textField: {
-    width: "25ch",
   },
 }));
 
@@ -151,7 +145,7 @@ const Login = (props) => {
                   {errorsRedux.emailnotfound}
                 </span>
               </Grid>
-              <Grid item sm={12}>
+              <Grid item xs="auto" sm={7} className="my-1">
                 <FormControl
                   className={clsx(classes.margin, classes.textField)}
                 >

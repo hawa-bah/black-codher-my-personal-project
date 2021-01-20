@@ -132,7 +132,20 @@ const TransactionsList = (props) => {
         {transactions && transactions.length > 0 ? (
           <div className="transactions-container">
             <div>
-              {isFiltered &&
+              {isFiltered && filteredTransactions.length !== 0 ? (
+                filteredTransactions.length > 0 ? (
+                  filteredTransactions.map(
+                    (transaction) => renderTransaction(transaction) // this creates <li>
+                  )
+                ) : (
+                  transactions.map((transaction) =>
+                    renderTransaction(transaction)
+                  )
+                )
+              ) : (
+                <p>There are no transactions for the filters selected</p>
+              )}
+              {/* {isFiltered &&
               filteredTransactions &&
               filteredTransactions.length > 0
                 ? filteredTransactions.map(
@@ -140,7 +153,7 @@ const TransactionsList = (props) => {
                   )
                 : transactions.map((transaction) =>
                     renderTransaction(transaction)
-                  )}
+                  )} */}
             </div>
           </div>
         ) : (
