@@ -50,6 +50,7 @@ const TransactionsList = (props) => {
         <div className="transactions-list-element">
           <div>{`${transaction.transaction_value}`}</div>
           <div>{`${transaction.description}`}</div>
+          {console.log(transaction.transaction_date)}
           <div>{`${transaction.transaction_date}`}</div>
           <div>{` ${transaction.budget_category}`}</div>
           <div>{` ${transaction.trip_name}`}</div>
@@ -132,7 +133,8 @@ const TransactionsList = (props) => {
         {transactions && transactions.length > 0 ? (
           <div className="transactions-container">
             <div>
-              {isFiltered && filteredTransactions.length !== 0 ? (
+              {/* this makesthe button delete not work */}
+              {/* {isFiltered && filteredTransactions.length !== 0 ? (
                 filteredTransactions.length > 0 ? (
                   filteredTransactions.map(
                     (transaction) => renderTransaction(transaction) // this creates <li>
@@ -144,8 +146,8 @@ const TransactionsList = (props) => {
                 )
               ) : (
                 <p>There are no transactions for the filters selected</p>
-              )}
-              {/* {isFiltered &&
+              )} */}
+              {isFiltered &&
               filteredTransactions &&
               filteredTransactions.length > 0
                 ? filteredTransactions.map(
@@ -153,7 +155,7 @@ const TransactionsList = (props) => {
                   )
                 : transactions.map((transaction) =>
                     renderTransaction(transaction)
-                  )} */}
+                  )}
             </div>
           </div>
         ) : (

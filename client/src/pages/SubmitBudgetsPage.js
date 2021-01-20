@@ -13,8 +13,8 @@ import AddIcon from "@material-ui/icons/Add";
 import Editable from "../components/budgetInfo/Editable";
 import SubmitInfoForm from "../components/budgetInfo/SubmitInfo";
 import { useSelector } from "react-redux";
-// import DeleteInfoCard from "../components/budgetInfo/DeleteInfoCard";
 
+import "../components/budgetInfo/InfoForm.css";
 // MATERIAL-UI:
 const ButtonSubmitPage = withStyles((theme) => ({
   root: {
@@ -23,9 +23,10 @@ const ButtonSubmitPage = withStyles((theme) => ({
     "&:hover": {
       backgroundColor: purple[700],
     },
-    borderRadius: "20px",
-    maxWidth: "fit-content",
-    position: "left",
+    borderRadius: "30px",
+    // maxWidth: "10px",
+    // width: "10px",
+    // position: "left",
   },
 }))(Button);
 
@@ -142,34 +143,44 @@ const SubmitBudgetPage = (props) => {
   const renderInfoCard = (infoCard) => {
     return (
       <div className="info-card-item">
-        <h2 style={{ position: "absolute" }}>{infoCard.trip_name}</h2>
-        <ButtonSubmitPage
-          variant="contained"
-          color="primary"
-          label=""
-          className={classes.margin}
-          startIcon={<EditIcon />}
-          onClick={() => handleClickEdit(infoCard)}
-        ></ButtonSubmitPage>
-        <ButtonSubmitPage
-          onClick={() => {
-            setClickDelete(true);
-            setCardToDelete(infoCard);
-          }}
-          style={{ background: "black" }}
-          startIcon={<DeleteIcon />}
-        />
-        <h3>BUDGETS:</h3>
-        {infoCard.budgets &&
-          infoCard.budgets.map((item) => {
-            return (
-              <div>
-                <p>
-                  {item.budget_category}: {item.budget_amount}
-                </p>
-              </div>
-            );
-          })}
+        <div className="info-card-header">
+          <div>
+            <p className="info-card-title">{infoCard.trip_name}</p>
+          </div>
+          <div className="action-buttons-infoCard">
+            <ButtonSubmitPage
+              variant="contained"
+              color="primary"
+              label=""
+              className={classes.margin}
+              startIcon={<EditIcon />}
+              size="small"
+              onClick={() => handleClickEdit(infoCard)}
+            ></ButtonSubmitPage>
+            <ButtonSubmitPage
+              onClick={() => {
+                setClickDelete(true);
+                setCardToDelete(infoCard);
+              }}
+              size="small"
+              style={{ background: "black" }}
+              startIcon={<DeleteIcon />}
+            />
+          </div>
+        </div>
+        <h5>BUDGETS:</h5>
+        <div className="info-card budget-list">
+          {infoCard.budgets &&
+            infoCard.budgets.map((item) => {
+              return (
+                <div>
+                  <p>
+                    {item.budget_category}: {item.budget_amount}
+                  </p>
+                </div>
+              );
+            })}
+        </div>
       </div>
     );
   };
@@ -243,65 +254,69 @@ const SubmitBudgetPage = (props) => {
 
         {clickEdit && (
           <form
-            className="info-form-edit"
+            className="info-form-edit info-card-item"
             style={{ backgroundColor: "yellow" }}
             onSubmit={(e) => handleFinishEdit(e)}
           >
             <Editable
               text={editTripName}
-              placeholder="Write a task name"
+              className="info-card-title"
+              // placeholder="Write a task name"
               type="input"
             >
               <input
                 type="text"
                 name="task"
-                placeholder="Write a task name"
+                // placeholder="Write a task name"
                 value={editTripName} //state
                 onChange={(e) => setEditTripName(e.target.value)}
               />
             </Editable>
 
-            {editCard.budgets.map((budget, index) => {
-              return (
-                <div>
-                  <Editable
-                    text={budget.budget_category}
-                    placeholder="Write a task name"
-                    type="input"
-                  >
-                    <input
-                      type="text"
-                      name="task"
+            <h5>BUDGETS:</h5>
+            <div className="info-card budget-list">
+              {editCard.budgets.map((budget, index) => {
+                return (
+                  <div>
+                    <Editable
+                      text={budget.budget_category}
                       placeholder="Write a task name"
-                      value={budget.budget_category}
-                    />
-                  </Editable>
-                  <Editable
-                    text={
-                      editBudgets[index].budget_amount || budget.budget_amount
-                    }
-                    placeholder={
-                      editBudgets[index].budget_amount || budget.budget_amount
-                    }
-                    type="input"
-                  >
-                    <input
-                      type="text"
-                      name="task"
-                      placeholder="Write a task name"
-                      value={
-                        !editBudgets[index].budget_amount
-                          ? budget.budget_amount
-                          : editBudgets[index].budget_amount
+                      type="input"
+                    >
+                      <input
+                        type="text"
+                        name="task"
+                        placeholder="Write a task name"
+                        value={budget.budget_category}
+                      />
+                    </Editable>
+                    <Editable
+                      text={
+                        editBudgets[index].budget_amount || budget.budget_amount
                       }
-                      onChange={(e) => {
-                        updateFieldChanged(index, e);
-                      }}
-                    />
-                  </Editable>
-                </div>
-              );
-            })}
+                      placeholder={
+                        editBudgets[index].budget_amount || budget.budget_amount
+                      }
+                      type="input"
+                    >
+                      <input
+                        type="text"
+                        name="task"
+                        placeholder="Write a task name"
+                        value={
+                          !editBudgets[index].budget_amount
+                            ? budget.budget_amount
+                            : editBudgets[index].budget_amount
+                        }
+                        onChange={(e) => {
+                          updateFieldChanged(index, e);
+                        }}
+                      />
+                    </Editable>
+                  </div>
+                );
+              })}
+            </div>
             <button type="submit">Finish editing</button>
           </form>
         )}
@@ -329,7 +344,9 @@ const SubmitBudgetPage = (props) => {
             </h4>
           </div>
         ) : null}
-        {infoCards && infoCards.map((infoCard) => renderInfoCard(infoCard))}
+        <div className="info-cards container">
+          {infoCards && infoCards.map((infoCard) => renderInfoCard(infoCard))}
+        </div>
       </div>
     </div>
   );

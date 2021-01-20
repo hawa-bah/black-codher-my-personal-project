@@ -43,7 +43,7 @@ const NavBar = () => {
                 className="nav-links categories"
                 onClick={closeMenu}
               >
-                Dashbord
+                Dashboard
               </Link>
             </li>
             <li className="nav-item">
