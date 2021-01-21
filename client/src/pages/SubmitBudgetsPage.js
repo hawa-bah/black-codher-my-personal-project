@@ -46,7 +46,7 @@ const SubmitBudgetPage = (props) => {
   const [hasSubmitedInfo, setHasSubmitedInfo] = useState(false);
 
   const [clickEdit, setClickEdit] = useState(false);
-  const [hasFinishedEdit, setHasFinishedEdit] = useState(false);
+  const [hasClickedFinishEdit, setHasClickedFinishEdit] = useState(false);
   const [wantsToSubmitInfo, setWantsToSubmitInfo] = useState(false); //>>>>pop up message to confirm if the user wants to continue editing
 
   const [clickDelete, setClickDelete] = useState(false);
@@ -84,7 +84,7 @@ const SubmitBudgetPage = (props) => {
 
   useEffect(() => {
     getInfoCards(); // this by itself causes an infinite loop but solve if useEffect is only called once
-  }, [hasSubmitedInfo, hasFinishedEdit, hasDeleted]);
+  }, [hasSubmitedInfo, hasClickedFinishEdit, hasDeleted]);
 
   const handleDelete = async (cardToDelete) => {
     setHasDeleted(!hasDeleted);
@@ -103,8 +103,9 @@ const SubmitBudgetPage = (props) => {
     setEditBudgets(newArr); //
   }; //
 
-  const handleFinishEdit = (event) => {
-    event.preventDefault();
+  const handleFinishEdit = () => {
+    // event.preventDefault();
+    console.log("HANDLE EDIT");
     const newArr = [...editBudgets];
     let index = 0;
     for (index = 0; index < editBudgets.length; index++) {
@@ -118,7 +119,10 @@ const SubmitBudgetPage = (props) => {
       trip_name: editTripName,
       budgets: editBudgets,
     });
-    setHasFinishedEdit(true);
+    // setHasFinishedEdit(true);
+    // setHasClickedFinishEdit(false);
+    getInfoCards();
+    console.log("HANDLE EDIT 2");
   };
 
   const handleClickEdit = (infoCard) => {
@@ -228,7 +232,8 @@ const SubmitBudgetPage = (props) => {
           />
         )}
 
-        {hasFinishedEdit && (
+        {hasClickedFinishEdit && (
+          /* {hasFinishedEdit && ( */
           <div class="pop-up dialog-parent">
             <div
               className="finished-edit-div pop-up dialog"
@@ -240,17 +245,27 @@ const SubmitBudgetPage = (props) => {
             >
               <h2>
                 {" "}
-                The card has been succesfully updated! Do you want to continue
-                editing the card?
+                {/* The card has been succesfully updated! Do you want to continue
+                editing the card? */}
+                Do you want to apply the new changes?
               </h2>
               <div className="finished-edit-buttons">
-                <ButtonSubmitPage onClick={() => setHasFinishedEdit(false)}>
+                <ButtonSubmitPage
+                  onClick={() => {
+                    handleFinishEdit();
+                    setHasClickedFinishEdit(false);
+                    setClickEdit(false);
+                    // setHasFinishedEdit(false);
+                  }}
+                >
                   YES
                 </ButtonSubmitPage>
                 <ButtonSubmitPage
                   onClick={() => {
-                    setHasFinishedEdit(false);
-                    setClickEdit(false);
+                    // setHasFinishedEdit(false);
+                    setHasClickedFinishEdit(false);
+
+                    // setClickEdit(false);
                   }}
                 >
                   NO
@@ -264,7 +279,11 @@ const SubmitBudgetPage = (props) => {
           {clickEdit && (
             <form
               className="info-form-edit"
-              onSubmit={(e) => handleFinishEdit(e)}
+              onSubmit={(e) => {
+                e.preventDefault();
+                setHasClickedFinishEdit(true);
+                // handleFinishEdit(e);
+              }}
             >
               <div className="info-card-item edit">
                 <Editable
@@ -288,12 +307,12 @@ const SubmitBudgetPage = (props) => {
                     return (
                       <div>
                         <Editable text={budget.budget_category} type="text">
-                          <input
+                          {/* <input
                             type="text"
                             name="task"
                             placeholder="Write a task name"
                             value={budget.budget_category}
-                          />
+                          /> */}
                         </Editable>
                         <Editable
                           text={
@@ -310,29 +329,11 @@ const SubmitBudgetPage = (props) => {
                             type="text"
                             name="task"
                             placeholder="Input an amount"
-                            // value={
-                            //   editBudgets[index].budget_amount //the one the user inputs
-                            //     ? editBudgets[index].budget_amount
-                            //     : budget.budget_amount //this is already set
-                            // }
                             onChange={(e) => {
                               updateFieldChanged(index, e);
                             }}
                           />
                         </Editable>
-                        {/* <Editable
-                          text={task}
-                          placeholder="Write a task name"
-                          type="input"
-                        >
-                          <input
-                            type="text"
-                            name="task"
-                            placeholder="Write a task name"
-                            value={task}
-                            onChange={(e) => setTask(e.target.value)}
-                          />
-                        </Editable> */}
                       </div>
                     );
                   })}
