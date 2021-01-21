@@ -40,8 +40,8 @@ const TransactionsList = (props) => {
   const deleteTransaction = async (transaction) => {
     await deleteOne(transaction);
     getTransactionsList(); //>>>>>>>>>>>>>>>>>>>>>> !!!! ask Tanya why we shouldn't make so may requests to the back-end
-    props.setHasSubmitedTransaction(!props.hasSubmitedTransaction);
-    props.setHasSubmitedTransaction(!props.hasSubmitedTransaction);
+    props.setHasSubmitedTransaction(true);
+    // props.setHasSubmitedTransaction(!props.hasSubmitedTransaction);
   };
 
   const renderTransaction = (transaction) => {
