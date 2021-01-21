@@ -70,9 +70,10 @@ const useStyles = makeStyles((theme) => ({
 const BudgetPage = (props) => {
   const classes = useStyles();
   const auth = useSelector((state) => state.auth);
+
   // >>>> I'm passing transactions state (the value of a transaction) as a props
 
-  const [viewTransactions, setViewTransactions] = useState(false);
+  const [viewTransactions, setViewTransactions] = useState(false); //>
   //>>>> The balance is the sum of those values with test for now
   const [hasSubmitedTransaction, setHasSubmitedTransaction] = useState(false);
   //

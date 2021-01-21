@@ -33,6 +33,7 @@ const BudgetCategories = (props) => {
       if (data.length !== 0 && spent) {
         renderBudgetCategory(tripName);
         changeColorBudget(data);
+        console.log("USE EFFECT SPENT:", spent);
       }
       props.setHasSubmitedTransaction(false);
     }
@@ -45,7 +46,6 @@ const BudgetCategories = (props) => {
       );
 
       // repeated code
-
       console.log("SPENT:" + elements.budget_category);
 
       let filterSpent = spent.filter((object) => {
@@ -63,7 +63,6 @@ const BudgetCategories = (props) => {
       } else {
         categoryDiv.style.cssText = "background-color: white; color: black";
       }
-      console.log(categoryDiv);
     });
   };
 

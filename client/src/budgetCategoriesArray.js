@@ -2,7 +2,7 @@ const budgetCategoriesArry = [
   "Accomodation",
   "Transport",
   "Food",
-  "Entretainment",
+  "Entertainment",
   "Shopping",
   "Others",
 ];
