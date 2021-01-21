@@ -40,6 +40,8 @@ const SubmitBudgetPage = (props) => {
   const auth = useSelector((state) => state.auth);
 
   const classes = useStyles;
+
+  const [task, setTask] = useState("something");
   const [infoCards, setInfoCards] = useState([]); //>>>> the cards stored in the database will be saved here to display them later
   const [hasSubmitedInfo, setHasSubmitedInfo] = useState(false);
 
@@ -93,7 +95,7 @@ const SubmitBudgetPage = (props) => {
   const updateFieldChanged = (index, e) => {
     console.log("index: " + index);
     console.log("property name: " + e.target.name);
-    let newArr = [...editBudgets]; // copying the old datas array
+    let newArr = [...editBudgets]; // copying the old data array
     newArr[index].budget_amount = e.target.value; // we are changing the values of the objects of editBudgets[] to the new values(e.target)
     if (!newArr[index].budget_amount) {
       newArr[index].budget_amount = editCard.budgets[index].budget_amount;
@@ -285,11 +287,7 @@ const SubmitBudgetPage = (props) => {
                   {editCard.budgets.map((budget, index) => {
                     return (
                       <div>
-                        <Editable
-                          text={budget.budget_category}
-                          placeholder="Write a task name"
-                          type="input"
-                        >
+                        <Editable text={budget.budget_category} type="text">
                           <input
                             type="text"
                             name="task"
@@ -311,17 +309,30 @@ const SubmitBudgetPage = (props) => {
                           <input
                             type="text"
                             name="task"
-                            placeholder="Write a task name"
-                            value={
-                              !editBudgets[index].budget_amount
-                                ? budget.budget_amount
-                                : editBudgets[index].budget_amount
-                            }
+                            placeholder="Input an amount"
+                            // value={
+                            //   editBudgets[index].budget_amount //the one the user inputs
+                            //     ? editBudgets[index].budget_amount
+                            //     : budget.budget_amount //this is already set
+                            // }
                             onChange={(e) => {
                               updateFieldChanged(index, e);
                             }}
                           />
                         </Editable>
+                        {/* <Editable
+                          text={task}
+                          placeholder="Write a task name"
+                          type="input"
+                        >
+                          <input
+                            type="text"
+                            name="task"
+                            placeholder="Write a task name"
+                            value={task}
+                            onChange={(e) => setTask(e.target.value)}
+                          />
+                        </Editable> */}
                       </div>
                     );
                   })}

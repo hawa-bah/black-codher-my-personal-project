@@ -26,12 +26,11 @@ const BudgetCategories = (props) => {
 
     if (props.hasSubmitedTransaction) {
       renderSpent(tripName);
-      console.log("use effect transaction submited");
+
       // >>> the color gets updated when a transaction has been submited and SPENT has been set and rendered
       if (data.length !== 0 && spent) {
         renderBudgetCategory(tripName);
         changeColorBudget(data);
-        console.log("USE EFFECT SPENT:", spent);
       }
       props.setHasSubmitedTransaction(false);
     }
