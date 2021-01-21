@@ -8,11 +8,11 @@ import BudgetPage from "./expense_tab/BudgetPage";
 const BudgetCategories = (props) => {
   const { auth } = props;
 
-  const [tripName, setTripName] = useState(""); // tripName is used to select the trip at thhe top of the page
-  const [tripNameList, setTripNameList] = useState(null); // documents from the budget collection
+  const [tripName, setTripName] = useState(""); // tripName is used to select the trip at the top of the page
+  const [tripNameList, setTripNameList] = useState(null); // documents from the budget collection from a user
   const [spent, setSpent] = useState(null); //transactions of a specific trip. Spent is an array of objects(transactions)
 
-  const [data, setData] = useState([]); //document from the budget collection from a specific Trip
+  const [data, setData] = useState([]); //document from the budget collection from a specific Trip and user
 
   useEffect(() => {
     if (!tripNameList) {
@@ -20,7 +20,7 @@ const BudgetCategories = (props) => {
     }
 
     // >>> the color gets updated in the first time the page is loaded
-    if (data.length !== 0) {
+    if (data.length !== 0 && spent.length !== 0) {
       changeColorBudget(data);
     } else {
       console.log("not working");
@@ -28,12 +28,13 @@ const BudgetCategories = (props) => {
 
     if (props.hasSubmitedTransaction) {
       renderSpent(tripName);
-      console.log("heeeey has submited");
+      console.log("use effect transaction submited");
       // >>> the color gets updated when a transaction has been submited and SPENT has been set and rendered
       if (data.length !== 0 && spent) {
         renderBudgetCategory(tripName);
         changeColorBudget(data);
-        console.log("USE EFFECT SPENT:", spent);
+        console.log("USE EFFECT SPENT:", spent); //>this gets called
+        // cono;
       }
       props.setHasSubmitedTransaction(false);
     }
