@@ -10,6 +10,8 @@ const Budget = Schema({
     },
   ],
   trip_name: String,
+  // user_id: { type: Schema.Types.ObjectId, ref: "users" },
+  user_ref_email: String,
 });
 
 mongoose.model("budget", Budget, "budget");

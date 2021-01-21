@@ -1,12 +1,24 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const userSchema = new Schema({
-  first_name: String,
-  last_name: String,
-  location: String,
+const UserSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-// LOOK AT EXAMPLE QUICK START: if I want to add a method with functionality add it in here before the model
-mongoose.model("users", userSchema);
-// "users name of the collections"
+module.exports = User = mongoose.model("users", UserSchema);
+//NOTES: in here we have exported the model not the schema. if using multiple connections export schema instead

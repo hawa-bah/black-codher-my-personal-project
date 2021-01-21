@@ -1,41 +1,92 @@
 const mongoose = require("mongoose");
+// const express = require("express");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+
+// importing input validation
+const validateRegistrationInput = require("../auth/validation/register");
+const validateLoginInput = require("../auth/validation/login");
 
 const User = mongoose.model("users");
 
 module.exports = (app) => {
-  app.get(`/api/user`, async (req, res) => {
-    const persons = await User.find();
-    return res.status(200).send(persons);
-  });
+  app.post("/api/register", (req, res) => {
+    // destructuring the return of the imported function
+    const { errors, isValid } = validateRegistrationInput(req.body);
+    // Check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+    User.findOne({ email: req.body.email }).then((user) => {
+      if (user) {
+        return res.status(400).json({ email: "Email already exists" });
+      } else {
+        // creating new user
+        const newUser = new User({
+          name: req.body.name,
+          email: req.body.email,
+          password: req.body.password,
+        });
 
-  app.post(`/api/user`, async (req, res) => {
-    const user = await User.create(req.body);
-    return res.status(201).send({
-      error: false,
-      user,
+        // Hash password before saving in database
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) throw err;
+            newUser.password = hash;
+            newUser
+              .save()
+              .then((user) => res.json(user))
+              .catch((err) => console.log(err));
+          });
+        });
+      }
     });
   });
 
-  app.put(`/api/user/:id`, async (req, res) => {
-    const { id } = req.params;
-
-    const user = await User.findByIdAndUpdate(id, req.body);
-
-    return res.status(202).send({
-      error: false,
-      user,
+  app.post(`/login`, (req, res) => {
+    const { errors, isValid } = validateLoginInput(req.body);
+    // Check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+    const email = req.body.email;
+    const password = req.body.password;
+    // Find user by email
+    User.findOne({ email }).then((user) => {
+      // Check if user exists
+      if (!user) {
+        return res.status(404).json({ emailnotfound: "Email not found" });
+      }
+      // Check password
+      bcrypt.compare(password, user.password).then((isMatch) => {
+        if (isMatch) {
+          // Create JWT Payload (the playload is what will be included in the state saved )
+          const payload = {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+          };
+          // Sign token
+          jwt.sign(
+            payload,
+            process.env.SECRET_KEY,
+            {
+              expiresIn: 31556926, // 1 year in seconds
+            },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: "Bearer " + token,
+              });
+            }
+          );
+        } else {
+          return res
+            .status(400)
+            .json({ passwordincorrect: "Password incorrect" });
+        }
+      });
     });
   });
-
-  app.delete(`/api/user/:id`, async (req, res) => {
-    const { id } = req.params;
-
-    const user = await User.findByIdAndDelete(id);
-
-    return res.status(202).send({
-      error: false,
-      user,
-    });
-  });
-
 };

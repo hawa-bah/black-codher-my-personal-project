@@ -14,6 +14,10 @@ const TransactionSchema = Schema({
     required: true,
   },
   trip_name: String,
+  user_ref_email: {
+    type: String,
+    required: true,
+  },
 });
 
 mongoose.model("transaction", TransactionSchema, "transaction");

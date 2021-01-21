@@ -34,7 +34,7 @@ const Sort = (props) => {
   const classes = useStyles();
 
   const [displayMenuItems, setDisplayMenuItems] = useState(null);
-  const [sortType, setSortType] = useState();
+  const [sortType, setSortType] = useState("");
 
   //   functions:
   const handleSortClick = (event) => {
@@ -47,9 +47,11 @@ const Sort = (props) => {
 
   const sortTransactions = (type) => {
     const sortedTransactions = [...props.transactions].sort(function (a, b) {
-      return type === "transaction_date"
-        ? new Date(b[type]).getTime() - new Date(a[type]).getTime()
-        : b[type] - a[type];
+      if (type === "transaction_date") {
+        return new Date(b[type]).getTime() - new Date(a[type]).getTime();
+      } else {
+        return b[type] - a[type];
+      }
     });
     props.setTransactions(sortedTransactions);
   };

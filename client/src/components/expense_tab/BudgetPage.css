@@ -3,7 +3,7 @@
 .budgetPage-Div {
   background-color: aliceblue;
   background: url("../../micheile-henderson-SoT4-mZhyhE-unsplash.jpg");
-  height: 100vh;
+  height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -59,7 +59,7 @@
 /* TRANSACTIONlIST.JS */
 .transactions-list-element {
   display: grid;
-  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
   margin: 5px;
 }
 .transactions-container {
