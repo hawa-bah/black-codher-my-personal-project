@@ -41,7 +41,6 @@ const SubmitBudgetPage = (props) => {
 
   const classes = useStyles;
 
-  const [task, setTask] = useState("something");
   const [infoCards, setInfoCards] = useState([]); //>>>> the cards stored in the database will be saved here to display them later
   const [hasSubmitedInfo, setHasSubmitedInfo] = useState(false);
 
@@ -195,7 +194,7 @@ const SubmitBudgetPage = (props) => {
     <div>
       <div>
         {clickDelete && (
-          <div class="pop-up dialog-parent">
+          <div className="pop-up dialog-parent">
             <div
               className="pop-up dialog"
               style={{
@@ -234,7 +233,7 @@ const SubmitBudgetPage = (props) => {
 
         {hasClickedFinishEdit && (
           /* {hasFinishedEdit && ( */
-          <div class="pop-up dialog-parent">
+          <div className="pop-up dialog-parent">
             <div
               className="finished-edit-div pop-up dialog"
               style={{

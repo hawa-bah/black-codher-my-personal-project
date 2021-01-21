@@ -47,7 +47,7 @@
 .pop-up.dialog {
   z-index: 4;
   position: "absolute";
-  background-color: "white";
+  background-color: white;
   max-width: 700px;
   padding: 20px;
   left: auto;
