@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 // components
 import Sort from "../action-buttons/Sort";
 import Filter from "../action-buttons/Filter";
-import TransactionsTable from "./TransactionsTable";
 // services
 import { getAll } from "../../services/transactionService";
 // import { deleteOne } from "../../services/userService";
@@ -128,7 +127,6 @@ const TransactionsList = (props) => {
       </div>
 
       <div className="new transaction list">
-        <TransactionsTable></TransactionsTable>
         <p>Transactions:</p>
         {transactions && transactions.length > 0 ? (
           <div className="transactions-container">

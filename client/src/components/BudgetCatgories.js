@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Grid, MenuItem, TextField } from "@material-ui/core";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { getAll, getBudget, getSpent } from "../services/budgetService";
-import { connect, useSelector } from "react-redux";
-import BudgetPage from "./expense_tab/BudgetPage";
 
 const BudgetCategories = (props) => {
   const { auth } = props;
@@ -20,7 +18,7 @@ const BudgetCategories = (props) => {
     }
 
     // >>> the color gets updated in the first time the page is loaded
-    if (data.length !== 0 && spent.length !== 0) {
+    if (data.length !== 0 && spent.length !== 0 && tripName !== "Hidde") {
       changeColorBudget(data);
     } else {
       console.log("not working");

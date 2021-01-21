@@ -1,15 +1,8 @@
-import DateFnsUtils from "@date-io/date-fns";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import axios from "axios";
 import TransactionsList from "../transaction_list/TransactionsList";
 import TransactionForm from "../expense_tab/TransactionForm";
-import { getBalance } from "../../services/transactionService";
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
 
 import NumberFormat from "react-number-format";
 import { Button } from "@material-ui/core";
@@ -77,9 +70,7 @@ const BudgetPage = (props) => {
   //>>>> The balance is the sum of those values with test for now
   const [hasSubmitedTransaction, setHasSubmitedTransaction] = useState(false);
   //
-  const [selectedDate, handleDateChange] = useState(new Date());
-  const [transactionCategory, setTransactionCategory] = useState("");
-  const [tripTransaction, setTripTransaction] = useState(null);
+
   //
 
   return (

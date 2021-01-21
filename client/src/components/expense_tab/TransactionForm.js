@@ -182,7 +182,7 @@ const TransactionForm = (props) => {
         <Grid
           container
           alignItems="flex-start"
-          justifyContent="space-around"
+          justifycontent="space-around"
           spacing={2}
           style={{ padding: "10px" }}
         >
