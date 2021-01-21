@@ -33,12 +33,11 @@ const BudgetCategories = (props) => {
       if (data.length !== 0 && spent) {
         renderBudgetCategory(tripName);
         changeColorBudget(data);
-        console.log("USE EFFECT SPENT:", spent); //>this gets called
-        // cono;
+        console.log("USE EFFECT SPENT:", spent);
       }
       props.setHasSubmitedTransaction(false);
     }
-  }, [props.hasSubmitedTransaction, data]);
+  }, [props.hasSubmitedTransaction, data, tripName]);
 
   const changeColorBudget = (data) => {
     data[0].budgets.map((elements) => {
@@ -123,6 +122,7 @@ const BudgetCategories = (props) => {
       </form>
 
       {spent && spent.length > 0 ? <h1>BUDGET CATEGORIES </h1> : null}
+
       <div className="category-card-container">
         {data && data.length > 0
           ? data[0].budgets.map((elements) => {
