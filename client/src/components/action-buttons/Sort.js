@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 // Material-ui
 import Button from "@material-ui/core/Button";
-import {
-  createMuiTheme,
-  withStyles,
-  makeStyles,
-  ThemeProvider,
-} from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { purple } from "@material-ui/core/colors";
 
 import Menu from "@material-ui/core/Menu";
