@@ -6,6 +6,8 @@ import Filter from "../action-buttons/Filter";
 import { getAll } from "../../services/transactionService";
 // import { deleteOne } from "../../services/userService";
 import { deleteOne } from "../../services/transactionService";
+import { Button } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const TransactionsList = (props) => {
   // >>> we are passing as props renderBalance() and others but only using the first
@@ -45,24 +47,23 @@ const TransactionsList = (props) => {
 
   const renderTransaction = (transaction) => {
     return (
-      <div key={transaction._id}>
-        <div className="transactions-list-element">
-          <div>{`${transaction.transaction_value}`}</div>
-          <div>{`${transaction.description}`}</div>
-          {console.log(transaction.transaction_date)}
-          <div>{`${transaction.transaction_date}`}</div>
-          <div>{` ${transaction.budget_category}`}</div>
-          <div>{` ${transaction.trip_name}`}</div>
-          {/* the button can be transformed to an icon later */}
-          <button
+      // <div key={transaction._id} className="transactions-list-element">
+      <>
+        <div>{`${transaction.transaction_value}`}</div>
+        <div>{`${transaction.description}`}</div>
+        <div>{`${transaction.transaction_date}`}</div>
+        <div>{` ${transaction.budget_category}`}</div>
+        <div>{` ${transaction.trip_name}`}</div>
+        {/* the button can be transformed to an icon later */}
+        <div>
+          <Button
+            startIcon={<DeleteIcon />}
             onClick={() => {
               deleteTransaction(transaction);
             }}
-          >
-            Delete
-          </button>
+          ></Button>
         </div>
-      </div>
+      </>
     );
   };
   // label is state, also the things that will be filtered
@@ -126,36 +127,42 @@ const TransactionsList = (props) => {
         ></Filter>
       </div>
 
-      <div className="new transaction list">
-        <p>Transactions:</p>
+      <p>Transactions:</p>
+
+      <div className="transactions-container">
+        {/* <p>Transactions:</p> */}
+        {/* <div className="transaction-table-head"> */}
+        <h5>Amount</h5>
+        <h5>Description</h5>
+        <h5>Date</h5>
+        <h5>Category</h5>
+        <h5>Trip</h5>
+        <h5>Actions</h5>
+        {/* </div> */}
         {transactions && transactions.length > 0 ? (
-          <div className="transactions-container">
-            <div>
-              {/* this makesthe button delete not work */}
-              {/* {isFiltered && filteredTransactions.length !== 0 ? (
-                filteredTransactions.length > 0 ? (
-                  filteredTransactions.map(
-                    (transaction) => renderTransaction(transaction) // this creates <li>
-                  )
-                ) : (
-                  transactions.map((transaction) =>
-                    renderTransaction(transaction)
-                  )
-                )
-              ) : (
-                <p>There are no transactions for the filters selected</p>
-              )} */}
-              {isFiltered &&
-              filteredTransactions &&
-              filteredTransactions.length > 0
-                ? filteredTransactions.map(
-                    (transaction) => renderTransaction(transaction) // this creates <li>
-                  )
-                : transactions.map((transaction) =>
-                    renderTransaction(transaction)
-                  )}
-            </div>
-          </div>
+          // {/* this makesthe button delete not work */}
+          // {/* {isFiltered && filteredTransactions.length !== 0 ? (
+          //     filteredTransactions.length > 0 ? (
+          //       filteredTransactions.map(
+          //         (transaction) => renderTransaction(transaction) // this creates <li>
+          //       )
+          //     ) : (
+          //       transactions.map((transaction) =>
+          //         renderTransaction(transaction)
+          //       )
+          //     )
+          //   ) : (
+          //     <p>There are no transactions for the filters selected</p>
+          //   )} */}
+          isFiltered &&
+          filteredTransactions &&
+          filteredTransactions.length > 0 ? (
+            filteredTransactions.map(
+              (transaction) => renderTransaction(transaction) // this creates <li>
+            )
+          ) : (
+            transactions.map((transaction) => renderTransaction(transaction))
+          )
         ) : (
           <p>No transactions made</p>
         )}

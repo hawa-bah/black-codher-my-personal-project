@@ -193,7 +193,10 @@ const TransactionForm = (props) => {
                 label="Date of the transaction"
                 clearable
                 value={selectedDate}
-                onChange={(date) => handleDateChange(date)}
+                onChange={(date) => {
+                  handleDateChange(date);
+                  console.log(date);
+                }}
                 // minDate={new Date()}
                 format="MM/dd/yyyy"
                 style={{ width: "25ch" }}
