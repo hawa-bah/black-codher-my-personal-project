@@ -15,6 +15,7 @@ import SubmitInfoForm from "../components/budgetInfo/SubmitInfo";
 import { useSelector } from "react-redux";
 
 import "../components/budgetInfo/InfoForm.css";
+import { getBalance } from "../services/transactionService";
 // MATERIAL-UI:
 const ButtonSubmitPage = withStyles((theme) => ({
   root: {
@@ -40,6 +41,8 @@ const SubmitBudgetPage = (props) => {
   const auth = useSelector((state) => state.auth);
 
   const classes = useStyles;
+
+  // const [totalBudget, setTotalBudget] = useState(0);
 
   const [infoCards, setInfoCards] = useState([]); //>>>> the cards stored in the database will be saved here to display them later
   const [hasSubmitedInfo, setHasSubmitedInfo] = useState(false);
@@ -145,7 +148,13 @@ const SubmitBudgetPage = (props) => {
     console.log(infoCards);
   }; //
 
+  // const renderTotal = async (infoCard) => {
+  //   let res = await getBalance(infoCard.trip_name, auth.user.email);
+  //   setTotalBudget(res.budgetedTotal[0].budgets);
+  // };
+
   const renderInfoCard = (infoCard) => {
+    // renderTotal(infoCard);
     return (
       <div className="info-card-item">
         <div className="info-card-header">
