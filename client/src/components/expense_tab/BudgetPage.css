@@ -57,32 +57,32 @@
 }
 
 /* TRANSACTIONlIST.JS */
+
 .transactions-container {
-  display: grid;
-  grid-template-columns: 1fr 2fr 4fr 3fr 3fr 1fr;
-  text-align: center;
-  /* gap: 20px 5px; */
-  padding-bottom: 30px;
-  /* column-gap: 10px; */
+  background-color: none;
+}
+.transactions-container > h5 {
+  display: none;
+}
+.transactions-container div:nth-child(6n + 1):before {
+  content: "Amount";
+}
+.transactions-container > div:nth-of-type(6n + 2):before {
+  content: "Description";
+}
+.transactions-container > div:nth-of-type(6n + 3):before {
+  content: "Date";
+}
+.transactions-container > div:nth-of-type(6n + 4):before {
+  content: "Category";
+}
+.transactions-container > div:nth-of-type(6n + 5):before {
+  content: "Trip";
+}
+.transactions-container > div:nth-of-type(6n + 6):before {
+  content: "Actions";
 }
 
-.transactions-container > h5 {
-  background-color: rgb(3, 3, 139);
-  color: white;
-  font-size: 12px;
-  padding: 10px;
-  border-radius: 20px;
-  margin: 10px;
-}
-.transactions-container > div {
-  border-bottom: 1px solid white;
-  padding: 10px;
-}
-/* @media screen and (max-width: 800px) {
-  .left, .main, .right {
-    width: 100%; /* The width is 100%, when the viewport is 800px or smaller 
-  }
-} */
 .transactions-container {
   margin: 20px;
 }
@@ -104,4 +104,28 @@
   padding-right: 20px;
   background-color: rgba(73, 4, 138, 0.185);
   /* max-width: fit-content; */
+}
+
+@media only screen and (min-width: 800px) {
+  .transactions-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 4fr 3fr 3fr 1fr;
+    text-align: center;
+    /* gap: 20px 5px; */
+    padding-bottom: 30px;
+    /* column-gap: 10px; */
+  }
+
+  .transactions-container > h5 {
+    background-color: rgb(3, 3, 139);
+    color: white;
+    font-size: 12px;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 10px;
+  }
+  .transactions-container > div {
+    border-bottom: 1px solid white;
+    padding: 10px;
+  }
 }
