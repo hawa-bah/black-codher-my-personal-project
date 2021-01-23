@@ -92,10 +92,11 @@ const BudgetCategories = (props) => {
   };
   const renderBalanceTotal = async (tripName) => {
     let res = await getBalance(tripName, auth.user.email);
-    setTotalSpent(res.spentTotal[0].transaction_value);
-    setTotalBudget(res.budgetedTotal[0].budgets);
-    console.log(totalBudget);
-    console.log(totalSpent);
+    if (res.budgetedTotal[0]) {
+      console.log(res);
+      setTotalSpent(res.spentTotal[0].transaction_value);
+      setTotalBudget(res.budgetedTotal[0].budgets);
+    }
   };
 
   return (
