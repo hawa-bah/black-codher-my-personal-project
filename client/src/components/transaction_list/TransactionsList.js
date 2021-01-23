@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Moment from "react-moment";
 // components
 import Sort from "../action-buttons/Sort";
 import Filter from "../action-buttons/Filter";
@@ -51,7 +52,9 @@ const TransactionsList = (props) => {
       <>
         <div>{`${transaction.transaction_value}`}</div>
         <div>{`${transaction.description}`}</div>
-        <div>{`${transaction.transaction_date}`}</div>
+        <div>
+          <Moment format="DD/MM/yyyy">{`${transaction.transaction_date}`}</Moment>
+        </div>
         <div>{` ${transaction.budget_category}`}</div>
         <div>{` ${transaction.trip_name}`}</div>
         {/* the button can be transformed to an icon later */}

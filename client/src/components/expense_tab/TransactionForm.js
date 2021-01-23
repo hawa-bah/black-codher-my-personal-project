@@ -194,11 +194,11 @@ const TransactionForm = (props) => {
                 clearable
                 value={selectedDate}
                 onChange={(date) => {
-                  handleDateChange(date);
-                  console.log(date);
+                  handleDateChange(date.toLocaleDateString());
+                  console.log(date.toLocaleDateString());
                 }}
                 // minDate={new Date()}
-                format="MM/dd/yyyy"
+                format="dd/MM/yyyy"
                 style={{ width: "25ch" }}
               />
             </MuiPickersUtilsProvider>
