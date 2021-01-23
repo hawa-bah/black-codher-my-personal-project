@@ -6,8 +6,8 @@ async function getAll(user_ref_email) {
   return res.data || [];
 }
 
-async function getBalance() {
-  const res = await axios.get(`/api/balance`);
+async function getBalance(tripName, user_ref_email) {
+  const res = await axios.get(`/api/balance/${tripName}/${user_ref_email}`);
   return res.data || [];
 }
 

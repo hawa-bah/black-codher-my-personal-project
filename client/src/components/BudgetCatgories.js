@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Grid, MenuItem, TextField } from "@material-ui/core";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { getAll, getBudget, getSpent } from "../services/budgetService";
+import { getBalance } from "../services/transactionService";
 
 const BudgetCategories = (props) => {
   const { auth } = props;
@@ -9,6 +10,8 @@ const BudgetCategories = (props) => {
   const [tripName, setTripName] = useState(""); // tripName is used to select the trip at the top of the page
   const [tripNameList, setTripNameList] = useState(null); // documents from the budget collection from a user
   const [spent, setSpent] = useState(null); //transactions of a specific trip. Spent is an array of objects(transactions)
+  const [totalBudget, setTotalBudget] = useState(0); // total budget for a specific trip
+  const [totalSpent, setTotalSpent] = useState(0); // total budget for a specific trip
 
   const [data, setData] = useState([]); //document from the budget collection from a specific Trip and user
 
@@ -47,7 +50,7 @@ const BudgetCategories = (props) => {
 
       let filterSpent = spent.filter((object) => {
         return object.budget_category === elements.budget_category;
-      }); // filterSpent is an array of objects(transactions in the same category hopefully?)
+      }); // filterSpent is an array of objects(transactions in the same category )
       let spentValue = filterSpent.reduce(function (prev, cur) {
         return prev + cur.transaction_value;
       }, 0);
@@ -87,6 +90,13 @@ const BudgetCategories = (props) => {
     let res = await getSpent(tripName, auth.user.email);
     setSpent(res); //this returns the transactions of a specific trip. Spent is an array of objects(transactions)
   };
+  const renderBalanceTotal = async (tripName) => {
+    let res = await getBalance(tripName, auth.user.email);
+    setTotalSpent(res.spentTotal[0].transaction_value);
+    setTotalBudget(res.budgetedTotal[0].budgets);
+    console.log(totalBudget);
+    console.log(totalSpent);
+  };
 
   return (
     <div className="budgetCategories-div" style={{ padding: "20px" }}>
@@ -103,6 +113,7 @@ const BudgetCategories = (props) => {
                 setTripName(event.target.value);
                 renderSpent(event.target.value); // this are transactions corresponding to one trip
                 renderBudgetCategory(event.target.value);
+                renderBalanceTotal(event.target.value);
                 console.log("You have selected " + event.target.value);
               }}
               style={{ width: "250px" }}
@@ -118,7 +129,22 @@ const BudgetCategories = (props) => {
         </Grid>
       </form>
 
-      {spent && spent.length > 0 ? <h1>BUDGET CATEGORIES </h1> : null}
+      {spent && spent.length > 0 ? (
+        <div className="total-summary-div">
+          <h1>{tripName} </h1>
+          <div className="total-summary">
+            <p>Total budgeted:</p> <p className="numb">{totalBudget}</p>
+            <p>Total spent: </p>
+            <p className="numb">
+              ({Math.round((totalSpent / totalBudget) * 100)}%){totalSpent}
+            </p>
+          </div>
+          <div className="bottom-grid total-summary">
+            <p>Amount left:</p>
+            <p className="numb">{totalBudget - totalSpent}</p>
+          </div>
+        </div>
+      ) : null}
 
       <div className="category-card-container">
         {data && data.length > 0

@@ -11,16 +11,27 @@ module.exports = (app) => {
     return res.status(200).send(transactions);
   });
 
-  app.get(`/api/balance`, async (req, res) => {
-    const balance = await Exp_Transaction.aggregate([
-      { $match: { description: "test" } },
+  app.get(`/api/balance/:trip/:ref`, async (req, res) => {
+    const { trip, ref } = req.params;
+    const spentTotal = await Exp_Transaction.aggregate([
+      { $match: { trip_name: trip, user_ref_email: ref } },
       {
         $group: { _id: "", transaction_value: { $sum: "$transaction_value" } },
       },
     ]);
-    console.log(balance);
-    return res.status(200).send(balance);
-    // console.log(res);
+    const budgetedTotal = await Budget.aggregate([
+      { $match: { trip_name: trip, user_ref_email: ref } },
+      {
+        $group: {
+          _id: "",
+          budgets: { $sum: { $sum: "$budgets.budget_amount" } },
+        },
+      },
+    ]);
+    console.log(spentTotal);
+    console.log(budgetedTotal);
+
+    return res.status(200).send({ spentTotal, budgetedTotal });
   });
 
   app.post(`/api/expense`, async (req, res) => {

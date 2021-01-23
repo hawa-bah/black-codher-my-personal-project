@@ -65,3 +65,22 @@
 .transactions-container {
   margin: 20px;
 }
+
+/* BUDGET CATEGORIES WITH COLORS */
+.total-summary {
+  /* max-width: 270px; */
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+.bottom-grid {
+  border-top: black solid;
+}
+.numb {
+  text-align: end;
+}
+.total-summary-div {
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: rgba(73, 4, 138, 0.185);
+  /* max-width: fit-content; */
+}
