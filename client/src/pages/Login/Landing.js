@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../Redux/actions/authActions";
-import { authenticate } from "passport";
 
 const Landing = () => {
   const dispatch = useDispatch();

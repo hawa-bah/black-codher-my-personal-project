@@ -184,9 +184,8 @@ const SubmitBudgetPage = (props) => {
         <p>
           Total:{" "}
           {infoCard.budgets &&
-            infoCard.budgets.map((item) => {
+            infoCard.budgets.forEach((item) => {
               totalBudget = totalBudget + item.budget_amount;
-              return;
             })}{" "}
           {totalBudget}
         </p>

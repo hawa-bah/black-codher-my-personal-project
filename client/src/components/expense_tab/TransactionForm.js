@@ -79,7 +79,7 @@ const TransactionForm = (props) => {
     let res = await getBudget(tripName);
     if (res.length > 0) {
       let preArray = [];
-      res[0].budgets.map((budget) => {
+      res[0].budgets.forEach((budget) => {
         preArray.push(budget.budget_category);
       });
       setBudgetCategoriesArray(preArray);

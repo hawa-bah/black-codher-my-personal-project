@@ -41,7 +41,7 @@ const BudgetCategories = (props) => {
   }, [props.hasSubmitedTransaction, data, tripName]);
 
   const changeColorBudget = (data) => {
-    data[0].budgets.map((elements) => {
+    data[0].budgets.forEach((elements) => {
       const categoryDiv = document.getElementById(
         "category-card-div" + "" + elements.budget_category
       );

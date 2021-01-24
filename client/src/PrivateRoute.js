@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 

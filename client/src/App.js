@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import PropTypes from "prop-types";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./Redux/utils/setAuthToken";
 import { logoutUser, setCurrentUser } from "./Redux/actions/authActions";

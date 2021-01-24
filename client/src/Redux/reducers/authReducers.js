@@ -6,8 +6,8 @@ const initialState = {
   user: {},
   loading: false,
 };
-
-export default function (state = initialState, action) {
+// should i leave foo in this ??????????????
+export default function foo(state = initialState, action) {
   switch (action.type) {
     case SET_CURRENT_USER:
       return {
