@@ -42,10 +42,6 @@ if (localStorage.jwtToken) {
 }
 
 function App() {
-  //>>>> this will be used for inputing the expenses/transactions and viewing the transactions:
-  const [transaction, setTransactions] = useState(0);
-  const [description, setDesc] = useState("");
-
   return (
     <div>
       {/* <div className="darken overlay-1"></div> */}
@@ -58,12 +54,7 @@ function App() {
             <React.Fragment>
               <NavBar />
 
-              <BudgetPage
-                transaction={transaction} //> used
-                setTransactions={setTransactions} //> used
-                description={description} //> used
-                setDesc={setDesc} //> used
-              />
+              <BudgetPage />
             </React.Fragment>
           )}
         />
