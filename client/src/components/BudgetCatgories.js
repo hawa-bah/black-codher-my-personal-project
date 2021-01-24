@@ -94,8 +94,10 @@ const BudgetCategories = (props) => {
     let res = await getBalance(tripName, auth.user.email);
     if (res.budgetedTotal[0]) {
       console.log(res);
-      setTotalSpent(res.spentTotal[0].transaction_value);
       setTotalBudget(res.budgetedTotal[0].budgets);
+    }
+    if (res.spentTotal[0]) {
+      setTotalSpent(res.spentTotal[0].transaction_value);
     }
   };
 
