@@ -8,7 +8,7 @@ module.exports = (app) => {
     const { tripName, user } = req.params;
     console.log(tripName, user);
     try {
-      const edited = await Exp_Transaction.update(
+      const edited = await Exp_Transaction.updateOne(
         {
           trip_name: tripName,
           user_ref_email: user,
