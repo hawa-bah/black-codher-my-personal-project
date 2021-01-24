@@ -45,7 +45,8 @@
   min-width: 300px;
   margin: 10px;
 }
-.submit-info-form-div form div.buttons {
+.submit-info-form-div form div.buttons,
+.buttons {
   display: flex;
   justify-content: flex-end;
   margin-top: 10px;

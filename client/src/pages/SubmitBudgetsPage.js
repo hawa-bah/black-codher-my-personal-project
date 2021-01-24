@@ -15,7 +15,6 @@ import SubmitInfoForm from "../components/budgetInfo/SubmitInfo";
 import { useSelector } from "react-redux";
 
 import "../components/budgetInfo/InfoForm.css";
-import { getBalance } from "../services/transactionService";
 // MATERIAL-UI:
 const ButtonSubmitPage = withStyles((theme) => ({
   root: {
@@ -25,6 +24,7 @@ const ButtonSubmitPage = withStyles((theme) => ({
       backgroundColor: purple[700],
     },
     borderRadius: "30px",
+    marginRight: "10px",
   },
 }))(Button);
 
@@ -298,13 +298,11 @@ const SubmitBudgetPage = (props) => {
                 <Editable
                   text={editTripName}
                   className="info-card-title"
-                  // placeholder="Write a task name"
                   type="input"
                 >
                   <input
                     type="text"
-                    name="task"
-                    // placeholder="Write a task name"
+                    name="trip"
                     value={editTripName} //state
                     onChange={(e) => setEditTripName(e.target.value)}
                   />
@@ -315,14 +313,8 @@ const SubmitBudgetPage = (props) => {
                   {editCard.budgets.map((budget, index) => {
                     return (
                       <div>
-                        <Editable text={budget.budget_category} type="text">
-                          {/* <input
-                            type="text"
-                            name="task"
-                            placeholder="Write a task name"
-                            value={budget.budget_category}
-                          /> */}
-                        </Editable>
+                        <b>{budget.budget_category}</b>
+
                         <Editable
                           text={
                             editBudgets[index].budget_amount ||
@@ -336,8 +328,8 @@ const SubmitBudgetPage = (props) => {
                         >
                           <input
                             type="text"
-                            name="task"
-                            placeholder="Input an amount"
+                            name="amount"
+                            placeholder="Input a new amount"
                             onChange={(e) => {
                               updateFieldChanged(index, e);
                             }}
@@ -347,7 +339,25 @@ const SubmitBudgetPage = (props) => {
                     );
                   })}
                 </div>
-                <button type="submit">Finish editing</button>
+                <div className="buttons">
+                  <ButtonSubmitPage
+                    type="submit"
+                    // style={{ padding: "5px", marginTop: "10px" }}
+                  >
+                    Finish editing
+                  </ButtonSubmitPage>
+                  <ButtonSubmitPage
+                    type="cancel"
+                    style={{
+                      // padding: "5px",
+                      // marginLeft: "10px",
+                      backgroundColor: "grey",
+                    }}
+                    onClick={() => setClickEdit(false)}
+                  >
+                    Cancel
+                  </ButtonSubmitPage>
+                </div>
               </div>
             </form>
           )}
