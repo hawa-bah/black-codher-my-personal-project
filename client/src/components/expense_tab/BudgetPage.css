@@ -147,6 +147,7 @@
   text-align: end;
 }
 .total-summary-div {
+  padding: 5px;
   padding-left: 20px;
   padding-right: 20px;
   background-color: rgba(73, 4, 138, 0.185);

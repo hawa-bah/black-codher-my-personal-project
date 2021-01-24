@@ -29,6 +29,7 @@ const BudgetCategories = (props) => {
 
     if (props.hasSubmitedTransaction) {
       renderSpent(tripName);
+      renderBalanceTotal(tripName);
 
       // >>> the color gets updated when a transaction has been submited and SPENT has been set and rendered
       if (data.length !== 0 && spent) {
@@ -174,7 +175,7 @@ const BudgetCategories = (props) => {
                     <h2 className={"category-card-title"}>
                       {elements.budget_category} budget for {tripName}
                     </h2>
-                    <p>Budget amount:{elements.budget_amount}</p>
+                    <p>Budget amount: {elements.budget_amount}</p>
                     <p>Number of transactions: {filterSpent.length}</p>
                     <p>
                       Amount spent: {spentValue} (

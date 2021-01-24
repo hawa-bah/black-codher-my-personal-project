@@ -194,7 +194,7 @@ const TransactionForm = (props) => {
                 clearable
                 value={selectedDate}
                 onChange={(date) => {
-                  handleDateChange(date.toLocaleDateString());
+                  handleDateChange(date);
                   console.log(date.toLocaleDateString());
                 }}
                 // minDate={new Date()}
