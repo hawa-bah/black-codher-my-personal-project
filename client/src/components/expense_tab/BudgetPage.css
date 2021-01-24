@@ -93,8 +93,8 @@
   .transactions-container > div:nth-of-type(6n + 6):before {
     content: "Actions";
   }
-  .transactions-container > div:nth-of-type(6n + 6) {
-    border-bottom: 1px solid white;
+  .transactions-container > div:nth-of-type(6n + 1) {
+    border-top: 1.5px solid white;
   }
   .transactions-container > div:nth-of-type(12n + 1),
   .transactions-container > div:nth-of-type(12n + 2),

@@ -130,33 +130,14 @@ const TransactionsList = (props) => {
         ></Filter>
       </div>
 
-      <p>Transactions:</p>
-
       <div className="transactions-container">
-        {/* <p>Transactions:</p> */}
-        {/* <div className="transaction-table-head"> */}
         <h5>Amount</h5>
         <h5>Description</h5>
         <h5>Date</h5>
         <h5>Category</h5>
         <h5>Trip</h5>
         <h5>Actions</h5>
-        {/* </div> */}
         {transactions && transactions.length > 0 ? (
-          // {/* this makesthe button delete not work */}
-          // {/* {isFiltered && filteredTransactions.length !== 0 ? (
-          //     filteredTransactions.length > 0 ? (
-          //       filteredTransactions.map(
-          //         (transaction) => renderTransaction(transaction) // this creates <li>
-          //       )
-          //     ) : (
-          //       transactions.map((transaction) =>
-          //         renderTransaction(transaction)
-          //       )
-          //     )
-          //   ) : (
-          //     <p>There are no transactions for the filters selected</p>
-          //   )} */}
           isFiltered &&
           filteredTransactions &&
           filteredTransactions.length > 0 ? (

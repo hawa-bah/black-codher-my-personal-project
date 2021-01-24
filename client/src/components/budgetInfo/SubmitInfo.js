@@ -93,7 +93,7 @@ const SubmitInfoForm = (props) => {
               className="finished-edit-div pop-up dialog"
               style={{ zIndex: 4, backgroundColor: "white" }}
             >
-              <h2> The card has been succesfully posted!</h2>
+              <h2> The card has been succesfully created!</h2>
               <div className="finished-edit-buttons">
                 <ColorButton
                   onClick={() => {
@@ -110,6 +110,7 @@ const SubmitInfoForm = (props) => {
 
         <div className="submit-info-form ">
           <form onSubmit={(e) => handleSubmitInfo(e)}>
+            <h5>Choose a name:</h5>
             <Grid container alignItems="flex-start" spacing={2}>
               <Grid item xs="auto" sm={4}>
                 <TextField
@@ -123,7 +124,8 @@ const SubmitInfoForm = (props) => {
                 />
               </Grid>
             </Grid>
-            <h4>Budgets</h4>
+            <br />
+            <h5>Set a budget for each category:</h5>
             <Grid container alignItems="flex-start" spacing={2}>
               <Grid item xs="auto" sm={4}>
                 <TextField
@@ -157,9 +159,9 @@ const SubmitInfoForm = (props) => {
               </Grid>
               <Grid item xs="auto" sm={4}>
                 <TextField
-                  id="entratainment"
+                  id="Entertainment"
                   color="secondary"
-                  label="entratainment amount"
+                  label="Entertainment amount"
                   value={entertainmentAmount}
                   onChange={(e) => setEntertainmentAmount(e.target.value)}
                   InputProps={{
@@ -174,7 +176,7 @@ const SubmitInfoForm = (props) => {
                 <TextField
                   id="shopping"
                   color="secondary"
-                  label="shopping amount"
+                  label="Shopping amount"
                   value={shoppingAmount}
                   onChange={(e) => setShoppingAmount(e.target.value)}
                   InputProps={{
@@ -189,7 +191,7 @@ const SubmitInfoForm = (props) => {
                 <TextField
                   id="others"
                   color="secondary"
-                  label="food amount"
+                  label="Food amount"
                   value={foodAmount}
                   onChange={(e) => setFoodAmount(e.target.value)}
                   InputProps={{
@@ -204,7 +206,7 @@ const SubmitInfoForm = (props) => {
                 <TextField
                   id="others"
                   color="secondary"
-                  label="others amount"
+                  label="Others amount"
                   value={othersAmount}
                   onChange={(e) => setOthersAmount(e.target.value)}
                   InputProps={{
@@ -216,14 +218,20 @@ const SubmitInfoForm = (props) => {
                 />
               </Grid>
             </Grid>
-            <ColorButton type="submit">Submit new budget</ColorButton>
-            <ColorButton
-              style={{ backgroundColor: "grey" }}
-              type="cancel"
-              onClick={() => props.setWantsToSubmitInfo(false)}
-            >
-              Cancel
-            </ColorButton>
+            <br />
+            <div className="buttons">
+              <ColorButton type="submit">Submit new budget</ColorButton>
+              <ColorButton
+                style={{
+                  backgroundColor: "grey",
+                  marginLeft: "10px",
+                }}
+                type="cancel"
+                onClick={() => props.setWantsToSubmitInfo(false)}
+              >
+                Cancel
+              </ColorButton>
+            </div>
           </form>
         </div>
       </div>

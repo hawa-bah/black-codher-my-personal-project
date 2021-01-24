@@ -10,6 +10,10 @@ const Budget = Schema({
     },
   ],
   trip_name: String,
+  date_added: {
+    type: Date,
+    default: new Date(),
+  },
   // user_id: { type: Schema.Types.ObjectId, ref: "users" },
   user_ref_email: String,
 });

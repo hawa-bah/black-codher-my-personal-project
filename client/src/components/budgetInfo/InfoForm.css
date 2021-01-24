@@ -35,6 +35,20 @@
   bottom: 0;
   top: 0;
   background-color: rgba(0, 0, 0, 0.74);
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+.submit-info-form-div form {
+  padding: 20px;
+  min-width: 300px;
+  margin: 10px;
+}
+.submit-info-form-div form div.buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
 }
 .submit-info-form-div > div {
   background-color: white;
@@ -42,6 +56,7 @@
   max-width: 600px;
   position: absolute;
   z-index: 3;
+  margin: 20px;
   /* /* opacity: 0;  */
 }
 .pop-up.dialog {

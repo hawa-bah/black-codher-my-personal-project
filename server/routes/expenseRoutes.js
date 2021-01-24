@@ -70,7 +70,7 @@ module.exports = (app) => {
   // /used
   app.get(`/api/budget/:ref`, async (req, res) => {
     const ref = req.params.ref;
-    const budgets = await Budget.find({ user_ref_email: ref });
+    const budgets = await Budget.find({ user_ref_email: ref }).sort("-_id");
     return res.status(200).send(budgets);
   });
 
