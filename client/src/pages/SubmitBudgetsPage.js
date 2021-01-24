@@ -111,11 +111,18 @@ const SubmitBudgetPage = (props) => {
       }
     }
     setEditBudgets(newArr);
-
+    // from budget model
     axios.put(`/api/edit/card/${editCard._id}`, {
       trip_name: editTripName,
       budgets: editBudgets,
     });
+    console.log("EDIT CARD", editCard.trip_name);
+    axios.put(
+      `/api/edit/transactions/${editCard.trip_name}/${auth.user.email}`,
+      {
+        trip_name: editTripName,
+      }
+    );
     // setHasFinishedEdit(true);
     // setHasClickedFinishEdit(false);
     getInfoCards();
