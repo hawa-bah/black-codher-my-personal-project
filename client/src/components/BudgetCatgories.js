@@ -8,7 +8,7 @@ const BudgetCategories = (props) => {
   const { auth } = props;
 
   const [tripName, setTripName] = useState(""); // tripName is used to select the trip at the top of the page
-  const [tripNameList, setTripNameList] = useState(null); // documents from the budget collection from a user
+  // const [tripNameList, setTripNameList] = useState(null); // documents from the budget collection from a user
   const [spent, setSpent] = useState(null); //transactions of a specific trip. Spent is an array of objects(transactions)
   const [totalBudget, setTotalBudget] = useState(0); // total budget for a specific trip
   const [totalSpent, setTotalSpent] = useState(0); // total budget for a specific trip
@@ -16,9 +16,9 @@ const BudgetCategories = (props) => {
   const [data, setData] = useState([]); //document from the budget collection from a specific Trip and user
 
   useEffect(() => {
-    if (!tripNameList) {
-      getTripNameList();
-    }
+    // if (!tripNameList) {
+    //   getTripNameList();
+    // }
 
     // >>> the color gets updated in the first time the page is loaded
     if (data.length !== 0 && spent.length !== 0 && tripName !== "Hidde") {
@@ -67,19 +67,20 @@ const BudgetCategories = (props) => {
     });
   };
 
-  const getTripNameList = async () => {
-    //>>>> I am getting the documents from the budget collection whith budgetService.js
-    let res = await getAll(auth.user.email);
-    setTripNameList(res);
-  };
+  // >>>>> STATE HAS BEEN LIFTED UP
+  // const getTripNameList = async () => {
+  //   //>>>> I am getting the documents from the budget collection whith budgetService.js
+  //   let res = await getAll(auth.user.email);
+  //   setTripNameList(res);
+  // };
 
-  const renderTripNameList = (trip) => {
-    return (
-      <MenuItem key={trip.trip_name} value={trip.trip_name}>
-        {trip.trip_name}
-      </MenuItem>
-    );
-  };
+  // const renderTripNameList = (trip) => {
+  //   return (
+  //     <MenuItem key={trip.trip_name} value={trip.trip_name}>
+  //       {trip.trip_name}
+  //     </MenuItem>
+  //   );
+  // };
 
   //  rendering categories info
   const renderBudgetCategory = async (tripName) => {
@@ -125,8 +126,10 @@ const BudgetCategories = (props) => {
             >
               <MenuItem key="hidde">Hidde</MenuItem>
               {/* here i am mapping the name of the trips inside the budget collection */}
-              {tripNameList && tripNameList.length > 0
-                ? tripNameList.map((trip) => renderTripNameList(trip))
+              {props.tripNameList && props.tripNameList.length > 0
+                ? props.tripNameList.map((trip) =>
+                    props.renderTripNameList(trip)
+                  )
                 : null}
             </TextField>
           </Grid>

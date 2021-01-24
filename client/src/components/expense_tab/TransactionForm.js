@@ -157,13 +157,22 @@ const TransactionForm = (props) => {
               id="TripName"
               color="secondary"
               label="Trip Name"
+              select
               value={tripTransaction}
               onChange={(e) => {
                 setTripTransaction(e.target.value);
                 handleBudgetCategoriesArray(e.target.value);
               }}
               required
-            />
+              style={{ width: "15ch" }}
+            >
+              <MenuItem key="blanc" value=""></MenuItem>
+              {props.tripNameList && props.tripNameList.length > 0
+                ? props.tripNameList.map((trip) =>
+                    props.renderTripNameList(trip)
+                  )
+                : null}
+            </TextField>
           </Grid>
           <Grid item xs="auto" sm={4} className="my-1">
             <TextField

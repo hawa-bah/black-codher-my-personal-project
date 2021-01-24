@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { getAll } from "../../services/budgetService.js";
 
 import TransactionsList from "../transaction_list/TransactionsList";
 import TransactionForm from "../expense_tab/TransactionForm";
 
 import NumberFormat from "react-number-format";
-import { Button } from "@material-ui/core";
+import { Button, MenuItem } from "@material-ui/core";
 // Material-ui
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import { purple } from "@material-ui/core/colors";
 import budgetCategoriesArry from "../../budgetCategoriesArray";
 
 import BudgetCategories from "../BudgetCatgories";
@@ -44,24 +43,7 @@ NumberFormatCustom.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-const ColorButton = withStyles((theme) => ({
-  root: {
-    color: theme.palette.getContrastText(purple[500]),
-    backgroundColor: purple[500],
-    "&:hover": {
-      backgroundColor: purple[700],
-    },
-  },
-}))(Button);
-
-const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
-}));
-
 const BudgetPage = (props) => {
-  const classes = useStyles();
   const auth = useSelector((state) => state.auth);
 
   // >>>> I'm passing transactions state (the value of a transaction) as a props
@@ -69,9 +51,28 @@ const BudgetPage = (props) => {
   const [viewTransactions, setViewTransactions] = useState(false); //>
   //>>>> The balance is the sum of those values with test for now
   const [hasSubmitedTransaction, setHasSubmitedTransaction] = useState(false);
-  //
 
-  //
+  const [tripNameList, setTripNameList] = useState(null); // documents from the budget collection from a user
+
+  useEffect(() => {
+    if (!tripNameList) {
+      getTripNameList();
+    }
+  }, [tripNameList]);
+
+  const getTripNameList = async () => {
+    //>>>> I am getting the documents from the budget collection whith budgetService.js
+    let res = await getAll(auth.user.email);
+    setTripNameList(res);
+  };
+
+  const renderTripNameList = (trip) => {
+    return (
+      <MenuItem key={trip.trip_name} value={trip.trip_name}>
+        {trip.trip_name}
+      </MenuItem>
+    );
+  };
 
   return (
     <div className="budgetPage-Div">
@@ -81,6 +82,8 @@ const BudgetPage = (props) => {
         hasSubmitedTransaction={hasSubmitedTransaction}
         setHasSubmitedTransaction={setHasSubmitedTransaction}
         auth={auth}
+        tripNameList={tripNameList}
+        renderTripNameList={renderTripNameList}
       />
 
       <div className="budget categories card">
@@ -89,6 +92,8 @@ const BudgetPage = (props) => {
           hasSubmitedTransaction={hasSubmitedTransaction}
           setHasSubmitedTransaction={setHasSubmitedTransaction}
           auth={auth}
+          tripNameList={tripNameList}
+          renderTripNameList={renderTripNameList}
         />
       </div>
 

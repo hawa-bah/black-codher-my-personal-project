@@ -6,7 +6,6 @@ import { connect, useSelector } from "react-redux";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./Redux/utils/setAuthToken";
 import { logoutUser, setCurrentUser } from "./Redux/actions/authActions";
-import { decode } from "jsonwebtoken";
 import store from "./Redux/store";
 
 // PAGES
@@ -43,9 +42,6 @@ if (localStorage.jwtToken) {
 }
 
 function App() {
-  const auth = useSelector((state) => state.auth);
-  const [budget, setbudget] = useState(0);
-
   //>>>> this will be used for inputing the expenses/transactions and viewing the transactions:
   const [transaction, setTransactions] = useState(0);
   const [description, setDesc] = useState("");
