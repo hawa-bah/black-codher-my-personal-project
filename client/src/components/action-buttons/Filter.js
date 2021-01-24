@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from "react";
 // Material-ui
 import Button from "@material-ui/core/Button";
-import {
-  createMuiTheme,
-  withStyles,
-  makeStyles,
-  ThemeProvider,
-} from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { purple } from "@material-ui/core/colors";
-
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import SortIcon from "@material-ui/icons/Sort";
 
 import FormGroup from "@material-ui/core/FormGroup";
@@ -18,7 +10,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormatHelperText from "@material-ui/core/FormHelperText";
-
 import Checkbox from "@material-ui/core/Checkbox";
 
 import { getAll } from "../../services/budgetService";
@@ -54,8 +45,6 @@ const Filter = (props) => {
   useEffect(() => {
     if (!tripList) {
       getTripList();
-
-      console.log("heeeey");
     } else {
       getErrorMessage();
     }
@@ -64,7 +53,6 @@ const Filter = (props) => {
   const getTripList = async () => {
     //>>>> I am getting the documents from the budget collection whith budgetService.js
     let res = await getAll(auth.user.email);
-    console.log(res.map((item) => item.trip_name));
     let data = res.map((item) => item.trip_name); //line 62 // array of trip names
     setTripNames(data); //line 63
 
@@ -199,6 +187,7 @@ const Filter = (props) => {
             Select at least one category to use the filter
           </FormatHelperText>
         </FormControl>
+
         <FormControl
           required
           error={errorTrip} // this will be used if we want a maximum of checkbox selected

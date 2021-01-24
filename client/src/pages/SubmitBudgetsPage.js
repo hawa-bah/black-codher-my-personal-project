@@ -25,9 +25,6 @@ const ButtonSubmitPage = withStyles((theme) => ({
       backgroundColor: purple[700],
     },
     borderRadius: "30px",
-    // maxWidth: "10px",
-    // width: "10px",
-    // position: "left",
   },
 }))(Button);
 
@@ -41,8 +38,6 @@ const SubmitBudgetPage = (props) => {
   const auth = useSelector((state) => state.auth);
 
   const classes = useStyles;
-
-  // const [totalBudget, setTotalBudget] = useState(0);
 
   const [infoCards, setInfoCards] = useState([]); //>>>> the cards stored in the database will be saved here to display them later
   const [hasSubmitedInfo, setHasSubmitedInfo] = useState(false);
@@ -148,13 +143,8 @@ const SubmitBudgetPage = (props) => {
     console.log(infoCards);
   }; //
 
-  // const renderTotal = async (infoCard) => {
-  //   let res = await getBalance(infoCard.trip_name, auth.user.email);
-  //   setTotalBudget(res.budgetedTotal[0].budgets);
-  // };
-
   const renderInfoCard = (infoCard) => {
-    // renderTotal(infoCard);
+    let totalBudget = 0;
     return (
       <div className="info-card-item">
         <div className="info-card-header">
@@ -182,10 +172,21 @@ const SubmitBudgetPage = (props) => {
             />
           </div>
         </div>
+
         <h5>BUDGETS:</h5>
+        <p>
+          Total:{" "}
+          {infoCard.budgets &&
+            infoCard.budgets.map((item) => {
+              totalBudget = totalBudget + item.budget_amount;
+              return;
+            })}{" "}
+          {totalBudget}
+        </p>
         <div className="info-card budget-list">
           {infoCard.budgets &&
             infoCard.budgets.map((item) => {
+              totalBudget = totalBudget + item.budget_amount;
               return (
                 <div>
                   <p>

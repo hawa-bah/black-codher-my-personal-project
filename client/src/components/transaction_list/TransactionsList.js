@@ -137,6 +137,7 @@ const TransactionsList = (props) => {
         <h5>Category</h5>
         <h5>Trip</h5>
         <h5>Actions</h5>
+
         {transactions && transactions.length > 0 ? (
           isFiltered &&
           filteredTransactions &&
