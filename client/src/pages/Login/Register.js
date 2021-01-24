@@ -5,9 +5,9 @@ import classnames from "classnames";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../Redux/actions/authActions";
 // material-ui
-import { Grid, TextField } from "@material-ui/core";
+import { Button, Grid, TextField } from "@material-ui/core";
 import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
+import useStyles from "./styles-ui";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -15,23 +15,6 @@ import IconButton from "@material-ui/core/IconButton";
 import FormControl from "@material-ui/core/FormControl";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-
-// Mmeterial-ui
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  margin: {
-    margin: theme.spacing(1),
-  },
-  withoutLabel: {
-    marginTop: theme.spacing(3),
-  },
-  textField: {
-    width: "25ch",
-  },
-}));
 
 const Register = (props) => {
   // redux:
@@ -57,6 +40,7 @@ const Register = (props) => {
 
   // material-ui
   const classes = useStyles();
+
   const handleClickShowPassword = () => {
     setSignUpInfo({ ...signUpInfo, showPassword: !signUpInfo.showPassword });
   };
@@ -91,13 +75,10 @@ const Register = (props) => {
   return (
     <div className="Register-div">
       <div>
-        <div className="container">
-          <div style={{ marginTop: "4rem" }} className="row">
+        <div styles={{ width: "300px" }}>
+          <div className={classes.row}>
             <div className="col s8 ">
-              <Link
-                to="/home"
-                className="btn-flat waves-effect black white-text"
-              >
+              <Link to="/home" className="auth-link">
                 <i className="material-icons left">keyboard_backspace</i> Back
               </Link>
               <div className="col s9">
@@ -105,67 +86,71 @@ const Register = (props) => {
                   <b>Register</b> below
                 </h4>
                 <p className="white-text text-darken-1">
-                  Already have an account? <Link to="/login">Login</Link>
+                  Already have an account?{" "}
+                  <Link className="auth-link" to="/login">
+                    Login
+                  </Link>
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        <div
-          className="register-form-div"
-          style={{
-            padding: 20,
-            margin: "auto",
-            marginBottom: "20px",
-            maxWidth: 600,
-          }}
-        >
+        <div className={classes.form}>
           <form
             noValidate
             onSubmit={(e) => {
               handleRegister(e);
               console.log("clickSubmit");
             }}
+            className={classes.root}
           >
             <Grid
               container
               alignItems="flex-start"
               spacing={2}
-              style={{ padding: "10px" }}
+              // style={{ padding: "10px" }}
             >
               <Grid item xs="auto" sm={12} className="my-1">
-                <TextField
-                  id="name"
-                  color="secondary"
-                  label="Name"
-                  value={signUpInfo.name}
-                  error={errorsRedux.name && errorsRedux.name}
-                  onChange={handleSignUpInfo}
-                  className={classnames("", {
-                    invalid: errorsRedux.name,
-                  })}
-                />
-                <span className="red-text">
-                  {errorsRedux.name && errorsRedux.name}
-                </span>
+                <FormControl
+                  className={clsx(classes.margin, classes.textField)}
+                >
+                  <TextField
+                    id="name"
+                    color="secondary"
+                    label="Name"
+                    value={signUpInfo.name}
+                    error={errorsRedux.name && errorsRedux.name}
+                    onChange={handleSignUpInfo}
+                    className={classnames("", {
+                      invalid: errorsRedux.name,
+                    })}
+                  />
+                  <span className="red-text">
+                    {errorsRedux.name && errorsRedux.name}
+                  </span>
+                </FormControl>
               </Grid>
               <Grid item xs="auto" sm={12} className="my-1">
-                <TextField
-                  id="email"
-                  color="secondary"
-                  label="Email"
-                  value={signUpInfo.email}
-                  error={errorsRedux.email}
-                  onChange={handleSignUpInfo}
-                  className={classnames("", {
-                    invalid: errorsRedux.email || errorsRedux.emailnotfound,
-                  })}
-                />
-                <span className="red-text">
-                  {errorsRedux.email}
-                  {errorsRedux.emailnotfound}
-                </span>
+                <FormControl
+                  className={clsx(classes.margin, classes.textField)}
+                >
+                  <TextField
+                    id="email"
+                    color="secondary"
+                    label="Email"
+                    value={signUpInfo.email}
+                    error={errorsRedux.email}
+                    onChange={handleSignUpInfo}
+                    className={classnames("", {
+                      invalid: errorsRedux.email || errorsRedux.emailnotfound,
+                    })}
+                  />
+                  <span className="red-text">
+                    {errorsRedux.email}
+                    {errorsRedux.emailnotfound}
+                  </span>
+                </FormControl>
               </Grid>
               <Grid item sm={12}>
                 <FormControl
@@ -240,14 +225,16 @@ const Register = (props) => {
                 </FormControl>
               </Grid>
             </Grid>
-            <button
+
+            <Button
               variant="contained"
+              className={classes.button}
               color="primary"
-              className="btn  btn-large waves-effect waves-light hoverable orange accent-3 white-text"
+              // className="btn  btn-large waves-effect waves-light hoverable orange accent-3 white-text"
               type="submit"
             >
               Ready to Sign Up!
-            </button>
+            </Button>
           </form>
         </div>
       </div>
@@ -264,5 +251,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,
 });
-// export default Register;
 export default connect(mapStateToProps, { registerUser })(withRouter(Register));

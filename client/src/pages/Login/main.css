@@ -1,15 +1,23 @@
+.auth-link {
+  color: white;
+}
+
 .Register-div {
   display: flex;
-  height: 100vh;
+  /* max-width: 100vh; */
+
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   color: black;
-  background-color: black;
+  background-color: rgb(2, 2, 53);
+  min-height: 100vh;
+  /* margin: 0; */
 }
 .Register-div > div {
-  margin: 20px;
-  max-width: 400px;
-  border-radius: 30px;
+  /* max-height: 100vh; */
+  max-width: 45%;
+  min-width: 300px;
+  min-height: 100vh;
 
   background: hsla(185, 71%, 53%, 1);
 
