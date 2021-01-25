@@ -68,6 +68,7 @@
   padding: 20px;
   left: auto;
   right: auto;
+  top: 10px;
 }
 .pop-up.dialog-parent {
   z-index: 3;
@@ -77,6 +78,8 @@
   bottom: 0;
   top: 0;
   background-color: rgba(0, 0, 0, 0.74);
+  display: flex;
+  justify-content: center;
 }
 
 /* INFO CARD CSS */

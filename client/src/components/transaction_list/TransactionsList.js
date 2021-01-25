@@ -139,11 +139,13 @@ const TransactionsList = (props) => {
         <h5>Actions</h5>
 
         {transactions && transactions.length > 0 ? (
-          isFiltered &&
-          filteredTransactions &&
-          filteredTransactions.length > 0 ? (
-            filteredTransactions.map(
-              (transaction) => renderTransaction(transaction) // this creates <li>
+          isFiltered && filteredTransactions ? (
+            filteredTransactions.length > 0 ? (
+              filteredTransactions.map(
+                (transaction) => renderTransaction(transaction) // this creates <li>
+              )
+            ) : (
+              <p>There are no transactions matching the filters</p>
             )
           ) : (
             transactions.map((transaction) => renderTransaction(transaction))

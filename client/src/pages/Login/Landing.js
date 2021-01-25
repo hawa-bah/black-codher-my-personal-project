@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../Redux/actions/authActions";
 
-import { Button, Icon } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 // import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 // import accountImg from "./account-logo.png";
@@ -41,7 +41,11 @@ const Landing = () => {
                   Logout
                 </Button>
               </div>
-              <img src="/images/account-logo.png" className="img-account"></img>
+              <img
+                src="/images/account-logo.png"
+                alt="user-icon"
+                className="img-account"
+              ></img>
               <div className="landing-text">
                 <h4>
                   <b>Hey there,</b>{" "}

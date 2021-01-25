@@ -7,6 +7,7 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "./Redux/utils/setAuthToken";
 import { logoutUser, setCurrentUser } from "./Redux/actions/authActions";
 import store from "./Redux/store";
+import { Provider } from "react-redux";
 
 // PAGES
 import BudgetPage from "./components/expense_tab/BudgetPage";
@@ -44,57 +45,64 @@ if (localStorage.jwtToken) {
 function App() {
   return (
     <div>
-      {/* <div className="darken overlay-1"></div> */}
+      <Provider store={store}>
+        <Router>
+          <Route
+            exact
+            path="/expenseTracker"
+            render={() => (
+              <React.Fragment>
+                <NavBar />
 
-      <Router>
-        <Route
-          exact
-          path="/expenseTracker"
-          render={() => (
-            <React.Fragment>
-              <NavBar />
-
-              <BudgetPage />
-            </React.Fragment>
-          )}
-        />
-        <Route
-          exact
-          path="/budgetInfo"
-          render={() => (
-            <React.Fragment>
-              <NavBar />
-              <SubmitBudgetPage budgetCategoriesArray={budgetCategoriesArry} />
-            </React.Fragment>
-          )}
-        />
-        {/* LOGIN PART */}
-        <Route
-          exact
-          path="/login-register"
-          render={() => (
-            <React.Fragment>
-              <Auth />
-            </React.Fragment>
-          )}
-        />
-        <Route exact path="/login" component={Login} render={() => <Login />} />
-        <Route exact path="/register" component={Register} />
-        {/*>>>> So that only one route is rendered */}
-        <Switch>
-          <PrivateRoute exact path="/landing" component={Landing} />
-        </Switch>
-        <Route
-          exact
-          path="/about"
-          render={() => (
-            <React.Fragment>
-              <NavBar />
-              <About />
-            </React.Fragment>
-          )}
-        />
-      </Router>
+                <BudgetPage />
+              </React.Fragment>
+            )}
+          />
+          <Route
+            exact
+            path="/budgetInfo"
+            render={() => (
+              <React.Fragment>
+                <NavBar />
+                <SubmitBudgetPage
+                  budgetCategoriesArray={budgetCategoriesArry}
+                />
+              </React.Fragment>
+            )}
+          />
+          {/* LOGIN PART */}
+          <Route
+            exact
+            path="/login-register"
+            render={() => (
+              <React.Fragment>
+                <Auth />
+              </React.Fragment>
+            )}
+          />
+          <Route
+            exact
+            path="/login"
+            component={Login}
+            render={() => <Login />}
+          />
+          <Route exact path="/register" component={Register} />
+          {/*>>>> So that only one route is rendered */}
+          <Switch>
+            <PrivateRoute exact path="/landing" component={Landing} />
+          </Switch>
+          <Route
+            exact
+            path="/about"
+            render={() => (
+              <React.Fragment>
+                <NavBar />
+                <About />
+              </React.Fragment>
+            )}
+          />
+        </Router>
+      </Provider>
     </div>
   );
 }
