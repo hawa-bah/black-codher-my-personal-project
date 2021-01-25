@@ -16,7 +16,8 @@ mongoose.Promise = global.Promise;
 mongoose
   .connect(
     process.env.MONGODB_URI ||
-      `mongodb://localhost:27017/black-codher-personal-project`,
+      `mongodb+srv://HawaBah:mongopassword25@cluster0.9kfx5.mongodb.net/black-codher-personal-project?retryWrites=true&w=majority`,
+    // `mongodb://localhost:27017/black-codher-personal-project`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

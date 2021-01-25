@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { deleteOne, getAll } from "../services/budgetService";
 
@@ -79,19 +79,27 @@ const SubmitBudgetPage = (props) => {
     },
   ]); //
 
+  const getInfoCards = useCallback(async () => {
+    // >>>> I am getting the documents from the budget collection whith budgetService.js
+    let res;
+    if (auth.user.email) {
+      res = await getAll(auth.user.email);
+    } else {
+      res = await getAll();
+    }
+    setInfoCards(res);
+  }, [auth.user.email]);
+
   useEffect(() => {
-    getInfoCards(); // this by itself causes an infinite loop but solve if useEffect is only called once
-  }, [hasSubmitedInfo, hasClickedFinishEdit, hasDeleted]);
+    getInfoCards();
+  }, [hasSubmitedInfo, hasClickedFinishEdit, hasDeleted, getInfoCards]);
 
   const handleDelete = async (cardToDelete) => {
     setHasDeleted(!hasDeleted);
     await deleteOne(cardToDelete._id);
-    console.log("transaction deleted ", cardToDelete.trip_name);
   };
 
   const updateFieldChanged = (index, e) => {
-    console.log("index: " + index);
-    console.log("property name: " + e.target.name);
     let newArr = [...editBudgets]; // copying the old data array
     newArr[index].budget_amount = e.target.value; // we are changing the values of the objects of editBudgets[] to the new values(e.target)
     if (!newArr[index].budget_amount) {
@@ -102,7 +110,6 @@ const SubmitBudgetPage = (props) => {
 
   const handleFinishEdit = () => {
     // event.preventDefault();
-    console.log("HANDLE EDIT");
     const newArr = [...editBudgets];
     let index = 0;
     for (index = 0; index < editBudgets.length; index++) {
@@ -123,10 +130,8 @@ const SubmitBudgetPage = (props) => {
         trip_name: editTripName,
       }
     );
-    // setHasFinishedEdit(true);
-    // setHasClickedFinishEdit(false);
+
     getInfoCards();
-    console.log("HANDLE EDIT 2");
   };
 
   const handleClickEdit = (infoCard) => {
@@ -134,20 +139,6 @@ const SubmitBudgetPage = (props) => {
     setClickEdit(true);
     setEditCard(infoCard);
     setEditTripName(infoCard.trip_name);
-  }; //
-
-  const getInfoCards = async () => {
-    //repeated code >>>> I am getting the documents from the budget collection whith budgetService.js
-    let res;
-    if (auth.user.email) {
-      res = await getAll(auth.user.email);
-    } else {
-      res = await getAll();
-    }
-    setInfoCards(res);
-    console.log("infoCardssss :");
-    console.log(res);
-    console.log(infoCards);
   }; //
 
   const renderInfoCard = (infoCard) => {
@@ -258,29 +249,20 @@ const SubmitBudgetPage = (props) => {
                 backgroundColor: "white",
               }}
             >
-              <h2>
-                {" "}
-                {/* The card has been succesfully updated! Do you want to continue
-                editing the card? */}
-                Do you want to apply the new changes?
-              </h2>
+              <h2>Do you want to apply the new changes?</h2>
               <div className="finished-edit-buttons">
                 <ButtonSubmitPage
                   onClick={() => {
                     handleFinishEdit();
                     setHasClickedFinishEdit(false);
                     setClickEdit(false);
-                    // setHasFinishedEdit(false);
                   }}
                 >
                   YES
                 </ButtonSubmitPage>
                 <ButtonSubmitPage
                   onClick={() => {
-                    // setHasFinishedEdit(false);
                     setHasClickedFinishEdit(false);
-
-                    // setClickEdit(false);
                   }}
                 >
                   NO
@@ -297,7 +279,6 @@ const SubmitBudgetPage = (props) => {
               onSubmit={(e) => {
                 e.preventDefault();
                 setHasClickedFinishEdit(true);
-                // handleFinishEdit(e);
               }}
             >
               <div className="info-card-item edit">
@@ -346,17 +327,12 @@ const SubmitBudgetPage = (props) => {
                   })}
                 </div>
                 <div className="buttons">
-                  <ButtonSubmitPage
-                    type="submit"
-                    // style={{ padding: "5px", marginTop: "10px" }}
-                  >
+                  <ButtonSubmitPage type="submit">
                     Finish editing
                   </ButtonSubmitPage>
                   <ButtonSubmitPage
                     type="cancel"
                     style={{
-                      // padding: "5px",
-                      // marginLeft: "10px",
                       backgroundColor: "grey",
                     }}
                     onClick={() => setClickEdit(false)}
