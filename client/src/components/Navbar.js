@@ -37,15 +37,7 @@ const NavBar = () => {
                 About
               </Link>
             </li>
-            <li className="nav-item">
-              <Link
-                to="/landing"
-                className="nav-links categories"
-                onClick={closeMenu}
-              >
-                Dashboard
-              </Link>
-            </li>
+
             <li className="nav-item">
               <Link
                 to="/expenseTracker"
@@ -60,17 +52,21 @@ const NavBar = () => {
                 View your plans
               </Link>
             </li>
+            <li className="nav-item">
+              <Link
+                to="/landing"
+                className="nav-links categories"
+                onClick={closeMenu}
+              >
+                Account
+              </Link>
+            </li>
 
-            <li className="nav-item">
-              <Link to="/login" className="nav-links" onClick={closeMenu}>
-                Login
-              </Link>
-            </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link to="/register" className="nav-links" onClick={closeMenu}>
-                Register
+                Sign Out
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

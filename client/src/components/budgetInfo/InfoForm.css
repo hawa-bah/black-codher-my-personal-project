@@ -130,6 +130,7 @@
 .SubmitBudgetPage-div .top {
   display: flex;
   align-items: flex-end;
+  margin: 20px;
 }
 .SubmitBudgetPage-div .top > div {
   margin: 10px;
