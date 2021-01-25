@@ -207,7 +207,7 @@ const SubmitBudgetPage = (props) => {
   };
 
   return (
-    <div>
+    <div className="SubmitBudgetPage-div">
       <div>
         {clickDelete && (
           <div className="pop-up dialog-parent">
@@ -370,14 +370,14 @@ const SubmitBudgetPage = (props) => {
         </div>
       </div>
 
-      <div>
-        <h2>Your plans</h2>
-      </div>
-      <div className="submit-Info-button">
-        <ButtonSubmitPage // to submit NEW info (not edit)
-          onClick={() => setWantsToSubmitInfo(true)}
-          startIcon={<AddIcon />}
-        ></ButtonSubmitPage>
+      <div className="top">
+        <h1>Your plans</h1>
+        <div className="submit-Info-button">
+          <ButtonSubmitPage // to submit NEW info (not edit)
+            onClick={() => setWantsToSubmitInfo(true)}
+            startIcon={<AddIcon />}
+          ></ButtonSubmitPage>
+        </div>
       </div>
       <div className="info-cards-container">
         {infoCards.length === 0 ? (

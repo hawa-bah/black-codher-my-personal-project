@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     padding: 20,
+    paddingLeft: "30%",
     margin: "auto",
     marginBottom: "20px",
     maxWidth: 600,

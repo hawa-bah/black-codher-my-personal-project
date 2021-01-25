@@ -12,6 +12,7 @@
   background-color: rgb(2, 2, 53);
   min-height: 100vh;
   /* margin: 0; */
+  /* align-items: center; */
 }
 .Register-div > div {
   /* max-height: 100vh; */
@@ -42,4 +43,37 @@
   );
 
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#33CFDD", endColorstr="#BB4DFF", GradientType=1 );
+}
+
+/* LANDING */
+.img-account {
+  max-width: 100px;
+}
+.landing-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+}
+.landing-content .action {
+  margin-left: 75%;
+}
+
+.landing-options > div {
+  border: 1px solid rgb(13, 13, 90);
+  border-radius: 20px;
+  padding: 20px;
+  min-width: 100px;
+  max-width: 200px;
+  margin: 20px;
+  text-align: center;
+}
+.landing-options {
+  display: flex;
+}
+.landing-link {
+  text-decoration: none;
+  font-weight: 900;
 }

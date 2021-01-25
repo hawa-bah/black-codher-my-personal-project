@@ -122,3 +122,15 @@
   padding: 10px;
   border-radius: 20px;
 }
+
+/* SUBMIT BUDGET PAGE */
+.SubmitBudgetPage-div {
+  padding: 20px;
+}
+.SubmitBudgetPage-div .top {
+  display: flex;
+  align-items: flex-end;
+}
+.SubmitBudgetPage-div .top > div {
+  margin: 10px;
+}

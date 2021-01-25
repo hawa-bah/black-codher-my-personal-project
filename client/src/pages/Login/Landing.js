@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../Redux/actions/authActions";
 
+import { Button, Icon } from "@material-ui/core";
+import { Link } from "react-router-dom";
+// import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+// import accountImg from "./account-logo.png";
+
 const Landing = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
@@ -19,32 +24,49 @@ const Landing = () => {
   return (
     <div className="Landing-div">
       <div>
-        <div style={{ height: "75vh" }} className="container valign-wrapper">
-          <div className="row">
-            <div className="col s12 center-align">
-              <h4>
-                <b>Hey there,</b>{" "}
-                {auth.user.name ? auth.user.name.split(" ")[0] : null}
-                <p className="flow-text grey-text text-darken-1">
-                  You are logged into a full-stack{" "}
-                  <span style={{ fontFamily: "monospace" }}>
-                    "decide the name of the app"
-                  </span>{" "}
-                  app 👏
-                </p>
-              </h4>
-              <button
-                style={{
-                  width: "150px",
-                  borderRadius: "3px",
-                  letterSpacing: "1.5px",
-                  marginTop: "1rem",
-                }}
-                onClick={(e) => clickLogout(e)}
-                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-              >
-                Logout
-              </button>
+        <div className="valign-wrapper">
+          <div className="landing-container ">
+            <div className="landing-content">
+              <div className="action">
+                <Button
+                  style={{
+                    width: "150px",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px",
+                    marginTop: "1rem",
+                  }}
+                  onClick={(e) => clickLogout(e)}
+                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                >
+                  Logout
+                </Button>
+              </div>
+              <img src="/images/account-logo.png" className="img-account"></img>
+              <div className="landing-text">
+                <h4>
+                  <b>Hey there,</b>{" "}
+                  {auth.user.name ? auth.user.name.split(" ")[0] : null}
+                  <p>
+                    Welcome to{" "}
+                    <span style={{ fontFamily: "monospace" }}>
+                      "decide the name of the app"
+                    </span>{" "}
+                    👏
+                  </p>
+                </h4>
+              </div>
+              <div className="landing-options">
+                <div>
+                  <Link to="/budgetInfo" className="landing-link">
+                    Check your plans
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/expenseTracker" className="landing-link">
+                    Track your expenses
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>
