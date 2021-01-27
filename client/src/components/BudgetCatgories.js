@@ -8,23 +8,15 @@ const BudgetCategories = (props) => {
   const { auth } = props;
 
   const [tripName, setTripName] = useState(""); // tripName is used to select the trip at the top of the page
-  // const [tripNameList, setTripNameList] = useState(null); // documents from the budget collection from a user
   const [spent, setSpent] = useState(null); //transactions of a specific trip. Spent is an array of objects(transactions)
   const [totalBudget, setTotalBudget] = useState(0); // total budget for a specific trip
   const [totalSpent, setTotalSpent] = useState(0); // total budget for a specific trip
-
   const [data, setData] = useState([]); //document from the budget collection from a specific Trip and user
 
   useEffect(() => {
-    // if (!tripNameList) {
-    //   getTripNameList();
-    // }
-
     // >>> the color gets updated in the first time the page is loaded
     if (data.length !== 0 && spent.length !== 0 && tripName !== "Hidde") {
       changeColorBudget(data);
-    } else {
-      console.log("not working");
     }
 
     if (props.hasSubmitedTransaction) {
@@ -46,9 +38,6 @@ const BudgetCategories = (props) => {
         "category-card-div" + "" + elements.budget_category
       );
 
-      // repeated code
-      console.log("SPENT:" + elements.budget_category);
-
       let filterSpent = spent.filter((object) => {
         return object.budget_category === elements.budget_category;
       }); // filterSpent is an array of objects(transactions in the same category )
@@ -67,30 +56,14 @@ const BudgetCategories = (props) => {
     });
   };
 
-  // >>>>> STATE HAS BEEN LIFTED UP
-  // const getTripNameList = async () => {
-  //   //>>>> I am getting the documents from the budget collection whith budgetService.js
-  //   let res = await getAll(auth.user.email);
-  //   setTripNameList(res);
-  // };
-
-  // const renderTripNameList = (trip) => {
-  //   return (
-  //     <MenuItem key={trip.trip_name} value={trip.trip_name}>
-  //       {trip.trip_name}
-  //     </MenuItem>
-  //   );
-  // };
-
-  //  rendering categories info
   const renderBudgetCategory = async (tripName) => {
     let res = await getBudget(tripName, auth.user.email);
     setData(res);
   };
-
   const renderSpent = async (tripName) => {
     let res = await getSpent(tripName, auth.user.email);
-    setSpent(res); //this returns the transactions of a specific trip. Spent is an array of objects(transactions)
+    setSpent(res); //this returns the transactions of a specific trip.
+    // Spent is an array of objects(transactions)
   };
   const renderBalanceTotal = async (tripName) => {
     let res = await getBalance(tripName, auth.user.email);
@@ -116,7 +89,7 @@ const BudgetCategories = (props) => {
               select
               onChange={(event) => {
                 setTripName(event.target.value);
-                renderSpent(event.target.value); // this are transactions corresponding to one trip
+                renderSpent(event.target.value);
                 renderBudgetCategory(event.target.value);
                 renderBalanceTotal(event.target.value);
                 console.log("You have selected " + event.target.value);
@@ -125,7 +98,6 @@ const BudgetCategories = (props) => {
               required
             >
               <MenuItem key="hidde">Hidde</MenuItem>
-              {/* here i am mapping the name of the trips inside the budget collection */}
               {props.tripNameList && props.tripNameList.length > 0
                 ? props.tripNameList.map((trip) =>
                     props.renderTripNameList(trip)
@@ -156,7 +128,6 @@ const BudgetCategories = (props) => {
       <div className="category-card-container">
         {data && data.length > 0
           ? data[0].budgets.map((elements) => {
-              // renderSpent(elements, tripName);
               let filterSpent = spent.filter((object) => {
                 return object.budget_category === elements.budget_category;
               }); //>>>> filterSpent is an array of objects(transactions in the same category hopefully?)
@@ -185,6 +156,7 @@ const BudgetCategories = (props) => {
                       {Math.round((spentValue / elements.budget_amount) * 100)}
                       %)
                     </p>
+
                     <ProgressBar
                       now={Math.round(
                         (spentValue / elements.budget_amount) * 100

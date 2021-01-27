@@ -23,6 +23,8 @@ import PrivateRoute from "./PrivateRoute";
 
 import "./pages/Login/main.css";
 import "./components/budgetInfo/InfoForm.css";
+import Home from "./pages/Home";
+
 // >>>> checking if a user is loged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -47,6 +49,16 @@ function App() {
     <div>
       <Provider store={store}>
         <Router>
+          <Route
+            exact
+            path="/home"
+            render={() => (
+              <React.Fragment>
+                <NavBar />
+                <Home />
+              </React.Fragment>
+            )}
+          />
           <Route
             exact
             path="/expenseTracker"

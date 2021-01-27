@@ -5,8 +5,7 @@ import { logoutUser } from "../../Redux/actions/authActions";
 
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-// import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-// import accountImg from "./account-logo.png";
+import NavBar from "../../components/Navbar";
 
 const Landing = () => {
   const dispatch = useDispatch();
@@ -23,6 +22,7 @@ const Landing = () => {
   };
   return (
     <div className="Landing-div">
+      <NavBar />
       <div>
         <div className="valign-wrapper">
           <div className="landing-container ">
@@ -34,6 +34,7 @@ const Landing = () => {
                     borderRadius: "3px",
                     letterSpacing: "1.5px",
                     marginTop: "1rem",
+                    backgroundColor: "white",
                   }}
                   onClick={(e) => clickLogout(e)}
                   className="btn btn-large waves-effect waves-light hoverable blue accent-3"
@@ -47,17 +48,14 @@ const Landing = () => {
                 className="img-account"
               ></img>
               <div className="landing-text">
-                <h4>
+                <h3>
                   <b>Hey there,</b>{" "}
-                  {auth.user.name ? auth.user.name.split(" ")[0] : null}
+                  {auth.user.name ? auth.user.name.split(" ")[0] : null}!
                   <p>
                     Welcome to{" "}
-                    <span style={{ fontFamily: "monospace" }}>
-                      "decide the name of the app"
-                    </span>{" "}
-                    👏
+                    <span style={{ fontFamily: "monospace" }}>TIRA</span> 👏
                   </p>
-                </h4>
+                </h3>
               </div>
               <div className="landing-options">
                 <div>

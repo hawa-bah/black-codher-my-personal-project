@@ -22,8 +22,6 @@ const Login = (props) => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const errorsRedux = useSelector((state) => state.errors);
-  console.log(props.history);
-  console.log(errorsRedux);
 
   const [loginInfo, setLoginInfo] = useState({
     email: "",
@@ -38,7 +36,7 @@ const Login = (props) => {
 
     if (auth.isAuthenticated) {
       console.log("using push");
-      props.history.push("/budgetInfo");
+      props.history.push("/landing");
     }
     if (errorsRedux) {
       console.log(errorsRedux);

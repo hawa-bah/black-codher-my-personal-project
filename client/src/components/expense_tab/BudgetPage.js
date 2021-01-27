@@ -46,10 +46,7 @@ NumberFormatCustom.propTypes = {
 const BudgetPage = (props) => {
   const auth = useSelector((state) => state.auth);
 
-  // >>>> I'm passing transactions state (the value of a transaction) as a props
-
   const [viewTransactions, setViewTransactions] = useState(false); //>
-  //>>>> The balance is the sum of those values with test for now
   const [hasSubmitedTransaction, setHasSubmitedTransaction] = useState(false);
 
   const [tripNameList, setTripNameList] = useState(null); // documents from the budget collection from a user

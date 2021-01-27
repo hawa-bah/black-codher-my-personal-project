@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
-// import Dropdown from "./Dropdown.js";
 import MenuIcon from "@material-ui/icons/Menu";
 
 const NavBar = () => {
@@ -14,10 +13,26 @@ const NavBar = () => {
       <div className="navBar-2">
         <div>
           <div className="navBar-onView">
-            <Link to="/home" className="navbar-logo" style={{ color: "black" }}>
-              HOME
+            <Link
+              to="/home"
+              className="navbar-logo"
+              style={{
+                color: "black",
+                backgroundColor: "white",
+                padding: "10px",
+                borderRadius: "10px",
+              }}
+            >
+              TIRA
             </Link>
-            <div onClick={handleClick}>
+            <div
+              onClick={handleClick}
+              style={{
+                backgroundColor: "white",
+                padding: "10px",
+                borderRadius: "10px",
+              }}
+            >
               <MenuIcon style={{ color: "black" }} />
               <i className={click ? "fas fa-times" : "fas fa-bars"} />
             </div>

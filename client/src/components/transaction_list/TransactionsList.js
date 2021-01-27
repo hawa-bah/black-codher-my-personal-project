@@ -5,7 +5,6 @@ import Sort from "../action-buttons/Sort";
 import Filter from "../action-buttons/Filter";
 // services
 import { getAll } from "../../services/transactionService";
-// import { deleteOne } from "../../services/userService";
 import { deleteOne } from "../../services/transactionService";
 import { Button } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -18,17 +17,13 @@ const TransactionsList = (props) => {
 
   const [filteredTransactions, setFilteredTransactions] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
-  const [filterLabel, setFilterLabel] = useState([]);
-  const [filterValue, setFilterValue] = useState([]);
 
   useEffect(() => {
     if (!transactions) {
       getTransactionsList();
-      console.log("heeeey transactions");
     }
     if (props.hasSubmitedTransaction) {
       getTransactionsList();
-      console.log("heeeey has submited");
       props.setHasSubmitedTransaction(false);
     }
   }, [props.hasSubmitedTransaction]);
@@ -43,7 +38,6 @@ const TransactionsList = (props) => {
     await deleteOne(transaction);
     getTransactionsList(); //>>>>>>>>>>>>>>>>>>>>>> !!!! ask Tanya why we shouldn't make so may requests to the back-end
     props.setHasSubmitedTransaction(true);
-    // props.setHasSubmitedTransaction(!props.hasSubmitedTransaction);
   };
 
   const renderTransaction = (transaction) => {
@@ -72,9 +66,6 @@ const TransactionsList = (props) => {
   // label is state, also the things that will be filtered
   const filterMethod = (categorySelected, tripSelected) => {
     setIsFiltered(true);
-
-    // setFilterLabel(label);
-    // setFilterValue(value);
     filterTransactions(categorySelected, tripSelected);
   };
 
@@ -110,8 +101,6 @@ const TransactionsList = (props) => {
 
   const clearFilters = () => {
     setIsFiltered(false);
-    setFilterLabel([]);
-    setFilterValue([]);
   };
 
   return (

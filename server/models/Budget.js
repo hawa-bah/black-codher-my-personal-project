@@ -6,7 +6,6 @@ const Budget = Schema({
     {
       budget_category: String,
       budget_amount: Number,
-      // spent_amount: Number,
     },
   ],
   trip_name: String,
@@ -14,7 +13,6 @@ const Budget = Schema({
     type: Date,
     default: new Date(),
   },
-  // user_id: { type: Schema.Types.ObjectId, ref: "users" },
   user_ref_email: String,
 });
 

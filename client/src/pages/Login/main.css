@@ -62,7 +62,7 @@
 }
 
 .landing-options > div {
-  border: 1px solid rgb(13, 13, 90);
+  border: 1px solid white;
   border-radius: 20px;
   padding: 20px;
   min-width: 100px;
@@ -73,7 +73,30 @@
 .landing-options {
   display: flex;
 }
+.landing-options > div {
+  background-color: rgba(250, 199, 58, 0.336);
+}
+.landing-options > div:hover {
+  background-color: rgba(58, 189, 250, 0.267);
+}
 .landing-link {
-  text-decoration: none;
   font-weight: 900;
+  color: black;
+  font-size: 20px;
+}
+.landing-link:hover {
+  color: white;
+}
+
+.Landing-div {
+  background: url("../../window-flight-2.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.red-text {
+  color: red;
 }
