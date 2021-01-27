@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Coda+Caption:wght@800&display=swap");
+
 .auth-link {
   color: white;
 }
@@ -100,3 +102,30 @@
 .red-text {
   color: red;
 }
+
+/* HOME */
+.links-div {
+  display: flex;
+  flex-direction: column;
+  max-width: 150px;
+  text-align: end;
+  align-items: flex-end;
+}
+.links-div > div {
+  margin: 5px;
+}
+.links {
+  padding: 10px;
+  display: flex;
+  border-radius: 20px;
+  font-family: "Coda Caption", sans-serif;
+  font-size: 20px;
+  text-decoration: none;
+}
+/*
+.links:hover {
+  text-decoration: none;
+  color: white;
+  text-emphasis: none;
+  border-radius: 20px;
+} */

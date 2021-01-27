@@ -79,7 +79,7 @@ const Login = (props) => {
         <div styles={{ width: "300px" }}>
           <div className={classes.row}>
             <div className="col s8 ">
-              <Link to="/" className="auth-link">
+              <Link to="/home" className="auth-link">
                 <i className="material-icons left">keyboard_backspace</i> Back
               </Link>
               <div className="col s9">

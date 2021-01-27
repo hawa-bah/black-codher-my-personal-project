@@ -15,15 +15,15 @@ import SubmitBudgetPage from "./pages/SubmitBudgetsPage";
 import budgetCategoriesArry from "./budgetCategoriesArray";
 import NavBar from "./components/Navbar";
 import About from "./pages/About";
-import Auth from "./pages/Auth";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Login/Register";
 import Landing from "./pages/Login/Landing";
 import PrivateRoute from "./PrivateRoute";
+import Home from "./pages/Home";
+import Generator from "./pages/Generator";
 
 import "./pages/Login/main.css";
 import "./components/budgetInfo/InfoForm.css";
-import Home from "./pages/Home";
 
 // >>>> checking if a user is loged in
 if (localStorage.jwtToken) {
@@ -59,39 +59,7 @@ function App() {
               </React.Fragment>
             )}
           />
-          <Route
-            exact
-            path="/expenseTracker"
-            render={() => (
-              <React.Fragment>
-                <NavBar />
 
-                <BudgetPage />
-              </React.Fragment>
-            )}
-          />
-          <Route
-            exact
-            path="/budgetInfo"
-            render={() => (
-              <React.Fragment>
-                <NavBar />
-                <SubmitBudgetPage
-                  budgetCategoriesArray={budgetCategoriesArry}
-                />
-              </React.Fragment>
-            )}
-          />
-          {/* LOGIN PART */}
-          <Route
-            exact
-            path="/login-register"
-            render={() => (
-              <React.Fragment>
-                <Auth />
-              </React.Fragment>
-            )}
-          />
           <Route
             exact
             path="/login"
@@ -99,10 +67,7 @@ function App() {
             render={() => <Login />}
           />
           <Route exact path="/register" component={Register} />
-          {/*>>>> So that only one route is rendered */}
-          <Switch>
-            <PrivateRoute exact path="/landing" component={Landing} />
-          </Switch>
+
           <Route
             exact
             path="/about"
@@ -113,6 +78,42 @@ function App() {
               </React.Fragment>
             )}
           />
+
+          <Switch>
+            <PrivateRoute exact path="/landing" component={Landing} />
+            <PrivateRoute
+              exact
+              path="/budgetInfo"
+              component={() => (
+                <React.Fragment>
+                  <NavBar />
+                  <SubmitBudgetPage
+                    budgetCategoriesArray={budgetCategoriesArry}
+                  />
+                </React.Fragment>
+              )}
+            />
+            <PrivateRoute
+              exact
+              path="/generator"
+              component={() => (
+                <React.Fragment>
+                  <NavBar />
+                  <Generator />
+                </React.Fragment>
+              )}
+            />
+            <PrivateRoute
+              exact
+              path="/expenseTracker"
+              component={() => (
+                <React.Fragment>
+                  <NavBar />
+                  <BudgetPage />
+                </React.Fragment>
+              )}
+            />
+          </Switch>
         </Router>
       </Provider>
     </div>

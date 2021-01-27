@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import { TweenMax, Power2 } from "gsap";
+import { Link } from "@material-ui/core";
 
 const Home = () => {
   const homeImg = useRef(null);
   const slider = useRef(null);
   const text = useRef(null);
+  const text2 = useRef(null);
   useEffect(() => {
     TweenMax.fromTo(
       homeImg.current,
@@ -20,6 +22,12 @@ const Home = () => {
       { top: "100%", left: "5%" },
       { top: "60%", left: "5%" }
     );
+    TweenMax.fromTo(
+      text2.current,
+      1.2,
+      { top: "10%", left: "90%" },
+      { top: "15%", left: "70%" }
+    );
   }, []);
   return (
     <>
@@ -30,6 +38,44 @@ const Home = () => {
             src="/images/save-money.jpg"
             alt="home-img"
           />
+          <div className="home-text links-div" ref={text2}>
+            <div
+              className="links-box"
+              // style={{ position: "absolute" }}
+            >
+              <lottie-player
+                src="https://assets8.lottiefiles.com/packages/lf20_frdtxW.json"
+                background="transparent"
+                speed="0.5"
+                style={{
+                  width: "300px",
+                  height: "300px",
+                  position: "absolute",
+                  left: "-70%",
+                  top: "-60%",
+                  zIndex: -1,
+                }}
+                loop
+                autoplay
+              ></lottie-player>
+              <a
+                style={{ color: " black", textDecoration: "none", zIndex: 4 }}
+                className="links"
+                href="/login"
+              >
+                Log in
+              </a>
+            </div>
+            <div>
+              <a
+                style={{ color: " black", textDecoration: "none", zIndex: 4 }}
+                className="links"
+                href="/register"
+              >
+                Create an account
+              </a>
+            </div>
+          </div>
           <div className="home-text" ref={text}>
             <h1>TIRA</h1>
             <div>
