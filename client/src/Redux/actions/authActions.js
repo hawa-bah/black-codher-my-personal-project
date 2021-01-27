@@ -7,7 +7,10 @@ import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 export const registerUser = (userData, history) => (dispatch) => {
   axios
     .post("http://localhost:5000/api/register", userData)
-    .then((res) => history.push("/login")) //>>>>>>>> THIS NEEDS TO CHANGE AS WE HAVE DIFFERENT ROUTES re-direct to login on successful register
+    .then((res) => {
+      res.status(200).send(res);
+      history.push("/login");
+    }) //>>>>>>>> THIS NEEDS TO CHANGE AS WE HAVE DIFFERENT ROUTES re-direct to login on successful register
     .catch((err) => {
       console.log("heeey axios ", err);
 
