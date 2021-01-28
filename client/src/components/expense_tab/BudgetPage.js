@@ -14,6 +14,7 @@ import BudgetCategories from "../BudgetCatgories";
 import "./BudgetPage.css";
 import "../../App.css";
 import { connect, useSelector } from "react-redux";
+import { Switch } from "react-router-dom";
 
 // >> for the transaction form, numeric input
 function NumberFormatCustom(props) {
@@ -72,6 +73,8 @@ const BudgetPage = (props) => {
   };
 
   return (
+    // <>
+    //   <Switch>
     <div className="budgetPage-Div" data-testid="ancestor">
       <h1 data-testid="descendant">Expense Tracker</h1>
 
@@ -123,6 +126,8 @@ const BudgetPage = (props) => {
         </div>
       </div>
     </div>
+    //   </Switch>
+    // </>
   );
 };
 const mapStateToProps = (state) => ({

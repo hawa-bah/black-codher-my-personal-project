@@ -110,6 +110,7 @@ function App() {
                 </React.Fragment>
               )}
             />
+
             <PrivateRoute
               exact
               path="/expenseTracker"

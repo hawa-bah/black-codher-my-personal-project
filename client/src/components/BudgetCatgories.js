@@ -8,7 +8,7 @@ const BudgetCategories = (props) => {
   const { auth } = props;
 
   const [tripName, setTripName] = useState(""); // tripName is used to select the trip at the top of the page
-  const [spent, setSpent] = useState(null); //transactions of a specific trip. Spent is an array of objects(transactions)
+  const [spent, setSpent] = useState([]); //transactions of a specific trip. Spent is an array of objects(transactions)
   const [totalBudget, setTotalBudget] = useState(0); // total budget for a specific trip
   const [totalSpent, setTotalSpent] = useState(0); // total budget for a specific trip
   const [data, setData] = useState([]); //document from the budget collection from a specific Trip and user
@@ -34,6 +34,7 @@ const BudgetCategories = (props) => {
 
   const changeColorBudget = (data) => {
     data[0].budgets.forEach((elements) => {
+      console.log("wle", elements);
       const categoryDiv = document.getElementById(
         "category-card-div" + "" + elements.budget_category
       );
@@ -62,6 +63,7 @@ const BudgetCategories = (props) => {
   };
   const renderSpent = async (tripName) => {
     let res = await getSpent(tripName, auth.user.email);
+    console.log(res);
     setSpent(res); //this returns the transactions of a specific trip.
     // Spent is an array of objects(transactions)
   };
@@ -126,7 +128,7 @@ const BudgetCategories = (props) => {
       ) : null}
 
       <div className="category-card-container">
-        {data && data.length > 0
+        {data && data.length && spent.length > 0
           ? data[0].budgets.map((elements) => {
               let filterSpent = spent.filter((object) => {
                 return object.budget_category === elements.budget_category;
