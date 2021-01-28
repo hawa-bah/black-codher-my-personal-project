@@ -4,6 +4,7 @@
   background-color: aliceblue;
   background: url("../../micheile-henderson-SoT4-mZhyhE-unsplash.jpg");
   height: 100vh;
+  width: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -11,8 +12,9 @@
   padding: 10px;
 }
 .budgetPage-Div .box {
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-items: center;
 }
 .transactions-form-ui-div,
 .budgetCategories-div,
@@ -32,7 +34,7 @@
 /* BUDGETCATEGORIES.js */
 .budgetCategories-div,
 .Transactions-div {
-  max-width: fit-content;
+  /* max-width: fit-content; */
   min-width: 250px;
 }
 
