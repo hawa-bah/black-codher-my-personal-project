@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Coda+Caption:wght@800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 
 .auth-link {
   color: white;
@@ -19,7 +20,7 @@
 .Register-div > div {
   /* max-height: 100vh; */
   max-width: 45%;
-  min-width: 300px;
+  min-width: 45%;
   min-height: 100vh;
 
   background: hsla(185, 71%, 53%, 1);
@@ -76,10 +77,10 @@
   display: flex;
 }
 .landing-options > div {
-  background-color: rgba(250, 199, 58, 0.336);
+  background-color: rgba(250, 199, 58, 0.904);
 }
 .landing-options > div:hover {
-  background-color: rgba(58, 189, 250, 0.267);
+  background-color: rgba(58, 189, 250, 0.836);
 }
 .landing-link {
   font-weight: 900;
@@ -140,7 +141,7 @@
   align-items: center;
   justify-content: center;
 }
-.post-register-div div div {
+.post-register-div div .title-registration {
   padding: 20px;
   width: 70%;
   display: flex;
@@ -149,10 +150,11 @@
   align-items: center;
   justify-content: center;
 }
+
 .post-register-div div h1 {
   color: white;
   font-size: 80px;
-  font-family: "Coda Caption", sans-serif;
+  font-family: "Fredoka One", cursive;
 }
 .slider2 {
   background-color: rgb(2, 2, 53);
@@ -160,9 +162,15 @@
   height: 100%;
 }
 @media only screen and (max-width: 800px) {
+  .Register-div > div {
+    /* max-height: 100vh; */
+    max-width: 45%;
+    min-width: 300px;
+    min-height: 100vh;
+  }
+
   .post-register-div div h1 {
     color: white;
     font-size: 30px;
-    font-family: "Coda Caption", sans-serif;
   }
 }
