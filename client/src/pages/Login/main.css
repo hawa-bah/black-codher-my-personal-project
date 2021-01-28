@@ -74,7 +74,11 @@
   text-align: center;
 }
 .landing-options {
-  display: flex;
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+  max-width: 1000px;
+  /* justify-items: center; */
 }
 .landing-options > div {
   background-color: rgba(250, 199, 58, 0.904);

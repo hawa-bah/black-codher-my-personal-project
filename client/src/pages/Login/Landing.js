@@ -64,8 +64,18 @@ const Landing = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link to="/expenseTracker" className="landing-link">
-                    Track your expenses
+                  <Link to="/transactionForm" className="landing-link">
+                    Submit a transaction
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/budgetCategories" className="landing-link">
+                    Your charts
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/transactionsList" className="landing-link">
+                    View your transactions
                   </Link>
                 </div>
               </div>
