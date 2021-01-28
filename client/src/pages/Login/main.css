@@ -122,10 +122,47 @@
   font-size: 20px;
   text-decoration: none;
 }
-/*
-.links:hover {
-  text-decoration: none;
+
+/* POST REGISTER */
+.post-register-div {
+  background-color: rgb(2, 2, 53);
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  /* margin-top: 40%; */
+}
+.post-register-div > div {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.post-register-div div div {
+  padding: 20px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.post-register-div div h1 {
   color: white;
-  text-emphasis: none;
-  border-radius: 20px;
-} */
+  font-size: 80px;
+  font-family: "Coda Caption", sans-serif;
+}
+.slider2 {
+  background-color: rgb(2, 2, 53);
+  width: 100%;
+  height: 100%;
+}
+@media only screen and (max-width: 800px) {
+  .post-register-div div h1 {
+    color: white;
+    font-size: 30px;
+    font-family: "Coda Caption", sans-serif;
+  }
+}

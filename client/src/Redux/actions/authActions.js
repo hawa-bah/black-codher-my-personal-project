@@ -10,7 +10,7 @@ export const registerUser = (userData, history) => (dispatch) => {
     .then((res) => {
       // res.status(200).send(res);
       // console.log("success", res);
-      history.push("/login");
+      history.push("/postRegister");
     }) //>>>>>>>> THIS NEEDS TO CHANGE AS WE HAVE DIFFERENT ROUTES re-direct to login on successful register
     .catch((err) => {
       console.log("heeey axios ", err);

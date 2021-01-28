@@ -24,6 +24,7 @@ import Generator from "./pages/Generator";
 
 import "./pages/Login/main.css";
 import "./components/budgetInfo/InfoForm.css";
+import PostRegister from "./pages/PostRegistration";
 
 // >>>> checking if a user is loged in
 if (localStorage.jwtToken) {
@@ -67,6 +68,12 @@ function App() {
             render={() => <Login />}
           />
           <Route exact path="/register" component={Register} />
+          <Route
+            exact
+            path="/postRegister"
+            component={PostRegister}
+            render={() => <PostRegister />}
+          />
 
           <Route
             exact
