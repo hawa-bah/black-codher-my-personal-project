@@ -16,6 +16,7 @@ import "../../App.css";
 import { connect, useSelector } from "react-redux";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import PrivateRoute from "../../PrivateRoute.js";
+import NavBar from "../Navbar.js";
 
 // >> for the transaction form, numeric input
 function NumberFormatCustom(props) {
@@ -75,30 +76,33 @@ const BudgetPage = (props) => {
 
   return (
     <>
-      <Router>
-        <Switch>
-          {/* <h1 data-testid="descendant">Expense Tracker</h1> */}
-          <PrivateRoute
-            exact
-            path="/transactionForm"
-            component={() => (
-              <div className="budgetPage-Div" data-testid="ancestor">
-                <TransactionForm
-                  hasSubmitedTransaction={hasSubmitedTransaction}
-                  setHasSubmitedTransaction={setHasSubmitedTransaction}
-                  auth={auth}
-                  tripNameList={tripNameList}
-                  renderTripNameList={renderTripNameList}
-                />
-              </div>
-            )}
-          ></PrivateRoute>
+      {/* <Router> */}
+      <Switch>
+        {/* <h1 data-testid="descendant">Expense Tracker</h1> */}
+        <PrivateRoute
+          exact
+          path="/transactionForm"
+          component={() => (
+            <div className="budgetPage-Div" data-testid="ancestor">
+              <NavBar />
+              <TransactionForm
+                hasSubmitedTransaction={hasSubmitedTransaction}
+                setHasSubmitedTransaction={setHasSubmitedTransaction}
+                auth={auth}
+                tripNameList={tripNameList}
+                renderTripNameList={renderTripNameList}
+              />
+            </div>
+          )}
+        ></PrivateRoute>
 
-          <PrivateRoute
-            exact
-            path="/budgetCategories"
-            component={() => (
-              <div className="budgetPage-Div" data-testid="ancestor">
+        <PrivateRoute
+          exact
+          path="/budgetCategories"
+          component={() => (
+            <>
+              <NavBar />
+              <div className="budgetPage-Div box" data-testid="ancestor">
                 <div className="budget categories card">
                   <BudgetCategories
                     budgetCategoriesArry={budgetCategoriesArry}
@@ -110,13 +114,16 @@ const BudgetPage = (props) => {
                   />
                 </div>
               </div>
-            )}
-          ></PrivateRoute>
-          <PrivateRoute
-            exact
-            path="/transactionsList"
-            component={() => (
-              <div className="budgetPage-Div" data-testid="ancestor">
+            </>
+          )}
+        ></PrivateRoute>
+        <PrivateRoute
+          exact
+          path="/transactionsList"
+          component={() => (
+            <>
+              <NavBar />
+              <div className="budgetPage-Div box" data-testid="ancestor">
                 <div className="budget categories card">
                   <React.Fragment>
                     <div
@@ -158,10 +165,11 @@ const BudgetPage = (props) => {
                   </React.Fragment>
                 </div>
               </div>
-            )}
-          ></PrivateRoute>
-        </Switch>
-      </Router>
+            </>
+          )}
+        ></PrivateRoute>
+      </Switch>
+      {/* </Router> */}
     </>
   );
 };

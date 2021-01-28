@@ -122,8 +122,8 @@ function App() {
               )}
             />
           </Switch>
+          <BudgetPage />
         </Router>
-        <BudgetPage />
       </Provider>
     </div>
   );

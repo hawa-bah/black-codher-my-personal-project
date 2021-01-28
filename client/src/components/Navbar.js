@@ -53,7 +53,7 @@ const NavBar = () => {
               </Link>
             </li>
 
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link
                 to="/expenseTracker"
                 className="nav-links"
@@ -61,7 +61,39 @@ const NavBar = () => {
               >
                 Expenses
               </Link>
+            </li> */}
+
+            <li className="nav-item">
+              <Link
+                to="/budgetCategories"
+                className="nav-links"
+                onClick={() => {
+                  closeMenu();
+                  window.location.href = "./budgetCategories";
+                }}
+              >
+                Your charts
+              </Link>
             </li>
+            <li className="nav-item">
+              <Link
+                to="/transactionForm"
+                className="nav-links"
+                onClick={closeMenu}
+              >
+                Submit a transaction
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                to="/transactionsList"
+                className="nav-links"
+                onClick={closeMenu}
+              >
+                View your transactions
+              </Link>
+            </li>
+
             <li className="nav-item">
               <Link to="/budgetInfo" className="nav-links" onClick={closeMenu}>
                 View your plans

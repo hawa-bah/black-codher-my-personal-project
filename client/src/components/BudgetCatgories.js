@@ -126,7 +126,7 @@ const BudgetCategories = (props) => {
       ) : null}
 
       <div className="category-card-container">
-        {data && data.length > 0
+        {data && data.length > 0 && spent
           ? data[0].budgets.map((elements) => {
               let filterSpent = spent.filter((object) => {
                 return object.budget_category === elements.budget_category;
