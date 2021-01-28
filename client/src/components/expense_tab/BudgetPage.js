@@ -14,6 +14,8 @@ import BudgetCategories from "../BudgetCatgories";
 import "./BudgetPage.css";
 import "../../App.css";
 import { connect, useSelector } from "react-redux";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import PrivateRoute from "../../PrivateRoute.js";
 
 // >> for the transaction form, numeric input
 function NumberFormatCustom(props) {
@@ -72,57 +74,95 @@ const BudgetPage = (props) => {
   };
 
   return (
-    <div className="budgetPage-Div" data-testid="ancestor">
-      <h1 data-testid="descendant">Expense Tracker</h1>
+    <>
+      <Router>
+        <Switch>
+          {/* <h1 data-testid="descendant">Expense Tracker</h1> */}
+          <PrivateRoute
+            exact
+            path="/transactionForm"
+            component={() => (
+              <div className="budgetPage-Div" data-testid="ancestor">
+                <TransactionForm
+                  hasSubmitedTransaction={hasSubmitedTransaction}
+                  setHasSubmitedTransaction={setHasSubmitedTransaction}
+                  auth={auth}
+                  tripNameList={tripNameList}
+                  renderTripNameList={renderTripNameList}
+                />
+              </div>
+            )}
+          ></PrivateRoute>
 
-      <TransactionForm
-        hasSubmitedTransaction={hasSubmitedTransaction}
-        setHasSubmitedTransaction={setHasSubmitedTransaction}
-        auth={auth}
-        tripNameList={tripNameList}
-        renderTripNameList={renderTripNameList}
-      />
+          <PrivateRoute
+            exact
+            path="/budgetCategories"
+            component={() => (
+              <div className="budgetPage-Div" data-testid="ancestor">
+                <div className="budget categories card">
+                  <BudgetCategories
+                    budgetCategoriesArry={budgetCategoriesArry}
+                    hasSubmitedTransaction={hasSubmitedTransaction}
+                    setHasSubmitedTransaction={setHasSubmitedTransaction}
+                    auth={auth}
+                    tripNameList={tripNameList}
+                    renderTripNameList={renderTripNameList}
+                  />
+                </div>
+              </div>
+            )}
+          ></PrivateRoute>
+          <PrivateRoute
+            exact
+            path="/transactionsList"
+            component={() => (
+              <div className="budgetPage-Div" data-testid="ancestor">
+                <div className="budget categories card">
+                  <React.Fragment>
+                    <div
+                      className="Transactions-div"
+                      style={{ padding: "20px", marginTop: "10px" }}
+                    >
+                      <h2 className="budgetPage-subtitle">TRANSACTIONS LIST</h2>
 
-      <div className="budget categories card">
-        <BudgetCategories
-          budgetCategoriesArry={budgetCategoriesArry}
-          hasSubmitedTransaction={hasSubmitedTransaction}
-          setHasSubmitedTransaction={setHasSubmitedTransaction}
-          auth={auth}
-          tripNameList={tripNameList}
-          renderTripNameList={renderTripNameList}
-        />
-      </div>
+                      <div className="button transaction">
+                        <Button
+                          onClick={() => setViewTransactions(!viewTransactions)}
+                        >
+                          <p>
+                            {viewTransactions
+                              ? "Click to Hide"
+                              : "Click to view"}
+                          </p>
+                        </Button>
+                      </div>
 
-      <div
-        className="Transactions-div"
-        style={{ padding: "20px", marginTop: "10px" }}
-      >
-        <h2 className="budgetPage-subtitle">TRANSACTIONS LIST</h2>
+                      <div className="transaction List">
+                        {viewTransactions ? (
+                          <div>
+                            <TransactionsList
+                              viewTransactions={viewTransactions}
+                              setViewTransactions={setViewTransactions}
+                              hasSubmitedTransaction={hasSubmitedTransaction}
+                              setHasSubmitedTransaction={
+                                setHasSubmitedTransaction
+                              }
+                              auth={auth}
 
-        <div className="button transaction">
-          <Button onClick={() => setViewTransactions(!viewTransactions)}>
-            <p>{viewTransactions ? "Click to Hide" : "Click to view"}</p>
-          </Button>
-        </div>
-
-        <div className="transaction List">
-          {viewTransactions ? (
-            <div>
-              <TransactionsList
-                viewTransactions={viewTransactions}
-                setViewTransactions={setViewTransactions}
-                hasSubmitedTransaction={hasSubmitedTransaction}
-                setHasSubmitedTransaction={setHasSubmitedTransaction}
-                auth={auth}
-
-                // renderBalance={renderBalance}
-              />
-            </div>
-          ) : null}
-        </div>
-      </div>
-    </div>
+                              // renderBalance={renderBalance}
+                            />
+                          </div>
+                        ) : null}
+                      </div>
+                    </div>
+                  </React.Fragment>
+                </div>
+              </div>
+            )}
+          ></PrivateRoute>
+        </Switch>
+      </Router>
+    </>
   );
 };
 const mapStateToProps = (state) => ({

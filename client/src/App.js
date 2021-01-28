@@ -110,6 +110,7 @@ function App() {
                 </React.Fragment>
               )}
             />
+
             <PrivateRoute
               exact
               path="/expenseTracker"
@@ -122,6 +123,7 @@ function App() {
             />
           </Switch>
         </Router>
+        <BudgetPage />
       </Provider>
     </div>
   );
