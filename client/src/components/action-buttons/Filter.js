@@ -113,12 +113,12 @@ const Filter = (props) => {
   console.log(tripNames);
   return (
     <div>
-      <div className={classes.root}>
+      <div className="Filetr-div">
         <FormControl
           required
           error={error}
           component="fieldset"
-          className={classes.formControl}
+          // className={classes.formControl}
         >
           <FormLabel component="legend">Choose a category</FormLabel>
           <FormGroup>
@@ -192,7 +192,7 @@ const Filter = (props) => {
           required
           error={errorTrip} // this will be used if we want a maximum of checkbox selected
           component="fieldset"
-          className={classes.formControl}
+          // className={classes.formControl}
         >
           <FormLabel component="legend">Choose the trip</FormLabel>
           <FormGroup>
@@ -209,16 +209,17 @@ const Filter = (props) => {
             Select at least one trip to use the filter
           </FormatHelperText>
         </FormControl>
-        <ColorButton
-          variant="contained"
-          color="primary"
-          className={classes.margin}
-          startIcon={<SortIcon />}
-          onClick={() => handleSubmitFilter()}
-        >
-          Submit Filters
-        </ColorButton>
       </div>
+      <ColorButton
+        variant="contained"
+        color="primary"
+        style={{ margin: "5px" }}
+        // className={classes.margin}
+        startIcon={<SortIcon />}
+        onClick={() => handleSubmitFilter()}
+      >
+        Submit Filters
+      </ColorButton>
     </div>
   );
 };
