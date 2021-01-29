@@ -77,10 +77,10 @@
   display: flex;
 }
 .landing-options > div {
-  background-color: rgba(250, 199, 58, 0.904);
+  background-color: rgba(250, 199, 58, 0.959);
 }
 .landing-options > div:hover {
-  background-color: rgba(58, 189, 250, 0.836);
+  background-color: rgba(58, 189, 250, 0.925);
 }
 .landing-link {
   font-weight: 900;

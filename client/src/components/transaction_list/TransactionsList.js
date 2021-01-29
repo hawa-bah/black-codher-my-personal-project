@@ -42,7 +42,6 @@ const TransactionsList = (props) => {
 
   const renderTransaction = (transaction) => {
     return (
-      // <div key={transaction._id} className="transactions-list-element">
       <>
         <div>{`${transaction.transaction_value}`}</div>
         <div>{`${transaction.description}`}</div>

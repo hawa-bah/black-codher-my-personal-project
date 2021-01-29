@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid, MenuItem, TextField } from "@material-ui/core";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import { getAll, getBudget, getSpent } from "../services/budgetService";
+import { getBudget, getSpent } from "../services/budgetService";
 import { getBalance } from "../services/transactionService";
 
 const BudgetCategories = (props) => {
