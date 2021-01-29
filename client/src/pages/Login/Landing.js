@@ -11,8 +11,6 @@ const Landing = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
-  console.log("USER", auth);
-  console.log(auth.user.id);
   const clickLogout = (e) => {
     e.preventDefault();
     dispatch(logoutUser());

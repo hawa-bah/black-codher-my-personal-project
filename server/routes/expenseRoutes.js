@@ -28,8 +28,6 @@ module.exports = (app) => {
         },
       },
     ]);
-    console.log(spentTotal);
-    console.log(budgetedTotal);
 
     return res.status(200).send({ spentTotal, budgetedTotal });
   });
@@ -47,7 +45,6 @@ module.exports = (app) => {
     const { id } = req.params;
 
     const transactions = await Exp_Transaction.findByIdAndDelete(id);
-    console.log(transactions);
     return res.status(202).send({
       error: false,
       transactions,
@@ -87,7 +84,7 @@ module.exports = (app) => {
       trip_name: tripName,
       user_ref_email: ref,
     });
-    console.log(budget);
+
     return res.status(200).send(budget);
   });
 };

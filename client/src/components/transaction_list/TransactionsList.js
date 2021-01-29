@@ -30,7 +30,6 @@ const TransactionsList = (props) => {
 
   const getTransactionsList = async () => {
     let res = await getAll(auth.user.email);
-    console.log(res);
     setTransactions(res);
   };
   // transaction is deleted from the database AND in the front end
@@ -77,13 +76,10 @@ const TransactionsList = (props) => {
       const filteredCategories = transactionsArray.filter((el) => {
         return categoriesSelectedArray.indexOf(el.budget_category) >= 0;
       });
-      console.log(filteredCategories);
 
-      console.log(tripsSelectedArray);
       const secondFilter = filteredCategories.filter((el) => {
         return tripsSelectedArray.indexOf(el.trip_name) >= 0;
       });
-      console.log(secondFilter);
       return secondFilter;
     };
     const test = filteredTransactions(
@@ -92,10 +88,7 @@ const TransactionsList = (props) => {
       tripSelected
     );
 
-    console.log(test);
-
     setFilteredTransactions(test);
-    console.log("filter transactions function clicked");
   };
 
   const clearFilters = () => {

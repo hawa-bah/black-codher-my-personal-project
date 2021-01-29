@@ -14,7 +14,6 @@ import BudgetCategories from "../BudgetCatgories";
 import "./BudgetPage.css";
 import "../../App.css";
 import { connect, useSelector } from "react-redux";
-import { Switch } from "react-router-dom";
 
 // >> for the transaction form, numeric input
 function NumberFormatCustom(props) {

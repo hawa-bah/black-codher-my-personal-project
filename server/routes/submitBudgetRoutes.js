@@ -6,7 +6,6 @@ const Exp_Transaction = mongoose.model("transaction");
 module.exports = (app) => {
   app.put(`/api/edit/transactions/:tripName/:user`, async (req, res) => {
     const { tripName, user } = req.params;
-    console.log(tripName, user);
     try {
       const edited = await Exp_Transaction.updateOne(
         {
@@ -15,8 +14,6 @@ module.exports = (app) => {
         },
         { $set: { trip_name: req.body.trip_name } }
       );
-      console.log(edited);
-
       res.status(200).send(edited);
     } catch (error) {
       res.status(500).send(error);
@@ -39,7 +36,7 @@ module.exports = (app) => {
     try {
       const CardToSubmit = await Budget.create(req.body);
       res.status(200).send(cardToEdit);
-    } catch {
+    } catch (error) {
       res.status(500).send(error);
     }
   });

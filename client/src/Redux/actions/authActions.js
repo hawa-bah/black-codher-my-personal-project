@@ -8,13 +8,9 @@ export const registerUser = (userData, history) => (dispatch) => {
   axios
     .post("http://localhost:5000/api/register", userData)
     .then((res) => {
-      // res.status(200).send(res);
-      // console.log("success", res);
       history.push("/postRegister");
-    }) //>>>>>>>> THIS NEEDS TO CHANGE AS WE HAVE DIFFERENT ROUTES re-direct to login on successful register
+    })
     .catch((err) => {
-      console.log("heeey axios ", err);
-
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data,
@@ -68,5 +64,4 @@ export const logoutUser = () => (dispatch) => {
   setAuthToken(false);
   // Set current user to empty object {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}));
-  console.log("LOGOUT ACTION");
 };

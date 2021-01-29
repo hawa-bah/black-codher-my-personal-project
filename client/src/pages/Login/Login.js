@@ -31,17 +31,10 @@ const Login = (props) => {
   });
 
   useEffect(() => {
-    console.log("use effect");
-    console.log(auth.isAuthenticated);
-
     if (auth.isAuthenticated) {
-      console.log("using push");
       props.history.push("/landing");
     }
-    if (errorsRedux) {
-      console.log(errorsRedux);
-    }
-  }, [auth, errorsRedux]);
+  }, [auth]);
   //
 
   // material-ui
@@ -57,20 +50,17 @@ const Login = (props) => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(loginInfo);
     const userData = {
       email: loginInfo.email,
       password: loginInfo.password,
     };
 
     dispatch(loginUser(userData));
-    console.log("AUTH", auth);
   };
 
   const handleloginInfo = (event) => {
     const { id, value } = event.target;
     setLoginInfo({ ...loginInfo, [id]: value });
-    console.log(loginInfo);
   };
 
   return (
@@ -79,7 +69,7 @@ const Login = (props) => {
         <div styles={{ width: "300px" }}>
           <div className={classes.row}>
             <div className="col s8 ">
-              <Link to="/home" className="auth-link">
+              <Link to="/" className="auth-link">
                 <i className="material-icons left">keyboard_backspace</i> Back
               </Link>
               <div className="col s9">
@@ -101,7 +91,6 @@ const Login = (props) => {
             noValidate
             onSubmit={(event) => {
               handleLogin(event);
-              console.log("clickSubmit");
             }}
             className={classes.root}
           >

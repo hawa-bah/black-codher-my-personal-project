@@ -16,7 +16,7 @@ const PrivateRoute = (props) => {
             auth.isAuthenticated === true ? (
               <Component {...props} />
             ) : (
-              <Redirect to="./home" />
+              <Redirect to="./" />
             )
           }
         />

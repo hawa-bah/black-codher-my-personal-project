@@ -14,7 +14,7 @@ const NavBar = () => {
         <div>
           <div className="navBar-onView">
             <Link
-              to="/home"
+              to="/"
               className="navbar-logo"
               style={{
                 color: "black",
@@ -43,7 +43,7 @@ const NavBar = () => {
             style={{ zIndex: 5, textDecoration: "none" }}
           >
             <li className="nav-item">
-              <Link to="/home" className="nav-links" onClick={closeMenu}>
+              <Link to="/" className="nav-links" onClick={closeMenu}>
                 Home
               </Link>
             </li>

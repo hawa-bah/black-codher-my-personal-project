@@ -29,9 +29,7 @@ const Sort = (props) => {
   const classes = useStyles();
 
   const [displayMenuItems, setDisplayMenuItems] = useState(null);
-  const [sortType, setSortType] = useState("");
 
-  //   functions:
   const handleSortClick = (event) => {
     setDisplayMenuItems(event.target);
   };
@@ -54,7 +52,6 @@ const Sort = (props) => {
   const handleMenuItemclick = (sortType) => {
     handleMenuClose();
     sortTransactions(sortType);
-    setSortType(sortType);
     props.clearFilters();
   };
 

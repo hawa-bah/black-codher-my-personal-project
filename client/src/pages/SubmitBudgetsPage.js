@@ -123,7 +123,6 @@ const SubmitBudgetPage = (props) => {
       trip_name: editTripName,
       budgets: editBudgets,
     });
-    console.log("EDIT CARD", editCard.trip_name);
     axios.put(
       `/api/edit/transactions/${editCard.trip_name}/${auth.user.email}`,
       {
@@ -135,7 +134,6 @@ const SubmitBudgetPage = (props) => {
   };
 
   const handleClickEdit = (infoCard) => {
-    console.log("CARD TO EDIT:" + infoCard);
     setClickEdit(true);
     setEditCard(infoCard);
     setEditTripName(infoCard.trip_name);

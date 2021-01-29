@@ -10,7 +10,6 @@ const PostRegister = () => {
       { height: "0%" },
       { height: "100vh", ease: Power2.easeInOut }
     );
-    console.log("heyy");
   }, []);
 
   setTimeout(() => {

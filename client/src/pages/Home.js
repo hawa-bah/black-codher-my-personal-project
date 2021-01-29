@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { TweenMax, Power2 } from "gsap";
-import { Link } from "@material-ui/core";
 
 const Home = () => {
   const homeImg = useRef(null);

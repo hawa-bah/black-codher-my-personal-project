@@ -34,7 +34,6 @@ const BudgetCategories = (props) => {
 
   const changeColorBudget = (data) => {
     data[0].budgets.forEach((elements) => {
-      console.log("wle", elements);
       const categoryDiv = document.getElementById(
         "category-card-div" + "" + elements.budget_category
       );
@@ -47,10 +46,8 @@ const BudgetCategories = (props) => {
       }, 0);
       if (Math.round((spentValue / elements.budget_amount) * 100) > 75) {
         categoryDiv.style.cssText = "background-color: red; color: white";
-        console.log("*******" + spentValue);
       } else if (Math.round((spentValue / elements.budget_amount) * 100) > 60) {
         categoryDiv.style.cssText = "background-color: orange; color: black";
-        console.log("*******" + spentValue);
       } else {
         categoryDiv.style.cssText = "background-color: white; color: black";
       }
@@ -63,14 +60,12 @@ const BudgetCategories = (props) => {
   };
   const renderSpent = async (tripName) => {
     let res = await getSpent(tripName, auth.user.email);
-    console.log(res);
     setSpent(res); //this returns the transactions of a specific trip.
     // Spent is an array of objects(transactions)
   };
   const renderBalanceTotal = async (tripName) => {
     let res = await getBalance(tripName, auth.user.email);
     if (res.budgetedTotal[0]) {
-      console.log(res);
       setTotalBudget(res.budgetedTotal[0].budgets);
     }
     if (res.spentTotal[0]) {
@@ -94,7 +89,6 @@ const BudgetCategories = (props) => {
                 renderSpent(event.target.value);
                 renderBudgetCategory(event.target.value);
                 renderBalanceTotal(event.target.value);
-                console.log("You have selected " + event.target.value);
               }}
               style={{ width: "250px" }}
               required
@@ -136,7 +130,6 @@ const BudgetCategories = (props) => {
               let spentValue = filterSpent.reduce(function (prev, cur) {
                 return prev + cur.transaction_value;
               }, 0);
-              console.log(elements.budget_category + filterSpent.length);
 
               return (
                 <>

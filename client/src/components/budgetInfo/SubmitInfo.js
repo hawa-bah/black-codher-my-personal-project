@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 // Material-ui
 import Button from "@material-ui/core/Button";
 import NumberFormat from "react-number-format";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import { purple } from "@material-ui/core/colors";
 import { Grid, TextField } from "@material-ui/core";
 
@@ -48,12 +48,6 @@ const ColorButton = withStyles((theme) => ({
     },
   },
 }))(Button);
-
-const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
-}));
 
 const SubmitInfoForm = (props) => {
   const auth = useSelector((state) => state.auth);

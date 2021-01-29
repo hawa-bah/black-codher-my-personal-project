@@ -57,7 +57,6 @@ const Filter = (props) => {
     setTripNames(data); //line 63
 
     const stateTrip = data.reduce((a, b) => ((a[b] = false), a), {}); // we obtain an object
-    console.log(stateTrip);
     setTripList(stateTrip); // TripList is now the state of the trips
   };
 
@@ -65,7 +64,6 @@ const Filter = (props) => {
     let errorNumber = Object.values(tripList).reduce((a, item) => a + item, 0); // >>> counting how many trips have been selected
     let errorTrip = errorNumber < 1;
     setErrorTrip(errorTrip);
-    console.log(errorNumber, errorTrip);
   };
 
   // with checkbox
@@ -102,15 +100,12 @@ const Filter = (props) => {
   };
 
   const handleSubmitFilter = () => {
-    console.log(tripList);
     const categorySelected = Object.keys(state).filter((item) => state[item]);
     const tripSelected = Object.keys(tripList).filter((item) => tripList[item]);
     //returns the array of the ones that are true
-    console.log(tripSelected);
 
     props.filterMethod(categorySelected, tripSelected);
   };
-  console.log(tripNames);
   return (
     <div>
       <div className={classes.root}>
@@ -196,7 +191,6 @@ const Filter = (props) => {
         >
           <FormLabel component="legend">Choose the trip</FormLabel>
           <FormGroup>
-            {console.log(tripList)}
             {tripNames &&
               tripNames.map((trip) => (
                 <FormControlLabel

@@ -7,7 +7,6 @@ const Editable = ({ text, type, placeholder, children, ...props }) => {
   const handleKeyDown = (event, type) => {
     // Handle when key is pressed
   };
-  console.log(text);
   /*
 - It will display a label is `isEditing` is false
 - It will display the children (input or textarea) if `isEditing` is true

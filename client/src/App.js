@@ -52,7 +52,7 @@ function App() {
         <Router>
           <Route
             exact
-            path="/home"
+            path="/"
             render={() => (
               <React.Fragment>
                 <NavBar />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -20,7 +20,6 @@ const Register = (props) => {
   // redux:
   const dispatch = useDispatch();
   const errorsRedux = useSelector((state) => state.errors);
-  console.log("history", props.history);
 
   const [signUpInfo, setSignUpInfo] = useState({
     name: "",
@@ -30,13 +29,6 @@ const Register = (props) => {
     showPassword: false,
     errors: {},
   });
-
-  useEffect(() => {
-    if (errorsRedux) {
-      console.log("FROM THE USE EFFECT");
-      console.log("ERROR REDUX:", errorsRedux);
-    }
-  }, [errorsRedux]);
 
   // material-ui
   const classes = useStyles();
@@ -50,7 +42,6 @@ const Register = (props) => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log("ERRORS", signUpInfo.errors);
 
     const newUser = {
       name: signUpInfo.name,
@@ -58,18 +49,15 @@ const Register = (props) => {
       password: signUpInfo.password,
       passwordToConfirm: signUpInfo.passwordToConfirm,
     };
-    console.log("REGISTER FUNC.", newUser);
 
     // redux
     dispatch(registerUser(newUser, props.history));
-    console.log("ERROR REDUX:", errorsRedux);
   };
 
   const handleSignUpInfo = (event) => {
     const { id, value } = event.target;
 
     setSignUpInfo({ ...signUpInfo, [id]: value });
-    console.log(signUpInfo);
   };
 
   return (
@@ -78,7 +66,7 @@ const Register = (props) => {
         <div styles={{ width: "300px" }}>
           <div className={classes.row}>
             <div className="col s8 ">
-              <Link to="/home" className="auth-link">
+              <Link to="/" className="auth-link">
                 <i className="material-icons left">keyboard_backspace</i> Back
               </Link>
               <div className="col s9">
@@ -101,7 +89,6 @@ const Register = (props) => {
             noValidate
             onSubmit={(e) => {
               handleRegister(e);
-              console.log("clickSubmit");
             }}
             className={classes.root}
           >
