@@ -45,6 +45,7 @@ const PORT = process.env.PORT || 5000;
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+// in production devdependecies are not installed
 
 app.listen(PORT, () => {
   console.log(`app running on port ${PORT}`);
