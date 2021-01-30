@@ -54,8 +54,13 @@ if (process.env.NODE_ENV === "production") {
 // in production devdependecies are not installed
 
 // Handles any requests that don't match the ones above, sends them to index.html and checks the other routes which I have created already
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+// app.get("*", (req, res) => {
+//   console.log(__dirname);
+//   res.sendFile(path.join(__dirname + "/client/build/index.html"));
+// });
+
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
 });
 
 app.listen(PORT, () => {
