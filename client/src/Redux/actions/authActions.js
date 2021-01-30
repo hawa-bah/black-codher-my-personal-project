@@ -6,7 +6,7 @@ import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 // Register User
 export const registerUser = (userData, history) => (dispatch) => {
   axios
-    .post("http://localhost:5000/api/register", userData)
+    .post("/api/register", userData)
     .then((res) => {
       history.push("/postRegister");
     })
