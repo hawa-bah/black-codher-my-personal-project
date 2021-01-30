@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const cors = require("cors");
+const path = require("path");
 
 // IMPORT YOUR MODELS
 require("./models/Users");
@@ -12,15 +13,6 @@ require("./models/Budget");
 const app = express();
 app.use(cors());
 
-// mongoose.Promise = global.Promise;
-// mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
-// // const conn = mongoose.connection;
-// mongoose.connection.once("open", () => {
-//   console.log("MongoDB Connected");
-// });
-// mongoose.connection.on("error", (err) => {
-//   console.log("MongoDB connection error: ", err);
-// });
 mongoose
   .connect(
     process.env.MONGODB_URI ||
