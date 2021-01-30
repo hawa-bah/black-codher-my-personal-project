@@ -48,9 +48,12 @@ require("./routes/submitBudgetRoutes")(app);
 
 const PORT = process.env.PORT || 5000;
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
+// }
+
+app.use(express.static(path.resolve(__dirname, "../client/build")));
+
 // in production devdependecies are not installed
 
 // Handles any requests that don't match the ones above, sends them to index.html and checks the other routes which I have created already
