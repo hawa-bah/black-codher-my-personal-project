@@ -83,7 +83,6 @@ const TransactionForm = (props) => {
         preArray.push(budget.budget_category);
       });
       setBudgetCategoriesArray(preArray);
-      console.log(budgetCategoriesArray);
     } else {
       setBudgetCategoriesArray([
         "Accomodation",
@@ -133,7 +132,6 @@ const TransactionForm = (props) => {
       <form
         onSubmit={(event) => {
           handleSubmit(event);
-          console.log("clickSubmit");
         }}
       >
         <Grid
@@ -204,7 +202,6 @@ const TransactionForm = (props) => {
                 value={selectedDate}
                 onChange={(date) => {
                   handleDateChange(date);
-                  console.log(date.toLocaleDateString());
                 }}
                 // minDate={new Date()}
                 format="dd/MM/yyyy"

@@ -75,16 +75,7 @@ function App() {
             render={() => <PostRegister />}
           />
 
-          <Route
-            exact
-            path="/about"
-            render={() => (
-              <React.Fragment>
-                <NavBar />
-                <About />
-              </React.Fragment>
-            )}
-          />
+          <Route exact path="/about" render={() => <About />} />
 
           <Switch>
             <PrivateRoute exact path="/landing" component={Landing} />
