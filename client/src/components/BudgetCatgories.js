@@ -20,13 +20,15 @@ const BudgetCategories = (props) => {
     }
 
     if (props.hasSubmitedTransaction) {
-      renderSpent(tripName);
-      renderBalanceTotal(tripName);
+      if (tripName !== "") {
+        renderSpent(tripName);
+        // renderBalanceTotal(tripName);
 
-      // >>> the color gets updated when a transaction has been submited and SPENT has been set and rendered
-      if (data.length !== 0 && spent) {
-        renderBudgetCategory(tripName);
-        changeColorBudget(data);
+        // >>> the color gets updated when a transaction has been submited and SPENT has been set and rendered
+        if (data.length !== 0 && spent) {
+          renderBudgetCategory(tripName);
+          changeColorBudget(data);
+        }
       }
       props.setHasSubmitedTransaction(false);
     }
@@ -65,6 +67,7 @@ const BudgetCategories = (props) => {
   };
   const renderBalanceTotal = async (tripName) => {
     let res = await getBalance(tripName, auth.user.email);
+    console.log(res);
     if (res.budgetedTotal[0]) {
       setTotalBudget(res.budgetedTotal[0].budgets);
     }

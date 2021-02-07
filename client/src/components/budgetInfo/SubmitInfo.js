@@ -73,7 +73,10 @@ const SubmitInfoForm = (props) => {
         { budget_category: "Others", budget_amount: othersAmount },
         { budget_category: "Food", budget_amount: foodAmount },
         { budget_category: "Shopping", budget_amount: shoppingAmount },
-        { budget_category: "Entrainment", budget_amount: entertainmentAmount },
+        {
+          budget_category: "Entertainment",
+          budget_amount: entertainmentAmount,
+        },
       ],
       user_ref_email: auth.user.email,
     });
