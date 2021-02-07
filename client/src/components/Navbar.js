@@ -1,7 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "./NavBar.css";
 import MenuIcon from "@material-ui/icons/Menu";
+const styles = {
+  largeIcon: {
+    width: 60,
+    height: 60,
+    fontSize: "xx-large",
+  },
+};
 
 const NavBar = () => {
   const [click, setClick] = useState(false);
@@ -13,28 +20,34 @@ const NavBar = () => {
       <div className="navBar-2">
         <div>
           <div className="navBar-onView">
-            <Link
-              to="/"
-              className="navbar-logo"
-              style={{
-                color: "black",
-                backgroundColor: "white",
-                padding: "10px",
-                borderRadius: "10px",
-              }}
-            >
-              TIRA
+            <Link to="/">
+              <img
+                src="/TIRA-removebg-preview.png"
+                alt="logo"
+                style={{ maxHeight: "60px" }}
+              />
             </Link>
             <div
               onClick={handleClick}
-              style={{
-                backgroundColor: "white",
-                padding: "10px",
-                borderRadius: "10px",
-              }}
+              // style={{
+              //   backgroundColor: "white",
+              //   padding: "10px",
+              //   borderRadius: "10px",
+              // }}
             >
-              <MenuIcon style={{ color: "black" }} />
-              <i className={click ? "fas fa-times" : "fas fa-bars"} />
+              <MenuIcon
+                style={{
+                  backgroundColor: "white",
+                  minWidth: "30px",
+                  borderRadius: "20px",
+                  color: "black",
+                }}
+                style={styles.largeIcon}
+              />
+              {/* <i
+                style={{ minWidth: "400px" }}
+                className={click ? "fas fa-times" : "fas fa-bars"}
+              /> */}
             </div>
           </div>
 
@@ -54,17 +67,35 @@ const NavBar = () => {
             </li>
 
             <li className="nav-item">
-              <Link
-                to="/expenseTracker"
-                className="nav-links"
-                onClick={closeMenu}
-              >
-                Expenses
+              <Link to="/budgetInfo" className="nav-links" onClick={closeMenu}>
+                View your plans
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/budgetInfo" className="nav-links" onClick={closeMenu}>
-                View your plans
+              <Link
+                to="/expenseTracker/TransactionForm"
+                className="nav-links"
+                onClick={closeMenu}
+              >
+                Submit a transaction
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                to="/expenseTracker/TransactionsList"
+                className="nav-links"
+                onClick={closeMenu}
+              >
+                List of transactions
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                to="/expenseTracker/BudgetCategories"
+                className="nav-links"
+                onClick={closeMenu}
+              >
+                View the state of your budgets
               </Link>
             </li>
             <li className="nav-item">

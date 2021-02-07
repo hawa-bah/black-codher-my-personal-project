@@ -82,14 +82,16 @@ const BudgetPage = (props) => {
           path="/expenseTracker/TransactionForm"
           component={() => (
             <>
-              <NavBar />
-              <TransactionForm
-                hasSubmitedTransaction={hasSubmitedTransaction}
-                setHasSubmitedTransaction={setHasSubmitedTransaction}
-                auth={auth}
-                tripNameList={tripNameList}
-                renderTripNameList={renderTripNameList}
-              />
+              <div className="budgetPage-Div">
+                <NavBar />
+                <TransactionForm
+                  hasSubmitedTransaction={hasSubmitedTransaction}
+                  setHasSubmitedTransaction={setHasSubmitedTransaction}
+                  auth={auth}
+                  tripNameList={tripNameList}
+                  renderTripNameList={renderTripNameList}
+                />
+              </div>
             </>
           )}
         />
@@ -98,8 +100,8 @@ const BudgetPage = (props) => {
           path="/expenseTracker/budgetCategories"
           component={() => (
             <>
-              <NavBar />
               <div className="budgetPage-Div" data-testid="ancestor">
+                <NavBar />
                 <div className="budget categories card">
                   <BudgetCategories
                     budgetCategoriesArry={budgetCategoriesArry}
@@ -119,8 +121,8 @@ const BudgetPage = (props) => {
           path="/expenseTracker/TransactionsList"
           component={() => (
             <>
-              <NavBar />
               <div className="budgetPage-Div" data-testid="ancestor">
+                <NavBar />
                 <div
                   className="Transactions-div"
                   style={{ padding: "20px", marginTop: "10px" }}

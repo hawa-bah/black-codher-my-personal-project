@@ -3,7 +3,8 @@
 .budgetPage-Div {
   background-color: aliceblue;
   background: url("../../micheile-henderson-SoT4-mZhyhE-unsplash.jpg");
-  height: 100vh;
+  min-height: 100vh;
+  max-height: max-content;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -28,7 +29,7 @@
 /* BUDGETCATEGORIES.js */
 .budgetCategories-div,
 .Transactions-div {
-  max-width: fit-content;
+  max-width: 90%;
   min-width: 250px;
 }
 

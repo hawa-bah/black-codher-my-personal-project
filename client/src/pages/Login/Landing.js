@@ -45,7 +45,7 @@ const Landing = () => {
                 alt="user-icon"
                 className="img-account"
               ></img>
-              <div className="landing-text">
+              <div className="landing-text" style={{ color: "white" }}>
                 <h3>
                   <b>Hey there,</b>{" "}
                   {auth.user.name ? auth.user.name.split(" ")[0] : null}!
