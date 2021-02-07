@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Link, Redirect } from "react-router-dom";
 import "./NavBar.css";
 import MenuIcon from "@material-ui/icons/Menu";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../Redux/actions/authActions";
+import { Button } from "@material-ui/core";
 const styles = {
   largeIcon: {
     width: 60,
@@ -11,9 +15,20 @@ const styles = {
 };
 
 const NavBar = () => {
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMenu = () => setClick(false);
+
+  const clickLogout = (e) => {
+    e.preventDefault();
+    dispatch(logoutUser());
+    if (!auth.user.name) {
+      window.location.href = "./";
+    }
+  };
 
   return (
     <React.Fragment>
@@ -27,14 +42,7 @@ const NavBar = () => {
                 style={{ maxHeight: "60px" }}
               />
             </Link>
-            <div
-              onClick={handleClick}
-              // style={{
-              //   backgroundColor: "white",
-              //   padding: "10px",
-              //   borderRadius: "10px",
-              // }}
-            >
+            <div onClick={handleClick}>
               <MenuIcon
                 style={{
                   backgroundColor: "white",
@@ -108,15 +116,45 @@ const NavBar = () => {
               </Link>
             </li>
 
-            {/* <li className="nav-item">
-              <Link to="/register" className="nav-links" onClick={closeMenu}>
-                Sign Out
-              </Link>
-            </li> */}
+            <li className="nav-item">
+              <div
+                className="action"
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  padding: "30px",
+                }}
+              >
+                <Button
+                  style={{
+                    width: "150px",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px",
+                    marginTop: "1rem",
+                    backgroundColor: "white",
+                  }}
+                  onClick={(e) => clickLogout(e)}
+                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                >
+                  Logout
+                </Button>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
     </React.Fragment>
   );
 };
-export default NavBar;
+
+NavBar.propTypes = {
+  auth: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logoutUser })(NavBar);
