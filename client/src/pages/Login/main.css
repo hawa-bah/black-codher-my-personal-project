@@ -76,6 +76,9 @@
 }
 .landing-options {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 600px;
 }
 .landing-options > div {
   background-color: rgba(250, 199, 58, 0.959);
@@ -94,7 +97,9 @@
 
 .Landing-div {
   background: url("../../window-flight-2.jpg");
-  height: 100vh;
+  /* min-height: 100vh; */
+  min-height: max-content;
+  padding-bottom: 600px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

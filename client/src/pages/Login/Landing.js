@@ -61,9 +61,33 @@ const Landing = () => {
                     Check your plans
                   </Link>
                 </div>
-                <div>
+                {/* <div>
                   <Link to="/expenseTracker" className="landing-link">
                     Track your expenses
+                  </Link>
+                </div> */}
+                <div>
+                  <Link
+                    to="/expenseTracker/TransactionForm"
+                    className="landing-link"
+                  >
+                    Submit a transaction
+                  </Link>
+                </div>
+                <div>
+                  <Link
+                    to="/expenseTracker/BudgetCategories"
+                    className="landing-link"
+                  >
+                    View the state of your budgets
+                  </Link>
+                </div>
+                <div>
+                  <Link
+                    to="/expenseTracker/TransactionsList"
+                    className="landing-link"
+                  >
+                    View your expenses
                   </Link>
                 </div>
               </div>
