@@ -108,10 +108,11 @@ function App() {
               component={() => (
                 <React.Fragment>
                   <NavBar />
-                  <BudgetPage />
+                  {/* <BudgetPage /> */}
                 </React.Fragment>
               )}
             />
+            <BudgetPage />
           </Switch>
         </Router>
       </Provider>

@@ -14,6 +14,9 @@ import BudgetCategories from "../BudgetCatgories";
 import "./BudgetPage.css";
 import "../../App.css";
 import { connect, useSelector } from "react-redux";
+import PrivateRoute from "../../PrivateRoute.js";
+import NavBar from "../Navbar.js";
+import { Switch } from "react-router-dom";
 
 // >> for the transaction form, numeric input
 function NumberFormatCustom(props) {
@@ -72,61 +75,143 @@ const BudgetPage = (props) => {
   };
 
   return (
-    // <>
-    //   <Switch>
-    <div className="budgetPage-Div" data-testid="ancestor">
-      <h1 data-testid="descendant">Expense Tracker</h1>
+    <>
+      <Switch>
+        <PrivateRoute
+          exact
+          path="/expenseTracker/TransactionForm"
+          component={() => (
+            <>
+              <NavBar />
+              <TransactionForm
+                hasSubmitedTransaction={hasSubmitedTransaction}
+                setHasSubmitedTransaction={setHasSubmitedTransaction}
+                auth={auth}
+                tripNameList={tripNameList}
+                renderTripNameList={renderTripNameList}
+              />
+            </>
+          )}
+        />
+        <PrivateRoute
+          exact
+          path="/expenseTracker/budgetCategories"
+          component={() => (
+            <>
+              <NavBar />
+              <div className="budgetPage-Div" data-testid="ancestor">
+                <div className="budget categories card">
+                  <BudgetCategories
+                    budgetCategoriesArry={budgetCategoriesArry}
+                    hasSubmitedTransaction={hasSubmitedTransaction}
+                    setHasSubmitedTransaction={setHasSubmitedTransaction}
+                    auth={auth}
+                    tripNameList={tripNameList}
+                    renderTripNameList={renderTripNameList}
+                  />
+                </div>
+              </div>
+            </>
+          )}
+        />
+        <PrivateRoute
+          exact
+          path="/expenseTracker/TransactionsList"
+          component={() => (
+            <>
+              <NavBar />
+              <div className="budgetPage-Div" data-testid="ancestor">
+                <div
+                  className="Transactions-div"
+                  style={{ padding: "20px", marginTop: "10px" }}
+                >
+                  <h2 className="budgetPage-subtitle">TRANSACTIONS LIST</h2>
 
-      <TransactionForm
-        hasSubmitedTransaction={hasSubmitedTransaction}
-        setHasSubmitedTransaction={setHasSubmitedTransaction}
-        auth={auth}
-        tripNameList={tripNameList}
-        renderTripNameList={renderTripNameList}
-      />
+                  <div className="button transaction">
+                    <Button
+                      onClick={() => setViewTransactions(!viewTransactions)}
+                    >
+                      <p>
+                        {viewTransactions ? "Click to Hide" : "Click to view"}
+                      </p>
+                    </Button>
+                  </div>
 
-      <div className="budget categories card">
-        <BudgetCategories
-          budgetCategoriesArry={budgetCategoriesArry}
+                  <div className="transaction List">
+                    {viewTransactions ? (
+                      <div>
+                        <TransactionsList
+                          viewTransactions={viewTransactions}
+                          setViewTransactions={setViewTransactions}
+                          hasSubmitedTransaction={hasSubmitedTransaction}
+                          setHasSubmitedTransaction={setHasSubmitedTransaction}
+                          auth={auth}
+
+                          // renderBalance={renderBalance}
+                        />
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        />
+        {/* //   <Switch> */}
+        {/* <div className="budgetPage-Div" data-testid="ancestor">
+        <h1 data-testid="descendant">Expense Tracker</h1>
+
+        <TransactionForm
           hasSubmitedTransaction={hasSubmitedTransaction}
           setHasSubmitedTransaction={setHasSubmitedTransaction}
           auth={auth}
           tripNameList={tripNameList}
           renderTripNameList={renderTripNameList}
         />
-      </div>
 
-      <div
-        className="Transactions-div"
-        style={{ padding: "20px", marginTop: "10px" }}
-      >
-        <h2 className="budgetPage-subtitle">TRANSACTIONS LIST</h2>
-
-        <div className="button transaction">
-          <Button onClick={() => setViewTransactions(!viewTransactions)}>
-            <p>{viewTransactions ? "Click to Hide" : "Click to view"}</p>
-          </Button>
+        <div className="budget categories card">
+          <BudgetCategories
+            budgetCategoriesArry={budgetCategoriesArry}
+            hasSubmitedTransaction={hasSubmitedTransaction}
+            setHasSubmitedTransaction={setHasSubmitedTransaction}
+            auth={auth}
+            tripNameList={tripNameList}
+            renderTripNameList={renderTripNameList}
+          />
         </div>
 
-        <div className="transaction List">
-          {viewTransactions ? (
-            <div>
-              <TransactionsList
-                viewTransactions={viewTransactions}
-                setViewTransactions={setViewTransactions}
-                hasSubmitedTransaction={hasSubmitedTransaction}
-                setHasSubmitedTransaction={setHasSubmitedTransaction}
-                auth={auth}
+        <div
+          className="Transactions-div"
+          style={{ padding: "20px", marginTop: "10px" }}
+        >
+          <h2 className="budgetPage-subtitle">TRANSACTIONS LIST</h2>
 
-                // renderBalance={renderBalance}
-              />
-            </div>
-          ) : null}
+          <div className="button transaction">
+            <Button onClick={() => setViewTransactions(!viewTransactions)}>
+              <p>{viewTransactions ? "Click to Hide" : "Click to view"}</p>
+            </Button>
+          </div>
+
+          <div className="transaction List">
+            {viewTransactions ? (
+              <div>
+                <TransactionsList
+                  viewTransactions={viewTransactions}
+                  setViewTransactions={setViewTransactions}
+                  hasSubmitedTransaction={hasSubmitedTransaction}
+                  setHasSubmitedTransaction={setHasSubmitedTransaction}
+                  auth={auth}
+
+                  // renderBalance={renderBalance}
+                />
+              </div>
+            ) : null}
+          </div>
         </div>
-      </div>
-    </div>
-    //   </Switch>
-    // </>
+      </div> */}
+        {/* //   </Switch> */}
+      </Switch>
+    </>
   );
 };
 const mapStateToProps = (state) => ({

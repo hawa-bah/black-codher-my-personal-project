@@ -119,124 +119,126 @@ const TransactionForm = (props) => {
   }
 
   return (
-    <div
-      className="transactions-form-ui-div"
-      style={{
-        padding: 20,
-        margin: "auto",
-        marginBottom: "20px",
-        maxWidth: 600,
-      }}
-    >
-      <h2 className="budgetPage-subtitle">INPUT AN EXPENSE</h2>
-      <form
-        onSubmit={(event) => {
-          handleSubmit(event);
+    <div className="budgetPage-Div">
+      <div
+        className="transactions-form-ui-div"
+        style={{
+          padding: 20,
+          margin: "auto",
+          marginBottom: "20px",
+          maxWidth: 600,
         }}
       >
-        <Grid
-          container
-          alignItems="flex-start"
-          spacing={2}
-          style={{ padding: "10px" }}
+        <h2 className="budgetPage-subtitle">INPUT AN EXPENSE</h2>
+        <form
+          onSubmit={(event) => {
+            handleSubmit(event);
+          }}
         >
-          <Grid item xs="auto" sm={4} className="my-1">
-            <TextField
-              id="Description"
-              color="secondary"
-              label="Description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-          </Grid>
-          <Grid item xs="auto" sm={4} className="my-1">
-            <TextField
-              id="TripName"
-              color="secondary"
-              label="Trip Name"
-              select
-              value={tripTransaction}
-              onChange={(e) => {
-                setTripTransaction(e.target.value);
-                handleBudgetCategoriesArray(e.target.value);
-              }}
-              required
-              style={{ width: "15ch" }}
-            >
-              <MenuItem key="blanc" value=""></MenuItem>
-              {props.tripNameList && props.tripNameList.length > 0
-                ? props.tripNameList.map((trip) =>
-                    props.renderTripNameList(trip)
-                  )
-                : null}
-            </TextField>
-          </Grid>
-          <Grid item xs="auto" sm={4} className="my-1">
-            <TextField
-              label="Transaction value"
-              value={transactionValue}
-              onChange={(event) => setTransactionValue(event.target.value)}
-              name="Transaction-value-input"
-              id="Transaction-value-input"
-              InputProps={{
-                inputComponent: NumberFormatCustom,
-              }}
-              required
-            />
-          </Grid>
-        </Grid>
-        <Grid
-          container
-          alignItems="flex-start"
-          justifycontent="space-around"
-          spacing={2}
-          style={{ padding: "10px" }}
-        >
-          <Grid item xs="auto" sm={6}>
-            {/* to input the date of the transaction we are using material-ui */}
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <KeyboardDatePicker
-                label="Date of the transaction"
-                clearable
-                value={selectedDate}
-                onChange={(date) => {
-                  handleDateChange(date);
-                }}
-                // minDate={new Date()}
-                format="dd/MM/yyyy"
-                style={{ width: "25ch" }}
+          <Grid
+            container
+            alignItems="flex-start"
+            spacing={2}
+            style={{ padding: "10px" }}
+          >
+            <Grid item xs="auto" sm={4} className="my-1">
+              <TextField
+                id="Description"
+                color="secondary"
+                label="Description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
               />
-            </MuiPickersUtilsProvider>
+            </Grid>
+            <Grid item xs="auto" sm={4} className="my-1">
+              <TextField
+                id="TripName"
+                color="secondary"
+                label="Trip Name"
+                select
+                value={tripTransaction}
+                onChange={(e) => {
+                  setTripTransaction(e.target.value);
+                  handleBudgetCategoriesArray(e.target.value);
+                }}
+                required
+                style={{ width: "15ch" }}
+              >
+                <MenuItem key="blanc" value=""></MenuItem>
+                {props.tripNameList && props.tripNameList.length > 0
+                  ? props.tripNameList.map((trip) =>
+                      props.renderTripNameList(trip)
+                    )
+                  : null}
+              </TextField>
+            </Grid>
+            <Grid item xs="auto" sm={4} className="my-1">
+              <TextField
+                label="Transaction value"
+                value={transactionValue}
+                onChange={(event) => setTransactionValue(event.target.value)}
+                name="Transaction-value-input"
+                id="Transaction-value-input"
+                InputProps={{
+                  inputComponent: NumberFormatCustom,
+                }}
+                required
+              />
+            </Grid>
           </Grid>
-          <Grid item xs="auto" sm={6} className="my-2">
-            <TextField
-              id="category-input-form"
-              label="Select a category"
-              value={transactionCategory}
-              select
-              onChange={(event) => setTransactionCategory(event.target.value)}
-              style={{ width: "25ch" }}
-              required
-            >
-              {budgetCategoriesArray &&
-                budgetCategoriesArray.map((category) => (
-                  <MenuItem key={category} value={category}>
-                    {category}
-                  </MenuItem>
-                ))}
-            </TextField>
+          <Grid
+            container
+            alignItems="flex-start"
+            justifycontent="space-around"
+            spacing={2}
+            style={{ padding: "10px" }}
+          >
+            <Grid item xs="auto" sm={6}>
+              {/* to input the date of the transaction we are using material-ui */}
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  label="Date of the transaction"
+                  clearable
+                  value={selectedDate}
+                  onChange={(date) => {
+                    handleDateChange(date);
+                  }}
+                  // minDate={new Date()}
+                  format="dd/MM/yyyy"
+                  style={{ width: "25ch" }}
+                />
+              </MuiPickersUtilsProvider>
+            </Grid>
+            <Grid item xs="auto" sm={6} className="my-2">
+              <TextField
+                id="category-input-form"
+                label="Select a category"
+                value={transactionCategory}
+                select
+                onChange={(event) => setTransactionCategory(event.target.value)}
+                style={{ width: "25ch" }}
+                required
+              >
+                {budgetCategoriesArray &&
+                  budgetCategoriesArray.map((category) => (
+                    <MenuItem key={category} value={category}>
+                      {category}
+                    </MenuItem>
+                  ))}
+              </TextField>
+            </Grid>
           </Grid>
-        </Grid>
-        <ColorButton
-          variant="contained"
-          color="primary"
-          className={classes.margin}
-          type="submit"
-        >
-          Submit Transaction
-        </ColorButton>
-      </form>
+          <ColorButton
+            variant="contained"
+            color="primary"
+            className={classes.margin}
+            type="submit"
+          >
+            Submit Transaction
+          </ColorButton>
+        </form>
+      </div>
     </div>
   );
 };
