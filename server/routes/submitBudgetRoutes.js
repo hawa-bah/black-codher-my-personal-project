@@ -35,7 +35,7 @@ module.exports = (app) => {
   app.post(`/api/submit/info/card`, async (req, res) => {
     try {
       const CardToSubmit = await Budget.create(req.body);
-      res.status(200).send(cardToEdit);
+      res.status(200).send(CardToSubmit);
     } catch (error) {
       res.status(500).send(error);
     }
