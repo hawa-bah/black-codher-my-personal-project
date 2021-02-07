@@ -104,7 +104,7 @@ const BudgetCategories = (props) => {
         </Grid>
       </form>
 
-      {spent && spent.length > 0 ? (
+      {spent && spent.length > 0 && tripName !== "" ? (
         <div className="total-summary-div">
           <h1>{tripName} </h1>
           <div className="total-summary">
