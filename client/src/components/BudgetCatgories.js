@@ -126,7 +126,7 @@ const BudgetCategories = (props) => {
 
       <div className="category-card-container">
         {data && data.length && spent.length > 0
-          ? data[0].budgets.map((elements) => {
+          ? data[0].budgets.map((elements, index) => {
               let filterSpent = spent.filter((object) => {
                 return object.budget_category === elements.budget_category;
               }); //>>>> filterSpent is an array of objects(transactions in the same category hopefully?)
@@ -138,6 +138,7 @@ const BudgetCategories = (props) => {
                 <>
                   <div
                     className={"category-card-div"}
+                    key={index}
                     id={"category-card-div" + "" + elements.budget_category}
                     value={
                       Math.round((spentValue / elements.budget_amount) * 100) >
