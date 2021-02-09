@@ -64,19 +64,16 @@ module.exports = (app) => {
   });
 
   //>>>>>>>>>>>>>>>>> for budgeting
-  // /used
   app.get(`/api/budget/:ref`, async (req, res) => {
     const ref = req.params.ref;
     const budgets = await Budget.find({ user_ref_email: ref }).sort("-_id");
     return res.status(200).send(budgets);
   });
 
-  // /used
   app.post(`/api/budget`, async (req, res) => {
     await Budget.create(req.body);
   });
 
-  // /used
   app.get(`/api/budget/category/:tripName/:ref`, async (req, res) => {
     const { tripName, ref } = req.params;
 

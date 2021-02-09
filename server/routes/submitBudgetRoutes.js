@@ -20,6 +20,7 @@ module.exports = (app) => {
       console.log("SERVER ERROR");
     }
   });
+
   app.put(`/api/edit/card/:id`, async (req, res) => {
     try {
       const cardToEdit = await Budget.findById(req.params.id).exec();
@@ -28,7 +29,6 @@ module.exports = (app) => {
       res.status(200).send(result);
     } catch (error) {
       res.status(500).send(error);
-      console.log("SERVER ERROR2");
     }
   });
 
