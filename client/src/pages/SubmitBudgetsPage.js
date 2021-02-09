@@ -277,6 +277,7 @@ const SubmitBudgetPage = (props) => {
                     type="text"
                     name="trip"
                     value={editTripName} //state
+                    style={{ maxWidth: "200px" }}
                     onChange={(e) => setEditTripName(e.target.value)}
                   />
                 </Editable>
@@ -300,9 +301,10 @@ const SubmitBudgetPage = (props) => {
                           type="input"
                         >
                           <input
-                            type="text"
+                            type="number"
                             name="amount"
                             placeholder="Input a new amount"
+                            style={{ maxWidth: "140px" }}
                             onChange={(e) => {
                               updateFieldChanged(index, e);
                             }}
