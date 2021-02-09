@@ -21,6 +21,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .info-card-item.edit {
   background-color: yellow;
   position: absolute;
