@@ -109,6 +109,7 @@
 }
 .action-buttons-infoCard {
   max-height: 30px;
+  margin-left: 20px;
 }
 .info-card-header {
   display: flex;
@@ -120,7 +121,7 @@
 .info-card.budget-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0px;
+  gap: 2px;
   grid-auto-rows: minmax(auto, auto);
   background-color: rgba(255, 173, 51, 0.185);
   padding: 10px;

@@ -184,9 +184,8 @@ const SubmitBudgetPage = (props) => {
               totalBudget = totalBudget + item.budget_amount;
               return (
                 <div>
-                  <p>
-                    {item.budget_category}: {item.budget_amount}
-                  </p>
+                  <p>{item.budget_category}:</p>
+                  <p>{item.budget_amount}</p>
                 </div>
               );
             })}
