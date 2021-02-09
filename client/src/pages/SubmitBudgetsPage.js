@@ -3,7 +3,7 @@ import axios from "axios";
 import { deleteOne, getAll } from "../services/budgetService";
 
 // Material-ui
-import { Button } from "@material-ui/core";
+import { Button, IconButton } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { purple } from "@material-ui/core/colors";
 import EditIcon from "@material-ui/icons/Edit";
@@ -28,16 +28,8 @@ const ButtonSubmitPage = withStyles((theme) => ({
   },
 }))(Button);
 
-const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(0),
-  },
-}));
-
 const SubmitBudgetPage = (props) => {
   const auth = useSelector((state) => state.auth);
-
-  const classes = useStyles;
 
   const [infoCards, setInfoCards] = useState([]); //>>>> the cards stored in the database will be saved here to display them later
   const [hasSubmitedInfo, setHasSubmitedInfo] = useState(false);
@@ -148,24 +140,21 @@ const SubmitBudgetPage = (props) => {
             <p className="info-card-title">{infoCard.trip_name}</p>
           </div>
           <div className="action-buttons-infoCard">
-            <ButtonSubmitPage
-              variant="contained"
-              color="primary"
-              label=""
-              className={classes.margin}
-              startIcon={<EditIcon />}
-              size="small"
+            <IconButton
+              style={{ background: "purple" }}
               onClick={() => handleClickEdit(infoCard)}
-            ></ButtonSubmitPage>
-            <ButtonSubmitPage
+            >
+              <EditIcon style={{ color: "white" }} fontSize="large" />
+            </IconButton>
+            <IconButton
               onClick={() => {
                 setClickDelete(true);
                 setCardToDelete(infoCard);
               }}
-              size="small"
               style={{ background: "black" }}
-              startIcon={<DeleteIcon />}
-            />
+            >
+              <DeleteIcon fontSize="large" style={{ color: "white" }} />
+            </IconButton>
           </div>
         </div>
 
