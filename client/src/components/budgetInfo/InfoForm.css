@@ -25,7 +25,7 @@
 .info-card-item.edit {
   background-color: yellow;
   position: absolute;
-  min-width: 300px;
+  min-width: max-content;
 }
 .submit-info-form-div {
   z-index: 2;
