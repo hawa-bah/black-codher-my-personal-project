@@ -110,11 +110,12 @@ const SubmitBudgetPage = (props) => {
       }
     }
     setEditBudgets(newArr);
-    // from budget model
+
     axios.put(`/api/edit/card/${editCard._id}`, {
       trip_name: editTripName,
       budgets: editBudgets,
     });
+
     axios.put(
       `/api/edit/transactions/${editCard.trip_name}/${auth.user.email}`,
       {
