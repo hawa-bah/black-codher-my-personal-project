@@ -84,12 +84,15 @@
   background-color: rgba(58, 189, 250, 0.925);
 }
 .landing-link {
-  font-weight: 900;
+  font-weight: 90;
   color: black;
   font-size: 20px;
 }
 .landing-link:hover {
   color: white;
+}
+.landing-link > img {
+  height: 70px;
 }
 
 .Landing-div {

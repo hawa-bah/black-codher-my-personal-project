@@ -37,7 +37,7 @@ const NavBar = () => {
           <div className="navBar-onView">
             <Link to="/">
               <img
-                src="/TIRA-removebg-preview.png"
+                src="/images/main-logo.png"
                 alt="logo"
                 style={{ maxHeight: "60px" }}
               />

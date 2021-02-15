@@ -35,6 +35,7 @@ const Landing = () => {
                 <div>
                   <Link to="/budgetInfo" className="landing-link">
                     Check your plans
+                    <img src="/images/plans.png" alt="plans" />
                   </Link>
                 </div>
                 {/* <div>
@@ -48,6 +49,7 @@ const Landing = () => {
                     className="landing-link"
                   >
                     Submit a transaction
+                    <img src="/images/cards.png" alt="card" />
                   </Link>
                 </div>
                 <div>
@@ -56,6 +58,7 @@ const Landing = () => {
                     className="landing-link"
                   >
                     View the state of your budgets
+                    <img src="/images/charts.png" alt="charts" />
                   </Link>
                 </div>
                 <div>
@@ -63,7 +66,8 @@ const Landing = () => {
                     to="/expenseTracker/TransactionsList"
                     className="landing-link"
                   >
-                    View your expenses
+                    <p>View your expenses</p>
+                    <img src="/images/list.png" alt="list" />
                   </Link>
                 </div>
               </div>
