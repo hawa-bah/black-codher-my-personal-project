@@ -12,10 +12,10 @@ const About = () => {
           <br />
         </div>
         <div className="about-text">
-          <h4>What's TIRA?</h4>
+          <h4>What's TARI?</h4>
           <div>
             <p>
-              Tira is a MERN stack application with the propose to make
+              TARI is a MERN stack application with the propose to make
               budgeting for trips easier.
             </p>
           </div>

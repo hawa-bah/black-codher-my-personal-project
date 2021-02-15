@@ -27,7 +27,7 @@ const Landing = () => {
                   {auth.user.name ? auth.user.name.split(" ")[0] : null}!
                   <p>
                     Welcome to{" "}
-                    <span style={{ fontFamily: "monospace" }}>TIRA</span> 👏
+                    <span style={{ fontFamily: "monospace" }}>TARI</span> 👏
                   </p>
                 </h3>
               </div>

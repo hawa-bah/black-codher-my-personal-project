@@ -76,7 +76,7 @@ const Home = () => {
             </div>
           </div>
           <div className="home-text" ref={text}>
-            <h1>TIRA</h1>
+            <h1>TARI</h1>
             <div>
               <h1>Budget ahead</h1>
               <h4>Travel more</h4>
