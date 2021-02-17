@@ -1,4 +1,4 @@
-# TIRA: Budget ahead, travel more
+# TARI: Budget ahead, travel more
 
 The main goal of this application is to help users to manage finances while traveling. Once created an account, they will be able to set budgets for future trips. They can also track their expenses by submitting and categorising transactions, while they check the status of their budgets. The web has been built with MERN full stack and it has been deployed with Heroku.
 
