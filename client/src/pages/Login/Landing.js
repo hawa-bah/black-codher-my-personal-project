@@ -18,7 +18,7 @@ const Landing = () => {
             <div className="landing-content">
               <img
                 src="/images/account-logo.png"
-                alt="user-icon"
+                alt="user-icon-with-blue-background"
                 className="img-account"
               ></img>
               <div className="landing-text" style={{ color: "white" }}>
@@ -35,7 +35,10 @@ const Landing = () => {
                 <div>
                   <Link to="/budgetInfo" className="landing-link">
                     Check your plans
-                    <img src="/images/plans.png" alt="plans" />
+                    <img
+                      src="/images/plans.png"
+                      alt="icon-of-a-notebook-with-plans"
+                    />
                   </Link>
                 </div>
                 <div>
@@ -44,7 +47,7 @@ const Landing = () => {
                     className="landing-link"
                   >
                     Submit a transaction
-                    <img src="/images/cards.png" alt="card" />
+                    <img src="/images/cards.png" alt="credit-cards" />
                   </Link>
                 </div>
                 <div>
@@ -62,7 +65,10 @@ const Landing = () => {
                     className="landing-link"
                   >
                     <p>View your expenses</p>
-                    <img src="/images/list.png" alt="list" />
+                    <img
+                      src="/images/list.png"
+                      alt="document-with-list-of-transactions"
+                    />
                   </Link>
                 </div>
               </div>

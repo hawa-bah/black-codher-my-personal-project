@@ -38,7 +38,7 @@ const NavBar = () => {
             <Link to="/">
               <img
                 src="/images/main-logo.png"
-                alt="logo"
+                alt="logo-of-the-app-plane-on-a-purse-on-front-of-a-cloud"
                 style={{ maxHeight: "60px" }}
               />
             </Link>
