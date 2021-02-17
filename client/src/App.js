@@ -21,11 +21,11 @@ import Landing from "./pages/Login/Landing";
 import PrivateRoute from "./PrivateRoute";
 import Home from "./pages/Home";
 
-import "./pages/Login/main.css";
+import "./stylesheets/main.css";
 import "./stylesheets/InfoForm.css";
 import PostRegister from "./pages/PostRegistration";
 
-// >>>> checking if a user is loged in
+// checking if a user is loged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
   const token = localStorage.jwtToken;

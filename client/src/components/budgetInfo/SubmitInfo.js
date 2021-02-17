@@ -21,7 +21,6 @@ function NumberFormatCustom(props) {
       onValueChange={(values) => {
         onChange({
           target: {
-            // name: props.name,
             value: values.value,
           },
         });
@@ -35,7 +34,6 @@ function NumberFormatCustom(props) {
 
 NumberFormatCustom.propTypes = {
   inputRef: PropTypes.func.isRequired,
-  // name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 

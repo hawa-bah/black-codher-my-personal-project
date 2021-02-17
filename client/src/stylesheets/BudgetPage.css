@@ -18,7 +18,6 @@
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.5);
   background-blend-mode: screen;
-  /* padding-bottom: 100px; */
 }
 .budgetPage-subtitle {
   font-family: "Archivo Black", sans-serif;
@@ -111,9 +110,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr 4fr 3fr 3fr 1fr;
     text-align: center;
-    /* gap: 20px 5px; */
     padding-bottom: 30px;
-    /* column-gap: 10px; */
   }
 
   .transactions-container > h5 {
@@ -136,7 +133,6 @@
 
 /* BUDGET CATEGORIES WITH COLORS */
 .total-summary {
-  /* max-width: 270px; */
   display: grid;
   grid-template-columns: 2fr 1fr;
 }
@@ -151,5 +147,4 @@
   padding-left: 20px;
   padding-right: 20px;
   background-color: rgba(73, 4, 138, 0.185);
-  /* max-width: fit-content; */
 }

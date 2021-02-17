@@ -38,11 +38,6 @@ const Landing = () => {
                     <img src="/images/plans.png" alt="plans" />
                   </Link>
                 </div>
-                {/* <div>
-                  <Link to="/expenseTracker" className="landing-link">
-                    Track your expenses
-                  </Link>
-                </div> */}
                 <div>
                   <Link
                     to="/expenseTracker/TransactionForm"

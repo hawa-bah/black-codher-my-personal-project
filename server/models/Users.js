@@ -21,4 +21,3 @@ const UserSchema = new Schema({
 });
 
 module.exports = User = mongoose.model("users", UserSchema);
-//NOTES: in here we have exported the model not the schema. if using multiple connections export schema instead

@@ -4,7 +4,6 @@ const Exp_Transaction = mongoose.model("transaction");
 const Budget = mongoose.model("budget");
 
 module.exports = (app) => {
-  // used
   app.get(`/api/expense/:ref`, async (req, res) => {
     const { ref } = req.params;
     const transactions = await Exp_Transaction.find({ user_ref_email: ref });
@@ -51,7 +50,6 @@ module.exports = (app) => {
     });
   });
 
-  // /used
   app.get(`/api/expenses/:tripName/:ref`, async (req, res) => {
     const { tripName, ref } = req.params;
 
@@ -63,7 +61,8 @@ module.exports = (app) => {
     return res.status(200).send(spent);
   });
 
-  //>>>>>>>>>>>>>>>>> for budgeting
+  // for budgeting
+
   app.get(`/api/budget/:ref`, async (req, res) => {
     const ref = req.params.ref;
     const budgets = await Budget.find({ user_ref_email: ref }).sort("-_id");

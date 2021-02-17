@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../stylesheets/NavBar.css";
 import MenuIcon from "@material-ui/icons/Menu";
 import { connect, useDispatch, useSelector } from "react-redux";
@@ -52,10 +52,6 @@ const NavBar = () => {
                 }}
                 style={styles.largeIcon}
               />
-              {/* <i
-                style={{ minWidth: "400px" }}
-                className={click ? "fas fa-times" : "fas fa-bars"}
-              /> */}
             </div>
           </div>
 
@@ -135,7 +131,6 @@ const NavBar = () => {
                     backgroundColor: "white",
                   }}
                   onClick={(e) => clickLogout(e)}
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                 >
                   Logout
                 </Button>

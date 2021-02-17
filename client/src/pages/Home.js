@@ -38,10 +38,7 @@ const Home = () => {
             alt="home-img"
           />
           <div className="home-text links-div" ref={text2}>
-            <div
-              className="links-box"
-              // style={{ position: "absolute" }}
-            >
+            <div className="links-box">
               <lottie-player
                 src="https://assets8.lottiefiles.com/packages/lf20_frdtxW.json"
                 background="transparent"

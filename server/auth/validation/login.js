@@ -3,7 +3,7 @@ const isEmpty = require("is-empty");
 
 module.exports = function validateLoginInput(data) {
   let errors = {};
-  // the validator package only works with strings so we are converting them to emty strings if the input is null
+  // the validator package only works with strings so I'm converting them to emty strings if the input is null
   data.email = !isEmpty(data.email) ? data.email : "";
   data.password = !isEmpty(data.password) ? data.password : "";
 

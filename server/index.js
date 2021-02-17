@@ -5,7 +5,7 @@ const passport = require("passport");
 const cors = require("cors");
 const path = require("path");
 
-// IMPORT YOUR MODELS
+// MODELS
 require("./models/Users");
 require("./models/Transaction");
 require("./models/Budget");
@@ -40,19 +40,13 @@ require("./routes/submitBudgetRoutes")(app);
 
 const PORT = process.env.PORT || 5000;
 
+app.use(express.static(path.resolve(__dirname, "../client/build")));
+
 // if (process.env.NODE_ENV === "production") {
 //   app.use(express.static("client/build"));
 // }
 
-app.use(express.static(path.resolve(__dirname, "../client/build")));
-
-// in production devdependecies are not installed
-
-// Handles any requests that don't match the ones above, sends them to index.html and checks the other routes which I have created already
-// app.get("*", (req, res) => {
-//   console.log(__dirname);
-//   res.sendFile(path.join(__dirname + "/client/build/index.html"));
-// });
+// in production environment devdependecies (the ones in the package.json) are not installed
 
 app.get("*", function (request, response) {
   response.sendFile(path.resolve(__dirname, "../client/build", "index.html"));

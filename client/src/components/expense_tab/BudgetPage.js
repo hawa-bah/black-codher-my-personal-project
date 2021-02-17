@@ -18,7 +18,7 @@ import PrivateRoute from "../../PrivateRoute.js";
 import NavBar from "../Navbar.js";
 import { Switch } from "react-router-dom";
 
-// >> for the transaction form, numeric input
+//for the transaction form, numeric input
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
 
@@ -61,7 +61,6 @@ const BudgetPage = (props) => {
   }, [tripNameList]);
 
   const getTripNameList = async () => {
-    //>>>> I am getting the documents from the budget collection whith budgetService.js
     let res = await getAll(auth.user.email);
     setTripNameList(res);
   };
@@ -148,8 +147,6 @@ const BudgetPage = (props) => {
                           hasSubmitedTransaction={hasSubmitedTransaction}
                           setHasSubmitedTransaction={setHasSubmitedTransaction}
                           auth={auth}
-
-                          // renderBalance={renderBalance}
                         />
                       </div>
                     ) : null}
@@ -159,59 +156,6 @@ const BudgetPage = (props) => {
             </>
           )}
         />
-        {/* //   <Switch> */}
-        {/* <div className="budgetPage-Div" data-testid="ancestor">
-        <h1 data-testid="descendant">Expense Tracker</h1>
-
-        <TransactionForm
-          hasSubmitedTransaction={hasSubmitedTransaction}
-          setHasSubmitedTransaction={setHasSubmitedTransaction}
-          auth={auth}
-          tripNameList={tripNameList}
-          renderTripNameList={renderTripNameList}
-        />
-
-        <div className="budget categories card">
-          <BudgetCategories
-            budgetCategoriesArry={budgetCategoriesArry}
-            hasSubmitedTransaction={hasSubmitedTransaction}
-            setHasSubmitedTransaction={setHasSubmitedTransaction}
-            auth={auth}
-            tripNameList={tripNameList}
-            renderTripNameList={renderTripNameList}
-          />
-        </div>
-
-        <div
-          className="Transactions-div"
-          style={{ padding: "20px", marginTop: "10px" }}
-        >
-          <h2 className="budgetPage-subtitle">TRANSACTIONS LIST</h2>
-
-          <div className="button transaction">
-            <Button onClick={() => setViewTransactions(!viewTransactions)}>
-              <p>{viewTransactions ? "Click to Hide" : "Click to view"}</p>
-            </Button>
-          </div>
-
-          <div className="transaction List">
-            {viewTransactions ? (
-              <div>
-                <TransactionsList
-                  viewTransactions={viewTransactions}
-                  setViewTransactions={setViewTransactions}
-                  hasSubmitedTransaction={hasSubmitedTransaction}
-                  setHasSubmitedTransaction={setHasSubmitedTransaction}
-                  auth={auth}
-
-                  // renderBalance={renderBalance}
-                />
-              </div>
-            ) : null}
-          </div>
-        </div>
-      </div> */}
-        {/* //   </Switch> */}
       </Switch>
     </>
   );

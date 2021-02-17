@@ -8,44 +8,34 @@
 
 .Register-div {
   display: flex;
-  /* max-width: 100vh; */
 
   align-items: center;
   justify-content: flex-end;
   color: black;
   background-color: rgb(2, 2, 53);
   min-height: 100vh;
-  /* margin: 0; */
-  /* align-items: center; */
 }
 .Register-div > div {
-  /* max-height: 100vh; */
   max-width: 45%;
   min-width: 45%;
   min-height: 100vh;
-
   background: hsla(185, 71%, 53%, 1);
-
   align-items: center;
-
   background: linear-gradient(
     90deg,
     hsla(185, 71%, 53%, 1) 0%,
     hsla(277, 100%, 65%, 1) 100%
   );
-
   background: -moz-linear-gradient(
     90deg,
     hsla(185, 71%, 53%, 1) 0%,
     hsla(277, 100%, 65%, 1) 100%
   );
-
   background: -webkit-linear-gradient(
     90deg,
     hsla(185, 71%, 53%, 1) 0%,
     hsla(277, 100%, 65%, 1) 100%
   );
-
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#33CFDD", endColorstr="#BB4DFF", GradientType=1 );
 }
 
@@ -96,8 +86,7 @@
 }
 
 .Landing-div {
-  background: url("../../assets/window-flight-2.jpg");
-  /* min-height: 100vh; */
+  background: url("../assets/window-flight-2.jpg");
   min-height: max-content;
   padding-bottom: 600px;
   background-position: center;
@@ -136,7 +125,6 @@
   width: 100%;
   height: 100vh;
   text-align: center;
-  /* margin-top: 40%; */
 }
 .post-register-div > div {
   padding: 20px;
@@ -169,7 +157,7 @@
 }
 /* ABOUT */
 .About-div {
-  background-image: url("../../assets/piggy-bank.jpg");
+  background-image: url("../assets/piggy-bank.jpg");
   min-height: max-content;
   min-height: max-content;
   background-position: center;
@@ -194,7 +182,6 @@
 @media only screen and (max-width: 800px) {
   /* REGISTER */
   .Register-div > div {
-    /* max-height: 100vh; */
     max-width: 45%;
     min-width: 300px;
     min-height: 100vh;
