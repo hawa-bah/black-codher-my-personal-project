@@ -96,7 +96,7 @@
 }
 
 .Landing-div {
-  background: url("../../window-flight-2.jpg");
+  background: url("../../assets/window-flight-2.jpg");
   /* min-height: 100vh; */
   min-height: max-content;
   padding-bottom: 600px;
@@ -169,8 +169,9 @@
 }
 /* ABOUT */
 .About-div {
-  background-image: url("../../piggy-bank.jpg");
-  height: 100vh;
+  background-image: url("../../assets/piggy-bank.jpg");
+  min-height: max-content;
+  min-height: max-content;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
