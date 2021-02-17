@@ -7,7 +7,7 @@ const path = require("path");
 
 // IMPORT YOUR MODELS
 require("./models/Users");
-require("./models/expense_models/Transaction");
+require("./models/Transaction");
 require("./models/Budget");
 
 const app = express();

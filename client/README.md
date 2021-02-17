@@ -17,6 +17,7 @@ In the example we have provided you can see:
 3. What to display if your request to the API doesn't return any users
 
 ---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
