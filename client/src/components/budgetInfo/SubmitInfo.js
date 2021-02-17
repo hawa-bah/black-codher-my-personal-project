@@ -9,7 +9,7 @@ import { purple } from "@material-ui/core/colors";
 import { Grid, TextField } from "@material-ui/core";
 
 import { connect, useSelector } from "react-redux";
-import "./InfoForm.css";
+import "../../stylesheets/InfoForm.css";
 
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;

@@ -22,7 +22,7 @@ import PrivateRoute from "./PrivateRoute";
 import Home from "./pages/Home";
 
 import "./pages/Login/main.css";
-import "./components/budgetInfo/InfoForm.css";
+import "./stylesheets/InfoForm.css";
 import PostRegister from "./pages/PostRegistration";
 
 // >>>> checking if a user is loged in

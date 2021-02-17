@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link, Redirect } from "react-router-dom";
-import "./NavBar.css";
+import "../stylesheets/NavBar.css";
 import MenuIcon from "@material-ui/icons/Menu";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../Redux/actions/authActions";

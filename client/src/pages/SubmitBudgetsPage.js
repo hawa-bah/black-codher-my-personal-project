@@ -14,7 +14,7 @@ import Editable from "../components/budgetInfo/Editable";
 import SubmitInfoForm from "../components/budgetInfo/SubmitInfo";
 import { useSelector } from "react-redux";
 
-import "../components/budgetInfo/InfoForm.css";
+import "../stylesheets/InfoForm.css";
 // MATERIAL-UI:
 const ButtonSubmitPage = withStyles((theme) => ({
   root: {

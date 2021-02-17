@@ -11,8 +11,8 @@ import { Button, MenuItem } from "@material-ui/core";
 import budgetCategoriesArry from "../../budgetCategoriesArray";
 
 import BudgetCategories from "../BudgetCatgories";
-import "./BudgetPage.css";
-import "../../App.css";
+import "../../stylesheets/BudgetPage.css";
+import "../../stylesheets/App.css";
 import { connect, useSelector } from "react-redux";
 import PrivateRoute from "../../PrivateRoute.js";
 import NavBar from "../Navbar.js";
