@@ -32,7 +32,7 @@ This is the structure of the repository:
 
 #### Start The Development Server
 
-Once cloned you can start the client side code (front-end), server side (back-end) and database separately using the commands in their respective folders. If you prefer to start all three together (this is the most convienient way), you can do so with the following commands:
+Once cloned you can start the application and run it locally, both (front-end) and (back-end) with the following commands:
 
-1. `npm install && cd client && npm install && cd ..`
+1. `cd black-codher-my-personal-project`
 2. `npm run start`
