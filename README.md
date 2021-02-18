@@ -6,11 +6,19 @@ The main goal of this application is to help users to manage finances while trav
 
 https://black-codher-hawa.herokuapp.com/
 
+#### GIFS using the web application
+
+##### Creating a plan
+
+##### Submiting transactions
+
+##### viewing your budgets
+
 ### Features
 
-1. Login, authentification and validation.
+1. Register and Login. The system validaties the inputs. Some of the pages are only accessible for users who have registred and logged in.
 2. Plan ahead a trip and create a card to set budgets for a specific trip. Cards can be edited and deleted.
-3. Submit transactions while travelling to track expenses according specifying parameters such as category spent on and date spent.
+3. Submit transactions while travelling to track expenses specifying parameters such as category spent on and date spent.
 4. Check the status of budgets by viewing information such as amount spent, amount left and number of transactions classified on a particular budget.
 5. View a list of transactions. Filter and sort them too.
 
@@ -27,6 +35,8 @@ This is the structure of the repository is:
 - README.md
 - client
 - server
+
+### API endpoints:
 
 ### Getting Started
 
