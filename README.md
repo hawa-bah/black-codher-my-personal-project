@@ -60,16 +60,20 @@ This is the structure of the repository:
 - `GET /api/balance/:trip/:ref` -
 - `DELETE /api/expenses/transactions/:id` - Delete a transaction
 - `POST /api/expense` - Submit a transaction
+- `PUT /api/edit/transactions/:tripName/:user` - Edit the name of the trip corresponding to a specific transaction for a specific user
 
 #### Budgets
 
 - `GET /api/budget/:ref` - Get all the infoCards of a user
 - `GET /api/budget/category/:tripName/:ref` - Get all the information of a trip for a specific user
 - `POST /api/budget` - Create a infoCard with budgets for a trip
+- `PUT /api/edit/card/:id` - Edit budgets of a trip
+- `DELETE /api/delete/Info/card/:id` - Delete infoCard storing budgets for a trip
 
 #### Users
 
 - `POST /api/register` - Register a user. Check that email has not been registrated yet, and both passwords coincide.
+- `POST /api/login` - Login a user. Check that the user has registrated and inputs are correct.
 
 ## GETTING STARTED
 
