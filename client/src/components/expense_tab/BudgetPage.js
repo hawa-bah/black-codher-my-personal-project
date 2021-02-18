@@ -78,7 +78,7 @@ const BudgetPage = (props) => {
       <Switch>
         <PrivateRoute
           exact
-          path="/expenseTracker/TransactionForm"
+          path="/expenseTracker-TransactionForm"
           component={() => (
             <>
               <div className="budgetPage-Div">
@@ -96,7 +96,7 @@ const BudgetPage = (props) => {
         />
         <PrivateRoute
           exact
-          path="/expenseTracker/budgetCategories"
+          path="/expenseTracker-budgetCategories"
           component={() => (
             <>
               <div className="budgetPage-Div" data-testid="ancestor">
@@ -117,7 +117,7 @@ const BudgetPage = (props) => {
         />
         <PrivateRoute
           exact
-          path="/expenseTracker/TransactionsList"
+          path="/expenseTracker-TransactionsList"
           component={() => (
             <>
               <div className="budgetPage-Div" data-testid="ancestor">

@@ -21,7 +21,6 @@
 }
 .submit-info-form-div {
   z-index: 2;
-  /* position: "absolute"; */
   position: fixed;
   left: 0;
   right: 0;

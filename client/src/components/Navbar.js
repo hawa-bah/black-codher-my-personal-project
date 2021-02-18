@@ -26,6 +26,7 @@ const NavBar = () => {
     e.preventDefault();
     dispatch(logoutUser());
     if (!auth.user.name) {
+      // console.log(window.location.href);
       window.location.href = "./";
     }
   };
@@ -77,7 +78,7 @@ const NavBar = () => {
             </li>
             <li className="nav-item">
               <Link
-                to="/expenseTracker/TransactionForm"
+                to="/expenseTracker-TransactionForm"
                 className="nav-links"
                 onClick={closeMenu}
               >
@@ -86,7 +87,7 @@ const NavBar = () => {
             </li>
             <li className="nav-item">
               <Link
-                to="/expenseTracker/TransactionsList"
+                to="/expenseTracker-TransactionsList"
                 className="nav-links"
                 onClick={closeMenu}
               >
@@ -95,7 +96,7 @@ const NavBar = () => {
             </li>
             <li className="nav-item">
               <Link
-                to="/expenseTracker/BudgetCategories"
+                to="/expenseTracker-BudgetCategories"
                 className="nav-links"
                 onClick={closeMenu}
               >

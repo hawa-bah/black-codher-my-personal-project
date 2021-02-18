@@ -91,16 +91,15 @@ function App() {
               )}
             />
 
-            <PrivateRoute
+            {/* <PrivateRoute
               exact
               path="/expenseTracker"
               component={() => (
                 <React.Fragment>
                   <NavBar />
-                  {/* <BudgetPage /> */}
                 </React.Fragment>
               )}
-            />
+            /> */}
             <BudgetPage />
           </Switch>
         </Router>

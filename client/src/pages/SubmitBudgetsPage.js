@@ -4,7 +4,7 @@ import { deleteOne, getAll } from "../services/budgetService";
 
 // Material-ui
 import { Button, IconButton } from "@material-ui/core";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import { purple } from "@material-ui/core/colors";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -69,7 +69,7 @@ const SubmitBudgetPage = (props) => {
       budget_category: "Entertainment",
       budget_amount: null,
     },
-  ]); //
+  ]);
 
   const getInfoCards = useCallback(async () => {
     let res;

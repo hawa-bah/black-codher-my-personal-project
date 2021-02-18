@@ -43,7 +43,7 @@ const Landing = () => {
                 </div>
                 <div>
                   <Link
-                    to="/expenseTracker/TransactionForm"
+                    to="/expenseTracker-TransactionForm"
                     className="landing-link"
                   >
                     Submit a transaction
@@ -52,7 +52,7 @@ const Landing = () => {
                 </div>
                 <div>
                   <Link
-                    to="/expenseTracker/BudgetCategories"
+                    to="/expenseTracker-BudgetCategories"
                     className="landing-link"
                   >
                     View the state of your budgets
@@ -61,7 +61,7 @@ const Landing = () => {
                 </div>
                 <div>
                   <Link
-                    to="/expenseTracker/TransactionsList"
+                    to="/expenseTracker-TransactionsList"
                     className="landing-link"
                   >
                     <p>View your expenses</p>

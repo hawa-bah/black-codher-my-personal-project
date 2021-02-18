@@ -17,6 +17,7 @@ const BudgetCategories = (props) => {
     // the color gets updated in the first time the page is loaded
     if (data.length !== 0 && spent.length !== 0 && tripName !== "Hidde") {
       changeColorBudget(data);
+      console.log("change color budget");
     }
 
     if (props.hasSubmitedTransaction) {
