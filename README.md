@@ -10,9 +10,15 @@ https://black-codher-hawa.herokuapp.com/
 
 ##### Creating a plan
 
+![Creating a plan](https://github.com/hawa-bah/black-codher-my-personal-project/blob/main/client/src/assets/images-Readme/create-plan.gif)
+
 ##### Submiting transactions
 
-##### viewing your budgets
+![Submiting transactions](https://github.com/hawa-bah/black-codher-my-personal-project/blob/main/client/src/assets/images-Readme/using-transactions.gif)
+
+##### Viewing your budgets
+
+![Viewing your budgets](https://github.com/hawa-bah/black-codher-my-personal-project/blob/main/client/src/assets/images-Readme/view-budgets.gif)
 
 ### Features
 
@@ -38,9 +44,28 @@ This is the structure of the repository:
 
 ### API endpoints:
 
+#### GET
+
+- `/api/expense/:ref`
+- `/api/balance/:trip/:ref`
+- Get all the transactions of a trip for a specific user `/api/expenses/:tripName/:ref`
+- Get all the infoCards of a user `/api/budget/:ref`
+- Get all the information of a trip for a specific user `/api/budget/category/:tripName/:ref`
+
+#### POST
+
+- Submit a transaction `/api/expense`
+- Create a infoCard with budgets for a trip `/api/budget`
+
+#### DELETE
+
+- Delete a transaction `/api/expenses/transactions/:id`
+
 ### Getting Started
 
 #### Start The Development Server
+
+As the application stores all the data in a mongoDB database, it will be important that you have created a mongo clustard to run the project locally.
 
 Once cloned you can start the application and run it locally, both (front-end) and (back-end) with the following commands:
 
