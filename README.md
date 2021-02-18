@@ -16,7 +16,7 @@ The main goal of this application is to help users to manage finances while trav
 
 https://black-codher-hawa.herokuapp.com/
 
-![Creating a plan](https://github.com/hawa-bah/black-codher-my-personal-project/blob/main/client/src/assets/images-Readme/create-plan.gif)
+![main](https://github.com/hawa-bah/black-codher-my-personal-project/blob/main/client/src/assets/images-Readme/main.gif)
 
 see more in the [user interface](#User-Interface) section
 
@@ -99,14 +99,11 @@ export MONGO_URI=<YOUR_MONGODB_URI_TO_CONNECT_YOUR_APPLICATION>
 
 ## USER INTERFACE
 
-##### Creating a plan
+##### View your budgets
 
-![Creating a plan](https://github.com/hawa-bah/black-codher-my-personal-project/blob/main/client/src/assets/images-Readme/create-plan.gif)
+![2](https://github.com/hawa-bah/black-codher-my-personal-project/blob/main/client/src/assets/images-Readme/2.gif)
 
-##### Submiting transactions
 
-![Submiting transactions](https://github.com/hawa-bah/black-codher-my-personal-project/blob/main/client/src/assets/images-Readme/using-transactions.gif)
+##### Viewing your transaction
 
-##### Viewing your budgets
-
-![Viewing your budgets](https://github.com/hawa-bah/black-codher-my-personal-project/blob/main/client/src/assets/images-Readme/view-budgets.gif)
+![3](https://github.com/hawa-bah/black-codher-my-personal-project/blob/main/client/src/assets/images-Readme/3.gif)
