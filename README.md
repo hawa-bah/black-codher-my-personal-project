@@ -10,19 +10,19 @@ https://black-codher-hawa.herokuapp.com/
 
 1. Login, authentification and validation.
 2. Plan ahead a trip and create a card to set budgets for a specific trip. Cards can be edited and deleted.
-3. Submit transactions while travelling to track expenses according specifying parameters such as category spent on and date spent.
+3. Submit transactions while travelling to track expenses specifying parameters such as category spent on, and date spent.
 4. Check the status of budgets by viewing information such as amount spent, amount left and number of transactions classified on a particular budget.
 5. View a list of transactions. Filter and sort them too.
 
 ## TECH
 
-### The stck
+### The stack
 
 MongoDB, HTML, CSS, Reactjs, JavaScript, Nodejs, Redux
 
 ### Project Structure
 
-This is the structure of the repository is:
+This is the structure of the repository:
 
 - README.md
 - client
@@ -32,7 +32,7 @@ This is the structure of the repository is:
 
 #### Start The Development Server
 
-Once cloned you can start the client side code (front-end), server side (back-end) and database separately using the commands in their respective folders. If you prefer to start all three together (this is the most convienient way), you can do so with the following commands:
+Once cloned you can start the application and run it locally, both (front-end) and (back-end) with the following commands:
 
-1. `npm install && cd client && npm install && cd ..`
+1. `cd black-codher-my-personal-project`
 2. `npm run start`
