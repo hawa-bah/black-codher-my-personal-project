@@ -14,17 +14,26 @@ const BudgetCategories = (props) => {
   const [data, setData] = useState([]); //document from the budget collection from a specific Trip and user
 
   useEffect(() => {
-    // >>> the color gets updated in the first time the page is loaded
-    if (data.length !== 0 && spent.length !== 0 && tripName !== "Hidde") {
-      changeColorBudget(data);
-    }
+    // the color gets updated in the first time the page is loaded
 
-    if (props.hasSubmitedTransaction) {
+    function updateColorBudget() {
       if (tripName !== "") {
         renderSpent(tripName);
-        // renderBalanceTotal(tripName);
 
-        // >>> the color gets updated when a transaction has been submited and SPENT has been set and rendered
+        if (data.length !== 0 && spent) {
+          renderBudgetCategory(tripName);
+          changeColorBudget(data);
+        }
+      }
+    }
+    updateColorBudget();
+
+    if (props.hasSubmitedTransaction) {
+      // the color gets updated when a transaction has been submited and SPENT has been set and rendered
+
+      if (tripName !== "") {
+        renderSpent(tripName);
+
         if (data.length !== 0 && spent) {
           renderBudgetCategory(tripName);
           changeColorBudget(data);

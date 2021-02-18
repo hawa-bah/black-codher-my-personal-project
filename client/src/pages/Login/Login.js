@@ -27,7 +27,7 @@ const Login = (props) => {
     email: "",
     password: "",
     showPassword: false,
-    errors: {}, // thisobject can be deleted
+    errors: {},
   });
 
   useEffect(() => {
@@ -35,7 +35,6 @@ const Login = (props) => {
       props.history.push("/landing");
     }
   }, [auth]);
-  //
 
   // material-ui
   const classes = useStyles();

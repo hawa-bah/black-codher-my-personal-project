@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link, Redirect } from "react-router-dom";
-import "./NavBar.css";
+import { Link } from "react-router-dom";
+import "../stylesheets/NavBar.css";
 import MenuIcon from "@material-ui/icons/Menu";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../Redux/actions/authActions";
@@ -26,6 +26,7 @@ const NavBar = () => {
     e.preventDefault();
     dispatch(logoutUser());
     if (!auth.user.name) {
+      // console.log(window.location.href);
       window.location.href = "./";
     }
   };
@@ -38,7 +39,7 @@ const NavBar = () => {
             <Link to="/">
               <img
                 src="/images/main-logo.png"
-                alt="logo"
+                alt="logo-of-the-app-plane-on-a-purse-on-front-of-a-cloud"
                 style={{ maxHeight: "60px" }}
               />
             </Link>
@@ -52,10 +53,6 @@ const NavBar = () => {
                 }}
                 style={styles.largeIcon}
               />
-              {/* <i
-                style={{ minWidth: "400px" }}
-                className={click ? "fas fa-times" : "fas fa-bars"}
-              /> */}
             </div>
           </div>
 
@@ -81,7 +78,7 @@ const NavBar = () => {
             </li>
             <li className="nav-item">
               <Link
-                to="/expenseTracker/TransactionForm"
+                to="/expenseTracker-TransactionForm"
                 className="nav-links"
                 onClick={closeMenu}
               >
@@ -90,7 +87,7 @@ const NavBar = () => {
             </li>
             <li className="nav-item">
               <Link
-                to="/expenseTracker/TransactionsList"
+                to="/expenseTracker-TransactionsList"
                 className="nav-links"
                 onClick={closeMenu}
               >
@@ -99,7 +96,7 @@ const NavBar = () => {
             </li>
             <li className="nav-item">
               <Link
-                to="/expenseTracker/BudgetCategories"
+                to="/expenseTracker-BudgetCategories"
                 className="nav-links"
                 onClick={closeMenu}
               >
@@ -135,7 +132,6 @@ const NavBar = () => {
                     backgroundColor: "white",
                   }}
                   onClick={(e) => clickLogout(e)}
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                 >
                   Logout
                 </Button>

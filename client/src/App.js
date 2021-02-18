@@ -20,13 +20,12 @@ import Register from "./pages/Login/Register";
 import Landing from "./pages/Login/Landing";
 import PrivateRoute from "./PrivateRoute";
 import Home from "./pages/Home";
-import Generator from "./pages/Generator";
 
-import "./pages/Login/main.css";
-import "./components/budgetInfo/InfoForm.css";
+import "./stylesheets/main.css";
+import "./stylesheets/InfoForm.css";
 import PostRegister from "./pages/PostRegistration";
 
-// >>>> checking if a user is loged in
+// checking if a user is loged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
   const token = localStorage.jwtToken;
@@ -91,27 +90,7 @@ function App() {
                 </React.Fragment>
               )}
             />
-            <PrivateRoute
-              exact
-              path="/generator"
-              component={() => (
-                <React.Fragment>
-                  <NavBar />
-                  <Generator />
-                </React.Fragment>
-              )}
-            />
 
-            <PrivateRoute
-              exact
-              path="/expenseTracker"
-              component={() => (
-                <React.Fragment>
-                  <NavBar />
-                  {/* <BudgetPage /> */}
-                </React.Fragment>
-              )}
-            />
             <BudgetPage />
           </Switch>
         </Router>

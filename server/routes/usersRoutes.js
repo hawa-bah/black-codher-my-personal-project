@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-// const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -75,7 +74,7 @@ module.exports = (app) => {
               payload,
               process.env.SECRET_KEY,
               {
-                expiresIn: 31556926, // 1 year in seconds
+                expiresIn: 31556926,
               },
               (err, token) => {
                 res.json({

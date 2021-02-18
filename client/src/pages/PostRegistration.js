@@ -28,7 +28,6 @@ const PostRegister = () => {
               background="transparent"
               speed="0.5"
               style={{
-                // minWidth: "300px",
                 position: "absolute",
                 left: "10%",
                 top: "20%",

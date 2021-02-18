@@ -1,0 +1,150 @@
+/* Budget PAGE  */
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Staatliches&display=swap");
+.budgetPage-Div {
+  background-color: aliceblue;
+  background: url("../assets/micheile-henderson-SoT4-mZhyhE-unsplash.jpg");
+  min-height: 100vh;
+  max-height: max-content;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 10px;
+}
+.transactions-form-ui-div,
+.budgetCategories-div,
+.Transactions-div {
+  backdrop-filter: blur(30px);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-blend-mode: screen;
+}
+.budgetPage-subtitle {
+  font-family: "Archivo Black", sans-serif;
+  font-size: 25px;
+  padding-left: 10px;
+}
+
+/* BUDGETCATEGORIES.js */
+.budgetCategories-div,
+.Transactions-div {
+  max-width: 90%;
+  min-width: 250px;
+}
+
+.category-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.category-card-div {
+  background-color: white;
+  min-width: 210px;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 40px;
+  max-width: fit-content;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+}
+.category-card-title {
+  font-family: "Staatliches", cursive;
+  font-size: 20px;
+  color: purple;
+}
+
+/* TRANSACTIONlIST.JS */
+
+@media only screen and (max-width: 800px) {
+  .transactions-container > h5 {
+    display: none;
+  }
+  .transactions-container div {
+    position: relative;
+    padding-left: 50%;
+    padding-bottom: 2px;
+    padding-top: 10px;
+  }
+  .transactions-container div::before {
+    padding-right: 10px;
+    position: absolute;
+    left: 10px;
+    width: 45%;
+    padding-bottom: 2px;
+  }
+  .transactions-container div:nth-child(6n + 1):before {
+    content: "Amount";
+  }
+  .transactions-container > div:nth-of-type(6n + 2):before {
+    content: "Description";
+  }
+  .transactions-container > div:nth-of-type(6n + 3):before {
+    content: "Date";
+  }
+  .transactions-container > div:nth-of-type(6n + 4):before {
+    content: "Category";
+  }
+  .transactions-container > div:nth-of-type(6n + 5):before {
+    content: "Trip";
+  }
+  .transactions-container > div:nth-of-type(6n + 6):before {
+    content: "Actions";
+  }
+  .transactions-container > div:nth-of-type(6n + 1) {
+    border-top: 1.5px solid white;
+  }
+  .transactions-container > div:nth-of-type(12n + 1),
+  .transactions-container > div:nth-of-type(12n + 2),
+  .transactions-container > div:nth-of-type(12n + 3),
+  .transactions-container > div:nth-of-type(12n + 4),
+  .transactions-container > div:nth-of-type(12n + 5),
+  .transactions-container > div:nth-of-type(12n + 6) {
+    background-color: rgba(53, 53, 145, 0.24);
+    color: white;
+  }
+}
+@media only screen and (min-width: 800px) {
+  .transactions-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 4fr 3fr 3fr 1fr;
+    text-align: center;
+    padding-bottom: 30px;
+  }
+
+  .transactions-container > h5 {
+    background-color: rgb(3, 3, 139);
+    color: white;
+    font-size: 12px;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 10px;
+  }
+  .transactions-container > div {
+    border-bottom: 1px solid white;
+    padding: 10px;
+  }
+}
+
+.transactions-container {
+  margin: 20px;
+}
+
+/* BUDGET CATEGORIES WITH COLORS */
+.total-summary {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+.bottom-grid {
+  border-top: black solid;
+}
+.numb {
+  text-align: end;
+}
+.total-summary-div {
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: rgba(73, 4, 138, 0.185);
+}

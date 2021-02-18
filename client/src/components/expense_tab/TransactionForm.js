@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import NumberFormat from "react-number-format";
-// import { Form, Field } from "react-final-form";
 import { Grid, Button, MenuItem, TextField } from "@material-ui/core";
 import {
   KeyboardDatePicker,
@@ -63,18 +62,16 @@ const useStyles = makeStyles((theme) => ({
 const TransactionForm = (props) => {
   const classes = useStyles();
   const { auth } = props;
-  // NEW:
-  //>>>> The balance is the sum of those values with test for now
-  //
+
   const [description, setDescription] = useState("");
   const [transactionValue, setTransactionValue] = useState(0);
   const [selectedDate, handleDateChange] = useState(new Date());
   const [transactionCategory, setTransactionCategory] = useState("");
   const [tripTransaction, setTripTransaction] = useState(null);
-  //
+
   const [budgetCategoriesArray, setBudgetCategoriesArray] = useState([]);
 
-  //>>>// this might need to change, for now depending on the trip selected (for the transaction or budgets to display) we will get its corresponded categories :
+  // for now depending on the trip selected we will get its corresponded categories :
   const handleBudgetCategoriesArray = async (tripName) => {
     let res = await getBudget(tripName);
     if (res.length > 0) {
@@ -98,17 +95,16 @@ const TransactionForm = (props) => {
   function handleSubmit(event) {
     event.preventDefault();
 
-    //>>>> users can post a transaction to the accomodation sect.
     axios.post(`/api/expense`, {
       transaction_value: transactionValue,
       description: description,
-      transaction_date: selectedDate, //
-      budget_category: transactionCategory, //
+      transaction_date: selectedDate,
+      budget_category: transactionCategory,
       trip_name: tripTransaction,
       user_ref_email: auth.user.email,
     });
 
-    //>>>> this is to clear the input fields once clicked submit. The values will still be saved in the mongo database
+    //clear the input fields once clicked submit.
     setTransactionValue(0);
     setDescription("");
     // handleDateChange(new Date());
@@ -194,7 +190,6 @@ const TransactionForm = (props) => {
           style={{ padding: "10px" }}
         >
           <Grid item xs="auto" sm={6}>
-            {/* to input the date of the transaction we are using material-ui */}
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
                 label="Date of the transaction"

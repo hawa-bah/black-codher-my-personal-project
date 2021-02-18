@@ -10,7 +10,6 @@ import { Button } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 const TransactionsList = (props) => {
-  // >>> we are passing as props renderBalance() and others but only using the first
   const { auth } = props;
 
   const [transactions, setTransactions] = useState(null);
@@ -49,7 +48,6 @@ const TransactionsList = (props) => {
         </div>
         <div>{` ${transaction.budget_category}`}</div>
         <div>{` ${transaction.trip_name}`}</div>
-        {/* the button can be transformed to an icon later */}
         <div>
           <Button
             startIcon={<DeleteIcon />}

@@ -1,0 +1,194 @@
+@import url("https://fonts.googleapis.com/css2?family=Coda+Caption:wght@800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
+.auth-link {
+  color: white;
+}
+
+.Register-div {
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+  color: black;
+  background-color: rgb(2, 2, 53);
+  min-height: 100vh;
+}
+.Register-div > div {
+  max-width: 45%;
+  min-width: 45%;
+  min-height: 100vh;
+  background: hsla(185, 71%, 53%, 1);
+  align-items: center;
+  background: linear-gradient(
+    90deg,
+    hsla(185, 71%, 53%, 1) 0%,
+    hsla(277, 100%, 65%, 1) 100%
+  );
+  background: -moz-linear-gradient(
+    90deg,
+    hsla(185, 71%, 53%, 1) 0%,
+    hsla(277, 100%, 65%, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    90deg,
+    hsla(185, 71%, 53%, 1) 0%,
+    hsla(277, 100%, 65%, 1) 100%
+  );
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#33CFDD", endColorstr="#BB4DFF", GradientType=1 );
+}
+
+/* LANDING */
+.img-account {
+  max-width: 100px;
+}
+.landing-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+}
+
+.landing-options > div {
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 20px;
+  min-width: 100px;
+  max-width: 200px;
+  margin: 20px;
+  text-align: center;
+}
+.landing-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 600px;
+}
+.landing-options > div {
+  background-color: rgba(250, 199, 58, 0.959);
+}
+.landing-options > div:hover {
+  background-color: rgba(58, 189, 250, 0.925);
+}
+.landing-link {
+  font-weight: 90;
+  color: black;
+  font-size: 20px;
+}
+.landing-link:hover {
+  color: white;
+}
+.landing-link > img {
+  height: 70px;
+}
+
+.Landing-div {
+  background: url("../assets/window-flight-2.jpg");
+  min-height: max-content;
+  padding-bottom: 600px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.red-text {
+  color: red;
+}
+
+/* HOME */
+.links-div {
+  display: flex;
+  flex-direction: column;
+  max-width: 150px;
+  text-align: end;
+  align-items: flex-end;
+}
+.links-div > div {
+  margin: 5px;
+}
+.links {
+  padding: 10px;
+  display: flex;
+  border-radius: 20px;
+  font-family: "Coda Caption", sans-serif;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+/* POST REGISTER */
+.post-register-div {
+  background-color: rgb(2, 2, 53);
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+}
+.post-register-div > div {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.post-register-div div .title-registration {
+  padding: 20px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-register-div div h1 {
+  color: white;
+  font-size: 80px;
+  font-family: "Fredoka One", cursive;
+}
+.slider2 {
+  background-color: rgb(2, 2, 53);
+  width: 100%;
+  height: 100%;
+}
+/* ABOUT */
+.About-div {
+  background-image: url("../assets/piggy-bank.jpg");
+  min-height: max-content;
+  min-height: max-content;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.about-text div {
+  background-color: rgba(255, 255, 255, 0.514);
+  margin-bottom: 100px;
+  margin-left: 30px;
+  margin-right: 30px;
+  padding: 30px;
+}
+.about-text h4 {
+  font-size: 30px;
+  font-family: "Pacifico", cursive;
+  padding: 20px;
+  margin-left: 50%;
+}
+
+@media only screen and (max-width: 800px) {
+  /* REGISTER */
+  .Register-div > div {
+    max-width: 45%;
+    min-width: 300px;
+    min-height: 100vh;
+  }
+
+  .post-register-div div h1 {
+    color: white;
+    font-size: 30px;
+  }
+}

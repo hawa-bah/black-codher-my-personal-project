@@ -1,0 +1,60 @@
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  min-height: 90vh;
+  position: absolute;
+  top: 70px;
+  left: -100%;
+  opacity: 1;
+  transition: all 0.6s ease;
+  text-decoration: none;
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.nav-menu.active {
+  background: #242222;
+  left: 0;
+  opacity: 1;
+  transition: all 0.5s ease;
+  z-index: 7;
+}
+
+.nav-links {
+  text-align: center;
+  padding: 2.5rem;
+  width: 100%;
+  transition: all 0.3s ease;
+  font-size: 2rem;
+  color: #fff;
+  display: block;
+  cursor: pointer;
+}
+
+.nav-links:hover {
+  text-decoration: none;
+  background-color: #f0eff3;
+  color: black;
+  border-radius: 0;
+}
+
+.navBar-onView {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+MenuIcon {
+  /* display: block; */
+  transform: translate(-100%, 60%);
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.fa-times {
+  font-size: 2rem;
+}

@@ -4,7 +4,7 @@ import { deleteOne, getAll } from "../services/budgetService";
 
 // Material-ui
 import { Button, IconButton } from "@material-ui/core";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import { purple } from "@material-ui/core/colors";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -14,7 +14,7 @@ import Editable from "../components/budgetInfo/Editable";
 import SubmitInfoForm from "../components/budgetInfo/SubmitInfo";
 import { useSelector } from "react-redux";
 
-import "../components/budgetInfo/InfoForm.css";
+import "../stylesheets/InfoForm.css";
 // MATERIAL-UI:
 const ButtonSubmitPage = withStyles((theme) => ({
   root: {
@@ -31,12 +31,12 @@ const ButtonSubmitPage = withStyles((theme) => ({
 const SubmitBudgetPage = (props) => {
   const auth = useSelector((state) => state.auth);
 
-  const [infoCards, setInfoCards] = useState([]); //>>>> the cards stored in the database will be saved here to display them later
+  const [infoCards, setInfoCards] = useState([]); // the cards stored in the database will be saved here to display them later
   const [hasSubmitedInfo, setHasSubmitedInfo] = useState(false);
 
   const [clickEdit, setClickEdit] = useState(false);
   const [hasClickedFinishEdit, setHasClickedFinishEdit] = useState(false);
-  const [wantsToSubmitInfo, setWantsToSubmitInfo] = useState(false); //>>>>pop up message to confirm if the user wants to continue editing
+  const [wantsToSubmitInfo, setWantsToSubmitInfo] = useState(false); // to confirm if the user wants to continue editing
 
   const [clickDelete, setClickDelete] = useState(false);
   const [cardToDelete, setCardToDelete] = useState({});
@@ -69,10 +69,9 @@ const SubmitBudgetPage = (props) => {
       budget_category: "Entertainment",
       budget_amount: null,
     },
-  ]); //
+  ]);
 
   const getInfoCards = useCallback(async () => {
-    // >>>> I am getting the documents from the budget collection whith budgetService.js
     let res;
     if (auth.user.email) {
       res = await getAll(auth.user.email);
@@ -93,15 +92,14 @@ const SubmitBudgetPage = (props) => {
 
   const updateFieldChanged = (index, e) => {
     let newArr = [...editBudgets]; // copying the old data array
-    newArr[index].budget_amount = e.target.value; // we are changing the values of the objects of editBudgets[] to the new values(e.target)
+    newArr[index].budget_amount = e.target.value; // changing the values of the objects of editBudgets[] to the new values(e.target)
     if (!newArr[index].budget_amount) {
       newArr[index].budget_amount = editCard.budgets[index].budget_amount;
     }
-    setEditBudgets(newArr); //
-  }; //
+    setEditBudgets(newArr);
+  };
 
   const handleFinishEdit = () => {
-    // event.preventDefault();
     const newArr = [...editBudgets];
     let index = 0;
     for (index = 0; index < editBudgets.length; index++) {
@@ -130,7 +128,7 @@ const SubmitBudgetPage = (props) => {
     setClickEdit(true);
     setEditCard(infoCard);
     setEditTripName(infoCard.trip_name);
-  }; //
+  };
 
   const renderInfoCard = (infoCard) => {
     let totalBudget = 0;
@@ -226,7 +224,6 @@ const SubmitBudgetPage = (props) => {
         )}
 
         {hasClickedFinishEdit && (
-          /* {hasFinishedEdit && ( */
           <div className="pop-up dialog-parent">
             <div
               className="finished-edit-div pop-up dialog"
@@ -338,7 +335,7 @@ const SubmitBudgetPage = (props) => {
       <div className="top">
         <h1>Your plans</h1>
         <div className="submit-Info-button">
-          <ButtonSubmitPage // to submit NEW info (not edit)
+          <ButtonSubmitPage
             onClick={() => setWantsToSubmitInfo(true)}
             startIcon={<AddIcon />}
           ></ButtonSubmitPage>
@@ -349,7 +346,7 @@ const SubmitBudgetPage = (props) => {
           <div>
             <h4>
               click the button
-              <ButtonSubmitPage // to submit NEW info (not edit)
+              <ButtonSubmitPage
                 onClick={() => setWantsToSubmitInfo(true)}
                 startIcon={<AddIcon />}
               ></ButtonSubmitPage>{" "}

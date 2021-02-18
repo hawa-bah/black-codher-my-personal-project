@@ -53,8 +53,8 @@ const Filter = (props) => {
   const getTripList = async () => {
     //>>>> I am getting the documents from the budget collection whith budgetService.js
     let res = await getAll(auth.user.email);
-    let data = res.map((item) => item.trip_name); //line 62 // array of trip names
-    setTripNames(data); //line 63
+    let data = res.map((item) => item.trip_name); // array of trip names
+    setTripNames(data);
 
     const stateTrip = data.reduce((a, b) => ((a[b] = false), a), {}); // we obtain an object
     setTripList(stateTrip); // TripList is now the state of the trips
@@ -77,7 +77,7 @@ const Filter = (props) => {
     Others: false,
   });
 
-  // (below) object destructuring of categories
+  // object destructuring of categories
   const {
     Accomodation,
     Transport,

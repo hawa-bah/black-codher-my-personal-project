@@ -35,13 +35,10 @@ const Home = () => {
           <img
             className="home-img"
             src="/images/save-money.jpg"
-            alt="home-img"
+            alt="home-img-girl-putting-money-into-a-van-money-box"
           />
           <div className="home-text links-div" ref={text2}>
-            <div
-              className="links-box"
-              // style={{ position: "absolute" }}
-            >
+            <div className="links-box">
               <lottie-player
                 src="https://assets8.lottiefiles.com/packages/lf20_frdtxW.json"
                 background="transparent"

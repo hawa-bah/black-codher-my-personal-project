@@ -50,7 +50,6 @@ const Register = (props) => {
       passwordToConfirm: signUpInfo.passwordToConfirm,
     };
 
-    // redux
     dispatch(registerUser(newUser, props.history));
   };
 
@@ -92,12 +91,7 @@ const Register = (props) => {
             }}
             className={classes.root}
           >
-            <Grid
-              container
-              alignItems="flex-start"
-              spacing={2}
-              // style={{ padding: "10px" }}
-            >
+            <Grid container alignItems="flex-start" spacing={2}>
               <Grid item xs="auto" sm={12} className="my-1">
                 <FormControl
                   className={clsx(classes.margin, classes.textField)}
@@ -217,7 +211,6 @@ const Register = (props) => {
               variant="contained"
               className={classes.button}
               color="primary"
-              // className="btn  btn-large waves-effect waves-light hoverable orange accent-3 white-text"
               type="submit"
             >
               Ready to Sign Up!
@@ -233,7 +226,6 @@ Register.propTypes = {
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
 };
-// getting state from Redux
 const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,

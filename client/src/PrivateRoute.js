@@ -16,6 +16,7 @@ const PrivateRoute = (props) => {
             auth.isAuthenticated === true ? (
               <Component {...props} />
             ) : (
+              //we need a conditional rendering depending on weather it's landing or other
               <Redirect to="./" />
             )
           }
