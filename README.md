@@ -2,7 +2,17 @@
 
 The main goal of this application is to help users to manage finances while traveling. Once created an account, they will be able to set budgets for future trips. They can also track their expenses by submitting and categorising transactions, while they check the status of their budgets. The web has been built with [MERN](https://www.mongodb.com/mern-stack) full stack and it has been deployed with [Heroku](https://www.heroku.com/).
 
-#### DEMO:
+## TABLE OF CONTENTS
+
+- [Demo](#Demo)
+- [Features](#Features)
+- [Tech](#Tech)
+  - [Project Structure](#Project-Structure)
+  - [API endpoints](#API-endpoints)
+- [Getting Started](#Getting-Started)
+- [User Interface](#User-Interface)
+
+## DEMO:
 
 https://black-codher-hawa.herokuapp.com/
 
@@ -10,7 +20,7 @@ https://black-codher-hawa.herokuapp.com/
 
 see more in the [user interface](#User-Interface) section
 
-### Features
+## FEATURES
 
 1. Register and Login. The system validates the inputs. Some of the pages are only accessible for users who have registered and logged in.
 2. Plan ahead of a trip and create a card to set budgets for a specific trip. Cards can be edited and deleted.
@@ -20,16 +30,16 @@ see more in the [user interface](#User-Interface) section
 
 ## TECH
 
-MongoDB, HTML, CSS, Reactjs, JavaScript, Nodejs, Redux
+Technologies used: MongoDB, HTML, CSS, Reactjs, JavaScript, Nodejs, Redux
 
-### Project Structure
+### PROJECT STRUCTURE
 
 This is the structure of the repository:
 
 - client/src
 
   - assets : images used in the project
-  - components: React components for the user interface
+  - components : React components for the user interface
   - pages
   - Redux : related to state management
   - services
@@ -41,34 +51,29 @@ This is the structure of the repository:
   - models : Mongoose database Schemas
   - auth : related to registration and login system
 
-### API endpoints:
+### API ENDPOINTS:
 
- <!-- NO NEED TO PUT ALL OF THEM ONLY THE MAIN ONES -->
+#### Transactions
 
-#### TRANSACTIONS
-
+- `GET /api/expense/:ref` - Get all the transactions for a specific user
 - `GET /api/expenses/:tripName/:ref` - Get all the transactions of a trip for a specific user
+- `GET /api/balance/:trip/:ref` -
 - `DELETE /api/expenses/transactions/:id` - Delete a transaction
 - `POST /api/expense` - Submit a transaction
 
-#### BUDGETS
+#### Budgets
 
 - `GET /api/budget/:ref` - Get all the infoCards of a user
 - `GET /api/budget/category/:tripName/:ref` - Get all the information of a trip for a specific user
 - `POST /api/budget` - Create a infoCard with budgets for a trip
 
-#### USERS
+#### Users
 
 - `POST /api/register` - Register a user. Check that email has not been registrated yet, and both passwords coincide.
 
-#### GET
+## GETTING STARTED
 
-- `/api/expense/:ref`
-- `/api/balance/:trip/:ref`
-
-## Getting Started
-
-As the application stores all the data in a mongoDB database, it will be important that you have created a mongo clustard to run the project locally. You can choose to create and an account in [here](https://account.mongodb.com/account/login?n=%2Fv2%2F5fc013e408c77a31a78ba7df&nextHash=%23clusters). You can get more information reading the [docs](https://docs.mongodb.com/).
+As the application stores all the data in a mongoDB database, it will be important that you have created a mongo clustard to run the project locally. You can choose to create an account [here](https://account.mongodb.com/account/login?n=%2Fv2%2F5fc013e408c77a31a78ba7df&nextHash=%23clusters). Get more information reading the [docs](https://docs.mongodb.com/).
 
 Once cloned you can start the application and run it locally, both (front-end) and (back-end) with the following commands:
 
@@ -77,14 +82,12 @@ Once cloned you can start the application and run it locally, both (front-end) a
 
 <!-- make user create an secreat_KEy in env -->
 
-2. create your environment variables. You will need
+2.  Create your environment variables. You will need to run the following commands:
 
 ```
 export SECRET_KEY=<YOUR_SECRET_KEY>
 export MONGO_URI=<YOUR_MONGODB_URI_TO_CONNECT_YOUR_APPLICATION>
 ```
-
-<!-- mongo db uri -->
 
 3. Run the application.
    ```
@@ -92,7 +95,7 @@ export MONGO_URI=<YOUR_MONGODB_URI_TO_CONNECT_YOUR_APPLICATION>
    ```
    Your application will be running in `localhost:3000`
 
-## User Interface
+## USER INTERFACE
 
 ##### Creating a plan
 
