@@ -80,8 +80,6 @@ Once cloned you can start the application and run it locally, both (front-end) a
 1.  Go to the root folder
     `cd black-codher-my-personal-project`
 
-<!-- make user create an secreat_KEy in env -->
-
 2.  Create your environment variables. You will need to run the following commands:
 
 ```
