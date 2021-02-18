@@ -10,19 +10,19 @@ https://black-codher-hawa.herokuapp.com/
 
 1. Login, authentification and validation.
 2. Plan ahead a trip and create a card to set budgets for a specific trip. Cards can be edited and deleted.
-3. Submit transactions while travelling to track expenses according specifying parameters such as category spent on and date spent.
+3. Submit transactions while travelling to track expenses specifying parameters such as category spent on, and date spent.
 4. Check the status of budgets by viewing information such as amount spent, amount left and number of transactions classified on a particular budget.
 5. View a list of transactions. Filter and sort them too.
 
 ## TECH
 
-### The stck
+### The stack
 
 MongoDB, HTML, CSS, Reactjs, JavaScript, Nodejs, Redux
 
 ### Project Structure
 
-This is the structure of the repository is:
+This is the structure of the repository:
 
 - README.md
 - client
